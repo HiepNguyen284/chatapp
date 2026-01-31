@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "4.0.2"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -34,7 +34,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     implementation("org.bouncycastle:bcprov-jdk18on:1.79")
-    implementation("org.msgpack:jackson-dataformat-msgpack:0.9.9")
+    implementation("org.msgpack:jackson-dataformat-msgpack:0.9.11")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
