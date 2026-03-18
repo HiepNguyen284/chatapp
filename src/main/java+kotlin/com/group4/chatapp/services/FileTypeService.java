@@ -1,11 +1,14 @@
 package com.group4.chatapp.services;
 
 import com.group4.chatapp.models.Attachment;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -13,14 +16,29 @@ import org.springframework.web.server.ResponseStatusException;
 public class FileTypeService {
 
     public String getFileExtension(String fileName) {
-        log.debug("ext: {}", fileName.substring(fileName.lastIndexOf(".") + 1));
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
+
+        if (!StringUtils.hasText(fileName)) {
+            return "";
+        }
+
+        int index = fileName.lastIndexOf('.');
+        if (index < 0 || index == fileName.length() - 1) {
+            return "";
+        }
+
+        var ext = fileName.substring(index + 1).toLowerCase();
+        log.debug("ext: {}", ext);
+
+        return ext;
     }
 
     public String getMimeType(String contentType) {
 
         if (contentType == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing content type");
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Missing content type"
+            );
         }
 
         if (contentType.startsWith("image/")) {
@@ -37,7 +55,10 @@ public class FileTypeService {
     public Attachment.FileType checkTypeInFileType(String resourceType, String format) {
 
         if (resourceType == null || format == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing file metadata");
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Missing file metadata"
+            );
         }
 
         switch (resourceType.toLowerCase()) {

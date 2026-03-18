@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Gradle
+.gradle
+gradle
+!gradle/wrapper
+
+# Build
+build
+!build/libs/*.jar
+
+# IDE
+.idea
+*.iml
+.vscode
+*.swp
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Test
+src/test
+
+# Docs
+*.md
+!README.md

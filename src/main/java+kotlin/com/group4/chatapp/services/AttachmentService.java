@@ -1,36 +1,54 @@
 package com.group4.chatapp.services;
 
 import com.group4.chatapp.dtos.messages.MessageSendDto;
+import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.Attachment;
 import com.group4.chatapp.repositories.AttachmentRepository;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AttachmentService {
 
     private final FileTypeService fileTypeService;
-    private final CloudinaryService cloudinaryService;
+    private final FileStorageService fileStorageService;
 
     private final AttachmentRepository attachmentRepository;
 
     public List<Attachment> getAttachments(MessageSendDto dto) {
 
-        List<Map<String, ?>> uploadedFiles;
-        try {
-            var attachments = dto.getAttachments();
-            uploadedFiles = cloudinaryService.uploadMutiFile(attachments);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        var attachments = dto.getAttachments();
+        if (CollectionUtils.isEmpty(attachments)) {
+            return List.of();
         }
 
-        if (uploadedFiles == null) {
+        var uploadedFiles = fileStorageService.uploadMultipleFiles(attachments);
+
+        if (CollectionUtils.isEmpty(uploadedFiles)) {
             return List.of();
+        }
+
+        var anySuccess = uploadedFiles.stream()
+            .anyMatch(file -> "success".equals(file.get("status")));
+
+        if (!anySuccess) {
+            var firstError = uploadedFiles.stream()
+                .map(file -> file.get("message"))
+                .filter(Objects::nonNull)
+                .map(Object::toString)
+                .findFirst()
+                .orElse("Upload failed");
+
+            throw new ApiException(HttpStatus.BAD_REQUEST, firstError);
         }
 
         return uploadedFiles
@@ -56,6 +74,7 @@ public class AttachmentService {
                 return attachmentRepository.save(attachment);
 
             })
+            .filter(Objects::nonNull)
             .toList();
     }
 }

@@ -5,6 +5,7 @@ import com.group4.chatapp.models.ChatMessage;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 public record MessageReceiveDto(
     long id,
@@ -23,6 +24,7 @@ public record MessageReceiveDto(
             message.getSentOn(),
             message.getAttachments()
                 .stream()
+                .filter(Objects::nonNull)
                 .map(AttachmentDto::new)
                 .toList()
         );

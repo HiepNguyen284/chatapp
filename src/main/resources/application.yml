@@ -17,10 +17,6 @@ spring:
 
     open-in-view: false
 
-    properties:
-      hibernate:
-        dialect: "org.hibernate.dialect.PostgreSQLDialect"
-
   output:
     ansi:
       enabled: "ALWAYS"
@@ -42,9 +38,8 @@ jwts:
   access-token-lifetime: "PT30M" # 30 minutes
   refresh-token-lifetime: "P30D" # 30 days
 
-  secret-key: "${JWT_SECRET}"
-
-cloudinary:
-  api-key: "${CLOUDINARY_API_KEY}"
-  api-secret: "${CLOUDINARY_API_SECRET}"
-  cloud-name: "${CLOUDINARY_CLOUD_NAME}"
+rustfs:
+  url: "${RUSTFS_URL:http://localhost:9000}"
+  access-key: "${RUSTFS_ACCESS_KEY}"
+  secret-key: "${RUSTFS_SECRET_KEY}"
+  bucket-name: "${RUSTFS_BUCKET_NAME}"
