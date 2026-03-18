@@ -1,12 +1,28 @@
 services:
+  gateway:
+    image: caddy:2-alpine
+    container_name: chatapp-gateway
+
+    env_file:
+      - ./.env
+
+    ports:
+      - 8080:8080
+
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
+    depends_on:
+      app:
+        condition: service_started
+      rustfs:
+        condition: service_healthy
+
   postgres:
     image: postgres:18-alpine
     container_name: chatapp-postgres
-
-    environment:
-      POSTGRES_DB: chatapp
-      POSTGRES_USER: chatapp
-      POSTGRES_PASSWORD: chatapp
+    env_file:
+      - ./.env
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -24,13 +40,10 @@ services:
     image: rustfs/rustfs:latest
     container_name: chatapp-rustfs
 
-    environment:
-      RUSTFS_ACCESS_KEY: rustfsadmin
-      RUSTFS_SECRET_KEY: rustfsadmin
-      RUSTFS_CONSOLE_ENABLE: "true"
+    env_file:
+      - ./.env
 
     ports:
-      - "9000:9000"
       - "9001:9001"
 
     volumes:
@@ -48,21 +61,8 @@ services:
       dockerfile: Dockerfile
 
     container_name: chatapp-app
-
-    ports:
-      - "8080:8080"
-
-    environment:
-      DB_URL: jdbc:postgresql://postgres:5432/chatapp
-      DB_USERNAME: chatapp
-      DB_PASSWORD: chatapp
-
-      RUSTFS_URL: http://rustfs:9000
-      RUSTFS_ACCESS_KEY: rustfsadmin
-      RUSTFS_SECRET_KEY: rustfsadmin
-      RUSTFS_BUCKET_NAME: chatapp
-
-      FILE_STORAGE_PROVIDER: rustfs
+    env_file:
+      - ./.env
 
     depends_on:
       postgres:

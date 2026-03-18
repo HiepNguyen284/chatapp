@@ -39,7 +39,8 @@ jwts:
   refresh-token-lifetime: "P30D" # 30 days
 
 rustfs:
-  url: "${RUSTFS_URL:http://localhost:9000}"
+  endpoint: "${RUSTFS_ENDPOINT:http://localhost:9000}"
+  public-url: "${RUSTFS_PUBLIC_URL:/storage}"
   access-key: "${RUSTFS_ACCESS_KEY}"
   secret-key: "${RUSTFS_SECRET_KEY}"
   bucket-name: "${RUSTFS_BUCKET_NAME}"

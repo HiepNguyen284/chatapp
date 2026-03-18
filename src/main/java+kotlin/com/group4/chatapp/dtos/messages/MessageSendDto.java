@@ -28,6 +28,13 @@ public class MessageSendDto {
     @Nullable
     private List<MultipartFile> attachments;
 
+    public List<MultipartFile> attachmentsOrEmpty() {
+        if (attachments == null) {
+            return List.of();
+        }
+        return attachments;
+    }
+
     public ChatMessage toMessage(
         @Nullable ChatMessage replyTo,
         ChatRoom room,

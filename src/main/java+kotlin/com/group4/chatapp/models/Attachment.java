@@ -31,6 +31,13 @@ public class Attachment {
     @Enumerated(EnumType.ORDINAL)
     private FileType type;
 
+    public static Attachment of(String source, FileType type) {
+        var attachment = new Attachment();
+        attachment.source = source;
+        attachment.type = type;
+        return attachment;
+    }
+
     public static boolean isDocumentFormat(String format) {
         return DOCUMENT_FORMATS.contains(format.toLowerCase());
     }

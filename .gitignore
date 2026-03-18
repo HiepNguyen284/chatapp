@@ -44,3 +44,6 @@ src/main/resources/certs/
 
 ### Local ###
 local.properties
+
+### Environment variable ###
+.env

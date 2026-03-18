@@ -12,8 +12,8 @@ import java.net.URI
 @Configuration
 class RustfsConfig {
 
-    @Value("\${rustfs.url}")
-    private lateinit var url: String
+    @Value("\${rustfs.endpoint}")
+    private lateinit var endpoint: String
 
     @Value("\${rustfs.access-key}")
     private lateinit var accessKey: String
@@ -23,7 +23,7 @@ class RustfsConfig {
 
     @Bean
     fun s3Client() = S3Client.builder()
-        .endpointOverride(URI.create(url))
+        .endpointOverride(URI.create(endpoint))
         .region(Region.US_EAST_1)
         .credentialsProvider(
             StaticCredentialsProvider.create(
