@@ -32,8 +32,7 @@ server:
   port: "${PORT:8080}"
 
 jwts:
-  public-key: "classpath:certs/jwts/public.pem"
-  private-key: "classpath:certs/jwts/private.pem"
+  secret: "${JWTS_SECRET}"
 
   access-token-lifetime: "PT30M" # 30 minutes
   refresh-token-lifetime: "P30D" # 30 days

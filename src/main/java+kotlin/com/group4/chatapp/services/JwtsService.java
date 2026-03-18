@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.JwsHeader;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +46,8 @@ public class JwtsService {
             .issuedAt(issued)
             .build();
 
-        var parameter = JwtEncoderParameters.from(claimsSet);
+        var headers = JwsHeader.with(MacAlgorithm.HS256).build();
+        var parameter = JwtEncoderParameters.from(headers, claimsSet);
 
         return jwtEncoder.encode(parameter);
     }

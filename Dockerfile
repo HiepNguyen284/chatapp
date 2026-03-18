@@ -16,11 +16,6 @@ RUN --mount=type=cache,target=/root/.gradle \
 
 COPY src /build/src
 
-RUN mkdir -p /build/src/main/resources/certs/jwts && \
-    openssl genrsa -out /build/src/main/resources/certs/jwts/keypair.pem 2048 && \
-    openssl rsa -in /build/src/main/resources/certs/jwts/keypair.pem -pubout -out /build/src/main/resources/certs/jwts/public.pem && \
-    openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in /build/src/main/resources/certs/jwts/keypair.pem -out /build/src/main/resources/certs/jwts/private.pem
-
 RUN --mount=type=cache,target=/root/.gradle \
     /build/gradlew --no-daemon bootJar
 
