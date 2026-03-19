@@ -10,10 +10,16 @@ import org.springframework.web.server.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Set;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class FileTypeService {
+
+    private static final Set<String> IMAGE_FORMATS = Set.of(
+        "jpg", "jpeg", "png", "gif", "bmp", "webp", "svg", "heic", "heif"
+    );
 
     public String getFileExtension(String fileName) {
 
@@ -69,6 +75,10 @@ public class FileTypeService {
                 return Attachment.FileType.VIDEO;
 
             case "raw":
+
+                if (IMAGE_FORMATS.contains(format.toLowerCase())) {
+                    return Attachment.FileType.IMAGE;
+                }
 
                 if (Attachment.isDocumentFormat(format)) {
                     return Attachment.FileType.DOCUMENT;
