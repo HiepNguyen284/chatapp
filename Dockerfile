@@ -11,7 +11,7 @@ COPY settings.gradle.kts /build/settings.gradle.kts
 
 RUN chmod +x /build/gradlew
 
-RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon
+RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon wrapper
 RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon dependencies
 
 COPY src /build/src
