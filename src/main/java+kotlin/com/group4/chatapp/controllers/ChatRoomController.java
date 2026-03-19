@@ -1,13 +1,15 @@
 package com.group4.chatapp.controllers;
 
 import com.group4.chatapp.dtos.ChatRoomDto;
-import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.services.ChatRoomService;
-import com.group4.chatapp.services.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,5 +27,11 @@ public class ChatRoomController {
     @GetMapping("/api/v1/chatrooms/")
     public List<ChatRoomDto> listChatRooms() {
         return chatRoomService.listRoomsWithLatestMessage();
+    }
+
+    @DeleteMapping("/api/v1/chatrooms/{roomId}/friend/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeFriend(@PathVariable long roomId) {
+        chatRoomService.removeFriend(roomId);
     }
 }
