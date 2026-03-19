@@ -18,6 +18,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -124,11 +125,13 @@ class MessageChangesService {
         newMessage.setId(message.getId());
         newMessage.setLastEdit(now);
 
-        messageRepository.save(newMessage);
+        var saved = messageRepository.save(newMessage);
+        sendToMembers(chatRoom, saved);
 
         // TODO: delete old resources
     }
 
+    @Transactional
     public void recallMessage(long messageId) {
 
         var message = checkService.getMessageAndCheckSender(messageId);
@@ -136,9 +139,10 @@ class MessageChangesService {
 
         message.setMessage(null);
         message.setLastEdit(now);
-        message.setAttachments(List.of());
+        message.setAttachments(new ArrayList<>());
         message.setStatus(ChatMessage.Status.RECALLED);
 
-        messageRepository.save(message);
+        var saved = messageRepository.save(message);
+        sendToMembers(saved.getRoom(), saved);
     }
 }
