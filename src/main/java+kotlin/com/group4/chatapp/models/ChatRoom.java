@@ -3,7 +3,7 @@ package com.group4.chatapp.models;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.sql.Timestamp;
 import java.util.List;

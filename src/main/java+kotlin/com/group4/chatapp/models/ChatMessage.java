@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.CollectionUtils;
 
 import java.sql.Timestamp;

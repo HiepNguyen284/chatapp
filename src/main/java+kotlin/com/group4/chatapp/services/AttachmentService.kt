@@ -27,6 +27,7 @@ class AttachmentService(
 
         val hasSuccess = uploadedResults.any { it is RustfsService.UploadResult.Success }
         if (!hasSuccess) {
+
             val firstError = uploadedResults
                 .filterIsInstance<RustfsService.UploadResult.Failure>()
                 .firstOrNull()

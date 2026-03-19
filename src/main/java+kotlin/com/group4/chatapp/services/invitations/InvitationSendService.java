@@ -11,8 +11,8 @@ import com.group4.chatapp.repositories.InvitationRepository;
 import com.group4.chatapp.repositories.UserRepository;
 import com.group4.chatapp.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,7 @@ package com.group4.chatapp.dtos.invitation;
 import com.group4.chatapp.dtos.ChatRoomDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.models.Invitation;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public record InvitationWithNewRoomDto(
 

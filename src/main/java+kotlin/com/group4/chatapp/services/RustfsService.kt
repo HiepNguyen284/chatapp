@@ -67,6 +67,7 @@ class RustfsService(
         }
 
         return files.mapIndexed { index, file ->
+
             val fallbackName = "file_$index"
             val originalName = file.originalFilename?.takeIf { it.isNotBlank() } ?: fallbackName
 

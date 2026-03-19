@@ -4,7 +4,7 @@ import com.group4.chatapp.dtos.AttachmentDto;
 import com.group4.chatapp.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Getter
 @AllArgsConstructor
