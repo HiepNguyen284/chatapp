@@ -65,20 +65,17 @@ public class ChatRoomService {
             );
         }
 
-        var memberUsernames = room.getMembers().stream()
-            .map(member -> member.getUsername())
-            .toList();
-
         messageRepository.deleteByRoomId(roomId);
         chatRoomRepository.delete(room);
 
         var payload = Map.of("roomId", roomId);
-        for (var username : memberUsernames) {
+
+        room.getMembers().forEach(member -> 
             messagingTemplate.convertAndSendToUser(
-                username,
+                member.getUsername(),
                 "/queue/friends/removed/",
                 payload
-            );
-        }
+            )
+        );
     }
 }
