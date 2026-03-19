@@ -11,7 +11,7 @@ import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.InvitationRepository;
 import com.group4.chatapp.services.ChatRoomService;
 import com.group4.chatapp.services.UserService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -73,9 +75,12 @@ class InvitationReplyService {
         @Nullable ChatRoomDto newChatRoomDto
     ) {
 
-        var receivers = new HashSet<String>();
+        var receivers = new ArrayList<String>();
 
-        if (invitation.isAccepted() && newChatRoomDto != null) {
+        var isFriendRequest = newChatRoomDto != null;
+        var needSendToMembers = isFriendRequest && invitation.isAccepted();
+
+        if (needSendToMembers) {
             receivers.addAll(newChatRoomDto.getMembersUsername());
             receivers.add(invitation.getSender().getUsername());
             receivers.add(invitation.getReceiver().getUsername());
@@ -86,7 +91,8 @@ class InvitationReplyService {
 
         var sendObject = new InvitationWithNewRoomDto(invitation, newChatRoomDto);
 
-        receivers.parallelStream()
+        receivers
+            .parallelStream()
             .forEach(username ->
                 messagingTemplate.convertAndSendToUser(
                     username,
