@@ -12,7 +12,7 @@
     }
 
     handle_path /storage/* {
-        reverse_proxy rustfs:9000
+        reverse_proxy versitygw:9000
     }
 
     handle {

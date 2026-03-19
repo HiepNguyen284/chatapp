@@ -18,7 +18,7 @@ import java.util.UUID
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Service
-class RustfsService(
+class S3Service(
     private val s3Client: S3Client,
     private val fileTypeService: FileTypeService
 ) {
@@ -41,10 +41,10 @@ class RustfsService(
 
     private val bucketReady = AtomicBoolean(false)
 
-    @Value("\${rustfs.public-url}")
-    private lateinit var rustfsPublicUrl: String
+    @Value("\${s3.public-url}")
+    private lateinit var s3PublicUrl: String
 
-    @Value("\${rustfs.bucket-name}")
+    @Value("\${s3.bucket-name}")
     private lateinit var bucketName: String
 
     fun uploadAvatar(file: MultipartFile): String {
@@ -190,7 +190,7 @@ class RustfsService(
     }
 
     private fun buildUrl(key: String): String {
-        val baseUrl = rustfsPublicUrl.trimEnd('/')
+        val baseUrl = s3PublicUrl.trimEnd('/')
         return "$baseUrl/$bucketName/$key"
     }
 }

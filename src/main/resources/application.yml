@@ -37,9 +37,9 @@ jwts:
   access-token-lifetime: "PT30M" # 30 minutes
   refresh-token-lifetime: "P30D" # 30 days
 
-rustfs:
-  endpoint: "${RUSTFS_ENDPOINT:http://localhost:9000}"
-  public-url: "${RUSTFS_PUBLIC_URL:/storage}"
-  access-key: "${RUSTFS_ACCESS_KEY}"
-  secret-key: "${RUSTFS_SECRET_KEY}"
-  bucket-name: "${RUSTFS_BUCKET_NAME}"
+s3:
+  endpoint: "${S3_ENDPOINT:http://localhost:9000}"
+  public-url: "${S3_PUBLIC_URL:/storage}"
+  access-key: "${S3_ACCESS_KEY}"
+  secret-key: "${S3_SECRET_KEY}"
+  bucket-name: "${S3_BUCKET_NAME}"

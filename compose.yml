@@ -15,7 +15,7 @@ services:
     depends_on:
       app:
         condition: service_started
-      rustfs:
+      versitygw:
         condition: service_healthy
 
   postgres:
@@ -36,21 +36,23 @@ services:
       timeout: 5s
       retries: 5
 
-  rustfs:
-    image: rustfs/rustfs:latest
-    container_name: chatapp-rustfs
+  versitygw:
+    image: versity/versitygw:latest
+    container_name: chatapp-versitygw
 
     env_file:
       - ./.env
 
     ports:
-      - "9001:9001"
+      - "9001:9000"
 
     volumes:
-      - rustfs_data:/data
+      - versitygw_data:/versity/data
+
+    command: --port :9000 --access ${S3_ACCESS_KEY} --secret ${S3_SECRET_KEY} --health /health posix /versity/data
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:9000/health"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -67,9 +69,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      rustfs:
+      versitygw:
         condition: service_healthy
 
 volumes:
   postgres_data:
-  rustfs_data:
+  versitygw_data:

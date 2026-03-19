@@ -10,15 +10,15 @@ import software.amazon.awssdk.services.s3.S3Client
 import java.net.URI
 
 @Configuration
-class RustfsConfig {
+class S3Config {
 
-    @Value("\${rustfs.endpoint}")
+    @Value("\${s3.endpoint}")
     private lateinit var endpoint: String
 
-    @Value("\${rustfs.access-key}")
+    @Value("\${s3.access-key}")
     private lateinit var accessKey: String
 
-    @Value("\${rustfs.secret-key}")
+    @Value("\${s3.secret-key}")
     private lateinit var secretKey: String
 
     @Bean

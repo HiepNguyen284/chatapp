@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class AttachmentService(
     private val fileTypeService: FileTypeService,
-    private val rustfsService: RustfsService,
+    private val s3Service: S3Service,
     private val attachmentRepository: AttachmentRepository
 ) {
 
@@ -20,16 +20,16 @@ class AttachmentService(
             return emptyList()
         }
 
-        val uploadedResults = rustfsService.uploadMany(multipartFiles)
+        val uploadedResults = s3Service.uploadMany(multipartFiles)
         if (uploadedResults.isEmpty()) {
             return emptyList()
         }
 
-        val hasSuccess = uploadedResults.any { it is RustfsService.UploadResult.Success }
+        val hasSuccess = uploadedResults.any { it is S3Service.UploadResult.Success }
         if (!hasSuccess) {
 
             val firstError = uploadedResults
-                .filterIsInstance<RustfsService.UploadResult.Failure>()
+                .filterIsInstance<S3Service.UploadResult.Failure>()
                 .firstOrNull()
                 ?.message
                 ?: "Upload failed"
@@ -39,7 +39,7 @@ class AttachmentService(
 
         return uploadedResults
             .asSequence()
-            .filterIsInstance<RustfsService.UploadResult.Success>()
+            .filterIsInstance<S3Service.UploadResult.Success>()
             .map { result ->
                 val attachmentType = fileTypeService.checkTypeInFileType(
                     result.resourceType,
