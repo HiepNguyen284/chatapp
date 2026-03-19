@@ -73,23 +73,23 @@ class InvitationReplyService {
         @Nullable ChatRoomDto newChatRoomDto
     ) {
 
-        var isFriendRequest = invitation.getChatRoom() != null;
-        var needSendToMembers = isFriendRequest && invitation.isAccepted();
+        var receivers = new HashSet<String>();
 
-        var receiver = new ArrayList<User>();
-
-        if (needSendToMembers) {
-            receiver.addAll(invitation.getChatRoom().getMembers());
+        if (invitation.isAccepted() && newChatRoomDto != null) {
+            receivers.addAll(newChatRoomDto.getMembersUsername());
+            receivers.add(invitation.getSender().getUsername());
+            receivers.add(invitation.getReceiver().getUsername());
         } else {
-            receiver.add(invitation.getSender());
+            // Rejected invitation only needs to notify sender.
+            receivers.add(invitation.getSender().getUsername());
         }
 
         var sendObject = new InvitationWithNewRoomDto(invitation, newChatRoomDto);
 
-        receiver.parallelStream()
-            .forEach(user ->
+        receivers.parallelStream()
+            .forEach(username ->
                 messagingTemplate.convertAndSendToUser(
-                    user.getUsername(),
+                    username,
                     "/queue/invitationReplies/",
                     sendObject
                 )
