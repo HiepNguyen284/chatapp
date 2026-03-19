@@ -7,6 +7,7 @@ WORKDIR /build
 COPY gradle /build/gradle
 COPY gradlew /build/gradlew
 COPY build.gradle.kts /build/build.gradle.kts
+COPY gradle.properties /build/settings.gradle.kts
 COPY settings.gradle.kts /build/settings.gradle.kts
 
 RUN chmod +x /build/gradlew
