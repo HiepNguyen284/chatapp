@@ -62,6 +62,7 @@ class SecurityConfig
             authorizeHttpRequests {
                 authorize("/api/v1/messages/**", authenticated)
                 authorize("/api/v1/invitations/**", authenticated)
+                authorize(HttpMethod.GET, "/api/v1/users/*/presence/", authenticated)
                 authorize(anyRequest, permitAll)
             }
         }
