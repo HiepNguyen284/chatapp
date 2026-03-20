@@ -4,8 +4,10 @@ import com.group4.chatapp.dtos.token.TokenObtainPairDto;
 import com.group4.chatapp.dtos.token.TokenRefreshDto;
 import com.group4.chatapp.dtos.token.TokenRefreshRequestDto;
 import com.group4.chatapp.dtos.user.UserDto;
+import com.group4.chatapp.dtos.user.UserPresenceDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.services.JwtsService;
+import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class UserController {
 
     private final UserService userService;
     private final JwtsService jwtsService;
+    private final PresenceService presenceService;
 
     @PostMapping("/register/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,5 +49,10 @@ public class UserController {
         @RequestParam(name = "limit", defaultValue = "10") int limit
     ) {
         return userService.searchUser(keyword, limit);
+    }
+
+    @GetMapping("/{username}/presence/")
+    public UserPresenceDto getUserPresence(@PathVariable String username) {
+        return presenceService.getPresence(username);
     }
 }
