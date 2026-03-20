@@ -68,4 +68,10 @@ public class MessageController {
     ) {
         messageService.setTypingStatus(roomId, dto.typing());
     }
+
+    @PostMapping("/read")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void markRoomRead(@RequestParam(name = "room") long roomId) {
+        messageService.setReadStatus(roomId);
+    }
 }
