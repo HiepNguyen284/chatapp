@@ -49,6 +49,9 @@ services:
     volumes:
       - versitygw_data:/versity/data
 
+    environment:
+      - VGW_CORS_ALLOW_ORIGIN=*
+
     command: --port :9000 --access ${S3_ACCESS_KEY} --secret ${S3_SECRET_KEY} --health /health posix /versity/data
 
     healthcheck:

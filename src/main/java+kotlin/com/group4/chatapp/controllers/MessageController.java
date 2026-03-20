@@ -3,6 +3,7 @@ package com.group4.chatapp.controllers;
 import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.messages.MessageSendDto;
 import com.group4.chatapp.dtos.messages.MessageSendResponseDto;
+import com.group4.chatapp.dtos.messages.MessageTypingDto;
 import com.group4.chatapp.services.messages.MessageService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
@@ -57,5 +58,14 @@ public class MessageController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void recallMessage(@PathVariable long messageId) {
         messageService.deleteMessage(messageId);
+    }
+
+    @PostMapping("/typing")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void setTypingStatus(
+        @RequestParam(name = "room") long roomId,
+        @RequestBody MessageTypingDto dto
+    ) {
+        messageService.setTypingStatus(roomId, dto.typing());
     }
 }

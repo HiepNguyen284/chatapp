@@ -3,9 +3,12 @@ package com.group4.chatapp.services.messages;
 import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.messages.MessageSendDto;
 import com.group4.chatapp.dtos.messages.MessageSendResponseDto;
+import com.group4.chatapp.dtos.messages.MessageTypingEventDto;
 import com.group4.chatapp.repositories.MessageRepository;
+import com.group4.chatapp.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,8 @@ public class MessageService {
     private final MessageChangesService sendService;
     private final MessageCheckService checkService;
     private final MessageRepository messageRepository;
+    private final UserService userService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @Transactional
     public List<MessageReceiveDto> getMessages(long roomId, int page) {
@@ -60,5 +65,29 @@ public class MessageService {
 
     public void deleteMessage(long messageId) {
         sendService.recallMessage(messageId);
+    }
+
+    @Transactional
+    public void setTypingStatus(long roomId, boolean typing) {
+
+        var user = userService.getUserOrThrows();
+        var chatRoom = checkService.receiveChatRoomAndCheck(roomId, user);
+        var payload = new MessageTypingEventDto(
+            chatRoom.getId(),
+            user.getUsername(),
+            typing
+        );
+
+        var socketPath = String.format("/queue/chat/%d/typing", roomId);
+        chatRoom.getMembers()
+            .stream()
+            .filter(member -> !member.equals(user))
+            .forEach(member ->
+                messagingTemplate.convertAndSendToUser(
+                    member.getUsername(),
+                    socketPath,
+                    payload
+                )
+            );
     }
 }
