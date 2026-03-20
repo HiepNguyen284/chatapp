@@ -50,9 +50,11 @@ services:
       - versitygw_data:/versity/data
 
     environment:
-      - VGW_CORS_ALLOW_ORIGIN=*
+      ROOT_ACCESS_KEY: ${S3_ACCESS_KEY}
+      ROOT_SECRET_KEY: ${S3_SECRET_KEY}
+      VGW_CORS_ALLOW_ORIGIN: "*"
 
-    command: --port :9000 --access ${S3_ACCESS_KEY} --secret ${S3_SECRET_KEY} --health /health posix /versity/data
+    command: --port :9000 --health /health posix /versity/data
 
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://localhost:9000/health"]
