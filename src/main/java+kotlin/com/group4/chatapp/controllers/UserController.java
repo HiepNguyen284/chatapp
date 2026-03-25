@@ -6,8 +6,10 @@ import com.group4.chatapp.dtos.token.TokenRefreshRequestDto;
 import com.group4.chatapp.dtos.user.UserDto;
 import com.group4.chatapp.dtos.user.UserPresenceDto;
 import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
+import com.group4.chatapp.dtos.user.UserBlockStatusDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.services.JwtsService;
+import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserService;
 import jakarta.validation.Valid;
@@ -24,6 +26,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserBlockService userBlockService;
     private final JwtsService jwtsService;
     private final PresenceService presenceService;
 
@@ -66,5 +69,27 @@ public class UserController {
     @PutMapping(value = "/me/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public UserWithAvatarDto updateMyProfile(@ModelAttribute UserProfileUpdateDto dto) {
         return userService.updateCurrentProfile(dto);
+    }
+
+    @GetMapping("/blocks/")
+    public List<UserWithAvatarDto> listBlockedUsers() {
+        return userBlockService.listBlockedUsers();
+    }
+
+    @PostMapping("/{username}/block/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void blockUser(@PathVariable String username) {
+        userBlockService.blockByUsername(username);
+    }
+
+    @DeleteMapping("/{username}/block/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void unblockUser(@PathVariable String username) {
+        userBlockService.unblockByUsername(username);
+    }
+
+    @GetMapping("/{username}/block-status/")
+    public UserBlockStatusDto getBlockStatus(@PathVariable String username) {
+        return userBlockService.getBlockStatus(username);
     }
 }

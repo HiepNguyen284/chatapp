@@ -4,6 +4,7 @@ import com.group4.chatapp.dtos.AttachmentDto;
 import com.group4.chatapp.dtos.ChatRoomDto;
 import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.ChatRoom;
+import com.group4.chatapp.repositories.ChatRoomReadStateRepository;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.MessageRepository;
 import jakarta.transaction.Transactional;
@@ -22,6 +23,7 @@ public class ChatRoomService {
     private final UserService userService;
 
     private final MessageRepository messageRepository;
+    private final ChatRoomReadStateRepository chatRoomReadStateRepository;
     private final ChatRoomRepository chatRoomRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -69,6 +71,7 @@ public class ChatRoomService {
             );
         }
 
+        chatRoomReadStateRepository.deleteByRoomId(roomId);
         messageRepository.deleteByRoomId(roomId);
         chatRoomRepository.delete(room);
 

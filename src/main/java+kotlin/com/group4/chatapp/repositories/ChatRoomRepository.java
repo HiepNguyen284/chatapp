@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
@@ -44,4 +45,13 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
         where a.id = ?1 and b.id = ?2 and c.type = ?3
     """)
     boolean usersShareRoomOfType(long id1, long id2, ChatRoom.Type type);
+
+    @Query("""
+        select c
+        from ChatRoom c
+        inner join c.members a
+        inner join c.members b
+        where a.id = ?1 and b.id = ?2 and c.type = ?3
+    """)
+    Optional<ChatRoom> findUsersRoomOfType(long id1, long id2, ChatRoom.Type type);
 }

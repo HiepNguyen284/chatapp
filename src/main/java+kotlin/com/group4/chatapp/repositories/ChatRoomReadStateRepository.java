@@ -13,6 +13,8 @@ public interface ChatRoomReadStateRepository extends JpaRepository<ChatRoomReadS
 
     Optional<ChatRoomReadState> findByRoomIdAndReaderId(long roomId, long readerId);
 
+    void deleteByRoomId(long roomId);
+
     @Query("""
         select state
         from ChatRoomReadState state

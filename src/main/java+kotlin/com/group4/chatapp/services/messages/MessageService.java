@@ -7,10 +7,12 @@ import com.group4.chatapp.dtos.messages.MessageSendResponseDto;
 import com.group4.chatapp.dtos.messages.MessageTypingEventDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.models.ChatMessage;
+import com.group4.chatapp.models.ChatRoom;
 import com.group4.chatapp.models.ChatRoomReadState;
 import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.ChatRoomReadStateRepository;
 import com.group4.chatapp.repositories.MessageRepository;
+import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +39,7 @@ public class MessageService {
     private final ChatRoomReadStateRepository chatRoomReadStateRepository;
     private final MessageRepository messageRepository;
     private final UserService userService;
+    private final UserBlockService userBlockService;
     private final SimpMessagingTemplate messagingTemplate;
 
     @Transactional
@@ -91,6 +94,7 @@ public class MessageService {
 
         var user = userService.getUserOrThrows();
         var chatRoom = checkService.receiveChatRoomAndCheck(roomId, user);
+        ensureRoomMessagingAllowed(chatRoom, user);
         var payload = new MessageTypingEventDto(
             chatRoom.getId(),
             user.getUsername(),
@@ -115,6 +119,7 @@ public class MessageService {
 
         var user = userService.getUserOrThrows();
         var chatRoom = checkService.receiveChatRoomAndCheck(roomId, user);
+        ensureRoomMessagingAllowed(chatRoom, user);
         var now = new Timestamp(System.currentTimeMillis());
 
         var state = chatRoomReadStateRepository
@@ -168,5 +173,27 @@ public class MessageService {
             })
             .sorted(Comparator.comparing(User::getUsername))
             .toList();
+    }
+
+    private void ensureRoomMessagingAllowed(ChatRoom room, User sender) {
+        if (room.getType() != ChatRoom.Type.DUO) {
+            return;
+        }
+
+        var peer = room.getMembers()
+            .stream()
+            .filter(member -> !member.equals(sender))
+            .findFirst()
+            .orElse(null);
+
+        if (peer == null) {
+            return;
+        }
+
+        userBlockService.ensureNotBlockedEitherWay(
+            sender,
+            peer,
+            "Cannot interact in this chat because one user has blocked the other"
+        );
     }
 }

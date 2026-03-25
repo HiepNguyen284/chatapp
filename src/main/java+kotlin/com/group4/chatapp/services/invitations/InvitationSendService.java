@@ -9,6 +9,7 @@ import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.InvitationRepository;
 import com.group4.chatapp.repositories.UserRepository;
+import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 class InvitationSendService {
 
     private final UserService userService;
+    private final UserBlockService userBlockService;
 
     private final UserRepository userRepository;
     private final InvitationRepository repository;
@@ -130,6 +132,12 @@ class InvitationSendService {
     private void validateChatRoomAndUsers(
         User sender, User receiver, @Nullable ChatRoom chatRoom
     ) {
+
+        userBlockService.ensureNotBlockedEitherWay(
+            sender,
+            receiver,
+            "Cannot send invitation because one user has blocked the other"
+        );
 
         if (hasTheSamePendingInvitationBefore(sender, receiver, chatRoom)) {
             throw new ApiException(
