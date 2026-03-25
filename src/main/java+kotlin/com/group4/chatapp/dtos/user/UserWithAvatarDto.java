@@ -12,6 +12,7 @@ public class UserWithAvatarDto {
 
     private long id;
     private String username;
+    private String displayName;
 
     @Nullable
     private AttachmentDto avatar;
@@ -21,6 +22,9 @@ public class UserWithAvatarDto {
         this(
             user.getId(),
             user.getUsername(),
+            user.getDisplayName() == null || user.getDisplayName().isBlank()
+                ? user.getUsername()
+                : user.getDisplayName(),
             null
         );
 

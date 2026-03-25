@@ -1,20 +1,25 @@
 package com.group4.chatapp.services;
 
 import com.group4.chatapp.dtos.user.UserDto;
+import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.exceptions.ApiException;
+import com.group4.chatapp.models.Attachment;
 import com.group4.chatapp.models.User;
+import com.group4.chatapp.repositories.AttachmentRepository;
 import com.group4.chatapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.jspecify.annotations.Nullable;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,7 +31,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository repository;
+    private final AttachmentRepository attachmentRepository;
     private final PasswordEncoder passwordEncoder;
+    private final S3Service s3Service;
+    private final FileTypeService fileTypeService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     public void createUser(UserDto dto) {
 
@@ -42,6 +51,7 @@ public class UserService {
         var user = User.builder()
             .username(dto.username())
             .password(hashedPassword)
+            .displayName(dto.username())
             .build();
 
         repository.save(user);
@@ -75,6 +85,41 @@ public class UserService {
             .orElseThrow(() -> new ErrorResponseException(HttpStatus.UNAUTHORIZED));
     }
 
+    public Optional<User> getUserByUsername(String username) {
+        return repository.findByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    public UserWithAvatarDto getCurrentProfile() {
+        return new UserWithAvatarDto(getUserOrThrows());
+    }
+
+    @Transactional
+    public UserWithAvatarDto updateCurrentProfile(UserProfileUpdateDto dto) {
+
+        var user = getUserOrThrows();
+        var changed = false;
+
+        var nextDisplayName = normalizeDisplayName(dto.displayName());
+        if (nextDisplayName != null && !nextDisplayName.equals(user.getDisplayName())) {
+            user.setDisplayName(nextDisplayName);
+            changed = true;
+        }
+
+        var nextAvatar = saveAvatar(dto.avatar());
+        if (nextAvatar != null) {
+            user.setAvatar(nextAvatar);
+            changed = true;
+        }
+
+        if (changed) {
+            user = repository.save(user);
+            publishProfileUpdate(user);
+        }
+
+        return new UserWithAvatarDto(user);
+    }
+
     @Transactional(readOnly = true)
     public List<UserWithAvatarDto> searchUser(String keyword, int limit) {
 
@@ -92,5 +137,51 @@ public class UserService {
         return repository.findByUsernameContaining(keyword, pageable)
             .map(UserWithAvatarDto::new)
             .toList();
+    }
+
+    private void publishProfileUpdate(User user) {
+        messagingTemplate.convertAndSend(
+            "/queue/users/profile/",
+            new UserWithAvatarDto(user)
+        );
+    }
+
+    @Nullable
+    private String normalizeDisplayName(@Nullable String displayName) {
+        if (displayName == null) {
+            return null;
+        }
+
+        var trimmed = displayName.trim();
+
+        if (trimmed.isEmpty()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Display name must not be blank");
+        }
+
+        if (trimmed.length() > 60) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Display name must be at most 60 characters");
+        }
+
+        return trimmed;
+    }
+
+    @Nullable
+    private Attachment saveAvatar(@Nullable MultipartFile avatarFile) {
+        if (avatarFile == null || avatarFile.isEmpty()) {
+            return null;
+        }
+
+        var resourceType = fileTypeService.getMimeType(avatarFile.getContentType());
+        var format = fileTypeService.getFileExtension(avatarFile.getOriginalFilename());
+        var fileType = fileTypeService.checkTypeInFileType(resourceType, format);
+
+        if (fileType != Attachment.FileType.IMAGE) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Avatar must be an image");
+        }
+
+        var uploadedUrl = s3Service.uploadAvatar(avatarFile);
+        var attachment = Attachment.of(uploadedUrl, Attachment.FileType.IMAGE);
+
+        return attachmentRepository.save(attachment);
     }
 }

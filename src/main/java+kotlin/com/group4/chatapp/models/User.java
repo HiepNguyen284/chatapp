@@ -31,6 +31,10 @@ public class User implements UserDetails {
     private String password;
 
     @Nullable
+    @Column(name = "display_name")
+    private String displayName;
+
+    @Nullable
     @ManyToOne
     private Attachment avatar;
 

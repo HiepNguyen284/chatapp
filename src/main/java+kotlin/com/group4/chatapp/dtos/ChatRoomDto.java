@@ -7,12 +7,14 @@ import com.group4.chatapp.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jspecify.annotations.Nullable;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatRoomDto {
