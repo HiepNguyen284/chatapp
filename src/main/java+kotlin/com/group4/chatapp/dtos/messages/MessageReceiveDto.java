@@ -12,6 +12,7 @@ import java.util.Objects;
 public record MessageReceiveDto(
     long id,
     String sender,
+    UserWithAvatarDto senderProfile,
     String message,
     Timestamp sentOn,
     List<AttachmentDto> attachments,
@@ -23,6 +24,7 @@ public record MessageReceiveDto(
         this(
             message.getId(),
             message.getSender().getUsername(),
+            new UserWithAvatarDto(message.getSender()),
             message.getMessage(),
             message.getSentOn(),
             message.getAttachments()
@@ -39,6 +41,7 @@ public record MessageReceiveDto(
         this(
             message.getId(),
             message.getSender().getUsername(),
+            new UserWithAvatarDto(message.getSender()),
             message.getMessage(),
             message.getSentOn(),
             message.getAttachments()

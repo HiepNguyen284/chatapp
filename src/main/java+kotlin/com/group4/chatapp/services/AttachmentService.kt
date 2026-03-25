@@ -14,6 +14,11 @@ class AttachmentService(
     private val attachmentRepository: AttachmentRepository
 ) {
 
+    fun getAttachmentOrThrow(id: Long): Attachment =
+        attachmentRepository.findById(id).orElseThrow {
+            ApiException(HttpStatus.NOT_FOUND, "Attachment not found")
+        }
+
     fun getAttachments(dto: MessageSendDto): List<Attachment> {
         val multipartFiles = dto.attachmentsOrEmpty()
         if (multipartFiles.isEmpty()) {

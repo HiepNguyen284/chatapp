@@ -89,6 +89,10 @@ public class UserService {
         return repository.findByUsername(username);
     }
 
+    public Optional<User> getUserById(long userId) {
+        return repository.findById(userId);
+    }
+
     @Transactional(readOnly = true)
     public UserWithAvatarDto getCurrentProfile() {
         return new UserWithAvatarDto(getUserOrThrows());
