@@ -1,8 +1,10 @@
 package com.group4.chatapp.services;
 
+import com.group4.chatapp.dtos.AttachmentDto;
 import com.group4.chatapp.dtos.ChatRoomDto;
 import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.ChatRoom;
+import com.group4.chatapp.repositories.ChatRoomReadStateRepository;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.MessageRepository;
 import jakarta.transaction.Transactional;
@@ -21,6 +23,7 @@ public class ChatRoomService {
     private final UserService userService;
 
     private final MessageRepository messageRepository;
+    private final ChatRoomReadStateRepository chatRoomReadStateRepository;
     private final ChatRoomRepository chatRoomRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -35,7 +38,10 @@ public class ChatRoomService {
 
     public List<ChatRoomDto> listRoomsWithLatestMessage() {
         var user = userService.getUserOrThrows();
-        return chatRoomRepository.findWithLatestMessage(user.getId());
+        return chatRoomRepository.findWithLatestMessage(user.getId())
+            .stream()
+            .map(room -> enrichDuoPreview(room, user.getUsername()))
+            .toList();
     }
 
     @Transactional
@@ -65,6 +71,7 @@ public class ChatRoomService {
             );
         }
 
+        chatRoomReadStateRepository.deleteByRoomId(roomId);
         messageRepository.deleteByRoomId(roomId);
         chatRoomRepository.delete(room);
 
@@ -77,5 +84,36 @@ public class ChatRoomService {
                 payload
             )
         );
+    }
+
+    private ChatRoomDto enrichDuoPreview(ChatRoomDto room, String currentUsername) {
+
+        if (room.getType() != ChatRoom.Type.DUO) {
+            return room;
+        }
+
+        var peerUsername = room.getMembersUsername()
+            .stream()
+            .filter(username -> !username.equals(currentUsername))
+            .findFirst()
+            .orElse(null);
+
+        if (peerUsername == null || peerUsername.isBlank()) {
+            return room;
+        }
+
+        userService.getUserByUsername(peerUsername).ifPresent(peer -> {
+            room.setName(peer.getDisplayName() == null || peer.getDisplayName().isBlank()
+                ? peer.getUsername()
+                : peer.getDisplayName());
+
+            if (peer.getAvatar() == null) {
+                room.setAvatar(null);
+            } else {
+                room.setAvatar(new AttachmentDto(peer.getAvatar()));
+            }
+        });
+
+        return room;
     }
 }

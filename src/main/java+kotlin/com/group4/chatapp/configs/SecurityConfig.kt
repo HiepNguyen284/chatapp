@@ -62,6 +62,11 @@ class SecurityConfig
             authorizeHttpRequests {
                 authorize("/api/v1/messages/**", authenticated)
                 authorize("/api/v1/invitations/**", authenticated)
+                authorize("/api/v1/users/me/**", authenticated)
+                authorize("/api/v1/users/blocks/**", authenticated)
+                authorize(HttpMethod.POST, "/api/v1/users/*/block/", authenticated)
+                authorize(HttpMethod.DELETE, "/api/v1/users/*/block/", authenticated)
+                authorize(HttpMethod.GET, "/api/v1/users/*/block-status/", authenticated)
                 authorize(HttpMethod.GET, "/api/v1/users/*/presence/", authenticated)
                 authorize(anyRequest, permitAll)
             }

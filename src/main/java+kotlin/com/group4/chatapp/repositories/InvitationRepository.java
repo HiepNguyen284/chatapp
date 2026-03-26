@@ -3,6 +3,7 @@ package com.group4.chatapp.repositories;
 import com.group4.chatapp.models.ChatRoom;
 import com.group4.chatapp.models.Invitation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -45,4 +46,13 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long> {
         long chatRoomId,
         Invitation.Status status
     );
+
+    @Modifying
+    @Query("""
+        delete from Invitation i
+        where i.status = ?3
+          and ((i.sender.id = ?1 and i.receiver.id = ?2)
+            or (i.sender.id = ?2 and i.receiver.id = ?1))
+    """)
+    void deletePendingBetweenUsers(long firstUserId, long secondUserId, Invitation.Status status);
 }

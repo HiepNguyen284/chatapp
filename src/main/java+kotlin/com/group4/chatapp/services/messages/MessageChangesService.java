@@ -9,6 +9,7 @@ import com.group4.chatapp.models.ChatRoom;
 import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.MessageRepository;
 import com.group4.chatapp.services.AttachmentService;
+import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ class MessageChangesService {
     private final MessageRepository messageRepository;
 
     private final UserService userService;
+    private final UserBlockService userBlockService;
     private final MessageCheckService checkService;
     private final AttachmentService attachmentService;
 
@@ -92,6 +94,7 @@ class MessageChangesService {
 
         var user = userService.getUserOrThrows();
         var chatRoom = checkService.receiveChatRoomAndCheck(roomId, user);
+        ensureRoomMessagingAllowed(chatRoom, user);
 
         var savedMessage = saveMessage(user, chatRoom, dto);
         sendToMembers(chatRoom, savedMessage);
@@ -114,6 +117,7 @@ class MessageChangesService {
 
         var chatRoom = message.getRoom();
         var sender = message.getSender();
+        ensureRoomMessagingAllowed(chatRoom, sender);
         var now = new Timestamp(System.currentTimeMillis());
 
         var newMessage = dto.toMessage(
@@ -144,5 +148,27 @@ class MessageChangesService {
 
         var saved = messageRepository.save(message);
         sendToMembers(saved.getRoom(), saved);
+    }
+
+    private void ensureRoomMessagingAllowed(ChatRoom room, User sender) {
+        if (room.getType() != ChatRoom.Type.DUO) {
+            return;
+        }
+
+        var peer = room.getMembers()
+            .stream()
+            .filter(member -> !member.equals(sender))
+            .findFirst()
+            .orElse(null);
+
+        if (peer == null) {
+            return;
+        }
+
+        userBlockService.ensureNotBlockedEitherWay(
+            sender,
+            peer,
+            "Cannot send messages because one user has blocked the other"
+        );
     }
 }
