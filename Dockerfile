@@ -19,8 +19,13 @@ COPY src /build/src
 
 RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon bootJar
 
-FROM eclipse-temurin:21-jre-alpine
+RUN jlink --add-modules ALL-MODULE-PATH --output /jre --strip-debug --no-header-files --no-man-pages
 
+FROM alpine:3
+
+WORKDIR /app
+
+COPY --from=builder /jre /jre
 COPY --from=builder /build/build/libs/*.jar /app.jar
 
-CMD ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["/jre/bin/java", "-jar", "/app.jar"]
