@@ -1,6 +1,6 @@
 package com.group4.chatapp.dtos.user;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.sql.Timestamp;
 
