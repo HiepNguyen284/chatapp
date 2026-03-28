@@ -42,6 +42,7 @@ public class GroupChatService {
     private final MessageRepository messageRepository;
     private final ChatRoomReadStateRepository chatRoomReadStateRepository;
     private final InvitationRepository invitationRepository;
+    private final ChatRoomPinRepository chatRoomPinRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
     @Transactional
@@ -149,16 +150,7 @@ public class GroupChatService {
         }
 
         room = chatRoomRepository.save(room);
-
-        // Notify members about update so clients can refresh name/avatar in realtime
-        notifyMembers(
-            roomId,
-            "group_updated",
-            Map.of(
-                "roomId", roomId,
-                "chatRoom", new ChatRoomDto(room, null)
-            )
-        );
+        publishGroupUpdated(room);
 
         return buildGroupChatDto(room, user.getId());
     }
@@ -296,6 +288,8 @@ public class GroupChatService {
         }
 
         var removedUser = removeMemberFromRoom(room, targetUserId);
+        chatRoomPinRepository.deleteByUser_IdAndChatRoom_Id(targetUserId, roomId);
+        publishRoomRemovedToUser(removedUser.getUsername(), roomId, "removed");
         publishGroupMembershipMessage(
             room,
             user,
@@ -337,6 +331,8 @@ public class GroupChatService {
         }
 
         var removedUser = removeMemberFromRoom(room, user.getId());
+        chatRoomPinRepository.deleteByUser_IdAndChatRoom_Id(user.getId(), roomId);
+        publishRoomRemovedToUser(removedUser.getUsername(), roomId, "left");
         publishGroupMembershipMessage(
             room,
             removedUser,
@@ -374,6 +370,7 @@ public class GroupChatService {
 
         chatRoomReadStateRepository.deleteByRoomId(roomId);
         invitationRepository.deleteByChatRoomId(roomId);
+        chatRoomPinRepository.deleteByChatRoom_Id(roomId);
         messageRepository.deleteByRoomId(roomId);
         chatRoomMemberRepository.deleteByChatRoomId(roomId);
         chatRoomRepository.delete(room);
@@ -521,13 +518,18 @@ public class GroupChatService {
         var room = chatRoomRepository.findById(roomId).orElse(null);
         if (room == null) return;
 
-        room.getMembers().forEach(member ->
+        room.getMembers().forEach(member -> {
+            var username = member.getUsername();
+            if (username == null || username.isBlank()) {
+                return;
+            }
+
             messagingTemplate.convertAndSendToUser(
-                member.getUsername(),
+                username,
                 "/queue/groups/" + event,
                 payload
-            )
-        );
+            );
+        });
     }
 
     private void publishRoomCreated(ChatRoom room, Set<User> targets) {
@@ -538,11 +540,62 @@ public class GroupChatService {
         var chatRoomDto = new ChatRoomDto(room, null);
         var payload = Map.of("chatRoom", chatRoomDto);
 
-        targets.forEach(member ->
+        targets.forEach(member -> {
+            var username = member.getUsername();
+            if (username == null || username.isBlank()) {
+                return;
+            }
+
             messagingTemplate.convertAndSendToUser(
-                member.getUsername(),
+                username,
                 "/queue/chatrooms/created/",
                 payload
+            );
+        });
+    }
+
+    private void publishGroupUpdated(ChatRoom room) {
+        var latestMessage = messageRepository
+            .findFirstByRoom_IdOrderBySentOnDescIdDesc(room.getId())
+            .orElse(null);
+
+        room.getMembers().forEach(member -> {
+            var username = member.getUsername();
+            if (username == null || username.isBlank()) {
+                return;
+            }
+
+            var chatRoomDto = new ChatRoomDto(room, latestMessage);
+            var isPinned = chatRoomPinRepository.existsByUser_IdAndChatRoom_Id(
+                member.getId(),
+                room.getId()
+            );
+            chatRoomDto.setPinned(isPinned);
+
+            var payload = Map.of(
+                "roomId", room.getId(),
+                "chatRoom", chatRoomDto
+            );
+
+            messagingTemplate.convertAndSendToUser(
+                username,
+                "/queue/groups/group_updated",
+                payload
+            );
+        });
+    }
+
+    private void publishRoomRemovedToUser(@Nullable String username, long roomId, String action) {
+        if (username == null || username.isBlank()) {
+            return;
+        }
+
+        messagingTemplate.convertAndSendToUser(
+            username,
+            "/queue/friends/removed/",
+            Map.of(
+                "roomId", roomId,
+                "action", action
             )
         );
     }

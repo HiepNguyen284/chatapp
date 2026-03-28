@@ -4,7 +4,9 @@ import com.group4.chatapp.dtos.AttachmentDto;
 import com.group4.chatapp.dtos.ChatRoomDto;
 import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.ChatRoom;
+import com.group4.chatapp.models.ChatRoomPin;
 import com.group4.chatapp.repositories.ChatRoomReadStateRepository;
+import com.group4.chatapp.repositories.ChatRoomPinRepository;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.MessageRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class ChatRoomService {
     private final MessageRepository messageRepository;
     private final ChatRoomReadStateRepository chatRoomReadStateRepository;
     private final ChatRoomRepository chatRoomRepository;
+    private final ChatRoomPinRepository chatRoomPinRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
     public ChatRoomDto getRoomWithLatestMessage(ChatRoom chatRoom) {
@@ -38,10 +42,42 @@ public class ChatRoomService {
 
     public List<ChatRoomDto> listRoomsWithLatestMessage() {
         var user = userService.getUserOrThrows();
+        var pinnedRoomIds = chatRoomPinRepository.findPinnedRoomIdsByUserId(user.getId())
+            .stream()
+            .collect(Collectors.toSet());
         return chatRoomRepository.findWithLatestMessage(user.getId())
             .stream()
-            .map(room -> enrichDuoPreview(room, user.getUsername()))
+            .map(room -> {
+                var dto = enrichDuoPreview(room, user.getUsername());
+                dto.setPinned(pinnedRoomIds.contains(dto.getId()));
+                return dto;
+            })
             .toList();
+    }
+
+    @Transactional
+    public void pinRoom(long roomId) {
+        var user = userService.getUserOrThrows();
+        var room = getRoomAsMemberOrThrow(user.getId(), roomId);
+
+        if (!chatRoomPinRepository.existsByUser_IdAndChatRoom_Id(user.getId(), roomId)) {
+            var pin = ChatRoomPin.builder()
+                .user(user)
+                .chatRoom(room)
+                .build();
+            chatRoomPinRepository.save(pin);
+        }
+
+        publishPinnedState(user.getUsername(), room, true);
+    }
+
+    @Transactional
+    public void unpinRoom(long roomId) {
+        var user = userService.getUserOrThrows();
+        var room = getRoomAsMemberOrThrow(user.getId(), roomId);
+
+        chatRoomPinRepository.deleteByUser_IdAndChatRoom_Id(user.getId(), roomId);
+        publishPinnedState(user.getUsername(), room, false);
     }
 
     @Transactional
@@ -71,6 +107,7 @@ public class ChatRoomService {
             );
         }
 
+        chatRoomPinRepository.deleteByChatRoom_Id(roomId);
         chatRoomReadStateRepository.deleteByRoomId(roomId);
         messageRepository.deleteByRoomId(roomId);
         chatRoomRepository.delete(room);
@@ -115,5 +152,40 @@ public class ChatRoomService {
         });
 
         return room;
+    }
+
+    private ChatRoom getRoomAsMemberOrThrow(long userId, long roomId) {
+        var room = chatRoomRepository.findById(roomId)
+            .orElseThrow(() -> new ApiException(
+                HttpStatus.NOT_FOUND,
+                "Chat room not found"
+            ));
+
+        var isMember = chatRoomRepository.userIsMemberInChatRoom(userId, roomId);
+        if (!isMember) {
+            throw new ApiException(
+                HttpStatus.FORBIDDEN,
+                "You are not a member of this room"
+            );
+        }
+
+        return room;
+    }
+
+    private void publishPinnedState(String username, ChatRoom room, boolean pinned) {
+        var chatRoomDto = enrichDuoPreview(getRoomWithLatestMessage(room), username);
+        chatRoomDto.setPinned(pinned);
+
+        var payload = Map.of(
+            "roomId", room.getId(),
+            "pinned", pinned,
+            "chatRoom", chatRoomDto
+        );
+
+        messagingTemplate.convertAndSendToUser(
+            username,
+            "/queue/chatrooms/pinned/",
+            payload
+        );
     }
 }
