@@ -30,7 +30,7 @@ public class ChatRoomService {
     public ChatRoomDto getRoomWithLatestMessage(ChatRoom chatRoom) {
 
         var latestMessage = messageRepository
-            .findLatestMessage(chatRoom.getId())
+            .findFirstByRoom_IdOrderBySentOnDescIdDesc(chatRoom.getId())
             .orElse(null);
 
         return new ChatRoomDto(chatRoom, latestMessage);

@@ -1,0 +1,263 @@
+@startuml AppChat_Database_Diagram
+
+!define TABLE(x) entity x << (T, #FFAAAA) >>
+!define NEWTABLE(x) entity x << (N, #AAFFAA) >>
+
+skinparam linetype ortho
+skinparam entity {
+    BackgroundColor #FEFECE
+    BorderColor #333333
+    FontSize 12
+    ArrowColor #333333
+}
+
+skinparam title {
+    FontSize 20
+    FontStyle bold
+}
+
+title Biểu đồ CSDL - Hệ thống AppChat\n(T) = Bảng đã có | (N) = Bảng mới
+
+' ===========================
+' BẢNG ĐÃ CÓ (EXISTING)
+' ===========================
+
+TABLE(users) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * username : VARCHAR <<UNIQUE, NOT NULL>>
+    * password : VARCHAR <<NOT NULL>>
+    display_name : VARCHAR <<NULLABLE>>
+    avatar_id : BIGINT <<FK>>
+    last_seen_at : TIMESTAMP <<NULLABLE>>
+}
+
+TABLE(attachments) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * source : VARCHAR <<NOT NULL>>
+    * type : INT <<ENUM: IMAGE, VIDEO, RAW, DOCUMENT, AUDIO>>
+}
+
+TABLE(user_blocks) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * blocker_id : BIGINT <<FK, NOT NULL>>
+    * blocked_id : BIGINT <<FK, NOT NULL>>
+    ..
+    UNIQUE(blocker_id, blocked_id)
+}
+
+TABLE(invitations) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * sender_id : BIGINT <<FK, NOT NULL>>
+    * receiver_id : BIGINT <<FK, NOT NULL>>
+    chat_room_id : BIGINT <<FK, NULLABLE>>
+    * status : INT <<ENUM: PENDING, ACCEPTED, REJECTED>>
+}
+
+TABLE(chat_rooms) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    name : VARCHAR <<NULLABLE>>
+    avatar_id : BIGINT <<FK>>
+    * type : INT <<ENUM: DUO, GROUP, AI_BOT>>
+    created_on : TIMESTAMP <<AUTO>>
+}
+note right of chat_rooms
+  🆕 Mở rộng enum Type
+  thêm **AI_BOT** cho
+  tính năng Chatbot AI (3.3)
+end note
+
+TABLE(chat_room_members) {
+    * **chat_room_id** : BIGINT <<PK, FK>>
+    * **user_id** : BIGINT <<PK, FK>>
+    --
+    Bảng join ManyToMany
+    (JPA tự sinh)
+}
+
+TABLE(chat_room_member_roles) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * chat_room_id : BIGINT <<FK, NOT NULL>>
+    * user_id : BIGINT <<FK, NOT NULL>>
+    * is_admin : BOOLEAN <<DEFAULT FALSE>>
+    * joined_at : TIMESTAMP <<NOT NULL, AUTO>>
+}
+
+TABLE(chat_messages) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * sender_id : BIGINT <<FK, NOT NULL>>
+    * room_id : BIGINT <<FK, NOT NULL>>
+    reply_to_id : BIGINT <<FK, NULLABLE>>
+    message : TEXT <<NULLABLE>>
+    last_edit : TIMESTAMP <<NULLABLE>>
+    * sent_on : TIMESTAMP <<NOT NULL, AUTO>>
+    * status : INT <<ENUM: NORMAL, EDITED, RECALLED>>
+}
+
+TABLE(chat_message_attachments) {
+    * **chat_message_id** : BIGINT <<PK, FK>>
+    * **attachment_id** : BIGINT <<PK, FK>>
+    --
+    Bảng join ManyToMany
+    (JPA tự sinh)
+}
+
+TABLE(chat_room_read_states) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * room_id : BIGINT <<FK, NOT NULL>>
+    * reader_id : BIGINT <<FK, NOT NULL>>
+    * last_read_at : TIMESTAMP <<NOT NULL>>
+    ..
+    UNIQUE(room_id, reader_id)
+}
+
+' ===========================
+' BẢNG MỚI (NEW)
+' ===========================
+
+NEWTABLE(friendships) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * user1_id : BIGINT <<FK, NOT NULL>>
+    * user2_id : BIGINT <<FK, NOT NULL>>
+    * created_at : TIMESTAMP <<NOT NULL, AUTO>>
+    ..
+    UNIQUE(user1_id, user2_id)
+    Quy ước: user1_id < user2_id
+}
+note bottom of friendships
+  🆕 **Bảng mới**
+  Lưu quan hệ bạn bè
+  đã xác nhận (từ invitations)
+  Hỗ trợ: 2.2
+end note
+
+NEWTABLE(pinned_conversations) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * user_id : BIGINT <<FK, NOT NULL>>
+    * room_id : BIGINT <<FK, NOT NULL>>
+    * pinned_at : TIMESTAMP <<NOT NULL, AUTO>>
+    ..
+    UNIQUE(user_id, room_id)
+}
+note bottom of pinned_conversations
+  🆕 **Bảng mới**
+  Ghim cuộc trò chuyện
+  quan trọng
+  Hỗ trợ: 2.5
+end note
+
+NEWTABLE(notifications) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * recipient_id : BIGINT <<FK, NOT NULL>>
+    * type : VARCHAR <<ENUM: NEW_MESSAGE, FRIEND_REQUEST, GROUP_INVITE>>
+    * title : VARCHAR <<NOT NULL>>
+    content : VARCHAR <<NULLABLE>>
+    reference_id : BIGINT <<NULLABLE>>
+    * is_read : BOOLEAN <<DEFAULT FALSE>>
+    * created_at : TIMESTAMP <<NOT NULL, AUTO>>
+}
+note bottom of notifications
+  🆕 **Bảng mới**
+  Thông báo đẩy cho
+  tin nhắn, lời mời, nhóm
+  Hỗ trợ: 2.7
+end note
+
+NEWTABLE(notification_settings) {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * user_id : BIGINT <<FK, NOT NULL>>
+    * room_id : BIGINT <<FK, NOT NULL>>
+    * is_muted : BOOLEAN <<DEFAULT FALSE>>
+    muted_until : TIMESTAMP <<NULLABLE>>
+    ..
+    UNIQUE(user_id, room_id)
+}
+note bottom of notification_settings
+  🆕 **Bảng mới**
+  Bật/tắt thông báo
+  theo từng cuộc trò chuyện
+  Hỗ trợ: 2.7
+end note
+
+' ===========================
+' QUAN HỆ (RELATIONSHIPS)
+' ===========================
+
+' -- users & attachments --
+users }o..|| attachments : "avatar_id"
+
+' -- user_blocks --
+user_blocks }o--|| users : "blocker_id"
+user_blocks }o--|| users : "blocked_id"
+
+' -- invitations --
+invitations }o--|| users : "sender_id"
+invitations }o--|| users : "receiver_id"
+invitations }o..o| chat_rooms : "chat_room_id\n(NULL = friend request)"
+
+' -- friendships --
+friendships }o--|| users : "user1_id"
+friendships }o--|| users : "user2_id"
+
+' -- chat_rooms & attachments --
+chat_rooms }o..|| attachments : "avatar_id"
+
+' -- chat_room_members --
+chat_room_members }o--|| chat_rooms : "chat_room_id"
+chat_room_members }o--|| users : "user_id"
+
+' -- chat_room_member_roles --
+chat_room_member_roles }o--|| chat_rooms : "chat_room_id"
+chat_room_member_roles }o--|| users : "user_id"
+
+' -- chat_messages --
+chat_messages }o--|| users : "sender_id"
+chat_messages }o--|| chat_rooms : "room_id"
+chat_messages }o..o| chat_messages : "reply_to_id"
+
+' -- chat_message_attachments --
+chat_message_attachments }o--|| chat_messages : "chat_message_id"
+chat_message_attachments }o--|| attachments : "attachment_id"
+
+' -- chat_room_read_states --
+chat_room_read_states }o--|| chat_rooms : "room_id"
+chat_room_read_states }o--|| users : "reader_id"
+
+' -- pinned_conversations --
+pinned_conversations }o--|| users : "user_id"
+pinned_conversations }o--|| chat_rooms : "room_id"
+
+' -- notifications --
+notifications }o--|| users : "recipient_id"
+
+' -- notification_settings --
+notification_settings }o--|| users : "user_id"
+notification_settings }o--|| chat_rooms : "room_id"
+
+' ===========================
+' LEGEND
+' ===========================
+
+legend right
+  |= Ký hiệu |= Ý nghĩa |
+  | (T) Hồng | Bảng đã tồn tại |
+  | (N) Xanh | Bảng mới cần thêm |
+  | * Bold | Cột bắt buộc (NOT NULL) |
+  | <<PK>> | Primary Key |
+  | <<FK>> | Foreign Key |
+  | <<UNIQUE>> | Ràng buộc duy nhất |
+  |<#FFFFFF> **Tổng cộng: 13 bảng** |
+endlegend
+
+@enduml

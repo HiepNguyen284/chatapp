@@ -14,13 +14,7 @@ import java.util.stream.Stream;
 @Repository
 public interface MessageRepository extends JpaRepository<ChatMessage, Long> {
 
-    @Query("""
-        select msg2.id
-        from ChatMessage msg2
-        where msg2.room.id = ?1
-        order by msg2.sentOn desc, msg2.id asc
-    """)
-    Optional<ChatMessage> findLatestMessage(long roomId);
+    Optional<ChatMessage> findFirstByRoom_IdOrderBySentOnDescIdDesc(long roomId);
 
     @Query("""
         select c

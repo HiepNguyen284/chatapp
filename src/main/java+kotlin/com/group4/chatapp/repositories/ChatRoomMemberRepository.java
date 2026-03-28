@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, Long> {
@@ -15,8 +14,9 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
         select cm
         from ChatRoomMember cm
         where cm.chatRoom.id = :roomId and cm.user.id = :userId
+        order by cm.joinedAt asc
     """)
-    Optional<ChatRoomMember> findByRoomIdAndUserId(long roomId, long userId);
+    List<ChatRoomMember> findByRoomIdAndUserId(long roomId, long userId);
 
     @Query("""
         select cm
@@ -26,9 +26,9 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
     List<ChatRoomMember> findByRoomId(long roomId);
 
     @Query("""
-        select cm.isAdmin = true
+        select case when count(cm) > 0 then true else false end
         from ChatRoomMember cm
-        where cm.chatRoom.id = :roomId and cm.user.id = :userId
+        where cm.chatRoom.id = :roomId and cm.user.id = :userId and cm.isAdmin = true
     """)
     boolean isUserAdmin(long roomId, long userId);
 
