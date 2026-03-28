@@ -6,6 +6,7 @@ import com.group4.chatapp.models.Attachment
 import com.group4.chatapp.repositories.AttachmentRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 
 @Service
 class AttachmentService(
@@ -55,5 +56,24 @@ class AttachmentService(
             }
             .map(attachmentRepository::save)
             .toList()
+    }
+
+    fun uploadAvatar(avatarFile: MultipartFile): Attachment {
+        if (avatarFile.isEmpty) {
+            throw ApiException(HttpStatus.BAD_REQUEST, "Avatar must not be empty")
+        }
+
+        val resourceType = fileTypeService.getMimeType(avatarFile.contentType)
+        val format = fileTypeService.getFileExtension(avatarFile.originalFilename)
+        val fileType = fileTypeService.checkTypeInFileType(resourceType, format)
+
+        if (fileType != Attachment.FileType.IMAGE) {
+            throw ApiException(HttpStatus.BAD_REQUEST, "Avatar must be an image")
+        }
+
+        val uploadedUrl = s3Service.uploadAvatar(avatarFile)
+        val attachment = Attachment.of(uploadedUrl, Attachment.FileType.IMAGE)
+
+        return attachmentRepository.save(attachment)
     }
 }

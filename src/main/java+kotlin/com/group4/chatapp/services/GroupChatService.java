@@ -5,6 +5,7 @@ import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.group.GroupChatCreateDto;
 import com.group4.chatapp.dtos.group.GroupChatDto;
 import com.group4.chatapp.dtos.group.GroupChatUpdateDto;
+import com.group4.chatapp.dtos.group.GroupChatUpdateMultipartDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.Attachment;
@@ -16,8 +17,10 @@ import com.group4.chatapp.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.jspecify.annotations.Nullable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -96,6 +99,20 @@ public class GroupChatService {
 
     @Transactional
     public GroupChatDto updateGroup(long roomId, GroupChatUpdateDto dto) {
+        return updateGroupInternal(roomId, dto.name(), dto.avatarId(), null);
+    }
+
+    @Transactional
+    public GroupChatDto updateGroup(long roomId, GroupChatUpdateMultipartDto dto) {
+        return updateGroupInternal(roomId, dto.name(), null, dto.avatar());
+    }
+
+    private GroupChatDto updateGroupInternal(
+        long roomId,
+        @Nullable String nextNameRaw,
+        @Nullable Long avatarId,
+        @Nullable MultipartFile avatarFile
+    ) {
         var user = userService.getUserOrThrows();
         var room = getGroupRoomOrThrow(roomId);
 
@@ -107,29 +124,75 @@ public class GroupChatService {
             );
         }
 
+        var changed = false;
+
         // Update name if provided
-        if (dto.name() != null && !dto.name().isBlank()) {
-            room.setName(dto.name());
+        var normalizedName = normalizeGroupName(nextNameRaw);
+        if (normalizedName != null && !normalizedName.equals(room.getName())) {
+            room.setName(normalizedName);
+            changed = true;
         }
 
-        // Update avatar if provided
-        if (dto.avatarId() != null) {
-            var avatar = attachmentService.getAttachmentOrThrow(dto.avatarId());
-            if (!avatar.isImage()) {
-                throw new ApiException(
-                    HttpStatus.BAD_REQUEST,
-                    "Avatar must be an image"
-                );
-            }
+        if (avatarFile != null && !avatarFile.isEmpty()) {
+            var avatar = attachmentService.uploadAvatar(avatarFile);
             room.setAvatar(avatar);
+            changed = true;
+        } else if (avatarId != null) {
+            var avatar = attachmentService.getAttachmentOrThrow(avatarId);
+            validateGroupAvatar(avatar);
+            room.setAvatar(avatar);
+            changed = true;
+        }
+
+        if (!changed) {
+            return buildGroupChatDto(room, user.getId());
         }
 
         room = chatRoomRepository.save(room);
 
-        // Notify members about update
-        notifyMembers(roomId, "group_updated", Map.of("roomId", roomId));
+        // Notify members about update so clients can refresh name/avatar in realtime
+        notifyMembers(
+            roomId,
+            "group_updated",
+            Map.of(
+                "roomId", roomId,
+                "chatRoom", new ChatRoomDto(room, null)
+            )
+        );
 
         return buildGroupChatDto(room, user.getId());
+    }
+
+    private void validateGroupAvatar(Attachment avatar) {
+        if (avatar.isImage()) {
+            return;
+        }
+
+        throw new ApiException(
+            HttpStatus.BAD_REQUEST,
+            "Avatar must be an image"
+        );
+    }
+
+    @Nullable
+    private String normalizeGroupName(@Nullable String rawName) {
+        if (rawName == null) {
+            return null;
+        }
+
+        var trimmed = rawName.trim();
+        if (trimmed.isEmpty()) {
+            return null;
+        }
+
+        if (trimmed.length() > 100) {
+            throw new ApiException(
+                HttpStatus.BAD_REQUEST,
+                "Group name must be at most 100 characters"
+            );
+        }
+
+        return trimmed;
     }
 
     @Transactional

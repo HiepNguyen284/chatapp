@@ -3,6 +3,7 @@ package com.group4.chatapp.controllers;
 import com.group4.chatapp.dtos.group.GroupChatCreateDto;
 import com.group4.chatapp.dtos.group.GroupChatDto;
 import com.group4.chatapp.dtos.group.GroupChatUpdateDto;
+import com.group4.chatapp.dtos.group.GroupChatUpdateMultipartDto;
 import com.group4.chatapp.dtos.group.GroupMembersAddDto;
 import com.group4.chatapp.services.GroupChatService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -10,11 +11,14 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +48,17 @@ public class GroupChatController {
     public GroupChatDto updateGroup(
         @PathVariable long roomId,
         @Valid @RequestBody GroupChatUpdateDto dto
+    ) {
+        return groupChatService.updateGroup(roomId, dto);
+    }
+
+    @PutMapping(
+        value = "/api/v1/chatrooms/{roomId}/groups/",
+        consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public GroupChatDto updateGroupWithAvatar(
+        @PathVariable long roomId,
+        @Valid @ModelAttribute GroupChatUpdateMultipartDto dto
     ) {
         return groupChatService.updateGroup(roomId, dto);
     }
