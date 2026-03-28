@@ -38,6 +38,7 @@ public class GroupChatService {
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final MessageRepository messageRepository;
     private final ChatRoomReadStateRepository chatRoomReadStateRepository;
+    private final InvitationRepository invitationRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
     @Transactional
@@ -287,6 +288,45 @@ public class GroupChatService {
             "action", "left",
             "actionBy", removedUser.getUsername()
         ));
+    }
+
+    @Transactional
+    public void dissolveGroup(long roomId) {
+        var user = userService.getUserOrThrows();
+        var room = getGroupRoomOrThrow(roomId);
+
+        Long creatorId = resolveCreatorId(room);
+        boolean isOwner = creatorId != null && creatorId.equals(user.getId());
+        if (!isOwner) {
+            throw new ApiException(
+                HttpStatus.FORBIDDEN,
+                "Only group owner can dissolve this group"
+            );
+        }
+
+        var memberUsernames = room.getMembers().stream()
+            .map(User::getUsername)
+            .filter(username -> username != null && !username.isBlank())
+            .collect(Collectors.toSet());
+
+        chatRoomReadStateRepository.deleteByRoomId(roomId);
+        invitationRepository.deleteByChatRoomId(roomId);
+        messageRepository.deleteByRoomId(roomId);
+        chatRoomMemberRepository.deleteByChatRoomId(roomId);
+        chatRoomRepository.delete(room);
+
+        var payload = Map.of(
+            "roomId", roomId,
+            "dissolvedBy", user.getUsername()
+        );
+
+        memberUsernames.forEach(username ->
+            messagingTemplate.convertAndSendToUser(
+                username,
+                "/queue/friends/removed/",
+                payload
+            )
+        );
     }
 
     @Transactional

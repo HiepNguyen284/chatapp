@@ -70,4 +70,10 @@ public class GroupChatController {
     public void leaveGroup(@PathVariable long roomId) {
         groupChatService.leaveGroup(roomId);
     }
+
+    @DeleteMapping("/api/v1/chatrooms/{roomId}/groups/dissolve/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void dissolveGroup(@PathVariable long roomId) {
+        groupChatService.dissolveGroup(roomId);
+    }
 }
