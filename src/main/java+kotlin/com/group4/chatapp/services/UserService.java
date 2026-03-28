@@ -136,9 +136,16 @@ public class UserService {
             );
         }
 
+        var normalizedKeyword = keyword.trim();
+        if (normalizedKeyword.isEmpty()) {
+            return List.of();
+        }
+
+        var currentUser = getUserOrThrows();
         var pageable = PageRequest.ofSize(limit);
 
-        return repository.findByUsernameContaining(keyword, pageable)
+        return repository.searchByKeyword(normalizedKeyword, currentUser.getId(), pageable)
+            .stream()
             .map(UserWithAvatarDto::new)
             .toList();
     }

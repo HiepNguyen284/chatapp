@@ -93,6 +93,13 @@ public class GroupChatService {
         }
 
         publishRoomCreated(room, members);
+        publishAddedToGroupNotification(
+            room,
+            creator,
+            members.stream()
+                .filter(member -> !member.getId().equals(creator.getId()))
+                .collect(Collectors.toSet())
+        );
 
         // Return the created group
         return buildGroupChatDto(room, creator.getId());
@@ -228,6 +235,7 @@ public class GroupChatService {
         room = chatRoomRepository.save(room);
 
         publishRoomCreated(room, newMembers);
+        publishAddedToGroupNotification(room, user, newMembers);
 
         // Notify members about new members
         var newMemberUsernames = newMembers.stream()
@@ -598,5 +606,44 @@ public class GroupChatService {
                 "action", action
             )
         );
+    }
+
+    private void publishAddedToGroupNotification(
+        ChatRoom room,
+        User actor,
+        Set<User> targets
+    ) {
+        if (targets.isEmpty()) {
+            return;
+        }
+
+        var roomName = room.getName();
+        if (roomName == null || roomName.isBlank()) {
+            roomName = "Group chat";
+        }
+
+        var addedBy = actor.getUsername();
+        if (addedBy == null || addedBy.isBlank()) {
+            addedBy = "Someone";
+        }
+
+        var payload = Map.<String, Object>of(
+            "roomId", room.getId(),
+            "roomName", roomName,
+            "addedBy", addedBy
+        );
+
+        targets.forEach(member -> {
+            var username = member.getUsername();
+            if (username == null || username.isBlank()) {
+                return;
+            }
+
+            messagingTemplate.convertAndSendToUser(
+                username,
+                "/queue/groups/added/",
+                payload
+            );
+        });
     }
 }
