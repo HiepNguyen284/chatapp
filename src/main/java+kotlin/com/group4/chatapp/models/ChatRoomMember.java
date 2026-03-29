@@ -7,7 +7,15 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "chat_room_member_roles")
+@Table(
+    name = "chat_room_member_roles",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_chat_room_member_role_room_user", columnNames = {
+            "chat_room_id",
+            "user_id"
+        })
+    }
+)
 @Getter
 @Setter
 @Builder

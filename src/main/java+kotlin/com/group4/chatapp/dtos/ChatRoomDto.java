@@ -30,6 +30,8 @@ public class ChatRoomDto {
     private ChatRoom.Type type;
     private Timestamp createdOn;
 
+    private boolean pinned;
+
     private MessageReceiveDto latestMessage;
 
     public ChatRoomDto(ChatRoom room,@Nullable ChatMessage latestMessage) {
@@ -41,6 +43,7 @@ public class ChatRoomDto {
             room.getMembers().stream().map(User::getUsername).toList(),
             room.getType(),
             room.getCreatedOn(),
+            false,
             null
         );
 

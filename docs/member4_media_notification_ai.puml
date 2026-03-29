@@ -1,0 +1,185 @@
+@startuml Member4_Media_Notification_AI
+
+skinparam linetype ortho
+skinparam entity {
+    BackgroundColor #FEFECE
+    BorderColor #333333
+    FontSize 12
+}
+skinparam title {
+    FontSize 18
+    FontStyle bold
+}
+
+title **Thành viên 4** – Media, Thông báo & Tính năng AI
+
+' ===========================
+' BẢNG CHÍNH (QUẢN LÝ TRỰC TIẾP)
+' ===========================
+
+entity "attachments" as attachments #FFA07A {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * source : VARCHAR <<NOT NULL>>
+    * type : INT <<ENUM>>
+    --
+    Giá trị type:
+    0 = **IMAGE** ← Hình ảnh chat
+    1 = VIDEO
+    2 = RAW
+    3 = DOCUMENT
+    4 = AUDIO
+    --
+    📌 Upload & lưu trữ hình ảnh
+    📌 Lưu đường dẫn S3/URL
+    📌 Xem ảnh toàn màn hình
+}
+
+entity "chat_message_attachments" as msg_attachments #FFA07A {
+    * **chat_message_id** : BIGINT <<PK, FK → chat_messages>>
+    * **attachment_id** : BIGINT <<PK, FK → attachments>>
+    --
+    Bảng join ManyToMany
+    --
+    📌 Liên kết ảnh với tin nhắn
+    📌 1 tin nhắn → nhiều ảnh
+    📌 Hiển thị ảnh trong chat
+}
+
+entity "notifications" as notifications #90EE90 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * recipient_id : BIGINT <<FK → users, NOT NULL>>
+    * type : VARCHAR <<ENUM>>
+    * title : VARCHAR <<NOT NULL>>
+    content : VARCHAR <<NULLABLE>>
+    reference_id : BIGINT <<NULLABLE>>
+    * is_read : BOOLEAN <<DEFAULT FALSE>>
+    * created_at : TIMESTAMP <<NOT NULL, AUTO>>
+    --
+    Giá trị type:
+    NEW_MESSAGE = tin nhắn mới
+    FRIEND_REQUEST = lời mời kết bạn
+    GROUP_INVITE = thêm vào nhóm
+    --
+    📌 Thông báo tin nhắn mới
+    📌 Thông báo lời mời kết bạn
+    📌 Thông báo thêm vào nhóm
+    📌 reference_id → ID entity liên quan
+    📌 🆕 Bảng mới
+}
+
+entity "notification_settings" as notif_settings #90EE90 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * user_id : BIGINT <<FK → users, NOT NULL>>
+    * room_id : BIGINT <<FK → chat_rooms, NOT NULL>>
+    * is_muted : BOOLEAN <<DEFAULT FALSE>>
+    muted_until : TIMESTAMP <<NULLABLE>>
+    --
+    UNIQUE(user_id, room_id)
+    --
+    📌 Bật / tắt thông báo
+    📌 theo từng cuộc trò chuyện
+    📌 muted_until = NULL → tắt vĩnh viễn
+    📌 muted_until = time → tắt tạm thời
+    📌 🆕 Bảng mới
+}
+
+entity "chat_rooms" as chat_rooms #FFA07A {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    name : VARCHAR <<NULLABLE>>
+    avatar_id : BIGINT <<FK → attachments>>
+    * type : INT <<ENUM>>
+    created_on : TIMESTAMP <<AUTO>>
+    --
+    Giá trị type:
+    0 = DUO
+    1 = GROUP
+    2 = **AI_BOT** ← Chatbot AI
+    --
+    📌 Tạo phòng chat AI_BOT
+    📌 Cuộc trò chuyện riêng với AI
+    📌 🆕 Mở rộng enum thêm AI_BOT
+}
+
+' ===========================
+' BẢNG THAM CHIẾU
+' ===========================
+
+entity "users" as users #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    * username : VARCHAR
+    display_name : VARCHAR
+    avatar_id : BIGINT <<FK>>
+    --
+    ⚙️ Tham chiếu: người nhận
+    ⚙️ thông báo, chủ cài đặt
+}
+
+entity "chat_messages" as chat_messages #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    * sender_id : BIGINT <<FK → users>>
+    * room_id : BIGINT <<FK → chat_rooms>>
+    message : TEXT
+    * sent_on : TIMESTAMP
+    * status : INT <<ENUM>>
+    --
+    ⚙️ Tham chiếu: tin nhắn
+    ⚙️ chứa attachment
+    ⚙️ Tin nhắn AI bot cũng lưu ở đây
+}
+
+' ===========================
+' QUAN HỆ
+' ===========================
+
+msg_attachments }o--|| chat_messages : "chat_message_id"
+msg_attachments }o--|| attachments : "attachment_id"
+
+notifications }o--|| users : "recipient_id"
+
+notif_settings }o--|| users : "user_id"
+notif_settings }o--|| chat_rooms : "room_id"
+
+chat_rooms }o..o| attachments : "avatar_id"
+
+chat_messages }o--|| chat_rooms : "room_id"
+chat_messages }o--|| users : "sender_id"
+
+' ===========================
+' GHI CHÚ
+' ===========================
+
+note bottom of chat_rooms
+    **Chatbot AI (3.3)**
+    - Tạo chat_room type = AI_BOT
+    - Mỗi user có 1 phòng AI riêng
+    - Tin nhắn AI lưu trong chat_messages
+    - sender = system bot account
+    - Gọi AI API để sinh phản hồi
+end note
+
+note right of notifications
+    **Luồng thông báo:**
+    1. Event xảy ra (tin nhắn mới,
+       lời mời, thêm vào nhóm)
+    2. Kiểm tra notification_settings
+       → nếu is_muted = true → bỏ qua
+    3. Tạo record trong notifications
+    4. Gửi push qua WebSocket
+end note
+
+legend right
+    |= Màu |= Ý nghĩa |
+    | <#FFA07A> | Bảng quản lý trực tiếp |
+    | <#90EE90> | Bảng mới cần tạo |
+    | <#D3D3D3> | Bảng tham chiếu (đọc) |
+    |= Tính năng AI |= Mô tả |
+    | Chatbot AI | chat_rooms(AI_BOT) + chat_messages |
+endlegend
+
+@enduml

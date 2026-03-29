@@ -1,0 +1,150 @@
+@startuml Member2_Private_Chat
+
+skinparam linetype ortho
+skinparam entity {
+    BackgroundColor #FEFECE
+    BorderColor #333333
+    FontSize 12
+}
+skinparam title {
+    FontSize 18
+    FontStyle bold
+}
+
+title **Thành viên 2** – Chat cá nhân (1–1) & Quản lý tin nhắn
+
+' ===========================
+' BẢNG CHÍNH (QUẢN LÝ TRỰC TIẾP)
+' ===========================
+
+entity "chat_rooms" as chat_rooms #87CEEB {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    name : VARCHAR <<NULLABLE>>
+    avatar_id : BIGINT <<FK → attachments>>
+    * type : INT <<ENUM>>
+    created_on : TIMESTAMP <<AUTO>>
+    --
+    Giá trị type:
+    0 = **DUO** ← Chat 1-1
+    1 = GROUP
+    2 = AI_BOT
+    --
+    📌 Tạo phòng chat DUO khi
+    📌 bắt đầu nhắn tin 1-1
+    📌 DUO: chỉ có đúng 2 members
+}
+
+entity "chat_messages" as chat_messages #87CEEB {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * sender_id : BIGINT <<FK → users, NOT NULL>>
+    * room_id : BIGINT <<FK → chat_rooms, NOT NULL>>
+    reply_to_id : BIGINT <<FK → chat_messages, NULLABLE>>
+    message : TEXT <<NULLABLE>>
+    last_edit : TIMESTAMP <<NULLABLE>>
+    * sent_on : TIMESTAMP <<NOT NULL, AUTO>>
+    * status : INT <<ENUM>>
+    --
+    Giá trị status:
+    0 = NORMAL (đã gửi)
+    1 = EDITED (đã chỉnh sửa)
+    2 = RECALLED (đã thu hồi)
+    --
+    📌 Gửi / nhận tin nhắn văn bản
+    📌 Hiển thị bubble + thời gian
+    📌 Xóa tin nhắn (status → RECALLED)
+    📌 Reply tin nhắn (reply_to_id)
+}
+
+entity "chat_room_read_states" as read_states #87CEEB {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * room_id : BIGINT <<FK → chat_rooms, NOT NULL>>
+    * reader_id : BIGINT <<FK → users, NOT NULL>>
+    * last_read_at : TIMESTAMP <<NOT NULL>>
+    --
+    UNIQUE(room_id, reader_id)
+    --
+    📌 Trạng thái: đã gửi / đã xem
+    📌 Đồng bộ trạng thái 2 phía
+    📌 So sánh last_read_at với
+    📌 sent_on để xác định "đã xem"
+}
+
+entity "chat_room_members" as members #87CEEB {
+    * **chat_room_id** : BIGINT <<PK, FK → chat_rooms>>
+    * **user_id** : BIGINT <<PK, FK → users>>
+    --
+    Bảng join ManyToMany
+    --
+    📌 Xác định 2 thành viên
+    📌 trong phòng chat DUO
+}
+
+' ===========================
+' BẢNG THAM CHIẾU
+' ===========================
+
+entity "users" as users #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    * username : VARCHAR
+    display_name : VARCHAR
+    avatar_id : BIGINT <<FK>>
+    last_seen_at : TIMESTAMP
+    --
+    ⚙️ Tham chiếu: hiển thị
+    ⚙️ tên, avatar, trạng thái
+}
+
+entity "attachments" as attachments #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    * source : VARCHAR
+    * type : INT <<ENUM>>
+    --
+    ⚙️ Tham chiếu: avatar phòng chat
+}
+
+' ===========================
+' QUAN HỆ
+' ===========================
+
+chat_messages }o--|| chat_rooms : "room_id"
+chat_messages }o--|| users : "sender_id"
+chat_messages }o..o| chat_messages : "reply_to_id\n(self-reference)"
+
+read_states }o--|| chat_rooms : "room_id"
+read_states }o--|| users : "reader_id"
+
+members }o--|| chat_rooms : "chat_room_id"
+members }o--|| users : "user_id"
+
+chat_rooms }o..o| attachments : "avatar_id"
+
+' ===========================
+' GHI CHÚ
+' ===========================
+
+note bottom of chat_messages
+    **Trạng thái "đang nhập..."**
+    Xử lý qua WebSocket event
+    (không lưu vào CSDL)
+
+    **AI Dịch tin nhắn (3.2)**
+    Đọc message → gửi AI API
+    → trả bản dịch trên UI
+end note
+
+legend right
+    |= Màu |= Ý nghĩa |
+    | <#87CEEB> | Bảng quản lý trực tiếp |
+    | <#D3D3D3> | Bảng tham chiếu (đọc) |
+    |= Realtime |= Công nghệ |
+    | WebSocket | Gửi/nhận tin nhắn |
+    | WebSocket | Trạng thái "đang nhập…" |
+    | WebSocket | Đồng bộ đã xem |
+endlegend
+
+@enduml

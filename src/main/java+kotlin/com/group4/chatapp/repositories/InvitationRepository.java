@@ -55,4 +55,11 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long> {
             or (i.sender.id = ?2 and i.receiver.id = ?1))
     """)
     void deletePendingBetweenUsers(long firstUserId, long secondUserId, Invitation.Status status);
+
+    @Modifying
+    @Query("""
+        delete from Invitation i
+        where i.chatRoom.id = ?1
+    """)
+    void deleteByChatRoomId(long roomId);
 }

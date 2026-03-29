@@ -39,6 +39,10 @@ public class ChatRoom {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
+    @Nullable
+    @Column(name = "creator_id")
+    private Long creatorId;
+
     @CreationTimestamp
     private Timestamp createdOn;
 

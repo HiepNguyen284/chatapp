@@ -1,0 +1,150 @@
+@startuml Member1_Account_Friends
+
+skinparam linetype ortho
+skinparam entity {
+    BackgroundColor #FEFECE
+    BorderColor #333333
+    FontSize 12
+}
+skinparam title {
+    FontSize 18
+    FontStyle bold
+}
+
+title **Thành viên 1** – Tài khoản & Quản lý bạn bè
+
+' ===========================
+' BẢNG CHÍNH (QUẢN LÝ TRỰC TIẾP)
+' ===========================
+
+entity "users" as users #FFD700 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * username : VARCHAR <<UNIQUE, NOT NULL>>
+    * password : VARCHAR <<NOT NULL>>
+    display_name : VARCHAR <<NULLABLE>>
+    avatar_id : BIGINT <<FK → attachments>>
+    last_seen_at : TIMESTAMP <<NULLABLE>>
+    --
+    📌 Đăng ký / Đăng nhập / Đăng xuất
+    📌 Quên mật khẩu (reset password)
+    📌 Cập nhật tên hiển thị
+    📌 Online / Offline / Last seen
+}
+
+entity "attachments" as attachments #FFD700 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * source : VARCHAR <<NOT NULL>>
+    * type : INT <<ENUM>>
+    --
+    Giá trị type:
+    0 = IMAGE
+    1 = VIDEO
+    2 = RAW
+    3 = DOCUMENT
+    4 = AUDIO
+    --
+    📌 Lưu ảnh đại diện user
+}
+
+entity "invitations" as invitations #FFD700 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * sender_id : BIGINT <<FK → users, NOT NULL>>
+    * receiver_id : BIGINT <<FK → users, NOT NULL>>
+    chat_room_id : BIGINT <<FK → chat_rooms, NULLABLE>>
+    * status : INT <<ENUM>>
+    --
+    Giá trị status:
+    0 = PENDING
+    1 = ACCEPTED
+    2 = REJECTED
+    --
+    📌 Gửi lời mời kết bạn
+    📌 Chấp nhận / Từ chối
+    📌 chat_room_id = NULL → friend request
+}
+
+entity "friendships" as friendships #90EE90 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * user1_id : BIGINT <<FK → users, NOT NULL>>
+    * user2_id : BIGINT <<FK → users, NOT NULL>>
+    * created_at : TIMESTAMP <<NOT NULL, AUTO>>
+    --
+    UNIQUE(user1_id, user2_id)
+    Quy ước: user1_id < user2_id
+    --
+    📌 Hiển thị danh sách bạn bè
+    📌 Xóa bạn bè
+    📌 🆕 Bảng mới
+}
+
+entity "user_blocks" as user_blocks #FFD700 {
+    * **id** : BIGINT <<PK, AUTO_INCREMENT>>
+    --
+    * blocker_id : BIGINT <<FK → users, NOT NULL>>
+    * blocked_id : BIGINT <<FK → users, NOT NULL>>
+    --
+    UNIQUE(blocker_id, blocked_id)
+    --
+    📌 Chặn người dùng
+}
+
+' ===========================
+' BẢNG THAM CHIẾU (ĐỌC DỮ LIỆU CHO AI)
+' ===========================
+
+entity "chat_rooms" as chat_rooms #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    name : VARCHAR
+    * type : INT <<ENUM: DUO, GROUP, AI_BOT>>
+    --
+    ⚙️ Tham chiếu cho AI Tóm tắt
+}
+
+entity "chat_messages" as chat_messages #D3D3D3 {
+    * **id** : BIGINT <<PK>>
+    --
+    * sender_id : BIGINT <<FK → users>>
+    * room_id : BIGINT <<FK → chat_rooms>>
+    message : TEXT
+    * sent_on : TIMESTAMP
+    --
+    ⚙️ Đọc tin nhắn để AI tóm tắt
+}
+
+' ===========================
+' QUAN HỆ
+' ===========================
+
+users ||--o| attachments : "avatar_id"
+
+invitations }o--|| users : "sender_id"
+invitations }o--|| users : "receiver_id"
+
+friendships }o--|| users : "user1_id"
+friendships }o--|| users : "user2_id"
+
+user_blocks }o--|| users : "blocker_id"
+user_blocks }o--|| users : "blocked_id"
+
+chat_messages }o--|| users : "sender_id"
+chat_messages }o--|| chat_rooms : "room_id"
+
+' ===========================
+' LEGEND
+' ===========================
+
+legend right
+    |= Màu |= Ý nghĩa |
+    | <#FFD700> | Bảng quản lý trực tiếp |
+    | <#90EE90> | Bảng mới cần tạo |
+    | <#D3D3D3> | Bảng tham chiếu (đọc) |
+    |= Chức năng AI |= Mô tả |
+    | Tóm tắt hội thoại | Đọc chat_messages → gửi AI API |
+endlegend
+
+@enduml

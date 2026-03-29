@@ -1,5 +1,6 @@
 package com.group4.chatapp.dtos.group;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.group4.chatapp.dtos.AttachmentDto;
 import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
@@ -38,13 +39,17 @@ public class GroupChatDto {
     @Schema(description = "Is current user an admin")
     private boolean isAdmin;
 
+    @Schema(description = "Is current user the group creator")
+    private boolean isOwner;
+
     public GroupChatDto() {}
 
     public GroupChatDto(
         ChatRoom room,
         @Nullable ChatMessage latestMessage,
         List<UserWithAvatarDto> members,
-        boolean isAdmin
+        boolean isAdmin,
+        boolean isOwner
     ) {
         this.id = room.getId();
         this.name = room.getName();
@@ -52,6 +57,7 @@ public class GroupChatDto {
         this.createdOn = room.getCreatedOn();
         this.members = members;
         this.isAdmin = isAdmin;
+        this.isOwner = isOwner;
 
         var avatar = room.getAvatar();
         if (avatar != null) {
@@ -71,5 +77,9 @@ public class GroupChatDto {
     public ChatRoom.Type getType() { return type; }
     public Timestamp getCreatedOn() { return createdOn; }
     public MessageReceiveDto getLatestMessage() { return latestMessage; }
+    @JsonProperty("isAdmin")
     public boolean isAdmin() { return isAdmin; }
+
+    @JsonProperty("isOwner")
+    public boolean isOwner() { return isOwner; }
 }
