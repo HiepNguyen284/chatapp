@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Biểu đồ CSDL đầy đủ cho hệ thống AppChat bao gồm:\n- Phân tích hiện trạng 8 bảng đã có (users, attachments, user_blocks, invitations, chat_rooms, chat_room_member_roles, chat_messages, chat_room_read_states)\n- Thiết kế 5 bảng mới (friendships, pinned_conversations, notifications, notification_settings, mở rộng chat_rooms enum)\n- Biểu đồ ERD dạng Mermaid với đầy đủ quan hệ\n- Chi tiết từng bảng với kiểu dữ liệu, ràng buộc, mô tả\n- Mapping chức năng → bảng CSDL\n- Ghi chú về tính năng AI",
-  "updatedAt": "2026-03-26T12:45:08.436377300Z"
-}
