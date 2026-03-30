@@ -45,5 +45,8 @@ src/main/resources/certs/
 ### Local ###
 local.properties
 
+### Build logs ###
+temp*.log
+
 ### Environment variable ###
 .env
