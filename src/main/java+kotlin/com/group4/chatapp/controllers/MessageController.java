@@ -3,6 +3,8 @@ package com.group4.chatapp.controllers;
 import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.messages.MessageSendDto;
 import com.group4.chatapp.dtos.messages.MessageSendResponseDto;
+import com.group4.chatapp.dtos.messages.MessageSummarizeRequestDto;
+import com.group4.chatapp.dtos.messages.MessageSummaryDto;
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto;
 import com.group4.chatapp.dtos.messages.MessageTranslationDto;
 import com.group4.chatapp.dtos.messages.MessageTypingDto;
@@ -84,5 +86,12 @@ public class MessageController {
         @Valid @RequestBody MessageTranslateRequestDto dto
     ) {
         return messageTranslationService.translate(dto);
+    }
+
+    @PostMapping(value = "/summarize", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MessageSummaryDto summarizeMessages(
+        @Valid @RequestBody MessageSummarizeRequestDto dto
+    ) {
+        return messageTranslationService.summarize(dto);
     }
 }

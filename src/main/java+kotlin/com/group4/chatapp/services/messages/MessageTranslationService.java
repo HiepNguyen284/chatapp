@@ -2,6 +2,8 @@ package com.group4.chatapp.services.messages;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.group4.chatapp.dtos.messages.MessageSummarizeRequestDto;
+import com.group4.chatapp.dtos.messages.MessageSummaryDto;
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto;
 import com.group4.chatapp.dtos.messages.MessageTranslationDto;
 import com.group4.chatapp.exceptions.ApiException;
@@ -27,8 +29,11 @@ import java.util.Map;
 public class MessageTranslationService {
 
     private static final int CACHE_MAX_SIZE = 2048;
+    private static final int SUMMARY_CACHE_MAX_SIZE = 1024;
     private static final int CONTEXT_MESSAGE_LIMIT = 8;
     private static final int CONTEXT_TEXT_LIMIT = 500;
+    private static final int SUMMARY_MESSAGE_LIMIT = 40;
+    private static final int SUMMARY_TEXT_LIMIT = 500;
 
     private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
@@ -40,6 +45,13 @@ public class MessageTranslationService {
         If the message is already Vietnamese, keep it natural and concise.
         Return only translated Vietnamese text, without explanation or quotes.
         """;
+    private static final String SUMMARY_SYSTEM_PROMPT = """
+        You are a concise conversation summarizer.
+        Summarize the recent chat in Vietnamese.
+        Keep key facts, tasks, decisions, and follow-up actions.
+        Use short clear paragraphs and bullet points when useful.
+        Do not invent facts that are not in the messages.
+        """;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Map<String, MessageTranslationDto> translationCache = Collections.synchronizedMap(
@@ -47,6 +59,14 @@ public class MessageTranslationService {
             @Override
             protected boolean removeEldestEntry(Map.Entry<String, MessageTranslationDto> eldest) {
                 return size() > CACHE_MAX_SIZE;
+            }
+        }
+    );
+    private final Map<String, MessageSummaryDto> summaryCache = Collections.synchronizedMap(
+        new LinkedHashMap<>(SUMMARY_CACHE_MAX_SIZE + 1, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, MessageSummaryDto> eldest) {
+                return size() > SUMMARY_CACHE_MAX_SIZE;
             }
         }
     );
@@ -89,7 +109,7 @@ public class MessageTranslationService {
                 throw new ApiException(HttpStatus.BAD_GATEWAY, "Translation service request failed");
             }
 
-            var translatedText = parseTranslatedText(response.body());
+            var translatedText = parseAssistantText(response.body());
             var detectedSourceLanguage = "auto".equals(sourceLanguage) ? "" : sourceLanguage;
 
             var result = new MessageTranslationDto(
@@ -105,6 +125,45 @@ public class MessageTranslationService {
             throw new ApiException(HttpStatus.GATEWAY_TIMEOUT, "Translation request interrupted");
         } catch (IOException | IllegalArgumentException e) {
             throw new ApiException(HttpStatus.BAD_GATEWAY, "Translation service is unavailable");
+        }
+    }
+
+    public MessageSummaryDto summarize(MessageSummarizeRequestDto dto) {
+        var summaryMessages = normalizeSummaryMessages(dto.messages());
+        var roomName = normalizeRoomName(dto.roomName());
+        var cacheKey = buildSummaryCacheKey(summaryMessages, roomName);
+
+        var cached = summaryCache.get(cacheKey);
+        if (cached != null) {
+            return cached;
+        }
+
+        try {
+            var request = HttpRequest.newBuilder(buildCompletionsUri())
+                .timeout(Duration.ofSeconds(20))
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + requireApiKey())
+                .POST(HttpRequest.BodyPublishers.ofString(
+                    buildSummaryRequestBody(summaryMessages, roomName),
+                    StandardCharsets.UTF_8
+                ))
+                .build();
+
+            var response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                throw new ApiException(HttpStatus.BAD_GATEWAY, "Summary service request failed");
+            }
+
+            var summaryText = parseAssistantText(response.body());
+            var result = new MessageSummaryDto(summaryText, summaryMessages.size());
+            summaryCache.put(cacheKey, result);
+            return result;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new ApiException(HttpStatus.GATEWAY_TIMEOUT, "Summary request interrupted");
+        } catch (IOException | IllegalArgumentException e) {
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "Summary service is unavailable");
         }
     }
 
@@ -176,6 +235,48 @@ public class MessageTranslationService {
         return objectMapper.writeValueAsString(root);
     }
 
+    private String buildSummaryRequestBody(
+        List<String> summaryMessages,
+        String roomName
+    ) throws IOException {
+        var model = kiloModel == null ? "" : kiloModel.trim();
+        if (model.isEmpty()) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Summary model is not configured");
+        }
+
+        var root = objectMapper.createObjectNode();
+        root.put("model", model);
+        root.put("temperature", 0.2);
+
+        var messages = root.putArray("messages");
+        messages.addObject()
+            .put("role", "system")
+            .put("content", SUMMARY_SYSTEM_PROMPT);
+
+        var userText = new StringBuilder();
+        if (!roomName.isBlank()) {
+            userText
+                .append("Chat room: ")
+                .append(roomName)
+                .append("\n\n");
+        }
+
+        userText.append("Recent messages (oldest to newest):\n");
+        for (int i = 0; i < summaryMessages.size(); i++) {
+            userText
+                .append(i + 1)
+                .append(". ")
+                .append(summaryMessages.get(i))
+                .append('\n');
+        }
+
+        messages.addObject()
+            .put("role", "user")
+            .put("content", userText.toString());
+
+        return objectMapper.writeValueAsString(root);
+    }
+
     private List<String> normalizePreviousMessages(List<String> previousMessages) {
         if (previousMessages == null || previousMessages.isEmpty()) {
             return List.of();
@@ -232,17 +333,75 @@ public class MessageTranslationService {
         return key.toString();
     }
 
-    private String parseTranslatedText(String rawBody) throws IOException {
+    private List<String> normalizeSummaryMessages(List<String> rawMessages) {
+        if (rawMessages == null || rawMessages.isEmpty()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Messages to summarize are required");
+        }
+
+        var normalized = new ArrayList<String>();
+        for (String rawMessage : rawMessages) {
+            if (rawMessage == null) {
+                continue;
+            }
+
+            var value = rawMessage.trim();
+            if (value.isEmpty()) {
+                continue;
+            }
+
+            if (value.length() > SUMMARY_TEXT_LIMIT) {
+                value = value.substring(0, SUMMARY_TEXT_LIMIT);
+            }
+
+            normalized.add(value);
+        }
+
+        if (normalized.isEmpty()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Messages to summarize are required");
+        }
+
+        if (normalized.size() > SUMMARY_MESSAGE_LIMIT) {
+            normalized = new ArrayList<>(
+                normalized.subList(normalized.size() - SUMMARY_MESSAGE_LIMIT, normalized.size())
+            );
+        }
+
+        return List.copyOf(normalized);
+    }
+
+    private String normalizeRoomName(String roomName) {
+        if (roomName == null) {
+            return "";
+        }
+
+        var normalized = roomName.trim();
+        if (normalized.isEmpty()) {
+            return "";
+        }
+
+        return normalized.length() > 120 ? normalized.substring(0, 120) : normalized;
+    }
+
+    private String buildSummaryCacheKey(List<String> summaryMessages, String roomName) {
+        var key = new StringBuilder();
+        key.append(roomName);
+        for (String message : summaryMessages) {
+            key.append('\u001F').append(message);
+        }
+        return key.toString();
+    }
+
+    private String parseAssistantText(String rawBody) throws IOException {
         JsonNode root = objectMapper.readTree(rawBody);
         JsonNode choices = root.path("choices");
         if (!choices.isArray() || choices.isEmpty()) {
-            throw new ApiException(HttpStatus.BAD_GATEWAY, "Translation service returned an invalid response");
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "AI service returned an invalid response");
         }
 
         var contentNode = choices.path(0).path("message").path("content");
         var result = sanitizeTranslatedText(extractTextContent(contentNode));
         if (result.isEmpty()) {
-            throw new ApiException(HttpStatus.BAD_GATEWAY, "Translation result is empty");
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "AI result is empty");
         }
 
         return result;
