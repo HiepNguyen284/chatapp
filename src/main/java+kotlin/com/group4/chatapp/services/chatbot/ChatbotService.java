@@ -72,13 +72,13 @@ public class ChatbotService {
     private final ChatbotConversationRepository chatbotConversationRepository;
     private final ChatbotMessageRepository chatbotMessageRepository;
 
-    @Value("${agents.translation.base-url:}")
+    @Value("${agents.messages.base-url:}")
     private String llmBaseUrl;
 
-    @Value("${agents.chatbot.model:${agents.translation.model:}}")
+    @Value("${agents.chatbot.model:${agents.messages.model:}}")
     private String chatbotModel;
 
-    @Value("${agents.translation.api-key:}")
+    @Value("${agents.messages.api-key:}")
     private String llmApiKey;
 
     @Value("${agents.chatbot.stream-timeout-seconds:120}")

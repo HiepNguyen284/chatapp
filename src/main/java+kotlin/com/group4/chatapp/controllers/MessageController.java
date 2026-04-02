@@ -8,8 +8,9 @@ import com.group4.chatapp.dtos.messages.MessageSummaryDto;
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto;
 import com.group4.chatapp.dtos.messages.MessageTranslationDto;
 import com.group4.chatapp.dtos.messages.MessageTypingDto;
+import com.group4.chatapp.services.ai.SummaryService;
+import com.group4.chatapp.services.ai.TranslationService;
 import com.group4.chatapp.services.messages.MessageService;
-import com.group4.chatapp.services.messages.MessageTranslationService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.Valid;
@@ -30,7 +31,8 @@ import java.util.List;
 public class MessageController {
 
     private final MessageService messageService;
-    private final MessageTranslationService messageTranslationService;
+    private final TranslationService translationService;
+    private final SummaryService summaryService;
 
     @GetMapping
     public List<MessageReceiveDto> getMessages(
@@ -85,13 +87,13 @@ public class MessageController {
     public MessageTranslationDto translateMessage(
         @Valid @RequestBody MessageTranslateRequestDto dto
     ) {
-        return messageTranslationService.translate(dto);
+        return translationService.translate(dto);
     }
 
     @PostMapping(value = "/summarize", consumes = MediaType.APPLICATION_JSON_VALUE)
     public MessageSummaryDto summarizeMessages(
         @Valid @RequestBody MessageSummarizeRequestDto dto
     ) {
-        return messageTranslationService.summarize(dto);
+        return summaryService.summarize(dto);
     }
 }

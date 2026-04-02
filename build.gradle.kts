@@ -27,6 +27,10 @@ repositories { mavenCentral() }
 
 dependencies {
 
+    implementation("com.openai:openai-java:4.30.0") {
+        exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
+    }
+
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-security")
