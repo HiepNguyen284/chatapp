@@ -61,6 +61,8 @@ class SecurityConfig
 
             authorizeHttpRequests {
                 authorize("/api/v1/messages/**", authenticated)
+                authorize(HttpMethod.POST, "/api/v1/speech-to-text", authenticated)
+                authorize(HttpMethod.POST, "/speech-to-text", authenticated)
                 authorize("/api/v1/chatbot/**", authenticated)
                 authorize("/api/v1/invitations/**", authenticated)
                 authorize("/api/v1/users/me/**", authenticated)

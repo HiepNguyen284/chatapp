@@ -54,3 +54,10 @@ agents:
   chatbot:
     model: "${CHATBOT_MODEL:${agents.messages.model:}}"
     stream-timeout-seconds: "${CHATBOT_STREAM_TIMEOUT_SECONDS:120}"
+
+speech-to-text:
+  whisper:
+    base-url: "${WHISPER_BASE_URL:http://whisper:8000}"
+    request-timeout-seconds: "${WHISPER_REQUEST_TIMEOUT_SECONDS:60}"
+  default-language: "${WHISPER_DEFAULT_LANGUAGE:vi}"
+  max-audio-size-bytes: "${WHISPER_MAX_AUDIO_SIZE_BYTES:12582912}"
