@@ -72,16 +72,16 @@ public class ChatbotService {
     private final ChatbotConversationRepository chatbotConversationRepository;
     private final ChatbotMessageRepository chatbotMessageRepository;
 
-    @Value("${translation.kilo.base-url:https://api.kilo.ai/api/gateway}")
-    private String kiloBaseUrl;
+    @Value("${agents.translation.base-url:}")
+    private String llmBaseUrl;
 
-    @Value("${chatbot.kilo.model:${translation.kilo.model:anthropic/claude-sonnet-4.5}}")
+    @Value("${agents.chatbot.model:${agents.translation.model:}}")
     private String chatbotModel;
 
-    @Value("${translation.kilo.api-key:}")
-    private String kiloApiKey;
+    @Value("${agents.translation.api-key:}")
+    private String llmApiKey;
 
-    @Value("${chatbot.kilo.stream-timeout-seconds:120}")
+    @Value("${agents.chatbot.stream-timeout-seconds:120}")
     private int chatbotStreamTimeoutSeconds;
 
     @PreDestroy
@@ -463,7 +463,7 @@ Your latest request:
     }
 
     private URI buildCompletionsUri() {
-        var baseUrl = kiloBaseUrl == null ? "" : kiloBaseUrl.trim();
+        var baseUrl = llmBaseUrl == null ? "" : llmBaseUrl.trim();
         if (baseUrl.isEmpty()) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Chatbot service is not configured");
         }
@@ -473,9 +473,9 @@ Your latest request:
     }
 
     private String requireApiKey() {
-        var apiKey = kiloApiKey == null ? "" : kiloApiKey.trim();
+        var apiKey = llmApiKey == null ? "" : llmApiKey.trim();
         if (apiKey.isEmpty()) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "KILO_API_KEY is not configured");
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "LLM_API_KEY is not configured");
         }
 
         return apiKey;

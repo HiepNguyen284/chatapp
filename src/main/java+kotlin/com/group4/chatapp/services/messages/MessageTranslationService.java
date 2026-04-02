@@ -75,17 +75,17 @@ public class MessageTranslationService {
         }
     );
 
-    @Value("${translation.kilo.base-url:https://api.kilo.ai/api/gateway}")
-    private String kiloBaseUrl;
+    @Value("${agents.translation.base-url:}")
+    private String llmBaseUrl;
 
-    @Value("${translation.kilo.model:anthropic/claude-sonnet-4.5}")
-    private String kiloModel;
+    @Value("${agents.translation.model:}")
+    private String llmModel;
 
-    @Value("${translation.kilo.api-key:}")
-    private String kiloApiKey;
+    @Value("${agents.translation.api-key:}")
+    private String llmApiKey;
 
-    @Value("${translation.kilo.request-timeout-seconds:45}")
-    private int kiloRequestTimeoutSeconds;
+    @Value("${agents.translation.request-timeout-seconds:45}")
+    private int llmRequestTimeoutSeconds;
 
     public MessageTranslationDto translate(MessageTranslateRequestDto dto) {
         var text = normalizeText(dto.text());
@@ -245,7 +245,7 @@ public class MessageTranslationService {
     }
 
     private Duration resolveRequestTimeout() {
-        var seconds = kiloRequestTimeoutSeconds;
+        var seconds = llmRequestTimeoutSeconds;
         if (seconds < 10) {
             seconds = 10;
         }
@@ -258,7 +258,7 @@ public class MessageTranslationService {
     }
 
     private URI buildCompletionsUri() {
-        var baseUrl = kiloBaseUrl == null ? "" : kiloBaseUrl.trim();
+        var baseUrl = llmBaseUrl == null ? "" : llmBaseUrl.trim();
         if (baseUrl.isEmpty()) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Translation service is not configured");
         }
@@ -268,9 +268,9 @@ public class MessageTranslationService {
     }
 
     private String requireApiKey() {
-        var apiKey = kiloApiKey == null ? "" : kiloApiKey.trim();
+        var apiKey = llmApiKey == null ? "" : llmApiKey.trim();
         if (apiKey.isEmpty()) {
-            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "KILO_API_KEY is not configured");
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "LLM_API_KEY is not configured");
         }
         return apiKey;
     }
@@ -280,7 +280,7 @@ public class MessageTranslationService {
         String sourceLanguage,
         List<String> previousMessages
     ) throws IOException {
-        var model = kiloModel == null ? "" : kiloModel.trim();
+        var model = llmModel == null ? "" : llmModel.trim();
         if (model.isEmpty()) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Translation model is not configured");
         }
@@ -329,7 +329,7 @@ public class MessageTranslationService {
         List<String> summaryMessages,
         String roomName
     ) throws IOException {
-        var model = kiloModel == null ? "" : kiloModel.trim();
+        var model = llmModel == null ? "" : llmModel.trim();
         if (model.isEmpty()) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Summary model is not configured");
         }

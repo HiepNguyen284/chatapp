@@ -44,14 +44,13 @@ s3:
   secret-key: "${S3_SECRET_KEY}"
   bucket-name: "${S3_BUCKET_NAME}"
 
-translation:
-  kilo:
-    base-url: "${KILO_BASE_URL:https://api.kilo.ai/api/gateway}"
-    model: "${KILO_MODEL:anthropic/claude-sonnet-4.5}"
-    api-key: "${KILO_API_KEY:}"
-    request-timeout-seconds: "${KILO_REQUEST_TIMEOUT_SECONDS:45}"
+agents:
+  translation:
+    base-url: "${LLM_BASE_URL}"
+    model: "${LLM_MODEL}"
+    api-key: "${LLM_API_KEY}"
+    request-timeout-seconds: "${LLM_REQUEST_TIMEOUT_SECONDS:45}"
 
-chatbot:
-  kilo:
-    model: "${CHATBOT_MODEL:${KILO_MODEL:anthropic/claude-sonnet-4.5}}"
+  chatbot:
+    model: "${CHATBOT_MODEL:${LLM_MODEL:}}"
     stream-timeout-seconds: "${CHATBOT_STREAM_TIMEOUT_SECONDS:120}"
