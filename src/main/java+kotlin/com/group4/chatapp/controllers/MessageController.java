@@ -3,8 +3,13 @@ package com.group4.chatapp.controllers;
 import com.group4.chatapp.dtos.messages.MessageReceiveDto;
 import com.group4.chatapp.dtos.messages.MessageSendDto;
 import com.group4.chatapp.dtos.messages.MessageSendResponseDto;
+import com.group4.chatapp.dtos.messages.MessageSummarizeRequestDto;
+import com.group4.chatapp.dtos.messages.MessageSummaryDto;
+import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto;
+import com.group4.chatapp.dtos.messages.MessageTranslationDto;
 import com.group4.chatapp.dtos.messages.MessageTypingDto;
 import com.group4.chatapp.services.messages.MessageService;
+import com.group4.chatapp.services.messages.MessageTranslationService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.Valid;
@@ -25,6 +30,7 @@ import java.util.List;
 public class MessageController {
 
     private final MessageService messageService;
+    private final MessageTranslationService messageTranslationService;
 
     @GetMapping
     public List<MessageReceiveDto> getMessages(
@@ -73,5 +79,19 @@ public class MessageController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void markRoomRead(@RequestParam(name = "room") long roomId) {
         messageService.setReadStatus(roomId);
+    }
+
+    @PostMapping(value = "/translate", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MessageTranslationDto translateMessage(
+        @Valid @RequestBody MessageTranslateRequestDto dto
+    ) {
+        return messageTranslationService.translate(dto);
+    }
+
+    @PostMapping(value = "/summarize", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MessageSummaryDto summarizeMessages(
+        @Valid @RequestBody MessageSummarizeRequestDto dto
+    ) {
+        return messageTranslationService.summarize(dto);
     }
 }
