@@ -61,6 +61,7 @@ class SecurityConfig
 
             authorizeHttpRequests {
                 authorize("/api/v1/messages/**", authenticated)
+                authorize("/api/v1/chatbot/**", authenticated)
                 authorize("/api/v1/invitations/**", authenticated)
                 authorize("/api/v1/users/me/**", authenticated)
                 authorize("/api/v1/users/blocks/**", authenticated)
