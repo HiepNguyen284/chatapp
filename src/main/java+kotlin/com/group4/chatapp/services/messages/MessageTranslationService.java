@@ -7,6 +7,8 @@ import com.group4.chatapp.dtos.messages.MessageSummaryDto;
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto;
 import com.group4.chatapp.dtos.messages.MessageTranslationDto;
 import com.group4.chatapp.exceptions.ApiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ import java.util.Map;
 
 @Service
 public class MessageTranslationService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageTranslationService.class);
 
     private static final int CACHE_MAX_SIZE = 2048;
     private static final int SUMMARY_CACHE_MAX_SIZE = 1024;
@@ -80,6 +84,9 @@ public class MessageTranslationService {
     @Value("${translation.kilo.api-key:}")
     private String kiloApiKey;
 
+    @Value("${translation.kilo.request-timeout-seconds:45}")
+    private int kiloRequestTimeoutSeconds;
+
     public MessageTranslationDto translate(MessageTranslateRequestDto dto) {
         var text = normalizeText(dto.text());
         var sourceLanguage = normalizeSourceLanguage(dto.sourceLanguage());
@@ -94,7 +101,7 @@ public class MessageTranslationService {
 
         try {
             var request = HttpRequest.newBuilder(buildCompletionsUri())
-                .timeout(Duration.ofSeconds(20))
+                .timeout(resolveRequestTimeout())
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + requireApiKey())
@@ -122,9 +129,15 @@ public class MessageTranslationService {
             return result;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new ApiException(HttpStatus.GATEWAY_TIMEOUT, "Translation request interrupted");
+            return fallbackTranslation(text, sourceLanguage, targetLanguage, cacheKey, e);
+        } catch (ApiException e) {
+            if (!isUpstreamFailure(e)) {
+                throw e;
+            }
+
+            return fallbackTranslation(text, sourceLanguage, targetLanguage, cacheKey, e);
         } catch (IOException | IllegalArgumentException e) {
-            throw new ApiException(HttpStatus.BAD_GATEWAY, "Translation service is unavailable");
+            return fallbackTranslation(text, sourceLanguage, targetLanguage, cacheKey, e);
         }
     }
 
@@ -140,7 +153,7 @@ public class MessageTranslationService {
 
         try {
             var request = HttpRequest.newBuilder(buildCompletionsUri())
-                .timeout(Duration.ofSeconds(20))
+                .timeout(resolveRequestTimeout())
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + requireApiKey())
@@ -161,10 +174,87 @@ public class MessageTranslationService {
             return result;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new ApiException(HttpStatus.GATEWAY_TIMEOUT, "Summary request interrupted");
+            return fallbackSummary(summaryMessages, roomName, cacheKey, e);
+        } catch (ApiException e) {
+            if (!isUpstreamFailure(e)) {
+                throw e;
+            }
+
+            return fallbackSummary(summaryMessages, roomName, cacheKey, e);
         } catch (IOException | IllegalArgumentException e) {
-            throw new ApiException(HttpStatus.BAD_GATEWAY, "Summary service is unavailable");
+            return fallbackSummary(summaryMessages, roomName, cacheKey, e);
         }
+    }
+
+    private MessageTranslationDto fallbackTranslation(
+        String text,
+        String sourceLanguage,
+        String targetLanguage,
+        String cacheKey,
+        Exception cause
+    ) {
+        LOGGER.warn("Translation AI fallback activated: {}", cause.getMessage());
+
+        var detectedSourceLanguage = "auto".equals(sourceLanguage) ? "" : sourceLanguage;
+        var fallback = new MessageTranslationDto(text, detectedSourceLanguage, targetLanguage);
+        translationCache.put(cacheKey, fallback);
+        return fallback;
+    }
+
+    private MessageSummaryDto fallbackSummary(
+        List<String> summaryMessages,
+        String roomName,
+        String cacheKey,
+        Exception cause
+    ) {
+        LOGGER.warn("Summary AI fallback activated: {}", cause.getMessage());
+
+        var previewCount = Math.min(summaryMessages.size(), 8);
+        var startIndex = Math.max(summaryMessages.size() - previewCount, 0);
+
+        var text = new StringBuilder();
+        text.append("AI summary is temporarily unavailable.\n");
+        if (!roomName.isBlank()) {
+            text.append("Chat room: ").append(roomName).append('\n');
+        }
+        text.append("Recent messages: ").append(summaryMessages.size()).append('\n');
+        text.append("Quick recap:\n");
+        for (int i = startIndex; i < summaryMessages.size(); i++) {
+            text.append("- ")
+                .append(compactFallbackLine(summaryMessages.get(i), 160))
+                .append('\n');
+        }
+        text.append("\nPlease try again in a few minutes for a richer AI summary.");
+
+        var fallback = new MessageSummaryDto(text.toString().trim(), summaryMessages.size());
+        summaryCache.put(cacheKey, fallback);
+        return fallback;
+    }
+
+    private String compactFallbackLine(String value, int maxLength) {
+        if (value == null) {
+            return "";
+        }
+
+        var normalized = value.replace('\n', ' ').trim();
+        if (normalized.length() <= maxLength) {
+            return normalized;
+        }
+
+        return normalized.substring(0, maxLength - 3).trim() + "...";
+    }
+
+    private Duration resolveRequestTimeout() {
+        var seconds = kiloRequestTimeoutSeconds;
+        if (seconds < 10) {
+            seconds = 10;
+        }
+
+        return Duration.ofSeconds(seconds);
+    }
+
+    private boolean isUpstreamFailure(ApiException exception) {
+        return exception.getStatusCode().value() >= 500;
     }
 
     private URI buildCompletionsUri() {
