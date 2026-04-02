@@ -49,7 +49,9 @@ translation:
     base-url: "${KILO_BASE_URL:https://api.kilo.ai/api/gateway}"
     model: "${KILO_MODEL:anthropic/claude-sonnet-4.5}"
     api-key: "${KILO_API_KEY:}"
+    request-timeout-seconds: "${KILO_REQUEST_TIMEOUT_SECONDS:45}"
 
 chatbot:
   kilo:
     model: "${CHATBOT_MODEL:${KILO_MODEL:anthropic/claude-sonnet-4.5}}"
+    stream-timeout-seconds: "${CHATBOT_STREAM_TIMEOUT_SECONDS:120}"

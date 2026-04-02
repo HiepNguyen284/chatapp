@@ -18,6 +18,8 @@ import com.group4.chatapp.services.UserService;
 import jakarta.annotation.PreDestroy;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -44,6 +46,8 @@ import java.util.concurrent.Executors;
 @Service
 @RequiredArgsConstructor
 public class ChatbotService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatbotService.class);
 
     private static final int HISTORY_LIMIT_FOR_PROMPT = 24;
     private static final int PREVIEW_MAX_LENGTH = 120;
@@ -76,6 +80,9 @@ public class ChatbotService {
 
     @Value("${translation.kilo.api-key:}")
     private String kiloApiKey;
+
+    @Value("${chatbot.kilo.stream-timeout-seconds:120}")
+    private int chatbotStreamTimeoutSeconds;
 
     @PreDestroy
     void shutdownStreamingExecutor() {
@@ -188,7 +195,7 @@ public class ChatbotService {
     ) {
         try {
             var request = HttpRequest.newBuilder(buildCompletionsUri())
-                .timeout(Duration.ofSeconds(60))
+                .timeout(resolveStreamTimeout())
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + requireApiKey())
@@ -249,8 +256,101 @@ public class ChatbotService {
 
             emitter.complete();
         } catch (Exception e) {
-            sendErrorEvent(emitter, friendlyErrorMessage(e));
+            streamFallbackResponse(conversation, promptMessages, emitter, e);
         }
+    }
+
+    private void streamFallbackResponse(
+        ChatbotConversation conversation,
+        List<ChatbotMessage> promptMessages,
+        SseEmitter emitter,
+        Exception cause
+    ) {
+        LOGGER.warn(
+            "Chatbot upstream unavailable for conversation {}: {}",
+            conversation.getId(),
+            cause.getMessage()
+        );
+
+        var fallbackText = buildFallbackAssistantText(promptMessages);
+
+        try {
+            var assistantMessage = chatbotMessageRepository.save(ChatbotMessage.builder()
+                .conversation(conversation)
+                .role(ChatbotMessage.Role.ASSISTANT)
+                .content(fallbackText)
+                .build());
+
+            touchConversation(conversation);
+
+            emitter.send(SseEmitter.event()
+                .name("token")
+                .data(new ChatbotStreamTokenDto(fallbackText), MediaType.APPLICATION_JSON));
+
+            emitter.send(SseEmitter.event()
+                .name("done")
+                .data(
+                    new ChatbotStreamDoneDto(
+                        conversation.getId(),
+                        assistantMessage.getId(),
+                        fallbackText
+                    ),
+                    MediaType.APPLICATION_JSON
+                ));
+
+            emitter.complete();
+        } catch (Exception fallbackException) {
+            LOGGER.error("Failed to emit chatbot fallback response", fallbackException);
+            sendErrorEvent(emitter, friendlyErrorMessage(cause));
+        }
+    }
+
+    private String buildFallbackAssistantText(List<ChatbotMessage> promptMessages) {
+        String latestUserPrompt = "";
+
+        for (int i = promptMessages.size() - 1; i >= 0; i--) {
+            var item = promptMessages.get(i);
+            if (item.getRole() != ChatbotMessage.Role.USER) {
+                continue;
+            }
+
+            latestUserPrompt = item.getContent() == null ? "" : item.getContent().trim();
+            break;
+        }
+
+        var preview = latestUserPrompt.isBlank()
+            ? "No question text was captured."
+            : compactFallbackLine(latestUserPrompt, 220);
+
+        return """
+I cannot reach the AI provider right now.
+Your message has been saved, and you can retry in a moment.
+
+Your latest request:
+- %s
+""".formatted(preview);
+    }
+
+    private String compactFallbackLine(String value, int maxLength) {
+        if (value == null) {
+            return "";
+        }
+
+        var normalized = value.replace('\n', ' ').trim();
+        if (normalized.length() <= maxLength) {
+            return normalized;
+        }
+
+        return normalized.substring(0, maxLength - 3).trim() + "...";
+    }
+
+    private Duration resolveStreamTimeout() {
+        var seconds = chatbotStreamTimeoutSeconds;
+        if (seconds < 20) {
+            seconds = 20;
+        }
+
+        return Duration.ofSeconds(seconds);
     }
 
     private void readStreamingLine(
