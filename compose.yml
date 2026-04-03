@@ -74,9 +74,13 @@ services:
 
     environment:
       WHISPER_MODEL: ${WHISPER_MODEL:-small}
-      WHISPER_DEFAULT_LANGUAGE: ${WHISPER_DEFAULT_LANGUAGE:-vi}
+      WHISPER_CACHE_DIR: ${WHISPER_CACHE_DIR:-/cache/whisper}
+      WHISPER_DEFAULT_LANGUAGE: ${WHISPER_DEFAULT_LANGUAGE:-auto}
       WHISPER_MAX_AUDIO_SIZE_BYTES: ${WHISPER_MAX_AUDIO_SIZE_BYTES:-12582912}
       WHISPER_FP16: ${WHISPER_FP16:-false}
+
+    volumes:
+      - whisper_model_cache:/cache/whisper
 
     ports:
       - "8000:8000"
@@ -108,3 +112,4 @@ services:
 volumes:
   postgres_data:
   versitygw_data:
+  whisper_model_cache:

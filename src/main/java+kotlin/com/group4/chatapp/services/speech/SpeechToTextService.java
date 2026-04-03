@@ -28,6 +28,8 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class SpeechToTextService {
@@ -36,6 +38,17 @@ public class SpeechToTextService {
     private static final Duration CONNECT_TIMEOUT = Duration.ofSeconds(10);
 
     private static final int MAX_PROMPT_LENGTH = 240;
+    private static final Set<String> SUPPORTED_LANGUAGE_CODES = Set.of("auto", "vi", "en", "ja");
+    private static final Map<String, String> LANGUAGE_ALIASES = Map.ofEntries(
+        Map.entry("vi-vn", "vi"),
+        Map.entry("vietnamese", "vi"),
+        Map.entry("en-us", "en"),
+        Map.entry("en-gb", "en"),
+        Map.entry("english", "en"),
+        Map.entry("ja-jp", "ja"),
+        Map.entry("jp", "ja"),
+        Map.entry("japanese", "ja")
+    );
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -45,7 +58,7 @@ public class SpeechToTextService {
     @Value("${speech-to-text.whisper.request-timeout-seconds:60}")
     private int whisperRequestTimeoutSeconds;
 
-    @Value("${speech-to-text.default-language:vi}")
+    @Value("${speech-to-text.default-language:auto}")
     private String defaultLanguage;
 
     @Value("${speech-to-text.max-audio-size-bytes:12582912}")
@@ -230,20 +243,29 @@ public class SpeechToTextService {
     }
 
     private String normalizeLanguage(String language) {
-        var fallback = normalizeSimpleText(defaultLanguage, "vi");
-        var normalized = normalizeSimpleText(language, fallback)
-            .toLowerCase(Locale.ROOT)
-            .replace('_', '-');
-
-        if ("auto".equals(normalized)) {
-            return normalized;
+        var fallback = canonicalizeLanguage(normalizeSimpleText(defaultLanguage, "auto"));
+        if (fallback.isEmpty()) {
+            fallback = "auto";
         }
 
-        if (!normalized.matches("^[a-z]{2,8}(-[a-z]{2,8})?$")) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid language parameter");
+        var normalized = canonicalizeLanguage(normalizeSimpleText(language, fallback));
+        if (normalized.isEmpty()) {
+            normalized = fallback;
+        }
+
+        if (!SUPPORTED_LANGUAGE_CODES.contains(normalized)) {
+            throw new ApiException(
+                HttpStatus.BAD_REQUEST,
+                "Invalid language parameter. Supported values: auto, vi, en, ja"
+            );
         }
 
         return normalized;
+    }
+
+    private String canonicalizeLanguage(String language) {
+        var normalized = language.trim().toLowerCase(Locale.ROOT).replace('_', '-');
+        return LANGUAGE_ALIASES.getOrDefault(normalized, normalized);
     }
 
     private String normalizePrompt(String prompt) {
