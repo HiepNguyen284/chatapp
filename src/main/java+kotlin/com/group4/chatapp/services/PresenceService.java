@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,8 @@ public class PresenceService {
     private final UserRepository userRepository;
     private final SimpUserRegistry simpUserRegistry;
     private final SimpMessagingTemplate messagingTemplate;
+
+    private final Map<String, Boolean> appActiveUsers = new ConcurrentHashMap<>();
 
     @Transactional(readOnly = true)
     public UserPresenceDto getPresence(String username) {
@@ -42,7 +46,16 @@ public class PresenceService {
             userRepository.save(user);
         });
 
+        appActiveUsers.remove(username);
         publishPresence(username, false);
+    }
+
+    public void markAppActive(String username, boolean active) {
+        appActiveUsers.put(username, active);
+    }
+
+    public boolean isAppActive(String username) {
+        return appActiveUsers.getOrDefault(username, false);
     }
 
     private void publishPresence(String username, boolean online) {
@@ -64,5 +77,9 @@ public class PresenceService {
             online,
             user.getLastSeenAt()
         );
+    }
+
+    public boolean isOnline(String username) {
+        return simpUserRegistry.getUser(username) != null;
     }
 }
