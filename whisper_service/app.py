@@ -2,6 +2,7 @@ import logging
 import re
 import subprocess
 import tempfile
+from threading import Lock
 from pathlib import Path
 
 import whisper
@@ -11,6 +12,7 @@ from pydantic import BaseModel
 LOGGER = logging.getLogger("whisper-service")
 logging.basicConfig(level=logging.INFO)
 
+import os
 
 def get_env(key: str, default: str | None = None) -> str | None:
     try:
@@ -21,28 +23,49 @@ def get_env(key: str, default: str | None = None) -> str | None:
             return default
         return value
     except Exception:
-        return default
+        return os.getenv(key, default)
 
 
 WHISPER_MODEL = get_env("WHISPER_MODEL", "small").strip() or "small"
+WHISPER_CACHE_DIR = (get_env("WHISPER_CACHE_DIR") or "/cache/whisper").strip() or "/cache/whisper"
 DEFAULT_LANGUAGE = (
-    (get_env("WHISPER_DEFAULT_LANGUAGE") or get_env("WHISPER_LANGUAGE") or "vi")
+    (get_env("WHISPER_DEFAULT_LANGUAGE") or get_env("WHISPER_LANGUAGE") or "auto")
     .strip()
     .lower()
 )
 MAX_AUDIO_SIZE_BYTES = int(get_env("WHISPER_MAX_AUDIO_SIZE_BYTES", "12582912"))
 WHISPER_FP16 = get_env("WHISPER_FP16", "false").strip().lower() == "true"
 
-VIETNAMESE_INITIAL_PROMPT = (
-    "Đây là tin nhắn thoại trong ứng dụng chat. "
-    "Ưu tiên nhận dạng chính xác tiếng Việt có dấu, tên riêng, số điện thoại và địa danh."
+MULTILINGUAL_INITIAL_PROMPT = (
+    "This is a chat voice message. "
+    "The language may be Vietnamese, English, or Japanese. "
+    "Transcribe exactly in the original language."
 )
 
+LANGUAGE_INITIAL_PROMPTS = {
+    "vi": "This is a Vietnamese chat voice message. Transcribe exactly with proper diacritics.",
+    "en": "This is an English chat voice message. Transcribe exactly as spoken.",
+    "ja": "This is a Japanese chat voice message. Transcribe exactly as spoken.",
+}
+
+SUPPORTED_LANGUAGE_CODES = {"vi", "en", "ja"}
+
+LANGUAGE_ALIASES = {
+    "vi-vn": "vi",
+    "vietnamese": "vi",
+    "en-us": "en",
+    "en-gb": "en",
+    "english": "en",
+    "ja-jp": "ja",
+    "jp": "ja",
+    "japanese": "ja",
+}
+
 _AUDIO_NAME_RE = re.compile(r"[^a-zA-Z0-9._-]")
-_LANGUAGE_RE = re.compile(r"^[a-z]{2,8}(?:-[a-z]{2,8})?$")
 
 app = FastAPI(title="Whisper Speech To Text", version="1.0.0")
 _model = None
+_model_lock = Lock()
 
 
 class SpeechToTextResponse(BaseModel):
@@ -56,11 +79,43 @@ class HealthResponse(BaseModel):
 
 @app.on_event("startup")
 def load_model() -> None:
-    global _model
+    _get_model()
 
-    LOGGER.info("Loading Whisper model: %s", WHISPER_MODEL)
-    _model = whisper.load_model(WHISPER_MODEL)
-    LOGGER.info("Whisper model loaded")
+
+def _get_model():
+    global _model
+    if _model is not None:
+        return _model
+
+    with _model_lock:
+        if _model is None:
+            cache_dir = Path(WHISPER_CACHE_DIR)
+            cache_dir.mkdir(parents=True, exist_ok=True)
+
+            LOGGER.info("Loading Whisper model: %s (cache: %s)", WHISPER_MODEL, cache_dir)
+            _model = _load_model_with_cache_recovery(cache_dir)
+            LOGGER.info("Whisper model loaded")
+
+    return _model
+
+
+def _load_model_with_cache_recovery(cache_dir: Path):
+    try:
+        return whisper.load_model(WHISPER_MODEL, download_root=str(cache_dir))
+    except RuntimeError as exc:
+        detail = str(exc).lower()
+        if "checksum" not in detail and "sha256" not in detail:
+            raise
+
+        LOGGER.warning("Whisper cache checksum mismatch detected, clearing cache and retrying once")
+        _clear_cached_model_file(cache_dir)
+        return whisper.load_model(WHISPER_MODEL, download_root=str(cache_dir))
+
+
+def _clear_cached_model_file(cache_dir: Path) -> None:
+    candidate = cache_dir / f"{WHISPER_MODEL}.pt"
+    if candidate.exists():
+        candidate.unlink(missing_ok=True)
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -119,11 +174,14 @@ async def speech_to_text(
 
         if normalized_prompt:
             decode_options["initial_prompt"] = normalized_prompt
-        elif normalized_language == "vi":
-            decode_options["initial_prompt"] = VIETNAMESE_INITIAL_PROMPT
+        elif normalized_language is None:
+            decode_options["initial_prompt"] = MULTILINGUAL_INITIAL_PROMPT
+        elif normalized_language in LANGUAGE_INITIAL_PROMPTS:
+            decode_options["initial_prompt"] = LANGUAGE_INITIAL_PROMPTS[normalized_language]
 
         try:
-            result = _model.transcribe(str(normalized_audio), **decode_options)
+            model = _get_model()
+            result = model.transcribe(str(normalized_audio), **decode_options)
         except Exception as exc:
             LOGGER.exception("Whisper transcription failed")
             raise HTTPException(
@@ -175,14 +233,31 @@ def _safe_filename(filename: str) -> str:
 
 
 def _normalize_language(language: str | None) -> str | None:
-    value = (language or DEFAULT_LANGUAGE).strip().lower().replace("_", "-")
+    value = _canonicalize_language(language)
+    if not value:
+        value = _canonicalize_language(DEFAULT_LANGUAGE)
+
+    if not value:
+        value = "auto"
+
     if value == "auto":
         return None
 
-    if not _LANGUAGE_RE.match(value):
-        raise HTTPException(status_code=400, detail="invalid language")
+    if value not in SUPPORTED_LANGUAGE_CODES:
+        raise HTTPException(
+            status_code=400,
+            detail="invalid language: supported values are auto, vi, en, ja",
+        )
 
     return value
+
+
+def _canonicalize_language(language: str | None) -> str:
+    value = (language or "").strip().lower().replace("_", "-")
+    if not value:
+        return ""
+
+    return LANGUAGE_ALIASES.get(value, value)
 
 
 def _normalize_prompt(prompt: str | None) -> str:

@@ -48,6 +48,7 @@ agents:
   messages:
     base-url: "${LLM_BASE_URL}"
     model: "${LLM_MODEL}"
+    fallback-model: "${LLM_FALLBACK_MODEL:kilo-auto/free}"
     api-key: "${LLM_API_KEY}"
     request-timeout-seconds: "${LLM_REQUEST_TIMEOUT_SECONDS:45}"
 
@@ -60,5 +61,5 @@ speech-to-text:
     base-url: "${WHISPER_BASE_URL:http://whisper:8000}"
     request-timeout-seconds: "${WHISPER_REQUEST_TIMEOUT_SECONDS:60}"
     healthcheck-enabled: "${WHISPER_HEALTHCHECK_ENABLED:false}"
-  default-language: "${WHISPER_DEFAULT_LANGUAGE:vi}"
+  default-language: "${WHISPER_DEFAULT_LANGUAGE:auto}"
   max-audio-size-bytes: "${WHISPER_MAX_AUDIO_SIZE_BYTES:12582912}"

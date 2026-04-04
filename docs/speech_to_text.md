@@ -30,20 +30,28 @@ flowchart LR
 - `WHISPER_BASE_URL` (default `http://whisper:8000`)
 - `WHISPER_REQUEST_TIMEOUT_SECONDS` (default `60`)
 - `WHISPER_HEALTHCHECK_ENABLED` (default `false`, set `true` to require `/health` before transcribe)
-- `WHISPER_DEFAULT_LANGUAGE` (default `vi`)
+- `WHISPER_CACHE_DIR` (default `/cache/whisper`)
+- `WHISPER_DEFAULT_LANGUAGE` (default `auto`)
 - `WHISPER_MAX_AUDIO_SIZE_BYTES` (default `12582912`)
 
 ### Whisper service (`chatapp/whisper_service`)
 - `WHISPER_MODEL` (default `small`)
-- `WHISPER_DEFAULT_LANGUAGE` (default `vi`)
+- `WHISPER_CACHE_DIR` (default `/cache/whisper`)
+- `WHISPER_DEFAULT_LANGUAGE` (default `auto`)
 - `WHISPER_MAX_AUDIO_SIZE_BYTES` (default `12582912`)
 - `WHISPER_FP16` (default `false`)
 
-## Vietnamese Recognition Tips
+### Model Cache
 
-- Use `language=vi` for best Vietnamese decoding stability.
+- Whisper model files are cached under `WHISPER_CACHE_DIR` and mounted to a named Docker volume (`whisper_model_cache`).
+- After the first startup download, subsequent container restarts reuse cached model files and avoid re-downloading.
+
+## Multilingual Recognition (Vietnamese, English, Japanese)
+
+- Supported values are `auto`, `vi`, `en`, `ja`.
+- Use `language=auto` to let Whisper detect Vietnamese/English/Japanese automatically.
+- Use `language=vi`, `language=en`, or `language=ja` when caller already knows the spoken language.
 - Keep sample rate at 16kHz and mono for lower latency and predictable quality.
-- Use a short Vietnamese initial prompt to improve diacritic output.
 - Prefer `small` model for better Vietnamese accuracy than `base` while still practical for CPU.
 
 ## Near Real-time Improvement Ideas

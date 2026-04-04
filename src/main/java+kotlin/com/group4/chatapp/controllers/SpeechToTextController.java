@@ -28,7 +28,7 @@ public class SpeechToTextController {
     )
     public SpeechToTextResponseDto speechToText(
         @RequestParam("audio") MultipartFile audio,
-        @RequestParam(name = "language", defaultValue = "vi") String language,
+        @RequestParam(name = "language", defaultValue = "auto") String language,
         @RequestParam(name = "prompt", required = false) String prompt
     ) {
         return speechToTextService.transcribe(audio, language, prompt);
