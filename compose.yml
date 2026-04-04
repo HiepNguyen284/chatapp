@@ -62,35 +62,35 @@ services:
       timeout: 5s
       retries: 3
 
-  whisper:
-    build:
-      context: ./whisper_service
-      dockerfile: Dockerfile
-
-    container_name: chatapp-whisper
-
-    env_file:
-      - ./.env
-
-    environment:
-      WHISPER_MODEL: ${WHISPER_MODEL:-small}
-      WHISPER_CACHE_DIR: ${WHISPER_CACHE_DIR:-/cache/whisper}
-      WHISPER_DEFAULT_LANGUAGE: ${WHISPER_DEFAULT_LANGUAGE:-auto}
-      WHISPER_MAX_AUDIO_SIZE_BYTES: ${WHISPER_MAX_AUDIO_SIZE_BYTES:-12582912}
-      WHISPER_FP16: ${WHISPER_FP16:-false}
-
-    volumes:
-      - whisper_model_cache:/cache/whisper
-
-    ports:
-      - "8000:8000"
-
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2).read()"]
-      interval: 15s
-      timeout: 5s
-      start_period: 5m
-      retries: 20
+  # whisper:
+  #   build:
+  #     context: ./whisper_service
+  #     dockerfile: Dockerfile
+  #
+  #   container_name: chatapp-whisper
+  #
+  #   env_file:
+  #     - ./.env
+  #
+  #   environment:
+  #     WHISPER_MODEL: ${WHISPER_MODEL:-small}
+  #     WHISPER_CACHE_DIR: ${WHISPER_CACHE_DIR:-/cache/whisper}
+  #     WHISPER_DEFAULT_LANGUAGE: ${WHISPER_DEFAULT_LANGUAGE:-auto}
+  #     WHISPER_MAX_AUDIO_SIZE_BYTES: ${WHISPER_MAX_AUDIO_SIZE_BYTES:-12582912}
+  #     WHISPER_FP16: ${WHISPER_FP16:-false}
+  #
+  #   volumes:
+  #     - whisper_model_cache:/cache/whisper
+  #
+  #   ports:
+  #     - "8000:8000"
+  #
+  #   healthcheck:
+  #     test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2).read()"]
+  #     interval: 15s
+  #     timeout: 5s
+  #     start_period: 5m
+  #     retries: 20
 
   app:
     build:
