@@ -22,6 +22,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.group4.chatapp.services.NotificationService;
+import com.group4.chatapp.services.PresenceService;
+
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +47,8 @@ public class GroupChatService {
     private final InvitationRepository invitationRepository;
     private final ChatRoomPinRepository chatRoomPinRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final NotificationService notificationService;
+    private final PresenceService presenceService;
 
     @Transactional
     public GroupChatDto createGroup(GroupChatCreateDto dto) {
@@ -256,6 +261,20 @@ public class GroupChatService {
             "addedBy", user.getUsername()
         ));
 
+        for (User newMember : newMembers) {
+            if (presenceService.isOnline(newMember.getUsername())) {
+                continue;
+            }
+            var roomName = room.getName() != null ? room.getName() : "Group chat";
+            notificationService.pushGroupEvent(
+                newMember.getUsername(),
+                roomName,
+                user.getUsername(),
+                roomId,
+                "added_to_group"
+            );
+        }
+
         return buildGroupChatDto(room, user.getId());
     }
 
@@ -316,6 +335,18 @@ public class GroupChatService {
             "action", "removed",
             "actionBy", user.getUsername()
         ));
+
+        if (presenceService.isOnline(removedUser.getUsername())) {
+            return;
+        }
+        var roomName = room.getName() != null ? room.getName() : "Group chat";
+        notificationService.pushGroupEvent(
+            removedUser.getUsername(),
+            roomName,
+            user.getUsername(),
+            roomId,
+            "removed_from_group"
+        );
     }
 
     @Transactional

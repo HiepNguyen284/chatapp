@@ -10,6 +10,7 @@ import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.InvitationRepository;
 import com.group4.chatapp.services.ChatRoomService;
+import com.group4.chatapp.services.NotificationService;
 import com.group4.chatapp.services.UserService;
 
 import org.jspecify.annotations.Nullable;
@@ -34,6 +35,7 @@ class InvitationReplyService {
     private final ChatRoomRepository chatRoomRepository;
 
     private final SimpMessagingTemplate messagingTemplate;
+    private final NotificationService notificationService;
 
     private void updateInvitation(Invitation invitation, boolean isAccepted) {
 
@@ -164,6 +166,12 @@ class InvitationReplyService {
 
         updateInvitation(invitation, isAccepted);
         notifyUserReply(invitation, newChatRoomDto);
+
+        notificationService.pushInvitationReply(
+            invitation.getSender().getUsername(),
+            invitation.getReceiver().getDisplayName(),
+            isAccepted
+        );
 
         return new ReplyResponse(newChatRoomDto);
     }

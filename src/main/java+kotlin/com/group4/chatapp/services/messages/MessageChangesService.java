@@ -9,6 +9,8 @@ import com.group4.chatapp.models.ChatRoom;
 import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.MessageRepository;
 import com.group4.chatapp.services.AttachmentService;
+import com.group4.chatapp.services.NotificationService;
+import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import jakarta.transaction.Transactional;
@@ -32,6 +34,8 @@ class MessageChangesService {
     private final UserBlockService userBlockService;
     private final MessageCheckService checkService;
     private final AttachmentService attachmentService;
+    private final NotificationService notificationService;
+    private final PresenceService presenceService;
 
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -40,15 +44,36 @@ class MessageChangesService {
         var socketPath = chatRoom.getSocketPath();
         var messageReceiveDto = new MessageReceiveDto(savedMessage);
 
+        var sender = savedMessage.getSender();
+        var senderDisplayName = sender.getDisplayName() != null ? sender.getDisplayName() : sender.getUsername();
+        var messageText = savedMessage.getMessage();
+        var preview = messageText != null && messageText.length() > 100
+            ? messageText.substring(0, 100) + "..."
+            : messageText;
+        var roomId = chatRoom.getId();
+
         chatRoom.getMembers()
             .parallelStream()
-            .forEach((member) ->
+            .forEach((member) -> {
                 messagingTemplate.convertAndSendToUser(
                     member.getUsername(),
                     socketPath,
                     messageReceiveDto
-                )
-            );
+                );
+
+                if (!member.equals(sender)) {
+                    if (presenceService.isOnline(member.getUsername())) {
+                        return;
+                    }
+                    var memberDisplayName = member.getDisplayName() != null ? member.getDisplayName() : member.getUsername();
+                    notificationService.pushNewMessage(
+                        member.getUsername(),
+                        senderDisplayName,
+                        preview != null ? preview : "New message",
+                        roomId
+                    );
+                }
+            });
     }
 
     @Nullable

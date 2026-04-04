@@ -9,6 +9,7 @@ import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.InvitationRepository;
 import com.group4.chatapp.repositories.UserRepository;
+import com.group4.chatapp.services.NotificationService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ class InvitationSendService {
     private final ChatRoomRepository chatRoomRepository;
 
     private final SimpMessagingTemplate messagingTemplate;
+    private final NotificationService notificationService;
 
     private void notifyInvitation(Invitation invitation) {
         messagingTemplate.convertAndSendToUser(
@@ -183,5 +185,13 @@ class InvitationSendService {
 
         invitation = repository.saveAndFlush(invitation);
         notifyInvitation(invitation);
+
+        boolean isGroup = invitation.getChatRoom() != null;
+        notificationService.pushInvitation(
+            invitation.getReceiver().getUsername(),
+            invitation.getSender().getDisplayName(),
+            invitation.getId(),
+            isGroup
+        );
     }
 }

@@ -8,6 +8,8 @@ import com.group4.chatapp.dtos.user.UserPresenceDto;
 import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
 import com.group4.chatapp.dtos.user.UserBlockStatusDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
+import com.group4.chatapp.dtos.user.FcmTokenDto;
+import com.group4.chatapp.services.FcmTokenService;
 import com.group4.chatapp.services.JwtsService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.PresenceService;
@@ -29,6 +31,7 @@ public class UserController {
     private final UserBlockService userBlockService;
     private final JwtsService jwtsService;
     private final PresenceService presenceService;
+    private final FcmTokenService fcmTokenService;
 
     @PostMapping("/register/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -91,5 +94,11 @@ public class UserController {
     @GetMapping("/{username}/block-status/")
     public UserBlockStatusDto getBlockStatus(@PathVariable String username) {
         return userBlockService.getBlockStatus(username);
+    }
+
+    @PostMapping("/fcm-token/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void registerFcmToken(@Valid @RequestBody FcmTokenDto dto) {
+        fcmTokenService.registerToken(dto.getToken());
     }
 }
