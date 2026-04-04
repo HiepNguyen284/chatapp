@@ -28,7 +28,7 @@ class TranslationService(
         return try {
 
             val prompt = promptService.buildTranslationPrompt(
-                text, sourceLanguage,
+                text, sourceLanguage, targetLanguage,
                 previousMessages
             )
 
@@ -49,23 +49,27 @@ class TranslationService(
                 .also { translationCache[cacheKey] = it }
 
         } catch (ex: Exception) {
-            fallbackTranslation(text, sourceLanguage, targetLanguage, cacheKey, ex)
+            fallbackTranslation(ex)
         }
     }
 
     private fun fallbackTranslation(
-        text: String,
-        sourceLanguage: String,
-        targetLanguage: String,
-        cacheKey: String,
         cause: Exception
     ): MessageTranslationDto {
 
         logger.warn("Translation AI fallback activated: {}", cause.message)
 
-        val detectedSourceLanguage = if (sourceLanguage == "auto") "" else sourceLanguage
-        return MessageTranslationDto(text, detectedSourceLanguage, targetLanguage)
-            .also { translationCache[cacheKey] = it }
+        if (cause is ApiException && cause.statusCode.value() == HttpStatus.TOO_MANY_REQUESTS.value()) {
+            throw ApiException(
+                HttpStatus.TOO_MANY_REQUESTS,
+                "Translation AI is rate limited, please try again shortly"
+            )
+        }
+
+        throw ApiException(
+            HttpStatus.BAD_GATEWAY,
+            "Translation service is temporarily unavailable"
+        )
     }
 
     private fun normalizePreviousMessages(previousMessages: List<String>?): List<String> {
@@ -113,15 +117,7 @@ class TranslationService(
 
     private fun normalizeTargetLanguage(language: String?): String {
         val normalized = normalizeLanguageCode(language)
-        if (normalized.isEmpty()) {
-            return "vi"
-        }
-
-        if (!normalized.startsWith("vi")) {
-            throw ApiException(HttpStatus.BAD_REQUEST, "Only Vietnamese translation is supported")
-        }
-
-        return "vi"
+        return normalized.ifEmpty { "vi" }
     }
 
     private fun normalizeSourceLanguage(language: String?): String {

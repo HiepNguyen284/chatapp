@@ -8,9 +8,19 @@ class PromptService {
     fun buildTranslationPrompt(
         text: String,
         sourceLanguage: String,
+        targetLanguage: String,
         previousMessages: List<String>
     ): PromptSpec {
+        val normalizedTargetLanguage = targetLanguage.trim().ifEmpty { "vi" }
+        val targetLanguageName = languageDisplayName(normalizedTargetLanguage)
+
         val userPrompt = buildString {
+            append("Target language: ")
+            append(targetLanguageName)
+            append(" (code: ")
+            append(normalizedTargetLanguage)
+            append(")\n\n")
+
             if (sourceLanguage != "auto") {
                 append("Source language hint: ")
                 append(sourceLanguage)
@@ -33,9 +43,55 @@ class PromptService {
         }
 
         return PromptSpec(
-            systemPrompt = TRANSLATOR_SYSTEM_PROMPT,
+            systemPrompt = buildTranslationSystemPrompt(
+                targetLanguageName,
+                normalizedTargetLanguage
+            ),
             userPrompt = userPrompt
         )
+    }
+
+    private fun languageDisplayName(code: String): String {
+        return when (code.lowercase().substringBefore('-')) {
+            "vi" -> "Vietnamese"
+            "en" -> "English"
+            "zh" -> "Chinese"
+            "ja" -> "Japanese"
+            "ko" -> "Korean"
+            "fr" -> "French"
+            "de" -> "German"
+            "es" -> "Spanish"
+            "pt" -> "Portuguese"
+            "it" -> "Italian"
+            "ru" -> "Russian"
+            "ar" -> "Arabic"
+            "hi" -> "Hindi"
+            "th" -> "Thai"
+            "id" -> "Indonesian"
+            "ms" -> "Malay"
+            "tr" -> "Turkish"
+            "nl" -> "Dutch"
+            "pl" -> "Polish"
+            "sv" -> "Swedish"
+            else -> "the language identified by code '$code'"
+        }
+    }
+
+    private fun buildTranslationSystemPrompt(
+        targetLanguageName: String,
+        targetLanguageCode: String
+    ): String {
+        return """
+            You translate chat messages into natural $targetLanguageName.
+            Preserve meaning, tone, names, emoji, links, and message formatting.
+            If the input is already in $targetLanguageName, rewrite it only if needed to sound natural.
+            Output rules:
+            - Return only the final translated text in $targetLanguageName (code: $targetLanguageCode).
+            - Do not add explanations, notes, labels, prefixes, or suffixes.
+            - Do not wrap the answer in quotes.
+            - Do not use markdown code fences.
+            - Do not mention the source language.
+        """.trimIndent()
     }
 
     fun buildSummaryPrompt(summaryMessages: List<String>, roomName: String): PromptSpec {
@@ -67,18 +123,6 @@ class PromptService {
     )
 
     companion object {
-        private const val TRANSLATOR_SYSTEM_PROMPT = """
-            You translate chat messages into natural Vietnamese.
-            Preserve meaning, tone, names, emoji, links, and message formatting.
-            If the input is already Vietnamese, rewrite it only if needed to sound natural.
-            Output rules:
-            - Return only the final Vietnamese text.
-            - Do not add explanations, notes, labels, prefixes, or suffixes.
-            - Do not wrap the answer in quotes.
-            - Do not use markdown code fences.
-            - Do not mention the source language.
-        """
-
         private const val SUMMARY_SYSTEM_PROMPT = """
             You summarize chat conversations in Vietnamese.
             Keep key facts, tasks, decisions, blockers, and follow-up actions.
