@@ -48,6 +48,7 @@ agents:
   messages:
     base-url: "${LLM_BASE_URL}"
     model: "${LLM_MODEL}"
+    fallback-model: "${LLM_FALLBACK_MODEL:kilo-auto/free}"
     api-key: "${LLM_API_KEY}"
     request-timeout-seconds: "${LLM_REQUEST_TIMEOUT_SECONDS:45}"
 

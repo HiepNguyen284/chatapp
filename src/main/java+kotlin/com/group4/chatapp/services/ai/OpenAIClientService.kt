@@ -3,6 +3,7 @@ package com.group4.chatapp.services.ai
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.group4.chatapp.exceptions.ApiException
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -17,11 +18,14 @@ import java.time.Duration
 class OpenAIClientService(
     @Value("\${agents.messages.base-url:}") private val llmBaseUrl: String,
     @Value("\${agents.messages.model:}") private val llmModel: String,
+    @Value("\${agents.messages.fallback-model:kilo-auto/free}")
+    private val llmFallbackModel: String,
     @Value("\${agents.messages.api-key:}") private val llmApiKey: String,
     @Value("\${agents.messages.request-timeout-seconds:45}") private val llmRequestTimeoutSeconds: Int
 ) {
 
     companion object {
+        private val logger = LoggerFactory.getLogger(OpenAIClientService::class.java)
         private val httpClient: HttpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .build()
@@ -34,6 +38,42 @@ class OpenAIClientService(
         serviceName: String,
         temperature: Double
     ): String {
+        val candidateModels = buildCandidateModels()
+        var lastError: ApiException? = null
+
+        for ((index, model) in candidateModels.withIndex()) {
+            try {
+                return requestTextWithModel(
+                    prompt = prompt,
+                    serviceName = serviceName,
+                    temperature = temperature,
+                    model = model
+                )
+            } catch (ex: ApiException) {
+                lastError = ex
+                val canTryNextModel = index < candidateModels.lastIndex
+                val isRateLimited = ex.statusCode.value() == HttpStatus.TOO_MANY_REQUESTS.value()
+                if (isRateLimited && canTryNextModel) {
+                    logger.warn("{} model '{}' is rate limited, trying fallback model", serviceName, model)
+                    continue
+                }
+
+                throw ex
+            }
+        }
+
+        throw lastError ?: ApiException(
+            HttpStatus.BAD_GATEWAY,
+            "$serviceName request failed"
+        )
+    }
+
+    private fun requestTextWithModel(
+        prompt: PromptService.PromptSpec,
+        serviceName: String,
+        temperature: Double,
+        model: String
+    ): String {
         val request = HttpRequest.newBuilder(buildCompletionsUri())
             .timeout(resolveRequestTimeout())
             .header("Accept", "application/json")
@@ -41,13 +81,19 @@ class OpenAIClientService(
             .header("Authorization", "Bearer ${requireApiKey()}")
             .POST(
                 HttpRequest.BodyPublishers.ofString(
-                    buildRequestBody(prompt, temperature),
+                    buildRequestBody(prompt, temperature, model),
                     StandardCharsets.UTF_8
                 )
             )
             .build()
 
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+        if (response.statusCode() == HttpStatus.TOO_MANY_REQUESTS.value()) {
+            throw ApiException(
+                HttpStatus.TOO_MANY_REQUESTS,
+                "$serviceName request failed: ${response.statusCode()}"
+            )
+        }
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             throw ApiException(HttpStatus.BAD_GATEWAY, "$serviceName request failed: ${response.statusCode()}")
         }
@@ -70,6 +116,16 @@ class OpenAIClientService(
         return result
     }
 
+    private fun buildCandidateModels(): List<String> {
+        val primary = requireModel()
+        val fallback = llmFallbackModel.trim()
+        if (fallback.isEmpty() || fallback == primary) {
+            return listOf(primary)
+        }
+
+        return listOf(primary, fallback)
+    }
+
     private fun buildCompletionsUri(): URI {
         val baseUrl = llmBaseUrl.trim()
         if (baseUrl.isEmpty()) {
@@ -80,9 +136,13 @@ class OpenAIClientService(
         return URI.create(baseUrl + separator + "chat/completions")
     }
 
-    private fun buildRequestBody(prompt: PromptService.PromptSpec, temperature: Double): String {
+    private fun buildRequestBody(
+        prompt: PromptService.PromptSpec,
+        temperature: Double,
+        model: String
+    ): String {
         val root = objectMapper.createObjectNode()
-        root.put("model", requireModel())
+        root.put("model", model)
         root.put("temperature", temperature)
 
         val messages = root.putArray("messages")
@@ -152,4 +212,5 @@ class OpenAIClientService(
 
         return text.toString()
     }
+
 }
