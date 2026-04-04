@@ -1,19 +1,24 @@
 package com.group4.chatapp.services.ai
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto
 import com.group4.chatapp.dtos.messages.MessageTranslationDto
 import com.group4.chatapp.exceptions.ApiException
 import org.slf4j.LoggerFactory
+import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import java.util.Collections
+import java.time.Duration
 import java.util.Locale
 
 @Service
 class TranslationService(
     private val openAIClientService: OpenAIClientService,
-    private val promptService: PromptService
+    private val promptService: PromptService,
+    private val redisTemplate: StringRedisTemplate
 ) {
+
+    private val objectMapper = jacksonObjectMapper()
 
     fun translate(dto: MessageTranslateRequestDto): MessageTranslationDto {
         val text = normalizeText(dto.text())
@@ -23,7 +28,7 @@ class TranslationService(
         val cacheKey =
             buildTranslationCacheKey(text, sourceLanguage, targetLanguage, previousMessages)
 
-        translationCache[cacheKey]?.let { return it }
+        getCachedTranslation(cacheKey)?.let { return it }
 
         return try {
 
@@ -46,10 +51,32 @@ class TranslationService(
             }
 
             MessageTranslationDto(translatedText, detectedSourceLanguage, targetLanguage)
-                .also { translationCache[cacheKey] = it }
+                .also { cacheTranslation(cacheKey, it) }
 
         } catch (ex: Exception) {
             fallbackTranslation(ex)
+        }
+    }
+
+    private fun getCachedTranslation(cacheKey: String): MessageTranslationDto? {
+        return try {
+            val json = redisTemplate.opsForValue().get(TRANSLATION_CACHE_PREFIX + cacheKey)
+            if (json != null) objectMapper.readValue(json, MessageTranslationDto::class.java) else null
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun cacheTranslation(cacheKey: String, dto: MessageTranslationDto) {
+        try {
+            val json = objectMapper.writeValueAsString(dto)
+            redisTemplate.opsForValue().set(
+                TRANSLATION_CACHE_PREFIX + cacheKey,
+                json,
+                CACHE_TTL
+            )
+        } catch (e: Exception) {
+            logger.warn("Failed to cache translation in Redis: {}", e.message)
         }
     }
 
@@ -142,16 +169,9 @@ class TranslationService(
     companion object {
         private val logger = LoggerFactory.getLogger(TranslationService::class.java)
 
-        private const val CACHE_MAX_SIZE = 2048
+        private const val TRANSLATION_CACHE_PREFIX = "translation:"
+        private val CACHE_TTL = Duration.ofHours(24)
         private const val CONTEXT_MESSAGE_LIMIT = 8
         private const val CONTEXT_TEXT_LIMIT = 500
     }
-
-    private val translationCache = Collections.synchronizedMap(
-        object : LinkedHashMap<String, MessageTranslationDto>(CACHE_MAX_SIZE + 1, 0.75f, true) {
-            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, MessageTranslationDto>?): Boolean {
-                return size > CACHE_MAX_SIZE
-            }
-        }
-    )
 }

@@ -64,6 +64,10 @@ speech-to-text:
   default-language: "${WHISPER_DEFAULT_LANGUAGE:auto}"
   max-audio-size-bytes: "${WHISPER_MAX_AUDIO_SIZE_BYTES:12582912}"
 
+  data:
+    redis:
+      url: "${REDIS_URL:redis://localhost:6379}"
+
 firebase:
   service-account-json: "${FIREBASE_SERVICE_ACCOUNT_JSON:}"
   service-account-path: "${FIREBASE_SERVICE_ACCOUNT_PATH:}"

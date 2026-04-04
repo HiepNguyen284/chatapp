@@ -92,6 +92,22 @@ services:
   #     start_period: 5m
   #     retries: 20
 
+  redis:
+    image: redis:8-alpine
+    container_name: chatapp-redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   app:
     build:
       context: .
@@ -103,6 +119,7 @@ services:
 
     environment:
       FIREBASE_SERVICE_ACCOUNT_PATH: ${FIREBASE_SERVICE_ACCOUNT_PATH:-/secrets/firebase-service-account.json}
+      REDIS_URL: redis://redis:6379
 
     volumes:
       - ./secrets:/secrets:ro
@@ -110,10 +127,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
       versitygw:
         condition: service_healthy
 
 volumes:
   postgres_data:
+  redis_data:
   versitygw_data:
   whisper_model_cache:

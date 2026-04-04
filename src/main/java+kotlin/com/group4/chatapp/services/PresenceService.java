@@ -5,6 +5,7 @@ import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
@@ -13,18 +14,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
 public class PresenceService {
 
+    private static final String APP_ACTIVE_KEY_PREFIX = "presence:app_active:";
+    private static final Duration TTL = Duration.ofMinutes(5);
+
     private final UserRepository userRepository;
     private final SimpUserRegistry simpUserRegistry;
     private final SimpMessagingTemplate messagingTemplate;
-
-    private final Map<String, Boolean> appActiveUsers = new ConcurrentHashMap<>();
+    private final StringRedisTemplate redisTemplate;
 
     @Transactional(readOnly = true)
     public UserPresenceDto getPresence(String username) {
@@ -46,16 +48,21 @@ public class PresenceService {
             userRepository.save(user);
         });
 
-        appActiveUsers.remove(username);
+        redisTemplate.delete(APP_ACTIVE_KEY_PREFIX + username);
         publishPresence(username, false);
     }
 
     public void markAppActive(String username, boolean active) {
-        appActiveUsers.put(username, active);
+        String key = APP_ACTIVE_KEY_PREFIX + username;
+        if (active) {
+            redisTemplate.opsForValue().set(key, "true", TTL);
+        } else {
+            redisTemplate.delete(key);
+        }
     }
 
     public boolean isAppActive(String username) {
-        return appActiveUsers.getOrDefault(username, false);
+        return Boolean.TRUE.equals(redisTemplate.hasKey(APP_ACTIVE_KEY_PREFIX + username));
     }
 
     private void publishPresence(String username, boolean online) {
