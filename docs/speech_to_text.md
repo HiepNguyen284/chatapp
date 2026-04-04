@@ -29,6 +29,7 @@ flowchart LR
 ### Backend (`chatapp`)
 - `WHISPER_BASE_URL` (default `http://whisper:8000`)
 - `WHISPER_REQUEST_TIMEOUT_SECONDS` (default `60`)
+- `WHISPER_HEALTHCHECK_ENABLED` (default `false`, set `true` to require `/health` before transcribe)
 - `WHISPER_DEFAULT_LANGUAGE` (default `vi`)
 - `WHISPER_MAX_AUDIO_SIZE_BYTES` (default `12582912`)
 

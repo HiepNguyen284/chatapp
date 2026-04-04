@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.InvalidMediaTypeException;
@@ -45,6 +46,9 @@ public class SpeechToTextService {
     @Value("${speech-to-text.whisper.request-timeout-seconds:60}")
     private int whisperRequestTimeoutSeconds;
 
+    @Value("${speech-to-text.whisper.healthcheck-enabled:false}")
+    private boolean whisperHealthcheckEnabled;
+
     @Value("${speech-to-text.default-language:vi}")
     private String defaultLanguage;
 
@@ -62,6 +66,7 @@ public class SpeechToTextService {
         var normalizedPrompt = normalizePrompt(prompt);
 
         try {
+            ensureWhisperHealthy();
             var response = sendWhisperRequest(audio, normalizedLanguage, normalizedPrompt);
             var text = parseText(response.getBody());
             if (text.isBlank()) {
@@ -135,14 +140,52 @@ public class SpeechToTextService {
         return Duration.ofSeconds(seconds);
     }
 
+    private void ensureWhisperHealthy() {
+        if (!whisperHealthcheckEnabled) {
+            return;
+        }
+
+        var requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(Duration.ofSeconds(5));
+
+        try {
+            var restTemplate = new RestTemplate(requestFactory);
+            ResponseEntity<String> response = restTemplate.exchange(
+                buildWhisperHealthUri(),
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                String.class
+            );
+
+            HttpStatusCode status = response.getStatusCode();
+            if (!status.is2xxSuccessful()) {
+                throw new ApiException(HttpStatus.BAD_GATEWAY, "Speech-to-text service unavailable");
+            }
+        } catch (ApiException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.warn("Speech-to-text healthcheck failed: {}", e.getMessage());
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "Speech-to-text service unavailable");
+        }
+    }
+
     private URI buildSpeechToTextUri() {
+        return buildWhisperUri("speech-to-text");
+    }
+
+    private URI buildWhisperHealthUri() {
+        return buildWhisperUri("health");
+    }
+
+    private URI buildWhisperUri(String path) {
         var baseUrl = whisperBaseUrl == null ? "" : whisperBaseUrl.trim();
         if (baseUrl.isEmpty()) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Whisper service base URL is not configured");
         }
 
         var separator = baseUrl.endsWith("/") ? "" : "/";
-        return URI.create(baseUrl + separator + "speech-to-text");
+        return URI.create(baseUrl + separator + path);
     }
 
     private ResponseEntity<String> sendWhisperRequest(

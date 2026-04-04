@@ -1,5 +1,4 @@
 import logging
-import os
 import re
 import subprocess
 import tempfile
@@ -12,14 +11,27 @@ from pydantic import BaseModel
 LOGGER = logging.getLogger("whisper-service")
 logging.basicConfig(level=logging.INFO)
 
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small").strip() or "small"
+
+def get_env(key: str, default: str | None = None) -> str | None:
+    try:
+        from google.colab import userdata
+
+        value = userdata.get(key)
+        if value is None or value == "":
+            return default
+        return value
+    except Exception:
+        return default
+
+
+WHISPER_MODEL = get_env("WHISPER_MODEL", "small").strip() or "small"
 DEFAULT_LANGUAGE = (
-    os.getenv("WHISPER_DEFAULT_LANGUAGE")
-    or os.getenv("WHISPER_LANGUAGE")
-    or "vi"
-).strip().lower()
-MAX_AUDIO_SIZE_BYTES = int(os.getenv("WHISPER_MAX_AUDIO_SIZE_BYTES", "12582912"))
-WHISPER_FP16 = os.getenv("WHISPER_FP16", "false").strip().lower() == "true"
+    (get_env("WHISPER_DEFAULT_LANGUAGE") or get_env("WHISPER_LANGUAGE") or "vi")
+    .strip()
+    .lower()
+)
+MAX_AUDIO_SIZE_BYTES = int(get_env("WHISPER_MAX_AUDIO_SIZE_BYTES", "12582912"))
+WHISPER_FP16 = get_env("WHISPER_FP16", "false").strip().lower() == "true"
 
 VIETNAMESE_INITIAL_PROMPT = (
     "Đây là tin nhắn thoại trong ứng dụng chat. "
@@ -81,7 +93,10 @@ async def speech_to_text(
 
                 total_size += len(chunk)
                 if total_size > MAX_AUDIO_SIZE_BYTES:
-                    raise HTTPException(status_code=413, detail="audio file is too large")
+                    raise HTTPException(
+                        status_code=413,
+                        detail="audio file is too large",
+                    )
 
                 output.write(chunk)
 
@@ -111,7 +126,10 @@ async def speech_to_text(
             result = _model.transcribe(str(normalized_audio), **decode_options)
         except Exception as exc:
             LOGGER.exception("Whisper transcription failed")
-            raise HTTPException(status_code=502, detail=f"whisper transcription failed: {exc}")
+            raise HTTPException(
+                status_code=502,
+                detail=f"whisper transcription failed: {exc}",
+            )
 
         text = str(result.get("text", "")).strip()
         return SpeechToTextResponse(text=text)
