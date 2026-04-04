@@ -50,3 +50,6 @@ temp*.log
 
 ### Environment variable ###
 .env
+
+### Secrets ###
+secrets/
