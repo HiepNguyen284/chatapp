@@ -1,6 +1,9 @@
 plugins {
     kotlin("jvm") version "2.2.21"
+    kotlin("plugin.jpa") version "2.2.21"
+	kotlin("plugin.lombok") version "2.2.21"
     kotlin("plugin.spring") version "2.2.21"
+    id("io.freefair.lombok") version "9.2.0"
     id("org.springframework.boot") version "4.0.5"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -54,6 +57,8 @@ dependencies {
 
     implementation("org.bouncycastle:bcprov-jdk18on:1.83")
     implementation("org.msgpack:jackson-dataformat-msgpack:0.9.11")
+
+    implementation("com.google.firebase:firebase-admin:9.8.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
