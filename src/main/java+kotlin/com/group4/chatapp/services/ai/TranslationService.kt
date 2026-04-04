@@ -1,6 +1,5 @@
 package com.group4.chatapp.services.ai
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.group4.chatapp.dtos.messages.MessageTranslateRequestDto
 import com.group4.chatapp.dtos.messages.MessageTranslationDto
 import com.group4.chatapp.exceptions.ApiException
@@ -18,8 +17,6 @@ class TranslationService(
     private val redisTemplate: StringRedisTemplate
 ) {
 
-    private val objectMapper = jacksonObjectMapper()
-
     fun translate(dto: MessageTranslateRequestDto): MessageTranslationDto {
         val text = normalizeText(dto.text())
         val sourceLanguage = normalizeSourceLanguage(dto.sourceLanguage())
@@ -28,7 +25,7 @@ class TranslationService(
         val cacheKey =
             buildTranslationCacheKey(text, sourceLanguage, targetLanguage, previousMessages)
 
-        getCachedTranslation(cacheKey)?.let { return it }
+        getCachedTranslation(cacheKey, targetLanguage)?.let { return it }
 
         return try {
 
@@ -58,10 +55,12 @@ class TranslationService(
         }
     }
 
-    private fun getCachedTranslation(cacheKey: String): MessageTranslationDto? {
+    private fun getCachedTranslation(cacheKey: String, targetLanguage: String): MessageTranslationDto? {
         return try {
-            val json = redisTemplate.opsForValue().get(TRANSLATION_CACHE_PREFIX + cacheKey)
-            if (json != null) objectMapper.readValue(json, MessageTranslationDto::class.java) else null
+            val translatedText = redisTemplate.opsForValue().get(TRANSLATION_CACHE_PREFIX + cacheKey)
+            if (translatedText != null) {
+                MessageTranslationDto(translatedText, "", targetLanguage)
+            } else null
         } catch (e: Exception) {
             null
         }
@@ -69,10 +68,9 @@ class TranslationService(
 
     private fun cacheTranslation(cacheKey: String, dto: MessageTranslationDto) {
         try {
-            val json = objectMapper.writeValueAsString(dto)
             redisTemplate.opsForValue().set(
                 TRANSLATION_CACHE_PREFIX + cacheKey,
-                json,
+                dto.translatedText,
                 CACHE_TTL
             )
         } catch (e: Exception) {
