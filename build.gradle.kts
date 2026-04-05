@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "2.2.21"
     kotlin("plugin.jpa") version "2.2.21"
-	kotlin("plugin.lombok") version "2.2.21"
+    kotlin("plugin.lombok") version "2.2.21"
     kotlin("plugin.spring") version "2.2.21"
     id("io.freefair.lombok") version "9.2.0"
     id("org.springframework.boot") version "4.0.5"
@@ -39,7 +39,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
     implementation("software.amazon.awssdk:s3:2.42.21")
@@ -49,7 +48,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("tools.jackson.module:jackson-module-kotlin")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")

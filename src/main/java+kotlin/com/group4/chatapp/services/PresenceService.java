@@ -12,16 +12,15 @@ import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class PresenceService {
 
     private static final String APP_ACTIVE_KEY_PREFIX = "presence:app_active:";
-    private static final Duration TTL = Duration.ofMinutes(5);
+    private static final String LAST_SEEN_KEY_PREFIX = "presence:last_seen:";
 
     private final UserRepository userRepository;
     private final SimpUserRegistry simpUserRegistry;
@@ -30,10 +29,10 @@ public class PresenceService {
 
     @Transactional(readOnly = true)
     public UserPresenceDto getPresence(String username) {
-        var user = userRepository.findByUsername(username)
+        userRepository.findByUsername(username)
             .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "User not found"));
 
-        return toPresenceDto(user);
+        return toPresenceDto(username);
     }
 
     @Transactional
@@ -43,11 +42,10 @@ public class PresenceService {
 
     @Transactional
     public void markDisconnected(String username) {
-        userRepository.findByUsername(username).ifPresent(user -> {
-            user.setLastSeenAt(Timestamp.from(Instant.now()));
-            userRepository.save(user);
-        });
-
+        redisTemplate.opsForValue().set(
+            LAST_SEEN_KEY_PREFIX + username,
+            String.valueOf(System.currentTimeMillis())
+        );
         redisTemplate.delete(APP_ACTIVE_KEY_PREFIX + username);
         publishPresence(username, false);
     }
@@ -55,7 +53,7 @@ public class PresenceService {
     public void markAppActive(String username, boolean active) {
         String key = APP_ACTIVE_KEY_PREFIX + username;
         if (active) {
-            redisTemplate.opsForValue().set(key, "true", TTL);
+            redisTemplate.opsForValue().set(key, "true");
         } else {
             redisTemplate.delete(key);
         }
@@ -67,26 +65,49 @@ public class PresenceService {
 
     private void publishPresence(String username, boolean online) {
         userRepository.findByUsername(username).ifPresent(user ->
-            messagingTemplate.convertAndSend("/queue/presence/", toPresenceDto(user, online))
+            messagingTemplate.convertAndSend("/queue/presence/", toPresenceDto(username))
         );
     }
 
-    private UserPresenceDto toPresenceDto(User user) {
-        final var isOnline = simpUserRegistry.getUser(user.getUsername()) != null;
+    private UserPresenceDto toPresenceDto(String username) {
+        final var isOnline = simpUserRegistry.getUser(username) != null;
 
-        return toPresenceDto(user, isOnline);
-    }
+        var values = redisTemplate.opsForValue().multiGet(List.of(
+            APP_ACTIVE_KEY_PREFIX + username,
+            LAST_SEEN_KEY_PREFIX + username
+        ));
 
-    private UserPresenceDto toPresenceDto(User user, boolean online) {
+        Timestamp lastSeenAt = null;
+        if (values != null && values.get(1) != null) {
+            lastSeenAt = new Timestamp(Long.parseLong(values.get(1)));
+        }
 
-        return new UserPresenceDto(
-            user.getUsername(),
-            online,
-            user.getLastSeenAt()
-        );
+        return new UserPresenceDto(username, isOnline, lastSeenAt);
     }
 
     public boolean isOnline(String username) {
         return simpUserRegistry.getUser(username) != null;
+    }
+
+    public Map<String, UserPresenceDto> getPresenceBatch(List<String> usernames) {
+        List<String> allKeys = new java.util.ArrayList<>(usernames.size() * 2);
+        for (String u : usernames) {
+            allKeys.add(APP_ACTIVE_KEY_PREFIX + u);
+            allKeys.add(LAST_SEEN_KEY_PREFIX + u);
+        }
+
+        List<String> values = redisTemplate.opsForValue().multiGet(allKeys);
+
+        Map<String, UserPresenceDto> result = new java.util.LinkedHashMap<>();
+        for (int i = 0; i < usernames.size(); i++) {
+            String username = usernames.get(i);
+            boolean isOnline = simpUserRegistry.getUser(username) != null;
+            Timestamp lastSeenAt = null;
+            if (values != null && values.get(i * 2 + 1) != null) {
+                lastSeenAt = new Timestamp(Long.parseLong(values.get(i * 2 + 1)));
+            }
+            result.put(username, new UserPresenceDto(username, isOnline, lastSeenAt));
+        }
+        return result;
     }
 }

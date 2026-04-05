@@ -38,10 +38,6 @@ public class User implements UserDetails {
     @ManyToOne
     private Attachment avatar;
 
-    @Nullable
-    @Column(name = "last_seen_at")
-    private Timestamp lastSeenAt;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
