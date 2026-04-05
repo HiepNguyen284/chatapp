@@ -5,6 +5,8 @@ import com.group4.chatapp.exceptions.ApiException;
 import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,6 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PresenceService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PresenceService.class);
     private static final String APP_ACTIVE_KEY_PREFIX = "presence:app_active:";
     private static final String LAST_SEEN_KEY_PREFIX = "presence:last_seen:";
 
@@ -38,16 +41,24 @@ public class PresenceService {
 
     @Transactional
     public void markConnected(String username) {
-        publishPresence(username, true);
+        try {
+            publishPresence(username, true);
+        } catch (Exception e) {
+            LOGGER.warn("Redis unavailable, skipping presence publish for {}: {}", username, e.getMessage());
+        }
     }
 
     @Transactional
     public void markDisconnected(String username) {
-        redisTemplate.opsForValue().set(
-            LAST_SEEN_KEY_PREFIX + username,
-            String.valueOf(System.currentTimeMillis())
-        );
-        redisTemplate.delete(APP_ACTIVE_KEY_PREFIX + username);
+        try {
+            redisTemplate.opsForValue().set(
+                LAST_SEEN_KEY_PREFIX + username,
+                String.valueOf(System.currentTimeMillis())
+            );
+            redisTemplate.delete(APP_ACTIVE_KEY_PREFIX + username);
+        } catch (Exception e) {
+            LOGGER.warn("Redis unavailable, skipping presence cleanup for {}: {}", username, e.getMessage());
+        }
         publishPresence(username, false);
     }
 
@@ -73,14 +84,17 @@ public class PresenceService {
     private UserPresenceDto toPresenceDto(String username) {
         final var isOnline = simpUserRegistry.getUser(username) != null;
 
-        var values = redisTemplate.opsForValue().multiGet(List.of(
-            APP_ACTIVE_KEY_PREFIX + username,
-            LAST_SEEN_KEY_PREFIX + username
-        ));
-
         Timestamp lastSeenAt = null;
-        if (values != null && values.get(1) != null) {
-            lastSeenAt = new Timestamp(Long.parseLong(values.get(1)));
+        try {
+            var values = redisTemplate.opsForValue().multiGet(List.of(
+                APP_ACTIVE_KEY_PREFIX + username,
+                LAST_SEEN_KEY_PREFIX + username
+            ));
+            if (values != null && values.get(1) != null) {
+                lastSeenAt = new Timestamp(Long.parseLong(values.get(1)));
+            }
+        } catch (Exception e) {
+            LOGGER.debug("Redis unavailable for presence lookup: {}", e.getMessage());
         }
 
         return new UserPresenceDto(username, isOnline, lastSeenAt);
