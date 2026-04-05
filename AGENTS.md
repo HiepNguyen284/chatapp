@@ -21,6 +21,10 @@ This guide helps coding agents and contributors work safely in the Chat App back
 
 - For local container commands, check `podman` first and fallback to `docker`.
 
+### Build Before Commit Rule
+
+- **ALWAYS build before commit**: run `./gradlew compileJava compileKotlin` and ensure it passes.
+
 ### Configuration Rules
 
 - Keep runtime configuration environment-driven via `src/main/resources/application.yml`.
