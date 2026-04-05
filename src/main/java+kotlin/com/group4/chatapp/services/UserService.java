@@ -36,6 +36,7 @@ public class UserService {
     private final S3Service s3Service;
     private final FileTypeService fileTypeService;
     private final SimpMessagingTemplate messagingTemplate;
+    private final UserCacheService userCacheService;
 
     public void createUser(UserDto dto) {
 
@@ -67,7 +68,7 @@ public class UserService {
 
         if (principal instanceof Jwt jwt) {
             String username = jwt.getSubject();
-            return repository.findByUsername(username);
+            return userCacheService.getCachedUser(username);
         } else if (principal instanceof User user) {
             return Optional.of(user);
         } else {
@@ -118,6 +119,7 @@ public class UserService {
 
         if (changed) {
             user = repository.save(user);
+            userCacheService.invalidateUserCache(user.getUsername());
             publishProfileUpdate(user);
         }
 

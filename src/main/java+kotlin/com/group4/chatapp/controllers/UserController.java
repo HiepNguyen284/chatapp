@@ -3,6 +3,7 @@ package com.group4.chatapp.controllers;
 import com.group4.chatapp.dtos.token.TokenObtainPairDto;
 import com.group4.chatapp.dtos.token.TokenRefreshDto;
 import com.group4.chatapp.dtos.token.TokenRefreshRequestDto;
+import com.group4.chatapp.dtos.token.TokenRevokeRequestDto;
 import com.group4.chatapp.dtos.user.UserDto;
 import com.group4.chatapp.dtos.user.UserPresenceDto;
 import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
@@ -49,6 +50,12 @@ public class UserController {
         @Valid @RequestBody TokenRefreshRequestDto dto
     ) {
         return jwtsService.refreshToken(dto.refresh());
+    }
+
+    @PostMapping("/token/revoke/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void revokeToken(@Valid @RequestBody TokenRevokeRequestDto dto) {
+        jwtsService.revokeRefreshToken(dto.getRefresh());
     }
 
     @GetMapping("/search/")
