@@ -119,7 +119,8 @@ services:
 
     environment:
       FIREBASE_SERVICE_ACCOUNT_PATH: ${FIREBASE_SERVICE_ACCOUNT_PATH:-/secrets/firebase-service-account.json}
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
     volumes:
       - ./secrets:/secrets:ro

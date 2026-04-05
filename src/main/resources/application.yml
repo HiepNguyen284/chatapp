@@ -17,6 +17,11 @@ spring:
 
     open-in-view: false
 
+  data:
+    redis:
+      host: "${REDIS_HOST:localhost}"
+      port: "${REDIS_PORT:6379}"
+
   output:
     ansi:
       enabled: "ALWAYS"
@@ -63,10 +68,6 @@ speech-to-text:
     healthcheck-enabled: "${WHISPER_HEALTHCHECK_ENABLED:false}"
   default-language: "${WHISPER_DEFAULT_LANGUAGE:auto}"
   max-audio-size-bytes: "${WHISPER_MAX_AUDIO_SIZE_BYTES:12582912}"
-
-  data:
-    redis:
-      url: "${REDIS_URL:redis://localhost:6379}"
 
 firebase:
   service-account-json: "${FIREBASE_SERVICE_ACCOUNT_JSON:}"
