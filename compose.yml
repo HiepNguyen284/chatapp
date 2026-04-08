@@ -3,9 +3,6 @@ services:
     image: caddy:2-alpine
     container_name: chatapp-gateway
 
-    env_file:
-      - ./.env
-
     ports:
       - 8080:8080
 
@@ -27,11 +24,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-    ports:
-      - "5432:5432"
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U chatapp"]
+      test: ["CMD-SHELL", "pg_isready", "-U", "chatapp"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -42,9 +36,6 @@ services:
 
     env_file:
       - ./.env
-
-    ports:
-      - "9001:9000"
 
     volumes:
       - versitygw_data:/versity/data
@@ -57,7 +48,7 @@ services:
     command: --port :9000 --health /health posix /versity/data
 
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:9000/health"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9000/health"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -96,9 +87,6 @@ services:
     image: redis:8-alpine
     container_name: chatapp-redis
 
-    ports:
-      - "6379:6379"
-
     volumes:
       - redis_data:/data
 
@@ -107,6 +95,20 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+
+  artemis:
+    image: apache/artemis:2.53.0-alpine
+    container_name: chatapp-artemis
+
+    environment:
+      ANONYMOUS_LOGIN: true
+
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8161"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
   app:
     build:
@@ -117,15 +119,12 @@ services:
     env_file:
       - ./.env
 
-    environment:
-      FIREBASE_SERVICE_ACCOUNT_PATH: ${FIREBASE_SERVICE_ACCOUNT_PATH:-/secrets/firebase-service-account.json}
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-
     volumes:
       - ./secrets:/secrets:ro
 
     depends_on:
+      artemis:
+        condition: service_healthy
       postgres:
         condition: service_healthy
       redis:

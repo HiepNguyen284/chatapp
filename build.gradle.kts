@@ -54,6 +54,9 @@ dependencies {
 
     runtimeOnly("org.postgresql:postgresql")
 
+    implementation("io.netty:netty-all")
+    implementation("io.projectreactor.netty:reactor-netty")
+
     implementation("org.bouncycastle:bcprov-jdk18on:1.83")
     implementation("org.msgpack:jackson-dataformat-msgpack:0.9.11")
 

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class ChatRoomController {
     public List<ChatRoomDto> listChatRooms() {
         return chatRoomService.listRoomsWithLatestMessage();
     }
-
+@MessageMapping
     @DeleteMapping("/api/v1/chatrooms/{roomId}/friend/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeFriend(@PathVariable long roomId) {

@@ -4,7 +4,6 @@ logging:
     com.group4.chatapp.configs.FirebaseConfig: "INFO"
     com.group4.chatapp.services.NotificationService: "INFO"
 
-
 spring:
   application:
     name: "chatapp"
@@ -75,3 +74,7 @@ speech-to-text:
 firebase:
   service-account-json: "${FIREBASE_SERVICE_ACCOUNT_JSON:}"
   service-account-path: "${FIREBASE_SERVICE_ACCOUNT_PATH:}"
+
+websocket:
+  relay_host: "${WEBSOCKET_RELAY_HOST:artemis}"
+  relay_port: "${WEBSOCKET_RELAY_PORT:61613}"
