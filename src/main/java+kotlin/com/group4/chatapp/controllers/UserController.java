@@ -10,12 +10,15 @@ import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
 import com.group4.chatapp.dtos.user.UserBlockStatusDto;
 import com.group4.chatapp.dtos.user.UserWithAvatarDto;
 import com.group4.chatapp.dtos.user.FcmTokenDto;
+import com.group4.chatapp.dtos.user.NotificationSettingsDto;
+import com.group4.chatapp.dtos.user.NotificationSettingsUpdateDto;
 import com.group4.chatapp.services.FcmTokenService;
 import com.group4.chatapp.services.JwtsService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserService;
 import com.group4.chatapp.services.NotificationService;
+import com.group4.chatapp.services.NotificationPreferenceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,6 +39,7 @@ public class UserController {
     private final PresenceService presenceService;
     private final FcmTokenService fcmTokenService;
     private final NotificationService notificationService;
+    private final NotificationPreferenceService notificationPreferenceService;
 
     @PostMapping("/register/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -113,5 +117,21 @@ public class UserController {
         }
         fcmTokenService.registerToken(dto.getToken());
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/me/notification-settings/")
+    public NotificationSettingsDto getNotificationSettings() {
+        var currentUser = userService.getUserOrThrows();
+        var enabled = notificationPreferenceService.isPushEnabled(currentUser.getId());
+        return new NotificationSettingsDto(enabled);
+    }
+
+    @PutMapping("/me/notification-settings/")
+    public NotificationSettingsDto updateNotificationSettings(
+        @RequestBody NotificationSettingsUpdateDto dto
+    ) {
+        var currentUser = userService.getUserOrThrows();
+        notificationPreferenceService.setPushEnabled(currentUser.getId(), dto.getPushEnabled());
+        return new NotificationSettingsDto(dto.getPushEnabled());
     }
 }

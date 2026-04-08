@@ -26,6 +26,7 @@ public class NotificationService {
   private final PresenceService presenceService;
   private final FcmTokenService fcmTokenService;
   private final UserService userService;
+  private final NotificationPreferenceService notificationPreferenceService;
   private final Optional<FirebaseApp> firebaseApp;
 
   public boolean isFirebaseEnabled() {
@@ -68,6 +69,11 @@ public class NotificationService {
     }
 
     Long userId = user.getId();
+    if (!notificationPreferenceService.isPushEnabled(userId)) {
+      LOGGER.debug("User {} has disabled push notifications", username);
+      return;
+    }
+
     List<String> tokens = fcmTokenService.getTokensForUser(userId);
     if (tokens.isEmpty()) {
       LOGGER.warn("No FCM tokens for user {} (id={})", username, userId);
