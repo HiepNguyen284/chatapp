@@ -19,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.jspecify.annotations.Nullable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 class MessageChangesService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageChangesService.class);
 
     private final MessageRepository messageRepository;
 
@@ -55,23 +59,31 @@ class MessageChangesService {
         chatRoom.getMembers()
             .parallelStream()
             .forEach((member) -> {
-                messagingTemplate.convertAndSendToUser(
-                    member.getUsername(),
-                    socketPath,
-                    messageReceiveDto
-                );
-
-                if (!member.equals(sender)) {
-                    if (presenceService.isOnline(member.getUsername())) {
-                        return;
-                    }
-                    var memberDisplayName = member.getDisplayName() != null ? member.getDisplayName() : member.getUsername();
-                    notificationService.pushNewMessage(
+                try {
+                    messagingTemplate.convertAndSendToUser(
                         member.getUsername(),
-                        senderDisplayName,
-                        preview != null ? preview : "New message",
-                        roomId
+                        socketPath,
+                        messageReceiveDto
                     );
+
+                    if (!member.equals(sender)) {
+                        if (presenceService.isOnline(member.getUsername())) {
+                            return;
+                        }
+                        var memberDisplayName = member.getDisplayName() != null ? member.getDisplayName() : member.getUsername();
+                        try {
+                            notificationService.pushNewMessage(
+                                member.getUsername(),
+                                senderDisplayName,
+                                preview != null ? preview : "New message",
+                                roomId
+                            );
+                        } catch (Exception e) {
+                            LOGGER.warn("Failed to send push notification to user {}: {}", member.getUsername(), e.getMessage());
+                        }
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Error sending message to user {}: {}", member.getUsername(), e.getMessage(), e);
                 }
             });
     }

@@ -6,9 +6,11 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.google.firebase.FirebaseApp;
 import com.group4.chatapp.models.User;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +26,34 @@ public class NotificationService {
   private final PresenceService presenceService;
   private final FcmTokenService fcmTokenService;
   private final UserService userService;
+  private final Optional<FirebaseApp> firebaseApp;
+
+  public boolean isFirebaseEnabled() {
+    return firebaseApp.isPresent();
+  }
+
+  /**
+   * Safely get FirebaseMessaging instance with null check
+   */
+  private Optional<FirebaseMessaging> getFirebaseMessagingInstance() {
+    try {
+      if (!isFirebaseEnabled()) {
+        return Optional.empty();
+      }
+      return Optional.of(FirebaseMessaging.getInstance());
+    } catch (Exception e) {
+      LOGGER.error("Failed to get FirebaseMessaging instance: {}", e.getMessage());
+      return Optional.empty();
+    }
+  }
 
   public void sendPushIfOffline(String username, String title, String body,
-                                Map<String, String> data) {
+                                 Map<String, String> data) {
+    if (!isFirebaseEnabled()) {
+      LOGGER.debug("Firebase is not enabled, skipping FCM push for user {}", username);
+      return;
+    }
+
     if (presenceService.isAppActive(username)) {
       LOGGER.debug("User {} app is active, skipping FCM push", username);
       return;
@@ -49,6 +76,12 @@ public class NotificationService {
 
     LOGGER.info("Sending FCM push to user {} ({} tokens)", username, tokens.size());
 
+    Optional<FirebaseMessaging> messagingInstance = getFirebaseMessagingInstance();
+    if (messagingInstance.isEmpty()) {
+      LOGGER.warn("FirebaseMessaging instance not available, skipping push notification");
+      return;
+    }
+
     Notification notification =
         Notification.builder().setTitle(title).setBody(body).build();
 
@@ -69,7 +102,7 @@ public class NotificationService {
                             .build();
 
       try {
-        FirebaseMessaging.getInstance().send(message);
+        messagingInstance.get().send(message);
       } catch (FirebaseMessagingException e) {
         LOGGER.warn("FCM push failed for user {}: {} - {}", username,
                     e.getErrorCode(), e.getMessage());
@@ -77,6 +110,8 @@ public class NotificationService {
             "INVALID_ARGUMENT".equals(e.getErrorCode().name())) {
           fcmTokenService.deleteInvalidToken(userId, token);
         }
+      } catch (Exception e) {
+        LOGGER.error("Unexpected error sending FCM push to user {}: {}", username, e.getMessage(), e);
       }
     }
   }

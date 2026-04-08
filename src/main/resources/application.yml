@@ -1,6 +1,9 @@
 logging:
   level:
     org.hibernate.SQL: "TRACE"
+    com.group4.chatapp.configs.FirebaseConfig: "INFO"
+    com.group4.chatapp.services.NotificationService: "INFO"
+
 
 spring:
   application:

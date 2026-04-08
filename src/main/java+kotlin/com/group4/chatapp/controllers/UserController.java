@@ -15,10 +15,12 @@ import com.group4.chatapp.services.JwtsService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserService;
+import com.group4.chatapp.services.NotificationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class UserController {
     private final JwtsService jwtsService;
     private final PresenceService presenceService;
     private final FcmTokenService fcmTokenService;
+    private final NotificationService notificationService;
 
     @PostMapping("/register/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -104,8 +107,11 @@ public class UserController {
     }
 
     @PostMapping("/fcm-token/")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void registerFcmToken(@Valid @RequestBody FcmTokenDto dto) {
+    public ResponseEntity<Void> registerFcmToken(@Valid @RequestBody FcmTokenDto dto) {
+        if (!notificationService.isFirebaseEnabled()) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        }
         fcmTokenService.registerToken(dto.getToken());
+        return ResponseEntity.noContent().build();
     }
 }
