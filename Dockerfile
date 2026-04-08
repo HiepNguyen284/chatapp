@@ -2,6 +2,8 @@
 
 FROM eclipse-temurin:21-jdk-alpine AS builder
 
+RUN jlink --add-modules ALL-MODULE-PATH --output /jre --strip-debug --no-header-files --no-man-pages
+
 WORKDIR /build
 
 COPY gradle /build/gradle
@@ -18,8 +20,6 @@ RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon dependenc
 COPY src /build/src
 
 RUN --mount=type=cache,target=/root/.gradle /build/gradlew --no-daemon bootJar
-
-RUN jlink --add-modules ALL-MODULE-PATH --output /jre --strip-debug --no-header-files --no-man-pages
 
 FROM alpine:3
 
