@@ -8,8 +8,10 @@ import java.util.*
 @Repository
 interface FcmTokenRepository : JpaRepository<FcmToken, Long> {
     fun findByUserId(userId: Long): List<FcmToken>
+    fun findAllByUserIdOrderByLastUsedDesc(userId: Long): List<FcmToken>
     fun findByUserIdAndToken(userId: Long, token: String): Optional<FcmToken>
     fun deleteByUserIdAndToken(userId: Long, token: String)
     fun findByToken(token: String): Optional<FcmToken>
     fun findByUserIdIn(userIds: List<Long>): List<FcmToken>
+    fun deleteByLastUsedBefore(lastUsed: java.sql.Timestamp): Long
 }

@@ -71,6 +71,7 @@ class SecurityConfig
                 authorize(HttpMethod.DELETE, "/api/v1/users/*/block/", authenticated)
                 authorize(HttpMethod.GET, "/api/v1/users/*/block-status/", authenticated)
                 authorize(HttpMethod.GET, "/api/v1/users/*/presence/", authenticated)
+                authorize(HttpMethod.POST, "/api/v1/users/password/change/", authenticated)
                 authorize(anyRequest, permitAll)
             }
         }

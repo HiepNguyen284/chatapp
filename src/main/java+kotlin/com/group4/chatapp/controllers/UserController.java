@@ -4,6 +4,10 @@ import com.group4.chatapp.dtos.token.TokenObtainPairDto;
 import com.group4.chatapp.dtos.token.TokenRefreshDto;
 import com.group4.chatapp.dtos.token.TokenRefreshRequestDto;
 import com.group4.chatapp.dtos.token.TokenRevokeRequestDto;
+import com.group4.chatapp.dtos.password.ChangePasswordDto;
+import com.group4.chatapp.dtos.password.PasswordResetConfirmDto;
+import com.group4.chatapp.dtos.password.PasswordResetRequestDto;
+import com.group4.chatapp.dtos.password.PasswordResetResponseDto;
 import com.group4.chatapp.dtos.user.UserDto;
 import com.group4.chatapp.dtos.user.UserPresenceDto;
 import com.group4.chatapp.dtos.user.UserProfileUpdateDto;
@@ -17,7 +21,6 @@ import com.group4.chatapp.services.JwtsService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserService;
-import com.group4.chatapp.services.NotificationService;
 import com.group4.chatapp.services.NotificationPreferenceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +41,6 @@ public class UserController {
     private final JwtsService jwtsService;
     private final PresenceService presenceService;
     private final FcmTokenService fcmTokenService;
-    private final NotificationService notificationService;
     private final NotificationPreferenceService notificationPreferenceService;
 
     @PostMapping("/register/")
@@ -63,6 +65,32 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void revokeToken(@Valid @RequestBody TokenRevokeRequestDto dto) {
         jwtsService.revokeRefreshToken(dto.getRefresh());
+    }
+
+    @PostMapping("/password/reset-request/")
+    public PasswordResetResponseDto requestPasswordReset(
+        @Valid @RequestBody PasswordResetRequestDto dto
+    ) {
+        userService.requestPasswordReset(dto.username());
+        return new PasswordResetResponseDto(
+            "If the account exists, a password reset link has been sent"
+        );
+    }
+
+    @PostMapping("/password/reset-confirm/")
+    public PasswordResetResponseDto confirmPasswordReset(
+        @Valid @RequestBody PasswordResetConfirmDto dto
+    ) {
+        userService.resetPassword(dto.token(), dto.newPassword());
+        return new PasswordResetResponseDto("Password reset successfully");
+    }
+
+    @PostMapping("/password/change/")
+    public PasswordResetResponseDto changePassword(
+        @Valid @RequestBody ChangePasswordDto dto
+    ) {
+        userService.changePassword(dto.oldPassword(), dto.newPassword());
+        return new PasswordResetResponseDto("Password changed successfully");
     }
 
     @GetMapping("/search/")
@@ -112,9 +140,6 @@ public class UserController {
 
     @PostMapping("/fcm-token/")
     public ResponseEntity<Void> registerFcmToken(@Valid @RequestBody FcmTokenDto dto) {
-        if (!notificationService.isFirebaseEnabled()) {
-            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
-        }
         fcmTokenService.registerToken(dto.getToken());
         return ResponseEntity.noContent().build();
     }

@@ -27,10 +27,30 @@ public class NotificationService {
   private final FcmTokenService fcmTokenService;
   private final UserService userService;
   private final NotificationPreferenceService notificationPreferenceService;
-  private final Optional<FirebaseApp> firebaseApp;
+  private volatile boolean firebaseOperational = true;
 
   public boolean isFirebaseEnabled() {
-    return firebaseApp.isPresent();
+    return firebaseOperational && resolveFirebaseApp().isPresent();
+  }
+
+  private Optional<FirebaseApp> resolveFirebaseApp() {
+    try {
+      List<FirebaseApp> apps = FirebaseApp.getApps();
+      if (apps == null || apps.isEmpty()) {
+        return Optional.empty();
+      }
+      return Optional.of(apps.get(0));
+    } catch (Exception e) {
+      return Optional.empty();
+    }
+  }
+
+  private void disableFirebase(String reason, Exception exception) {
+    if (!firebaseOperational) {
+      return;
+    }
+    firebaseOperational = false;
+    LOGGER.error("Firebase notification service disabled: {}", reason, exception);
   }
 
   /**
@@ -38,12 +58,13 @@ public class NotificationService {
    */
   private Optional<FirebaseMessaging> getFirebaseMessagingInstance() {
     try {
-      if (!isFirebaseEnabled()) {
+      Optional<FirebaseApp> app = resolveFirebaseApp();
+      if (!firebaseOperational || app.isEmpty()) {
         return Optional.empty();
       }
-      return Optional.of(FirebaseMessaging.getInstance());
+      return Optional.of(FirebaseMessaging.getInstance(app.get()));
     } catch (Exception e) {
-      LOGGER.error("Failed to get FirebaseMessaging instance: {}", e.getMessage());
+      disableFirebase("failed to initialize FirebaseMessaging instance", e);
       return Optional.empty();
     }
   }
@@ -96,7 +117,7 @@ public class NotificationService {
             .setPriority(AndroidConfig.Priority.HIGH)
             .setNotification(AndroidNotification.builder()
                                  .setChannelId("chat_messages")
-                                 .build())
+                                  .build())
             .build();
 
     for (String token : tokens) {

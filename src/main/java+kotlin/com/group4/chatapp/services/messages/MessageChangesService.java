@@ -10,7 +10,6 @@ import com.group4.chatapp.models.User;
 import com.group4.chatapp.repositories.MessageRepository;
 import com.group4.chatapp.services.AttachmentService;
 import com.group4.chatapp.services.NotificationService;
-import com.group4.chatapp.services.PresenceService;
 import com.group4.chatapp.services.UserBlockService;
 import com.group4.chatapp.services.UserService;
 import jakarta.transaction.Transactional;
@@ -39,7 +38,6 @@ class MessageChangesService {
     private final MessageCheckService checkService;
     private final AttachmentService attachmentService;
     private final NotificationService notificationService;
-    private final PresenceService presenceService;
 
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -67,10 +65,6 @@ class MessageChangesService {
                     );
 
                     if (!member.equals(sender)) {
-                        if (presenceService.isOnline(member.getUsername())) {
-                            return;
-                        }
-                        var memberDisplayName = member.getDisplayName() != null ? member.getDisplayName() : member.getUsername();
                         try {
                             notificationService.pushNewMessage(
                                 member.getUsername(),
