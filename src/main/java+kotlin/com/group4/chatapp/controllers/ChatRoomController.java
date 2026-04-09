@@ -37,6 +37,17 @@ public class ChatRoomController {
         chatRoomService.removeFriend(roomId);
     }
 
+    @PostMapping("/api/v1/chatrooms/{roomId}/call")
+    public com.group4.chatapp.dtos.messages.VideoCallResponseDto initiateCall(@PathVariable long roomId) {
+        return chatRoomService.initiateVideoCall(roomId);
+    }
+
+    @PostMapping("/api/v1/chatrooms/{roomId}/call/reject")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void rejectCall(@PathVariable long roomId) {
+        chatRoomService.rejectVideoCall(roomId);
+    }
+
     @PostMapping("/api/v1/chatrooms/{roomId}/pin/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void pinRoom(@PathVariable long roomId) {

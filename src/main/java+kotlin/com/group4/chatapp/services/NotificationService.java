@@ -180,4 +180,15 @@ public class NotificationService {
                              String.valueOf(roomId), "senderUsername",
                              actorName));
   }
+
+  public void pushVideoCall(String username, String callerName, long roomId, String channelName, String receiverToken) {
+    String title = "Incoming Video Call";
+    String body = callerName + " is calling you...";
+    sendPushIfOffline(username, title, body,
+                      Map.of("type", "video_call", 
+                             "roomId", String.valueOf(roomId), 
+                             "senderUsername", callerName,
+                             "channelName", channelName,
+                             "agoraToken", receiverToken));
+  }
 }

@@ -62,6 +62,7 @@ dependencies {
     implementation("org.msgpack:jackson-dataformat-msgpack:0.9.11")
 
     implementation("com.google.firebase:firebase-admin:9.8.0")
+    implementation("io.agora:authentication:2.1.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

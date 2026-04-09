@@ -9,6 +9,7 @@ import com.group4.chatapp.repositories.ChatRoomReadStateRepository;
 import com.group4.chatapp.repositories.ChatRoomPinRepository;
 import com.group4.chatapp.repositories.ChatRoomRepository;
 import com.group4.chatapp.repositories.MessageRepository;
+import com.group4.chatapp.dtos.messages.VideoCallResponseDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -30,6 +31,8 @@ public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomPinRepository chatRoomPinRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final AgoraTokenService agoraTokenService;
+    private final NotificationService notificationService;
 
     public ChatRoomDto getRoomWithLatestMessage(ChatRoom chatRoom) {
 
@@ -78,6 +81,80 @@ public class ChatRoomService {
 
         chatRoomPinRepository.deleteByUser_IdAndChatRoom_Id(user.getId(), roomId);
         publishPinnedState(user.getUsername(), room, false);
+    }
+
+    @Transactional
+    public VideoCallResponseDto initiateVideoCall(long roomId) {
+        var user = userService.getUserOrThrows();
+        var room = getRoomAsMemberOrThrow(user.getId(), roomId);
+
+        var channelName = "room_" + roomId;
+        var callerUid = (int) (user.getId() % 100000);
+
+        var callerToken = agoraTokenService.generateToken(channelName, callerUid);
+
+        var senderDisplayName = user.getDisplayName() != null ? user.getDisplayName() : user.getUsername();
+        var senderAvatar = user.getAvatar() != null ? user.getAvatar().getSource() : "";
+
+        // Notify ALL other members of the room
+        room.getMembers().stream()
+            .filter(member -> !member.getId().equals(user.getId()))
+            .forEach(member -> {
+                var receiverUid = (int) (member.getId() % 100000);
+                var receiverToken = agoraTokenService.generateToken(channelName, receiverUid);
+
+                var payload = java.util.Map.of(
+                    "type", "video_call",
+                    "roomId", roomId,
+                    "channelName", channelName,
+                    "agoraToken", receiverToken,
+                    "senderUsername", user.getUsername(),
+                    "senderDisplayName", senderDisplayName,
+                    "senderAvatar", senderAvatar
+                );
+
+                messagingTemplate.convertAndSendToUser(
+                    member.getUsername(),
+                    "/queue/calls/video",
+                    payload
+                );
+
+                notificationService.pushVideoCall(
+                    member.getUsername(),
+                    senderDisplayName,
+                    roomId,
+                    channelName,
+                    receiverToken
+                );
+            });
+
+        return new VideoCallResponseDto(channelName, callerToken, roomId, callerUid);
+    }
+
+    @Transactional
+    public void rejectVideoCall(long roomId) {
+        var user = userService.getUserOrThrows();
+        var room = getRoomAsMemberOrThrow(user.getId(), roomId);
+
+        var rejectorName = user.getDisplayName() != null ? user.getDisplayName() : user.getUsername();
+
+        // Notify everyone else in the room that this user rejected
+        var payload = java.util.Map.of(
+            "type", "video_call_rejected",
+            "roomId", roomId,
+            "rejectedBy", rejectorName,
+            "rejectedByUsername", user.getUsername()
+        );
+
+        room.getMembers().stream()
+            .filter(member -> !member.getId().equals(user.getId()))
+            .forEach(member ->
+                messagingTemplate.convertAndSendToUser(
+                    member.getUsername(),
+                    "/queue/calls/video_rejected",
+                    payload
+                )
+            );
     }
 
     @Transactional
