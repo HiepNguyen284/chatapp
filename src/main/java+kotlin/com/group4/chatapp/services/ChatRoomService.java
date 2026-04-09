@@ -103,15 +103,15 @@ public class ChatRoomService {
                 var receiverUid = (int) (member.getId() % 100000);
                 var receiverToken = agoraTokenService.generateToken(channelName, receiverUid);
 
-                var payload = java.util.Map.of(
-                    "type", "video_call",
-                    "roomId", roomId,
-                    "channelName", channelName,
-                    "agoraToken", receiverToken,
-                    "senderUsername", user.getUsername(),
-                    "senderDisplayName", senderDisplayName,
-                    "senderAvatar", senderAvatar
-                );
+                var payload = new java.util.HashMap<String, Object>();
+                payload.put("type", "video_call");
+                payload.put("roomId", roomId);
+                payload.put("channelName", channelName);
+                payload.put("agoraToken", receiverToken);
+                payload.put("agoraUid", receiverUid);
+                payload.put("senderUsername", user.getUsername());
+                payload.put("senderDisplayName", senderDisplayName);
+                payload.put("senderAvatar", senderAvatar);
 
                 messagingTemplate.convertAndSendToUser(
                     member.getUsername(),

@@ -34,3 +34,5 @@ src/test
 # Docs
 *.md
 !README.md
+
+.postgres/
