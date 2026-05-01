@@ -56,7 +56,7 @@ server:
 jwts:
   secret: "${JWTS_SECRET}"
 
-  access-token-lifetime: "PT30M" # 30 minutes
+  access-token-lifetime: "P1D" # 1 day
   refresh-token-lifetime: "P30D" # 30 days
 
 s3:
@@ -97,7 +97,6 @@ websocket:
 password-reset:
   token-expiry-minutes: "${PASSWORD_RESET_TOKEN_EXPIRY_MINUTES:30}"
   frontend-url: "${PASSWORD_RESET_FRONTEND_URL:http://localhost:3000/reset-password}"
-
 
 agora:
   app-id: ""
