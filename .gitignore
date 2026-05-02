@@ -53,3 +53,6 @@ temp*.log
 
 ### Secrets ###
 secrets/
+
+### OpenCode ###
+.opencode/
