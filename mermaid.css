@@ -1,0 +1,88 @@
+/* Mermaid render tuning for text alignment and cleaner arrows */
+
+/* Keep all connector lines visually consistent */
+.edgePath .path,
+.flowchart-link,
+.relation,
+.messageLine0,
+.messageLine1,
+.er.relationshipLine {
+  stroke: #1a376c !important;
+  stroke-width: 3px !important;
+  stroke-linecap: butt !important;
+  stroke-linejoin: miter !important;
+}
+
+/* Arrowhead shape/color */
+.marker,
+.arrowheadPath,
+.arrowMarkerPath,
+marker path,
+#arrowhead path {
+  fill: #1a376c !important;
+  stroke: #1a376c !important;
+  stroke-width: 1.35px !important;
+  stroke-linejoin: miter !important;
+}
+
+/* Sequence lifelines */
+.actor-line {
+  stroke: #8da3bd !important;
+  stroke-width: 2.6px !important;
+}
+
+/* Node borders */
+.node rect,
+.node circle,
+.node ellipse,
+.node polygon,
+.node path,
+.actor {
+  stroke-width: 2.4px !important;
+}
+
+/* Text alignment fixes (both SVG and foreignObject labels) */
+.label text,
+.cluster-label text,
+.edgeLabel text,
+.messageText,
+.noteText,
+.sectionTitle,
+.actor text {
+  fill: #1a376c !important;
+  text-anchor: middle !important;
+}
+
+foreignObject div,
+foreignObject span,
+foreignObject p {
+  text-align: center !important;
+  line-height: 1.35 !important;
+}
+
+.label foreignObject div,
+.edgeLabel foreignObject div {
+  display: table-cell !important;
+  vertical-align: middle !important;
+}
+
+/* ER-specific polish */
+.er.entityBox {
+  stroke-width: 2px !important;
+  fill: #f8fbff !important;
+  stroke: #1a376c !important;
+}
+
+.er.attributeBoxEven {
+  fill: #ffffff !important;
+}
+
+.er.attributeBoxOdd {
+  fill: #f0f4f8 !important;
+}
+
+.er.relationshipLabelBox {
+  fill: #ffffff !important;
+  stroke: #1a376c !important;
+  fill-opacity: 0.9 !important;
+}

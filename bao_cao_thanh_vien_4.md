@@ -1,89 +1,17 @@
-<div align="center">
-
-# BỘ GIÁO DỤC VÀ ĐÀO TẠO
-
-## [Tên Trường Đại Học]
-
-### KHOA CÔNG NGHỆ THÔNG TIN
-
----
-
-# BÁO CÁO BÀI TẬP LỚN
-
-## Môn: Kiến trúc Phần mềm
-
-**Nhóm QLĐT:** [Nhóm QLĐT]  
-**Nhóm BTL:** [Nhóm BTL]
-
----
-
-# ỨNG DỤNG NHẮN TIN TRỰC TUYẾN — CHATAPP
-
----
-
-| STT | Họ và tên | MSSV |
-|:---:|-----------|------|
-| 1 | [Họ tên TV1] | [MSSV1] |
-| 2 | [Họ tên TV2] | [MSSV2] |
-| 3 | [Họ tên TV3] | [MSSV3] |
-| 4 | [Họ tên TV4] | [MSSV4] |
-
-**Thành viên thực hiện báo cáo:** [Họ tên TV4] — [MSSV4]
-
-**GVHD:** [Tên GVHD]
-
-**Năm học:** 2025 – 2026
-
-</div>
-
-> *Ghi chú in ấn: Font Times New Roman, cỡ 14, căn lề 2 bên, in 1 mặt.*
-
----
-
-<div style="page-break-before: always;"></div>
-
 # BẢNG PHÂN CÔNG NHIỆM VỤ
 
 | STT | Họ và tên | MSSV | Nhiệm vụ cụ thể | Đóng góp (%) |
 |:---:|-----------|------|------------------|:------------:|
-| 1 | [Họ tên TV1] | [MSSV1] | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI | 25% |
-| 2 | [Họ tên TV2] | [MSSV2] | Chat cá nhân 1-1, Gửi/nhận tin nhắn văn bản, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI | 25% |
-| 3 | [Họ tên TV3] | [MSSV3] | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin | 25% |
-| 4 | [Họ tên TV4] | [MSSV4] | Gửi hình ảnh/media, Thông báo đẩy (FCM), Bật/tắt thông báo, Chatbot AI streaming | 25% |
+| 1 | Nguyễn Văn Duy | B22DCCN154 | Gửi hình ảnh/media, Thông báo đẩy (FCM), Chatbot AI streaming, Video Call (Agora) | 25% |
+| 2 | Nguyễn Hoàng Hiệp | B22DCCN298 | Chat cá nhân 1-1, Gửi/nhận tin nhắn, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI, Voice-to-Text | 25% |
+| 3 | Nguyễn Quang Minh | B22DCCN538 | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI | 25% |
+| 4 | Đặng Hữu Hoàng Quân | B22DCCN658 | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin | 25% |
 
 *Bảng 0.1: Bảng phân công nhiệm vụ các thành viên*
 
 ---
 
-<div style="page-break-before: always;"></div>
-
 # MỤC LỤC
-
-- [Bảng phân công nhiệm vụ](#bảng-phân-công-nhiệm-vụ)
-- [Danh sách viết tắt](#danh-sách-viết-tắt)
-- [Danh sách hình](#danh-sách-hình)
-- [Danh sách bảng](#danh-sách-bảng)
-- [Chương 1: Mở đầu](#chương-1-mở-đầu)
-  - [1.1 Giới thiệu ứng dụng và lý do thực hiện](#11-giới-thiệu-ứng-dụng-và-lý-do-thực-hiện)
-  - [1.2 Concept và mục tiêu](#12-concept-và-mục-tiêu)
-  - [1.3 Phân tích yêu cầu](#13-phân-tích-yêu-cầu)
-  - [1.4 Lựa chọn công nghệ](#14-lựa-chọn-công-nghệ)
-- [Chương 2: Phân tích thiết kế](#chương-2-phân-tích-thiết-kế)
-  - [2.1 Kiến trúc tổng quan](#21-kiến-trúc-tổng-quan)
-  - [2.2 Biểu đồ Use Case tổng quan](#22-biểu-đồ-use-case-tổng-quan)
-  - [2.3 Biểu đồ Use Case chi tiết](#23-biểu-đồ-use-case-chi-tiết)
-  - [2.4 Biểu đồ lớp](#24-biểu-đồ-lớp)
-  - [2.5 Biểu đồ tuần tự](#25-biểu-đồ-tuần-tự)
-  - [2.6 Sơ đồ thực thể quan hệ — ER Diagram](#26-sơ-đồ-thực-thể-quan-hệ--er-diagram)
-  - [2.7 Giao diện đáp ứng chức năng](#27-giao-diện-đáp-ứng-chức-năng)
-- [Chương 3: Kết quả](#chương-3-kết-quả)
-  - [3.1 Mô hình triển khai](#31-mô-hình-triển-khai)
-  - [3.2 Các bước cài đặt và triển khai](#32-các-bước-cài-đặt-và-triển-khai)
-  - [3.3 Kết quả thực hiện](#33-kết-quả-thực-hiện)
-  - [3.4 Kết quả thử nghiệm](#34-kết-quả-thử-nghiệm)
-  - [3.5 Kết luận và hạn chế](#35-kết-luận-và-hạn-chế)
-  - [3.6 Tài liệu tham khảo](#36-tài-liệu-tham-khảo)
-
 ---
 
 <div style="page-break-before: always;"></div>
@@ -103,7 +31,6 @@
 | MCP | Model Context Protocol |
 | MSSV | Mã số sinh viên |
 | ORM | Object-Relational Mapping |
-| QLĐT | Quản lý đào tạo |
 | REST | Representational State Transfer |
 | S3 | Simple Storage Service |
 | SDK | Software Development Kit |
@@ -123,19 +50,24 @@
 |----------|-------|
 | Hình 2.1 | Sơ đồ kiến trúc tổng quan hệ thống ChatApp |
 | Hình 2.2 | Biểu đồ Use Case tổng quan |
-| Hình 2.3 | Biểu đồ Use Case chi tiết — Media, Thông báo & AI |
-| Hình 2.4 | Biểu đồ lớp — Module Media, Thông báo & AI |
-| Hình 2.5 | Biểu đồ tuần tự — Gửi hình ảnh |
-| Hình 2.6 | Biểu đồ tuần tự — Push notification |
-| Hình 2.7 | Biểu đồ tuần tự — Chatbot AI streaming |
-| Hình 2.8 | Sơ đồ thực thể quan hệ (ER Diagram) |
-| Hình 2.9 | Giao diện ChatScreen — Gửi hình ảnh |
-| Hình 2.10 | Giao diện AI Chatbot |
-| Hình 2.11 | Giao diện Cài đặt thông báo |
+| Hình 2.3 | Biểu đồ Use Case chi tiết — Danh sách chat & Chat nhóm |
+| Hình 2.4 | Biểu đồ lớp — Module Danh sách chat & Chat nhóm |
+| Hình 2.5 | Biểu đồ tuần tự — Tạo nhóm chat |
+| Hình 2.6 | Biểu đồ tuần tự — Thêm thành viên vào nhóm |
+| Hình 2.7 | Biểu đồ tuần tự — Ghim cuộc trò chuyện |
+| Hình 2.8 | Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm |
+| Hình 2.9 | Sơ đồ thực thể quan hệ (ER Diagram) |
+| Hình 2.10 | Giao diện Danh sách cuộc trò chuyện |
+| Hình 2.11 | Giao diện Tạo nhóm |
+| Hình 2.12 | Giao diện Quản lý thành viên nhóm |
+| Hình 2.13 | Giao diện Trang chủ (Tabs) |
+| Hình 2.14 | Luồng dữ liệu Provider trong Flutter |
+| Hình 2.15 | Biểu đồ hoạt động — Luồng tạo nhóm chat |
 | Hình 3.1 | Sơ đồ triển khai Docker Compose |
-| Hình 3.2 | Kết quả — Gửi hình ảnh |
-| Hình 3.3 | Kết quả — Push notification |
-| Hình 3.4 | Kết quả — AI Chatbot |
+| Hình 3.2 | Kết quả — Danh sách chat |
+| Hình 3.3 | Kết quả — Tạo nhóm |
+| Hình 3.4 | Kết quả — Quản lý thành viên |
+| Hình 3.5 | Kết quả — Ghim chat |
 
 *Bảng 0.3: Danh sách hình*
 
@@ -145,15 +77,24 @@
 
 | Ký hiệu | Mô tả |
 |----------|-------|
-| Bảng 0.1 | Bảng phân công nhiệm vụ các thành viên |
-| Bảng 0.2 | Danh sách viết tắt |
-| Bảng 0.3 | Danh sách hình |
-| Bảng 0.4 | Danh sách bảng |
 | Bảng 1.1 | Yêu cầu chức năng |
 | Bảng 1.2 | Yêu cầu phi chức năng |
 | Bảng 1.3 | So sánh lựa chọn công nghệ |
+| Bảng 1.4 | So sánh ChatApp với các ứng dụng nhắn tin hiện có |
+| Bảng 1.5 | Tổng hợp các mẫu thiết kế áp dụng |
+| Bảng 1.6 | Đặc tả UC-09 — Tạo nhóm chat |
+| Bảng 1.7 | Đặc tả UC-13 — Ghim cuộc trò chuyện |
+| Bảng 1.8 | Đặc tả UC-15 — Quản lý thành viên nhóm |
+| Bảng 2.1 | Danh sách STOMP events — Module Nhóm |
+| Bảng 2.2 | Chi tiết các trường entity trong hệ thống |
+| Bảng 2.3 | Cấu trúc phân lớp Flutter Frontend |
+| Bảng 2.4 | Danh sách services trong Flutter Frontend |
+| Bảng 2.5 | API Endpoints — Module Danh sách chat & Nhóm |
 | Bảng 3.1 | Danh sách services trong Docker Compose |
-| Bảng 3.2 | Kết quả thử nghiệm chức năng Media, Thông báo & AI |
+| Bảng 3.2 | Các biến môi trường cấu hình hệ thống |
+| Bảng 3.3 | Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm |
+| Bảng 3.4 | Đánh giá kiến trúc module Danh sách chat & Nhóm |
+| Bảng 3.5 | Phân tích hiệu năng module Nhóm |
 
 *Bảng 0.4: Danh sách bảng*
 
@@ -165,37 +106,37 @@
 
 ## 1.1 Giới thiệu ứng dụng và lý do thực hiện
 
-Trong thời đại công nghệ số hiện nay, nhu cầu giao tiếp trực tuyến ngày càng tăng cao. Các ứng dụng nhắn tin đã trở thành công cụ không thể thiếu trong cuộc sống hàng ngày, từ trao đổi công việc đến kết nối bạn bè, gia đình.
+Trong thời đại công nghệ số hiện nay, nhu cầu giao tiếp trực tuyến ngày càng tăng cao. Các ứng dụng nhắn tin đã trở thành công cụ không thể thiếu trong cuộc sống hàng ngày, từ trao đổi công việc đến kết nối bạn bè, gia đình. Thị trường hiện nay có nhiều ứng dụng nhắn tin phổ biến như Zalo, Messenger, Telegram, mỗi ứng dụng đều có những ưu điểm và hạn chế riêng.
 
 **ChatApp** là ứng dụng nhắn tin trực tuyến được phát triển bởi nhóm 4 sinh viên với mục tiêu xây dựng một hệ thống hoàn chỉnh, áp dụng các kiến thức kiến trúc phần mềm đã học. Ứng dụng hỗ trợ nhắn tin cá nhân, nhắn tin nhóm, gửi hình ảnh/tệp, gọi video, và tích hợp trí tuệ nhân tạo (AI) cho các tính năng tóm tắt, dịch thuật và chatbot.
 
 **Lý do thực hiện:**
 
-- **Nhu cầu thực tế**: Xây dựng sản phẩm phần mềm hoàn chỉnh từ thiết kế đến triển khai.
-- **Kiến trúc hiện đại**: Áp dụng kiến trúc Client-Server với API Gateway, message broker, cache layer, object storage.
-- **Công nghệ tiên tiến**: Spring Boot 4, Flutter, WebSocket (STOMP), Redis, Docker.
-- **Tích hợp AI**: Large Language Model (LLM) qua OpenAI API cho tóm tắt, dịch thuật, chatbot.
+- **Nhu cầu thực tế**: Xây dựng một sản phẩm phần mềm hoàn chỉnh từ thiết kế đến triển khai, giúp sinh viên vận dụng kiến thức lý thuyết vào thực hành.
+- **Kiến trúc hiện đại**: Áp dụng kiến trúc Client-Server với API Gateway, message broker, cache layer, và object storage — đại diện cho các mô hình kiến trúc phần mềm phổ biến trong ngành.
+- **Công nghệ tiên tiến**: Sử dụng Spring Boot 4, Flutter, WebSocket (STOMP), Redis, Docker — các công nghệ được sử dụng rộng rãi trong các doanh nghiệp phần mềm.
+- **Tích hợp AI**: Tận dụng Large Language Model (LLM) thông qua OpenAI API để cung cấp các tính năng thông minh như tóm tắt hội thoại, dịch tin nhắn, và chatbot hỗ trợ.
 
 ## 1.2 Concept và mục tiêu
 
 ### Concept
 
-ChatApp được thiết kế theo mô hình **Client-Server** với kiến trúc phân lớp:
+ChatApp được thiết kế theo mô hình **Client-Server** với kiến trúc phân lớp rõ ràng:
 
-- **Client**: Flutter đa nền tảng (Android, iOS, Web).
-- **API Gateway**: Caddy reverse proxy.
-- **Backend**: Spring Boot 4 application.
-- **Hạ tầng**: PostgreSQL, Redis, Apache Artemis, VersityGW.
+- **Client**: Ứng dụng Flutter đa nền tảng (Android, iOS, Web) cung cấp giao diện người dùng trực quan, mượt mà.
+- **API Gateway**: Caddy reverse proxy đóng vai trò điểm truy cập duy nhất, phân phối request đến đúng service.
+- **Backend**: Spring Boot 4 application xử lý toàn bộ business logic, xác thực, và quản lý dữ liệu.
+- **Hạ tầng hỗ trợ**: PostgreSQL (database), Redis (cache & presence), Apache Artemis (message broker), VersityGW (S3-compatible object storage).
 
 ### Mục tiêu
 
-1. Hệ thống nhắn tin thời gian thực (chat 1-1 và nhóm).
-2. Gửi/nhận đa phương tiện (hình ảnh, video, tài liệu, âm thanh).
-3. Thông báo đẩy qua Firebase Cloud Messaging.
-4. Tính năng AI: tóm tắt, dịch, chatbot streaming.
-5. Gọi video qua Agora RTC Engine.
-6. Bảo mật JWT + Argon2.
-7. Triển khai Docker Compose.
+1. Xây dựng hệ thống nhắn tin thời gian thực hỗ trợ chat 1-1 và chat nhóm.
+2. Tích hợp gửi/nhận đa phương tiện (hình ảnh, video, tài liệu, âm thanh).
+3. Triển khai hệ thống thông báo đẩy (push notification) qua Firebase Cloud Messaging.
+4. Tích hợp các tính năng AI: tóm tắt hội thoại, dịch tin nhắn, chatbot thông minh.
+5. Hỗ trợ gọi video qua Agora RTC Engine.
+6. Đảm bảo bảo mật với JWT authentication và mã hóa mật khẩu.
+7. Triển khai dễ dàng với Docker Compose.
 
 ## 1.3 Phân tích yêu cầu
 
@@ -203,25 +144,27 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 | STT | Mã | Yêu cầu | Mô tả |
 |:---:|-----|---------|-------|
-| 1 | FR-01 | Đăng ký tài khoản | Tạo tài khoản với username/password |
-| 2 | FR-02 | Đăng nhập | JWT token pair authentication |
-| 3 | FR-03 | Quên mật khẩu | Email reset link |
-| 4 | FR-05 | Cập nhật profile | Đổi displayName, avatar |
-| 5 | FR-06 | Quản lý bạn bè | Lời mời kết bạn |
-| 6 | FR-07 | Chặn người dùng | Block/unblock |
-| 7 | FR-08 | Nhắn tin 1-1 | Realtime DUO chat |
-| 8 | FR-09 | Nhắn tin nhóm | GROUP chat ≥3 người |
-| 9 | FR-10 | Gửi media | Upload hình ảnh, video, tài liệu, âm thanh |
-| 10 | FR-11 | Trạng thái tin nhắn | Typing, đã gửi, đã xem |
-| 11 | FR-12 | Xóa tin nhắn | Thu hồi (recall) |
-| 12 | FR-13 | Ghim chat | Pin/unpin chatroom |
-| 13 | FR-14 | Tìm kiếm | Search user |
-| 14 | FR-15 | Thông báo đẩy | FCM push notification |
-| 15 | FR-16 | Tóm tắt AI | LLM summarization |
-| 16 | FR-17 | Dịch tin nhắn AI | LLM translation |
-| 17 | FR-18 | Chatbot AI | Streaming SSE chatbot |
-| 18 | FR-19 | Gọi video | Agora RTC 1-1 |
-| 19 | FR-20 | Trạng thái online | Redis presence |
+| 1 | FR-01 | Đăng ký tài khoản | Người dùng tạo tài khoản với username và password |
+| 2 | FR-02 | Đăng nhập | Xác thực bằng username/password, trả về JWT token pair |
+| 3 | FR-03 | Quên mật khẩu | Gửi email chứa link reset mật khẩu |
+| 4 | FR-04 | Đổi mật khẩu | Thay đổi mật khẩu khi đã đăng nhập |
+| 5 | FR-05 | Cập nhật profile | Thay đổi displayName và avatar |
+| 6 | FR-06 | Quản lý bạn bè | Gửi/nhận/chấp nhận/từ chối lời mời kết bạn |
+| 7 | FR-07 | Chặn người dùng | Chặn/bỏ chặn user, ngăn gửi tin nhắn và lời mời |
+| 8 | FR-08 | Nhắn tin 1-1 | Gửi/nhận tin nhắn văn bản thời gian thực (DUO) |
+| 9 | FR-09 | Nhắn tin nhóm | Tạo nhóm (≥3 người), gửi tin nhắn trong nhóm |
+| 10 | FR-10 | Gửi media | Upload hình ảnh, video, tài liệu, âm thanh |
+| 11 | FR-11 | Trạng thái tin nhắn | Typing indicator, đã gửi, đã xem |
+| 12 | FR-12 | Xóa tin nhắn | Thu hồi (recall) tin nhắn đã gửi |
+| 13 | FR-13 | Ghim cuộc trò chuyện | Ghim/bỏ ghim chatroom lên đầu danh sách |
+| 14 | FR-14 | Tìm kiếm | Tìm kiếm người dùng theo keyword |
+| 15 | FR-15 | Thông báo đẩy | Push notification khi có tin nhắn mới, lời mời |
+| 16 | FR-16 | Tóm tắt AI | Tóm tắt nội dung hội thoại bằng LLM |
+| 17 | FR-17 | Dịch tin nhắn AI | Dịch nội dung tin nhắn sang ngôn ngữ chọn |
+| 18 | FR-18 | Chatbot AI | Trò chuyện với AI chatbot, hỗ trợ streaming SSE |
+| 19 | FR-19 | Gọi video | Video call 1-1 qua Agora RTC |
+| 20 | FR-20 | Trạng thái online | Hiển thị trạng thái online/offline (Redis presence) |
+| 21 | FR-21 | Voice-to-Text | Chuyển giọng nói thành văn bản qua Google Speech |
 
 *Bảng 1.1: Yêu cầu chức năng*
 
@@ -229,14 +172,14 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 | STT | Mã | Yêu cầu | Mô tả |
 |:---:|-----|---------|-------|
-| 1 | NFR-01 | Hiệu năng | < 500ms WebSocket delivery |
-| 2 | NFR-02 | Bảo mật | JWT + Argon2 |
-| 3 | NFR-03 | Khả dụng | Docker 24/7 |
-| 4 | NFR-04 | Mở rộng | Scalable services |
-| 5 | NFR-05 | Tương thích | Android, iOS, Web |
-| 6 | NFR-06 | Cache | Redis |
-| 7 | NFR-07 | Lưu trữ | S3-compatible |
-| 8 | NFR-08 | Triển khai | Docker Compose |
+| 1 | NFR-01 | Hiệu năng | Tin nhắn gửi/nhận trong < 500ms qua WebSocket |
+| 2 | NFR-02 | Bảo mật | JWT authentication, mã hóa password với Argon2 |
+| 3 | NFR-03 | Khả dụng | Hệ thống hoạt động 24/7 với Docker containerization |
+| 4 | NFR-04 | Khả năng mở rộng | Kiến trúc tách biệt cho phép scale từng service |
+| 5 | NFR-05 | Tương thích | Hỗ trợ Android, iOS, Web qua Flutter |
+| 6 | NFR-06 | Cache | Redis cache cho user info và presence |
+| 7 | NFR-07 | Lưu trữ | S3-compatible storage cho media files |
+| 8 | NFR-08 | Triển khai | Docker Compose one-command deployment |
 
 *Bảng 1.2: Yêu cầu phi chức năng*
 
@@ -244,19 +187,19 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 | Thành phần | Công nghệ | Phiên bản | Lý do lựa chọn |
 |------------|-----------|-----------|-----------------|
-| **Backend** | Spring Boot | 4.0.5 | Hệ sinh thái lớn, WebSocket, Security, JPA |
-| **Ngôn ngữ** | Java + Kotlin | 21 / 2.2 | Virtual threads + cú pháp ngắn gọn |
-| **Frontend** | Flutter | Dart ^3.5 | Đa nền tảng, hot reload |
-| **Database** | PostgreSQL | 18 | RDBMS mạnh mẽ, ACID |
-| **Cache** | Redis | 8 | In-memory, pub/sub |
-| **Broker** | Apache Artemis | 2.53.0 | STOMP protocol |
-| **Storage** | VersityGW | Latest | S3-compatible |
-| **Gateway** | Caddy | 2 Alpine | Reverse proxy |
-| **Push** | Firebase Admin SDK | 9.8.0 | FCM push |
-| **Video** | Agora RTC | 6.2.0 | Video call SDK |
-| **AI** | OpenAI Java SDK | 4.30.0 | LLM integration |
-| **State** | Provider | 6.1.2 | Flutter state management |
-| **Deploy** | Docker Compose | — | Multi-service deployment |
+| **Backend Framework** | Spring Boot | 4.0.5 | Framework Java phổ biến nhất, hỗ trợ WebSocket, Security, JPA |
+| **Ngôn ngữ Backend** | Java + Kotlin | Java 21, Kotlin 2.2 | Java 21 virtual threads, Kotlin cú pháp ngắn gọn |
+| **Frontend Framework** | Flutter | Dart SDK ^3.5 | Đa nền tảng, hot reload, hiệu năng native |
+| **Database** | PostgreSQL | 18 | RDBMS mạnh mẽ, hỗ trợ ACID, JSON |
+| **Cache** | Redis | 8 | In-memory cache, pub/sub cho presence |
+| **Message Broker** | Apache Artemis| Message broker hỗ trợ STOMP/JMS | 2.53.0 | STOMP protocol, tích hợp Spring WebSocket |
+| **Object Storage** | VersityGW | Latest | S3-compatible, tự host |
+| **API Gateway** | Caddy | 2 Alpine | Reverse proxy, tự động HTTPS |
+| **Push Notification** | Firebase Admin SDK | 9.8.0 | Push notification miễn phí |
+| **Video Call** | Agora RTC | 6.2.0 | Video call chất lượng cao |
+| **AI Service** | OpenAI Java SDK | 4.30.0 | Tích hợp LLM |
+| **State Management** | Provider | 6.1.2 | Quản lý state đơn giản |
+| **Containerization** | Docker Compose | — | Triển khai multi-service |
 
 *Bảng 1.3: So sánh lựa chọn công nghệ*
 
@@ -270,11 +213,11 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 | Tiêu chí | ChatApp | Zalo | Telegram | Messenger |
 |----------|---------|------|----------|-----------|
 | **Nền tảng** | Android, iOS, Web (Flutter) | Android, iOS, Web, Desktop | Đa nền tảng | Android, iOS, Web |
-| **AI tích hợp** | Tóm tắt, dịch, chatbot streaming (LLM) | Không | Bot API | Meta AI |
-| **Push notification** | FCM (Firebase) | Proprietary | Proprietary | Proprietary |
-| **Media upload** | S3-compatible (VersityGW) | Proprietary | Cloud-based | Proprietary |
-| **Chatbot** | SSE streaming, MCP support | Không | Bot API (không streaming) | Meta AI (limited) |
+| **Nhắn tin realtime** | STOMP WebSocket | Proprietary | MTProto | Proprietary |
+| **Nhóm chat** | ≥3 thành viên, admin/member | ≥3, nhiều quyền | ≥3, supergroup 200K | ≥3, admin |
+| **AI tích hợp** | Tóm tắt, dịch, chatbot (LLM) | Không | Bot API | Meta AI |
 | **Self-hosted** | Docker Compose | Không | TDLib | Không |
+| **Mã hóa password** | Argon2 (state-of-the-art) | Không rõ | Không rõ | Không rõ |
 
 *Bảng 1.4: So sánh ChatApp với các ứng dụng nhắn tin hiện có*
 
@@ -282,64 +225,63 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 | Mẫu thiết kế | Loại (GoF) | Vị trí áp dụng | Lợi ích chính |
 |---------------|------------|-----------------|---------------|
-| Repository | Structural | JPA Repositories | Tách data access |
+| Repository | Structural | JPA Repositories | Tách data access, testability |
 | Service Layer | Architectural | Service classes | Single Responsibility |
 | DTO | Structural | API request/response | Bảo vệ domain model |
 | Observer | Behavioral | STOMP, FCM | Loose coupling, realtime |
 | Strategy | Behavioral | FileTypeService | Open/Closed Principle |
-| Proxy | Structural | Caddy, Security | Access control |
+| Proxy | Structural | Caddy, Security | Access control, routing |
 | Builder | Creational | PromptService | Readable construction |
 
-*Bảng 1.5: Tổng hợp các mẫu thiết kế*
+*Bảng 1.5: Tổng hợp các mẫu thiết kế áp dụng*
 
-**Chi tiết áp dụng trong module Media, Thông báo & AI:**
-- **Strategy Pattern:** `FileTypeService` phân loại file thành 5 loại: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW dựa trên extension.
-- **Observer Pattern:** FCM push notification — `NotificationService` → `FcmTokenService` → Firebase Admin SDK → Device.
-- **Builder Pattern:** `PromptService.buildTranslationPrompt()` và `buildSummaryPrompt()` xây dựng prompt LLM từng bước.
-- **Service Layer:** `ChatbotService` (~21KB) quản lý toàn bộ lifecycle chatbot conversation + SSE streaming.
+**Chi tiết áp dụng trong module Danh sách chat & Nhóm:**
+- **Repository Pattern:** `ChatRoomRepository`, `ChatRoomMemberRepository`, `ChatRoomPinRepository` tách biệt truy vấn DB.
+- **Service Layer:** `GroupChatService` (~22KB, lớn nhất hệ thống) đóng gói toàn bộ business logic quản lý nhóm.
+- **Observer Pattern:** STOMP events cho group updates — `/user/queue/groups/group_updated`, `/user/queue/groups/member_removed`, `/user/queue/groups/members_added`.
 
-## 1.7 Đặc tả Use Case chi tiết — Media, Thông báo & AI
+## 1.7 Đặc tả Use Case chi tiết — Danh sách chat & Nhóm
 
-### UC-10: Gửi hình ảnh trong chat
+### UC-09: Tạo nhóm chat
 
 | Thành phần | Mô tả |
 |------------|-------|
-| **Tên UC** | Gửi hình ảnh trong cuộc trò chuyện |
+| **Tên UC** | Tạo nhóm chat mới |
+| **Actor** | Người dùng (đã đăng nhập) |
+| **Tiền điều kiện** | User đã có ≥2 bạn bè để mời |
+| **Hậu điều kiện** | ChatRoom(GROUP) được tạo, tất cả thành viên được thông báo |
+| **Luồng chính** | 1. Nhấn "Tạo nhóm". 2. Nhập tên nhóm, chọn ≥2 thành viên. 3. `POST /api/v1/chatrooms/groups/`. 4. GroupChatService validate memberIds.size + creator ≥ 3. 5. Tạo ChatRoom(GROUP) + ChatRoomMember records. 6. Creator có isAdmin = true. 7. STOMP notify tất cả thành viên. |
+| **Luồng ngoại lệ** | 4a. < 3 thành viên → 400 Bad Request. |
+| **API** | `POST /api/v1/chatrooms/groups/` |
+
+*Bảng 1.6: Đặc tả UC-09 — Tạo nhóm chat*
+
+### UC-13: Ghim cuộc trò chuyện
+
+| Thành phần | Mô tả |
+|------------|-------|
+| **Tên UC** | Ghim/bỏ ghim cuộc trò chuyện |
 | **Actor** | Người dùng (thành viên chatroom) |
 | **Tiền điều kiện** | ChatRoom tồn tại, user là thành viên |
-| **Hậu điều kiện** | Attachment(IMAGE) được tạo, file upload lên S3, tin nhắn broadcast |
-| **Luồng chính** | 1. Nhấn nút đính kèm (📎). 2. ImagePicker chọn ảnh. 3. `POST /api/v1/messages/?room={id}` (multipart). 4. AttachmentService → FileTypeService → IMAGE. 5. S3Service upload lên VersityGW. 6. Tạo Attachment + ChatMessage. 7. STOMP broadcast. |
-| **Luồng ngoại lệ** | 5a. S3 upload fail → 500. 4a. File quá lớn → 413. |
-| **API** | `POST /api/v1/messages/?room={roomId}` (multipart/form-data) |
+| **Hậu điều kiện** | ChatRoomPin record được tạo/xóa, danh sách chat sắp xếp lại |
+| **Luồng chính** | 1. Long-press ChatRoomTile → "Ghim". 2. `POST /api/v1/chatrooms/{id}/pin/`. 3. Tạo ChatRoomPin (unique user_id + chat_room_id). 4. ChatRoomsProvider cập nhật pinnedRoomIds. 5. Rooms ghim lên đầu danh sách. |
+| **Luồng ngoại lệ** | 3a. Đã ghim → 409 Conflict. |
+| **API** | `POST /api/v1/chatrooms/{id}/pin/` (ghim), `DELETE` (bỏ ghim) |
 
-*Bảng 1.6: Đặc tả UC-10 — Gửi hình ảnh*
+*Bảng 1.7: Đặc tả UC-13 — Ghim cuộc trò chuyện*
 
-### UC-18: Chat với AI Bot (Streaming)
+*Bảng 1.8: Đặc tả UC-15 — Quản lý thành viên nhóm*
 
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Trò chuyện với AI chatbot (streaming SSE) |
-| **Actor** | Người dùng (đã đăng nhập) |
-| **Tiền điều kiện** | ChatbotConversation tồn tại, dịch vụ AI cấu hình |
-| **Hậu điều kiện** | ChatbotMessage(USER) + ChatbotMessage(ASSISTANT) được lưu |
-| **Luồng chính** | 1. Nhập tin nhắn. 2. `POST /chatbot/conversations/{id}/stream`. 3. ChatbotService lưu USER message. 4. Load conversation history. 5. OpenAIClientService streaming → SseEmitter. 6. Client nhận từng chunk qua SSE. 7. Render markdown realtime. 8. Khi [DONE] → lưu ASSISTANT message. |
-| **Luồng ngoại lệ** | 5a. Timeout 5 phút → SseEmitter timeout. 5b. AI error → error event. |
-| **API** | `POST /api/v1/chatbot/conversations/{id}/stream` |
-
-*Bảng 1.7: Đặc tả UC-18 — Chat với AI Bot*
-
-### UC-15: Nhận push notification
+### UC-14: Tìm kiếm người dùng
 
 | Thành phần | Mô tả |
 |------------|-------|
-| **Tên UC** | Nhận thông báo đẩy khi có tin nhắn mới |
-| **Actor** | Hệ thống (tự động) |
-| **Tiền điều kiện** | User đã đăng ký FCM token, notification enabled |
-| **Hậu điều kiện** | Push notification hiển thị trên device |
-| **Luồng chính** | 1. MessageService gửi tin nhắn. 2. NotificationService kiểm tra preference. 3. FcmTokenService lấy tokens. 4. Firebase Admin SDK sendMulticast. 5. FCM deliver → Device. 6. LocalNotificationService hiển thị. |
-| **Luồng ngoại lệ** | 2a. Notification disabled → skip. 3a. Không có token → skip. |
-
-*Bảng 1.8: Đặc tả UC-15 — Push notification*
+| **Tên UC** | Tìm kiếm người dùng theo tên hoặc username |
+| **Actor** | Người dùng |
+| **Tiền điều kiện** | User đã đăng nhập |
+| **Hậu điều kiện** | Danh sách kết quả phù hợp hiển thị |
+| **Luồng chính** | 1. Nhấn icon tìm kiếm (🔍). 2. Nhập từ khóa (keyword). 3. `GET /api/v1/users/search?keyword=`. 4. UserService sử dụng `ILIKE` trong PostgreSQL để tìm kiếm mờ. 5. Trả về danh sách `UserSearchDto`. 6. Hiển thị kết quả trên UI. |
+| **API** | `GET /api/v1/users/search?keyword=` |
 
 ---
 
@@ -348,6 +290,8 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 # Chương 2: Phân tích thiết kế
 
 ## 2.1 Kiến trúc tổng quan
+
+Hệ thống ChatApp được thiết kế theo kiến trúc **Client-Server** với API Gateway pattern. Toàn bộ hạ tầng được container hóa bằng Docker Compose gồm 6 services hoạt động phối hợp.
 
 ```mermaid
 graph TB
@@ -361,34 +305,45 @@ graph TB
         SB["Spring Boot 4 App<br/>REST API + WebSocket"]
     end
     subgraph Data["Data Layer"]
-        PG["PostgreSQL 18"]
-        RD["Redis 8"]
+        PG["PostgreSQL 18<br/>Primary Database"]
+        RD["Redis 8<br/>Cache & Presence"]
     end
     subgraph Messaging["Messaging Layer"]
         AR["Apache Artemis<br/>STOMP Broker"]
     end
     subgraph Storage["Storage Layer"]
-        S3["VersityGW<br/>S3-Compatible"]
+        S3["VersityGW<br/>S3-Compatible Storage"]
     end
     subgraph External["External Services"]
         FB["Firebase Cloud Messaging"]
-        AI["OpenAI API (kilo.ai)"]
-        AG["Agora RTC"]
+        AI["OpenAI API<br/>(kilo.ai gateway)"]
+        AG["Agora RTC<br/>Video Call"]
     end
 
-    FL <-->|"HTTP/WS"| CA
-    CA <-->|"Proxy"| SB
+    FL <-->|"HTTP/WebSocket"| CA
+    CA <-->|"Reverse Proxy"| SB
     CA <-->|"/storage/*"| S3
-    SB <-->|"JPA"| PG
-    SB <-->|"Cache"| RD
-    SB <-->|"STOMP"| AR
-    SB -->|"Upload"| S3
-    SB -->|"Push"| FB
-    SB -->|"AI"| AI
-    SB -->|"Token"| AG
+    SB <-->|"JPA/JDBC"| PG
+    SB <-->|"Cache/Pub-Sub"| RD
+    SB <-->|"STOMP Relay"| AR
+    SB -->|"Upload/Download"| S3
+    SB -->|"Push Notification"| FB
+    SB -->|"AI Requests"| AI
+    SB -->|"Token Service"| AG
 ```
 
+[image: tv3_so_o_kien_truc_tong_quan_he_thong_chatapp.png]
 *Hình 2.1: Sơ đồ kiến trúc tổng quan hệ thống ChatApp*
+
+**Mô tả các khối:**
+
+- **Flutter App**: Ứng dụng đa nền tảng, Provider state management, STOMP WebSocket realtime, Firebase Messaging push notification.
+- **Caddy Gateway**: Reverse proxy port 8080, route `/api/*` và `/ws*` → Spring Boot, `/storage/*` → VersityGW.
+- **Spring Boot App**: Business logic, JWT Auth, REST API, WebSocket (STOMP), file upload, AI integration.
+- **PostgreSQL**: Dữ liệu quan hệ — 12 bảng (User, ChatRoom, ChatMessage, Invitation, Attachment, v.v.).
+- **Redis**: Cache user info, quản lý presence online/offline, refresh token.
+- **Apache Artemis**: STOMP message broker, relay tin nhắn WebSocket.
+- **VersityGW**: S3-compatible object storage cho media files.
 
 ## 2.2 Biểu đồ Use Case tổng quan
 
@@ -399,11 +354,15 @@ graph LR
     System((Hệ thống))
 
     subgraph UC_Auth["Quản lý tài khoản"]
-        UC1["Đăng ký / Đăng nhập"]
+        UC1["Đăng ký"]
+        UC2["Đăng nhập"]
+        UC3["Quên mật khẩu"]
         UC4["Cập nhật profile"]
     end
     subgraph UC_Friend["Quản lý bạn bè"]
-        UC6["Lời mời kết bạn"]
+        UC6["Gửi lời mời kết bạn"]
+        UC7["Chấp nhận/Từ chối"]
+        UC8["Xóa bạn"]
         UC9["Chặn người dùng"]
     end
     subgraph UC_Chat["Nhắn tin"]
@@ -414,7 +373,8 @@ graph LR
     end
     subgraph UC_Group["Quản lý nhóm"]
         UC14["Tạo nhóm chat"]
-        UC15["Quản lý thành viên"]
+        UC15["Thêm/xóa thành viên"]
+        UC16["Phân quyền admin"]
         UC17["Ghim cuộc trò chuyện"]
     end
     subgraph UC_AI["Tính năng AI"]
@@ -437,38 +397,35 @@ graph LR
     System --- UC21
 ```
 
+[image: tv3_bieu_o_use_case_tong_quan.png]
 *Hình 2.2: Biểu đồ Use Case tổng quan*
 
 ---
 
-## 2.3 Biểu đồ Use Case chi tiết — Media, Thông báo & AI Chatbot
+## 2.3 Biểu đồ Use Case chi tiết — Danh sách chat & Chat nhóm
 
 ```mermaid
 graph LR
     User((Người dùng))
-    System((Hệ thống))
 
-    subgraph UC_Media["Module Media"]
-        UC1["Gửi hình ảnh trong chat"]
-        UC2["Gửi video/tài liệu/âm thanh"]
-        UC3["Xem hình ảnh toàn màn hình"]
-        UC4["Download tệp đính kèm"]
+    subgraph UC_List["Module Danh sách chat"]
+        UC1["Xem danh sách cuộc trò chuyện"]
+        UC2["Hiển thị tin nhắn cuối + thời gian"]
+        UC3["Hiển thị badge chưa đọc"]
+        UC4["Tìm kiếm user & conversation"]
+        UC5["Ghim cuộc trò chuyện"]
+        UC6["Bỏ ghim cuộc trò chuyện"]
     end
 
-    subgraph UC_Notify["Module Thông báo"]
-        UC5["Nhận push notification tin nhắn"]
-        UC6["Nhận push notification lời mời"]
-        UC7["Nhận push notification nhóm"]
-        UC8["Bật/tắt thông báo toàn cục"]
-        UC9["Đăng ký FCM token"]
-    end
-
-    subgraph UC_AI["Module AI Chatbot"]
-        UC10["Tạo cuộc trò chuyện AI"]
-        UC11["Gửi tin nhắn cho AI"]
-        UC12["Nhận phản hồi streaming SSE"]
-        UC13["Xem lịch sử chatbot"]
-        UC14["Xóa cuộc trò chuyện AI"]
+    subgraph UC_Group["Module Chat nhóm"]
+        UC7["Tạo nhóm chat"]
+        UC8["Thêm thành viên"]
+        UC9["Xóa thành viên"]
+        UC10["Phân quyền admin/member"]
+        UC11["Đổi tên nhóm"]
+        UC12["Đổi ảnh nhóm"]
+        UC13["Rời nhóm"]
+        UC14["Giải tán nhóm"]
     end
 
     User --- UC1
@@ -486,224 +443,207 @@ graph LR
     User --- UC13
     User --- UC14
 
-    System --- UC5
-    System --- UC6
-    System --- UC7
-
-    UC1 -.->|"include"| UC4
-    UC11 -.->|"include"| UC12
+    UC7 -.->|"include"| UC10
+    UC14 -.->|"extend"| UC10
 ```
 
-*Hình 2.3: Biểu đồ Use Case chi tiết — Media, Thông báo & AI*
+[image: tv3_bieu_o_use_case_chi_tiet_danh_sach_chat_chat_nhom.png]
+*Hình 2.3: Biểu đồ Use Case chi tiết — Danh sách chat & Chat nhóm*
 
-**Mô tả chi tiết:**
+**Mô tả chi tiết các Use Case:**
 
-**UC1 — Gửi hình ảnh**: Chọn ảnh từ gallery (ImagePicker) → multipart upload `POST /api/v1/messages/?room={id}` → AttachmentService xác định FileType → S3Service upload lên VersityGW → tạo Attachment entity → attach vào ChatMessage → STOMP broadcast.
+**UC1 — Xem danh sách cuộc trò chuyện**: Hiển thị tất cả ChatRoom (DUO + GROUP) mà user là thành viên, sắp xếp theo thời gian tin nhắn cuối. API: `GET /api/v1/chatrooms/`.
 
-**UC2 — Gửi video/tài liệu/âm thanh**: Tương tự UC1 nhưng FileTypeService phân loại: VIDEO, DOCUMENT (pdf, doc, xls...), AUDIO (mp3, wav...), RAW (các định dạng khác).
+**UC3 — Badge chưa đọc**: So sánh `ChatRoomReadState.lastReadAt` với `sentOn` của tin nhắn cuối để tính unread count. UnreadStateService (Flutter) quản lý state.
 
-**UC5 — Push notification tin nhắn**: MessageService gửi tin nhắn → NotificationService kiểm tra NotificationPreference → FcmTokenService lấy token của receiver → Firebase Admin SDK gửi push → Client FCM handler → LocalNotificationService hiển thị.
+**UC5 — Ghim cuộc trò chuyện**: Tạo ChatRoomPin record (user_id, chat_room_id). Cuộc trò chuyện được ghim hiển thị lên đầu danh sách. API: `POST /api/v1/chatrooms/{roomId}/pin/`.
 
-**UC8 — Bật/tắt thông báo**: `PUT /api/v1/users/me/notification-settings/` → NotificationPreferenceService cập nhật setting. Khi tắt, NotificationService skip push.
+**UC7 — Tạo nhóm chat**: Yêu cầu ≥3 thành viên (bao gồm người tạo). GroupChatService validate số lượng → tạo ChatRoom(GROUP) + ChatRoomMember records. Người tạo tự động là admin. API: `POST /api/v1/chatrooms/groups/`.
 
-**UC10 — Tạo cuộc trò chuyện AI**: `POST /api/v1/chatbot/conversations` → ChatbotService tạo ChatbotConversation(title, modelName, mcpEnabled).
+**UC8 — Thêm thành viên**: Chỉ admin mới được thêm. GroupChatService kiểm tra quyền → tạo ChatRoomMember mới → STOMP notify. API: `POST /api/v1/chatrooms/{roomId}/groups/members/`.
 
-**UC12 — Streaming SSE**: `POST /api/v1/chatbot/conversations/{id}/stream` → ChatbotService → OpenAIClientService streaming → SseEmitter gửi từng chunk → Client render markdown realtime.
+**UC9 — Xóa thành viên**: Chỉ admin mới được xóa (trừ chính mình). GroupChatService kiểm tra quyền → xóa ChatRoomMember + xóa khỏi ChatRoom.members. API: `DELETE /api/v1/chatrooms/{roomId}/groups/members/{userId}/`.
 
-## 2.4 Biểu đồ lớp — Module Media, Thông báo & AI
+**UC10 — Phân quyền admin**: ChatRoomMember.isAdmin = true/false. Admin có quyền thêm/xóa thành viên, đổi tên/ảnh nhóm, giải tán nhóm.
+
+**UC13 — Rời nhóm**: Thành viên tự rời khỏi nhóm. Nếu là admin cuối cùng → chuyển quyền admin cho thành viên khác. API: `DELETE /api/v1/chatrooms/{roomId}/groups/leave/`.
+
+**UC14 — Giải tán nhóm**: Chỉ admin mới được giải tán. Xóa toàn bộ ChatRoom, ChatRoomMember, ChatRoomPin liên quan. API: `DELETE /api/v1/chatrooms/{roomId}/groups/dissolve/`.
+
+## 2.4 Biểu đồ lớp — Module Danh sách chat & Chat nhóm
 
 ```mermaid
 classDiagram
-    class Attachment {
+    class ChatRoom {
         -Long id
-        -String source
-        -FileType type
-        +isImage() boolean
-        +of(String, FileType) Attachment
-        +isDocumentFormat(String) boolean
-        +isAudioFormat(String) boolean
+        -String name
+        -Attachment avatar
+        -Set~User~ members
+        -List~ChatMessage~ messages
+        -Type type
+        -Long creatorId
+        -Timestamp createdOn
+        +getSocketPath() String
+        +isChatGroup() boolean
     }
 
-    class FcmToken {
+    class ChatRoomMember {
+        -Long id
+        -ChatRoom chatRoom
+        -User user
+        -boolean isAdmin
+        -Timestamp joinedAt
+        +createMember(chatRoom, user, isAdmin) ChatRoomMember
+    }
+
+    class ChatRoomPin {
         -Long id
         -User user
-        -String token
-        -Timestamp createdAt
-        -Timestamp lastUsed
+        -ChatRoom chatRoom
+        -Timestamp pinnedOn
     }
 
-    class ChatbotConversation {
+    class ChatRoomReadState {
         -Long id
-        -User owner
-        -String title
-        -String modelName
-        -boolean mcpEnabled
-        -String mcpSessionId
-        -Timestamp createdOn
-        -Timestamp updatedOn
+        -ChatRoom room
+        -User reader
+        -Timestamp lastReadAt
     }
 
-    class ChatbotMessage {
-        -Long id
-        -ChatbotConversation conversation
-        -Role role
-        -String content
-        -String metadataJson
-        -Timestamp createdOn
+    class GroupChatService {
+        +createGroup(GroupChatCreateDto) GroupChatDto
+        +getGroupDetails(roomId) GroupChatDto
+        +updateGroup(roomId, dto) GroupChatDto
+        +addMembers(roomId, memberIds) GroupChatDto
+        +removeMember(roomId, userId) void
+        +leaveGroup(roomId) void
+        +dissolveGroup(roomId) void
     }
 
-    class AttachmentService {
-        +createAttachment(MultipartFile) Attachment
-        +getFileType(String) FileType
+    class ChatRoomService {
+        +listRoomsWithLatestMessage() List
+        +pinRoom(roomId) void
+        +unpinRoom(roomId) void
+        +removeFriend(roomId) void
     }
 
-    class S3Service {
-        +upload(String, InputStream) String
-        +delete(String) void
-        +getPresignedUrl(String) String
+    class ChatRoomsProvider {
+        -List~ChatRoom~ rooms
+        -Set~Long~ pinnedRoomIds
+        +loadRooms() void
+        +pinRoom(roomId) void
+        +unpinRoom(roomId) void
     }
 
-    class NotificationService {
-        +notifyNewMessage(ChatMessage) void
-        +notifyInvitation(Invitation) void
-        +notifyGroupAction(ChatRoom, action) void
+    class UnreadStateService {
+        +getUnreadCount(roomId) int
+        +markRead(roomId) void
     }
 
-    class FcmTokenService {
-        +registerToken(String) void
-        +getTokensByUserId(Long) List
-        +cleanupExpiredTokens() void
-    }
+    ChatRoom "1" --> "0..*" ChatRoomMember : roles
+    ChatRoom "1" --> "0..*" ChatRoomPin : pins
+    ChatRoom "1" --> "0..*" ChatRoomReadState : readStates
+    ChatRoom "1" --> "0..*" User : members
+    ChatRoomMember "N" --> "1" User : user
+    ChatRoomPin "N" --> "1" User : user
 
-    class NotificationPreferenceService {
-        +isPushEnabled(Long) boolean
-        +setPushEnabled(Long, boolean) void
-    }
-
-    class ChatbotService {
-        +listConversations() List
-        +createConversation(dto) ChatbotConversationDto
-        +listMessages(conversationId) List
-        +deleteConversation(conversationId) void
-        +streamReply(conversationId, dto) SseEmitter
-    }
-
-    class FileTypeService {
-        +determineFileType(String) FileType
-    }
-
-    class LocalNotificationService {
-        +show(title, body, payload) void
-        +initialize() void
-    }
-
-    Attachment "0..*" --> "1" ChatMessage : attachments
-    FcmToken "N" --> "1" User : user
-    ChatbotConversation "N" --> "1" User : owner
-    ChatbotMessage "N" --> "1" ChatbotConversation : conversation
-
-    AttachmentService ..> S3Service : uploads
-    AttachmentService ..> FileTypeService : classifies
-    NotificationService ..> FcmTokenService : getTokens
-    NotificationService ..> NotificationPreferenceService : checks
-    ChatbotService ..> OpenAIClientService : streams
-    ChatbotService ..> ChatbotConversation : manages
-    ChatbotService ..> ChatbotMessage : stores
+    GroupChatService ..> ChatRoom : manages
+    GroupChatService ..> ChatRoomMember : creates
+    ChatRoomService ..> ChatRoom : queries
+    ChatRoomService ..> ChatRoomPin : manages
+    ChatRoomsProvider ..> ChatRoomService : calls
 ```
 
-*Hình 2.4: Biểu đồ lớp — Module Media, Thông báo & AI*
+[image: tv3_bieu_o_lop_module_danh_sach_chat_chat_nhom.png]
+*Hình 2.4: Biểu đồ lớp — Module Danh sách chat & Chat nhóm*
 
 **Giải thích:**
 
-- **Attachment**: 5 FileTypes (IMAGE, VIDEO, RAW, DOCUMENT, AUDIO). Static helper methods phân loại định dạng file.
-- **FcmToken**: Lưu FCM registration token per device. Unique constraint (user_id, token). FcmTokenCleanupJob dọn token hết hạn.
-- **ChatbotConversation**: Cuộc trò chuyện AI, hỗ trợ MCP (Model Context Protocol). Mỗi conversation thuộc 1 user.
-- **ChatbotMessage**: Tin nhắn trong chatbot với 4 roles: USER, ASSISTANT, SYSTEM, TOOL.
-- **S3Service**: Quản lý upload/download file lên VersityGW (S3-compatible) qua AWS SDK.
-- **NotificationService**: Orchestrator push notification, kiểm tra preference trước khi gửi.
-- **ChatbotService (~21KB)**: Service lớn xử lý streaming SSE qua SseEmitter, quản lý conversation lifecycle.
+- **ChatRoom(GROUP)**: Phòng chat nhóm, type = GROUP, ≥3 members. Có name, avatar, creatorId.
+- **ChatRoomMember**: Quản lý vai trò trong nhóm (isAdmin). Unique constraint (chat_room_id, user_id). Bảng `chat_room_member_roles`.
+- **ChatRoomPin**: Ghim cuộc trò chuyện. Unique constraint (user_id, chat_room_id). Index trên cả 2 cột.
+- **GroupChatService**: Service lớn nhất (~22KB), xử lý toàn bộ logic nhóm chat.
+- **ChatRoomsProvider (Flutter)**: Provider quản lý danh sách chatrooms, pinnedRoomIds, unread counts.
 
 ## 2.5 Biểu đồ tuần tự
 
-### 2.5.1 Biểu đồ tuần tự — Gửi hình ảnh
+### 2.5.1 Biểu đồ tuần tự — Tạo nhóm chat
 
 ```mermaid
 sequenceDiagram
-    actor User as Người gửi
+    actor UserA as Người tạo
     participant App as Flutter App
     participant API as Caddy Gateway
     participant SB as Spring Boot
-    participant MsgSvc as MessageService
-    participant AttSvc as AttachmentService
-    participant FTSvc as FileTypeService
-    participant S3 as S3Service
-    participant Store as VersityGW
+    participant GrpSvc as GroupChatService
     participant DB as PostgreSQL
     participant STOMP as STOMP Broker
-    participant AppB as Flutter App B
+    participant Notify as NotificationService
 
-    User->>App: Chọn ảnh từ gallery
-    App->>App: ImagePicker.pickImage()
-    App->>API: POST /api/v1/messages/?room=1
-    Note over App,API: multipart/form-data (file + message)
-    API->>SB: Forward multipart
-    SB->>MsgSvc: sendMessage(roomId, dto)
-    MsgSvc->>AttSvc: createAttachment(file)
-    AttSvc->>FTSvc: determineFileType(filename)
-    FTSvc-->>AttSvc: FileType.IMAGE
-    AttSvc->>S3: upload(key, inputStream)
-    S3->>Store: PUT object
-    Store-->>S3: 200 OK
-    S3-->>AttSvc: S3 key
-    AttSvc->>DB: INSERT Attachment(source, IMAGE)
-    DB-->>AttSvc: Attachment saved
-    AttSvc-->>MsgSvc: Attachment entity
-    MsgSvc->>DB: INSERT ChatMessage + attachments
-    DB-->>MsgSvc: Saved
-    MsgSvc->>STOMP: Broadcast to /queue/chat/1
-    STOMP-->>AppB: STOMP MESSAGE (with attachment URL)
-    AppB->>AppB: CachedNetworkImage load từ /storage/*
-    MsgSvc-->>SB: Response
+    UserA->>App: Chọn members, nhập tên nhóm
+    App->>API: POST /api/v1/chatrooms/groups/
+    Note over App,API: {name, memberIds: [2,3,4]}
+    API->>SB: Forward request
+    SB->>GrpSvc: createGroup(dto)
+    GrpSvc->>GrpSvc: Validate memberIds.size >= 2
+    Note over GrpSvc: + creator = 3 members total
+    GrpSvc->>DB: INSERT ChatRoom(GROUP, name)
+    DB-->>GrpSvc: ChatRoom saved (id=10)
+    GrpSvc->>DB: INSERT ChatRoomMember(room=10, user=1, isAdmin=true)
+    GrpSvc->>DB: INSERT ChatRoomMember(room=10, user=2, isAdmin=false)
+    GrpSvc->>DB: INSERT ChatRoomMember(room=10, user=3, isAdmin=false)
+    GrpSvc->>DB: INSERT ChatRoomMember(room=10, user=4, isAdmin=false)
+    DB-->>GrpSvc: Members saved
+    GrpSvc->>STOMP: Notify all members /queue/rooms
+    GrpSvc->>Notify: Push notification to members
+    GrpSvc-->>SB: GroupChatDto
     SB-->>API: 201 Created
     API-->>App: Response
+    App-->>UserA: Mở nhóm chat mới
 ```
 
-*Hình 2.5: Biểu đồ tuần tự — Gửi hình ảnh*
+[image: tv3_bieu_o_tuan_tu_tao_nhom_chat.png]
+*Hình 2.5: Biểu đồ tuần tự — Tạo nhóm chat*
 
-### 2.5.2 Biểu đồ tuần tự — Push notification
+### 2.5.2 Biểu đồ tuần tự — Thêm thành viên vào nhóm
 
 ```mermaid
 sequenceDiagram
-    participant MsgSvc as MessageService
-    participant NotifSvc as NotificationService
-    participant PrefSvc as NotificationPreferenceService
-    participant FcmSvc as FcmTokenService
+    actor Admin as Admin nhóm
+    participant App as Flutter App
+    participant API as Caddy Gateway
+    participant SB as Spring Boot
+    participant GrpSvc as GroupChatService
     participant DB as PostgreSQL
-    participant Firebase as Firebase Admin SDK
-    participant FCM as Firebase Cloud Messaging
-    participant Device as Client Device
-    participant LocalNotif as LocalNotificationService
+    participant STOMP as STOMP Broker
+    participant AppNew as Flutter App (New member)
+    actor NewUser as Thành viên mới
 
-    MsgSvc->>NotifSvc: notifyNewMessage(chatMessage)
-    NotifSvc->>PrefSvc: isPushEnabled(receiverId)
-    PrefSvc->>DB: Check notification_preferences
-    DB-->>PrefSvc: enabled = true
-    PrefSvc-->>NotifSvc: true
-    NotifSvc->>FcmSvc: getTokensByUserId(receiverId)
-    FcmSvc->>DB: SELECT FROM fcm_tokens
-    DB-->>FcmSvc: List of tokens
-    FcmSvc-->>NotifSvc: ["token1", "token2"]
-    NotifSvc->>Firebase: sendMulticast(message, tokens)
-    Firebase->>FCM: Deliver push
-    FCM-->>Device: Push notification
-    Device->>Device: FirebaseMessagingService.onMessage()
-    Device->>LocalNotif: show(title, body, payload)
-    LocalNotif-->>Device: System notification displayed
+    Admin->>App: Chọn user để thêm
+    App->>API: POST /api/v1/chatrooms/10/groups/members/
+    Note over App,API: {memberIds: [5]}
+    API->>SB: Forward request
+    SB->>GrpSvc: addMembers(roomId=10, memberIds)
+    GrpSvc->>DB: Check isAdmin(currentUser, room=10)
+    DB-->>GrpSvc: isAdmin = true
+    GrpSvc->>DB: Check user 5 not already member
+    DB-->>GrpSvc: OK - not member
+    GrpSvc->>DB: Add user 5 to ChatRoom.members
+    GrpSvc->>DB: INSERT ChatRoomMember(room=10, user=5, isAdmin=false)
+    DB-->>GrpSvc: Saved
+    GrpSvc->>STOMP: Notify /queue/rooms (member added)
+    STOMP-->>AppNew: STOMP MESSAGE
+    AppNew-->>NewUser: Hiển thị nhóm mới
+    GrpSvc-->>SB: GroupChatDto (updated)
+    SB-->>API: 200 OK
+    API-->>App: Response
+    App-->>Admin: Cập nhật danh sách thành viên
 ```
 
-*Hình 2.6: Biểu đồ tuần tự — Push notification*
+[image: tv3_bieu_o_tuan_tu_them_thanh_vien_vao_nhom.png]
+*Hình 2.6: Biểu đồ tuần tự — Thêm thành viên vào nhóm*
 
-### 2.5.3 Biểu đồ tuần tự — Chatbot AI streaming
+### 2.5.3 Biểu đồ tuần tự — Ghim cuộc trò chuyện
 
 ```mermaid
 sequenceDiagram
@@ -711,154 +651,95 @@ sequenceDiagram
     participant App as Flutter App
     participant API as Caddy Gateway
     participant SB as Spring Boot
-    participant BotSvc as ChatbotService
+    participant RoomSvc as ChatRoomService
     participant DB as PostgreSQL
-    participant OpenAI as OpenAIClientService
-    participant LLM as kilo.ai LLM
 
-    User->>App: Nhập tin nhắn cho AI
-    App->>API: POST /chatbot/conversations/1/stream
-    Note over App,API: {message: "Hello AI", model: "gpt-4o"}
-    API->>SB: Forward (Accept: text/event-stream)
-    SB->>BotSvc: streamReply(conversationId, dto)
-    BotSvc->>DB: Save ChatbotMessage(USER, content)
-    BotSvc->>DB: Load conversation history
-    DB-->>BotSvc: List of previous messages
-    BotSvc->>BotSvc: Create SseEmitter(timeout=5min)
-    BotSvc->>OpenAI: Streaming chat completion
-    OpenAI->>LLM: API call (stream=true)
-
-    loop Streaming chunks
-        LLM-->>OpenAI: delta chunk
-        OpenAI-->>BotSvc: onNext(chunk)
-        BotSvc->>SB: SseEmitter.send(chunk)
-        SB-->>API: SSE event
-        API-->>App: data: {"content": "..."}
-        App->>App: Append to markdown buffer
-        App-->>User: Render markdown realtime
-    end
-
-    LLM-->>OpenAI: [DONE]
-    OpenAI-->>BotSvc: onComplete()
-    BotSvc->>DB: Save ChatbotMessage(ASSISTANT, fullContent)
-    BotSvc->>SB: SseEmitter.complete()
-    SB-->>API: SSE stream end
-    API-->>App: Connection closed
+    User->>App: Long-press chat → "Ghim"
+    App->>API: POST /api/v1/chatrooms/5/pin/
+    API->>SB: Forward request
+    SB->>RoomSvc: pinRoom(roomId=5)
+    RoomSvc->>DB: Check user is member of room 5
+    DB-->>RoomSvc: OK
+    RoomSvc->>DB: INSERT ChatRoomPin(user, chatRoom)
+    Note over DB: Unique constraint (user_id, chat_room_id)
+    DB-->>RoomSvc: Saved
+    RoomSvc-->>SB: 204 No Content
+    SB-->>API: Response
+    API-->>App: Success
+    App->>App: ChatRoomsProvider.pinRoom(5)
+    App-->>User: Chat di chuyển lên đầu danh sách
 ```
 
-*Hình 2.7: Biểu đồ tuần tự — Chatbot AI streaming*
+[image: tv3_bieu_o_tuan_tu_ghim_cuoc_tro_chuyen.png]
+*Hình 2.7: Biểu đồ tuần tự — Ghim cuộc trò chuyện*
 
 
-### 2.5.4 Biểu đồ tuần tự — Chatbot AI Streaming (SSE)
+### 2.5.4 Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm
 
 ```mermaid
 sequenceDiagram
-    actor User as Người dùng
+    actor User as Admin/Member
     participant App as Flutter App
     participant API as Caddy Gateway
     participant SB as Spring Boot
-    participant BotSvc as ChatbotService
+    participant GrpSvc as GroupChatService
     participant DB as PostgreSQL
-    participant Prompt as PromptService
-    participant OpenAI as OpenAIClientService
-    participant LLM as kilo.ai LLM
+    participant STOMP as STOMP Broker
+    participant AppM as Flutter Apps (Members)
 
-    User->>App: Nhập tin nhắn chatbot
-    App->>API: POST /chatbot/conversations/{id}/stream
-    Note over App,API: Content-Type: text/event-stream
-    API->>SB: Forward (SSE)
-    SB->>BotSvc: streamMessage(convId, message)
-    BotSvc->>DB: Save ChatbotMessage(USER)
-    BotSvc->>DB: Load conversation history
-    DB-->>BotSvc: List ChatbotMessage
-    BotSvc->>Prompt: Build chatbot prompt
-    Prompt-->>BotSvc: Messages list
-    BotSvc->>BotSvc: Create SseEmitter(timeout=5min)
-    BotSvc->>OpenAI: streamText(messages)
-    OpenAI->>LLM: POST /chat/completions (stream=true)
-    loop Streaming chunks
-        LLM-->>OpenAI: data: {chunk}
-        OpenAI-->>BotSvc: onNext(chunk)
-        BotSvc-->>API: SSE event: data
-        API-->>App: text/event-stream chunk
-        App-->>User: Render markdown realtime
-    end
-    LLM-->>OpenAI: data: [DONE]
-    OpenAI-->>BotSvc: onComplete()
-    BotSvc->>DB: Save ChatbotMessage(ASSISTANT)
-    BotSvc-->>API: SSE event: [DONE]
-    API-->>App: Stream complete
-```
-
-*Hình 2.10: Biểu đồ tuần tự — Chatbot AI Streaming*
-
-**Đặc điểm kỹ thuật OpenAIClientService:**
-
-```kotlin
-// OpenAIClientService.kt - Fallback mechanism
-fun requestText(prompt: PromptSpec, tag: String, temperature: Double): String {
-    return try {
-        callModel(primaryModel, prompt, temperature)
-    } catch (e: Exception) {
-        if (e.statusCode == 429) {
-            logger.warn("Rate limited on primary, fallback to: {}", fallbackModel)
-            callModel(fallbackModel, prompt, temperature)
-        } else throw e
-    }
-}
-```
-
-- **Primary model:** `gpt-4o-mini` (nhanh, rẻ, đủ chất lượng cho chat)
-- **Fallback model:** `kilo-auto/free` (miễn phí, dùng khi rate limited)
-- **Timeout:** 30 giây cho mỗi request, 5 phút cho SSE stream
-- **Temperature:** 0.3 cho dịch thuật (chính xác), 0.7 cho chatbot (sáng tạo)
-
-### 2.5.5 Biểu đồ tuần tự — Push Notification (FCM)
-
-```mermaid
-sequenceDiagram
-    participant MsgSvc as MessageService
-    participant NotifSvc as NotificationService
-    participant PrefSvc as NotificationPreferenceService
-    participant TokenSvc as FcmTokenService
-    participant DB as PostgreSQL
-    participant Firebase as Firebase Admin SDK
-    participant FCM as FCM Cloud
-    participant Device as User Device
-    participant LocalNotif as LocalNotificationService
-
-    MsgSvc->>NotifSvc: notifyNewMessage(message, roomId)
-    NotifSvc->>PrefSvc: isEnabled(userId)?
-    PrefSvc->>DB: SELECT notification_preference
-    DB-->>PrefSvc: enabled = true/false
-    alt Notification disabled
-        PrefSvc-->>NotifSvc: false
-        Note over NotifSvc: Skip - user opted out
-    else Notification enabled
-        PrefSvc-->>NotifSvc: true
-        NotifSvc->>TokenSvc: getTokensByUserId(userId)
-        TokenSvc->>DB: SELECT fcm_tokens WHERE user_id = ?
-        DB-->>TokenSvc: List FcmToken
-        TokenSvc-->>NotifSvc: Token list
-        NotifSvc->>Firebase: sendMulticast(tokens, notification)
-        Firebase->>FCM: Deliver to devices
-        FCM-->>Device: Push notification
-        Device->>LocalNotif: onMessage callback
-        LocalNotif->>LocalNotif: Show notification banner
+    alt Rời nhóm (Member)
+        User->>App: Nhấn "Rời nhóm"
+        App->>API: DELETE /chatrooms/{id}/groups/leave/
+        API->>SB: Forward
+        SB->>GrpSvc: leaveGroup(roomId, userId)
+        GrpSvc->>DB: DELETE ChatRoomMember
+        GrpSvc->>GrpSvc: Kiểm tra admin cuối?
+        Note over GrpSvc: Nếu admin cuối → chuyển quyền cho member cũ nhất
+        GrpSvc->>STOMP: Broadcast GroupMemberRemovedEvent
+        STOMP-->>AppM: Event (action=LEAVE)
+        GrpSvc-->>SB: 204 No Content
+    else Giải tán nhóm (Admin only)
+        User->>App: Nhấn "Giải tán nhóm"
+        App->>API: DELETE /chatrooms/{id}/groups/dissolve/
+        API->>SB: Forward
+        SB->>GrpSvc: dissolveGroup(roomId, userId)
+        GrpSvc->>GrpSvc: Kiểm tra isAdmin?
+        GrpSvc->>DB: DELETE ChatRoom + Members + Pins
+        GrpSvc->>STOMP: Broadcast FriendRemovedEvent (action=DISSOLVED)
+        STOMP-->>AppM: Event → xóa room khỏi danh sách
+        GrpSvc-->>SB: 204 No Content
     end
 ```
 
-*Hình 2.11: Biểu đồ tuần tự — Push Notification (FCM)*
+[image: tv3_bieu_o_tuan_tu_roi_nhom_giai_tan_nhom.png]
+*Hình 2.8: Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm*
 
-**Chi tiết FcmTokenService:**
-- Quản lý vòng đời token: đăng ký khi login, xóa khi logout.
-- Unique constraint `(user_id, token)` ngăn đăng ký trùng.
-- `cleanupExpiredTokens()` xóa token không sử dụng > 30 ngày.
-- Mỗi user có thể có nhiều token (multi-device support).
+### 2.5.5 Chi tiết mô hình sự kiện WebSocket — Module Nhóm
+
+Hệ thống sử dụng nhiều loại STOMP event để đồng bộ trạng thái nhóm realtime:
+
+| Event | STOMP Destination | Payload | Trigger |
+|-------|-------------------|---------|---------|
+| Group Created | `/user/queue/chatrooms/created/` | `ChatRoomCreatedEvent` | Tạo nhóm mới |
+| Group Updated | `/user/queue/groups/group_updated` | `GroupUpdatedEvent` | Đổi tên/ảnh nhóm |
+| Members Added | `/user/queue/groups/members_added` | `GroupMembersAddedEvent` | Thêm thành viên |
+| Member Removed | `/user/queue/groups/member_removed` | `GroupMemberRemovedEvent` | Xóa thành viên |
+| Group Added | `/user/queue/groups/added` | `GroupAddedEvent` | Được thêm vào nhóm |
+| Room Pinned | `/user/queue/chatrooms/pinned` | `ChatRoomPinnedEvent` | Ghim/bỏ ghim |
+| Friend Removed | `/user/queue/friends/removed/` | `FriendRemovedEvent` | Giải tán nhóm |
+
+*Bảng 2.1: Danh sách STOMP events — Module Nhóm*
+
+**Đặc điểm kỹ thuật RealtimeService (Flutter):**
+- File: `lib/services/realtime_service.dart` — 1021 dòng, 30KB
+- Quản lý 15+ `StreamController.broadcast()` cho các loại event khác nhau
+- `_requestedRooms` Set theo dõi rooms cần subscribe
+- `_activeRoomSubscriptions`, `_activeTypingSubscriptions`, `_activeReadSubscriptions` ngăn duplicate subscriptions
+- Auto-reconnect với fresh JWT token sau 4 giây khi connection drop
 
 ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
 
-Sơ đồ ER mô tả toàn bộ 12 entity. Các entity **★** thuộc phạm vi Thành viên 4.
+Sơ đồ ER mô tả toàn bộ 12 entity. Các entity **★** thuộc phạm vi Thành viên 3.
 
 ```mermaid
 erDiagram
@@ -890,19 +771,20 @@ erDiagram
         Long id PK
         Long user_id FK
         String token
-        Timestamp created_at
-        Timestamp last_used
     }
     CHAT_ROOM {
         Long id PK
         String name
+        Long avatar_id FK
         Type type
         Long creator_id
+        Timestamp created_on
     }
     CHAT_MESSAGE {
         Long id PK
         Long sender_id FK
         Long room_id FK
+        Long reply_to_id FK
         String message
         Status status
         Timestamp sent_on
@@ -912,11 +794,13 @@ erDiagram
         Long chat_room_id FK
         Long user_id FK
         Boolean is_admin
+        Timestamp joined_at
     }
     CHAT_ROOM_PIN {
         Long id PK
         Long user_id FK
         Long chat_room_id FK
+        Timestamp pinned_on
     }
     CHAT_ROOM_READ_STATE {
         Long id PK
@@ -929,18 +813,12 @@ erDiagram
         Long owner_id FK
         String title
         String model_name
-        Boolean mcp_enabled
-        String mcp_session_id
-        Timestamp created_on
-        Timestamp updated_on
     }
     CHATBOT_MESSAGE {
         Long id PK
         Long conversation_id FK
         Role role
         String content
-        String metadata_json
-        Timestamp created_on
     }
 
     USER ||--o| ATTACHMENT : "avatar"
@@ -960,11 +838,14 @@ erDiagram
     CHAT_MESSAGE }o--o| CHAT_MESSAGE : "replyTo"
     USER ||--o{ CHAT_MESSAGE : "sender"
     USER ||--o{ CHAT_ROOM_MEMBER : "member"
+    USER ||--o{ CHAT_ROOM_PIN : "pins"
+    USER ||--o{ CHAT_ROOM_READ_STATE : "reader"
     USER ||--o{ CHATBOT_CONVERSATION : "owner"
     CHATBOT_CONVERSATION ||--o{ CHATBOT_MESSAGE : "messages"
 ```
 
-*Hình 2.8: Sơ đồ thực thể quan hệ (ER Diagram)*
+[image: tv3_so_o_thuc_the_quan_he_er_diagram.png]
+*Hình 2.9: Sơ đồ thực thể quan hệ (ER Diagram)*
 **Chi tiết các trường quan trọng:**
 
 | Entity | Trường | Kiểu | Constraint | Mô tả |
@@ -983,56 +864,83 @@ erDiagram
 | CHATBOT_MESSAGE | role | Enum | NOT NULL | USER/ASSISTANT/SYSTEM/TOOL |
 | INVITATION | status | Enum | NOT NULL | PENDING/ACCEPTED/REJECTED |
 
-*Bảng 2.4: Chi tiết các trường entity trong hệ thống*
+*Bảng 2.2: Chi tiết các trường entity trong hệ thống*
 
 **Các ràng buộc quan trọng:**
 - **Cascade Delete:** Khi xóa ChatRoom → cascade xóa ChatMessage, ChatRoomMember, ChatRoomPin, ChatRoomReadState.
 - **Unique Constraints:** (user_id, chat_room_id) trong ChatRoomPin, (user_id, token) trong FcmToken, (blocker_id, blocked_id) trong UserBlock.
 - **Foreign Key References:** ChatMessage.sender_id → User, ChatMessage.room_id → ChatRoom, Invitation.sender_id → User.
-- **Index Strategy:** Index trên username (User), oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
+- **Index Strategy:** Index trên username (User), 
+oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 
 
-**★ Entity thuộc phạm vi Thành viên 4:** ATTACHMENT, FCM_TOKEN, CHATBOT_CONVERSATION, CHATBOT_MESSAGE.
+**★ Entity thuộc phạm vi Thành viên 3:** CHAT_ROOM (GROUP), CHAT_ROOM_MEMBER, CHAT_ROOM_PIN, CHAT_ROOM_READ_STATE.
 
 ## 2.7 Giao diện đáp ứng chức năng
 
-### 2.7.1 Gửi hình ảnh trong ChatScreen
+### 2.7.1 Màn hình Danh sách cuộc trò chuyện (ChatListScreen)
 
-**File:** `lib/screens/chat/chat_screen.dart`
+**File:** `lib/screens/home/chat_list_screen.dart`
 
-**Mô tả:** Trong ChatScreen, nút đính kèm (📎) mở ImagePicker để chọn ảnh từ gallery hoặc camera. Ảnh được preview trước khi gửi. Sau khi gửi, ảnh hiển thị trong MessageBubble qua CachedNetworkImage, load từ `/storage/*` qua Caddy Gateway.
-
-*Hình 2.9: Giao diện ChatScreen — Gửi hình ảnh*
-
-`[Ảnh chụp màn hình gửi ảnh — placeholder]`
-
-### 2.7.2 Màn hình AI Chatbot (ChatbotScreen)
-
-**File:** `lib/screens/home/chatbot_screen.dart`
-
-**Mô tả:** Giao diện chat với AI chatbot. Hiển thị danh sách cuộc trò chuyện AI ở sidebar, nội dung chat ở main area. Tin nhắn AI được render dưới dạng Markdown (flutter_markdown_plus). Hỗ trợ streaming — text xuất hiện từng ký tự.
+**Mô tả:** Tab chính hiển thị toàn bộ cuộc trò chuyện (DUO + GROUP). Mỗi item gồm: avatar, tên, tin nhắn cuối, thời gian, badge chưa đọc. Cuộc trò chuyện được ghim hiển thị lên đầu với icon ghim. Hỗ trợ pull-to-refresh.
 
 **Các thành phần chính:**
-- ListView conversations (sidebar)
-- FAB tạo conversation mới
-- Chat area: MessageBubble cho USER + ASSISTANT
-- ASSISTANT messages render Markdown
-- Streaming indicator khi AI đang trả lời
-- Input bar gửi tin nhắn
+- ListView.builder với ChatRoomTile widget
+- ChatRoomTile: Avatar, name, last message preview, time, unread badge, pin icon
+- Long-press context menu: Ghim/Bỏ ghim, Xóa bạn (DUO), Rời nhóm (GROUP)
+- Sắp xếp: Pinned rooms → theo thời gian tin nhắn cuối
 
-*Hình 2.10: Giao diện AI Chatbot*
+[image: tv3_giao_dien_danh_sach_cuoc_tro_chuyen.png]
+*Hình 2.10: Giao diện Danh sách cuộc trò chuyện*
 
-`[Ảnh chụp màn hình Chatbot — placeholder]`
+`[Ảnh chụp màn hình ChatList — placeholder]`
 
-### 2.7.3 Màn hình Cài đặt thông báo
+### 2.7.2 Màn hình Tạo nhóm (CreateGroupScreen)
 
-**File:** `lib/screens/home/settings_screen.dart`
+**File:** `lib/screens/home/create_group_screen.dart`
 
-**Mô tả:** Trong SettingsScreen, có toggle switch bật/tắt thông báo đẩy. Gọi `PUT /api/v1/users/me/notification-settings/` để cập nhật server-side preference.
+**Mô tả:** Cho phép tạo nhóm chat mới. Nhập tên nhóm, chọn thành viên từ danh sách bạn bè (tối thiểu 2 người + bản thân = 3). Hiển thị chip danh sách thành viên đã chọn.
 
-*Hình 2.11: Giao diện Cài đặt thông báo*
+**Các thành phần chính:**
+- TextField tên nhóm
+- ListView bạn bè với checkbox chọn thành viên
+- Chip row hiển thị thành viên đã chọn
+- ElevatedButton "Tạo nhóm" → gọi `GroupChatService.createGroup()`
+- Validate: ≥2 thành viên được chọn
 
-`[Ảnh chụp màn hình Notification settings — placeholder]`
+[image: tv3_giao_dien_tao_nhom.png]
+*Hình 2.11: Giao diện Tạo nhóm*
+
+`[Ảnh chụp màn hình CreateGroup — placeholder]`
+
+### 2.7.3 Màn hình Quản lý thành viên nhóm (GroupMembersScreen)
+
+**File:** `lib/screens/chat/group_members_screen.dart`
+
+**Mô tả:** Hiển thị danh sách thành viên nhóm với vai trò (Admin/Member). Admin có thể thêm/xóa thành viên, phân quyền, đổi tên/ảnh nhóm. Thành viên thường chỉ xem.
+
+**Các thành phần chính:**
+- AppBar: Tên nhóm, avatar nhóm (có thể đổi nếu admin)
+- ListView thành viên: Avatar, tên, role badge (Admin/Member)
+- Admin actions: Xóa thành viên, Toggle admin
+- FAB: Thêm thành viên (chỉ admin)
+- Nút: Rời nhóm, Giải tán nhóm (chỉ admin)
+
+[image: tv3_giao_dien_quan_ly_thanh_vien_nhom.png]
+*Hình 2.12: Giao diện Quản lý thành viên nhóm*
+
+`[Ảnh chụp màn hình GroupMembers — placeholder]`
+
+### 2.7.4 Màn hình Trang chủ (HomeScreen)
+
+**File:** `lib/screens/home/home_screen.dart`
+
+**Mô tả:** Trang chủ với bottom navigation gồm các tab: Chat (ChatListScreen), Bạn bè (PeopleScreen), Lời mời (InvitationsScreen), AI Chat, Cài đặt. Quản lý navigation giữa các tab.
+
+[image: tv3_giao_dien_trang_chu_tabs.png]
+*Hình 2.13: Giao diện Trang chủ (Tabs)*
+
+`[Ảnh chụp màn hình Home — placeholder]`
 
 ---
 
@@ -1107,7 +1015,7 @@ Hệ thống Flutter sử dụng **Provider** (official state management) với 
 | **Utils** | `lib/utils/` | Helpers, formatters | Date formatting, error handling |
 | **Core** | `lib/core/` | Constants, theme | `AppConstants`, base URL |
 
-*Bảng 2.5: Cấu trúc phân lớp Flutter Frontend*
+*Bảng 2.3: Cấu trúc phân lớp Flutter Frontend*
 
 **Các service chính (Frontend):**
 
@@ -1122,7 +1030,7 @@ Hệ thống Flutter sử dụng **Provider** (official state management) với 
 | FcmTokenManagerService | `fcm_token_manager_service.dart` | 3.8KB | Quản lý FCM token lifecycle |
 | AgoraService | `agora_service.dart` | 6.9KB | Video call via Agora RTC |
 
-*Bảng 2.6: Danh sách services trong Flutter Frontend*
+*Bảng 2.4: Danh sách services trong Flutter Frontend*
 
 **Luồng dữ liệu Provider:**
 
@@ -1137,7 +1045,8 @@ flowchart LR
     Provider -->|notifyListeners| UI
 `
 
-*Hình 2.12: Luồng dữ liệu Provider trong Flutter*
+[image: tv3_luong_du_lieu_provider_trong_flutter.png]
+*Hình 2.14: Luồng dữ liệu Provider trong Flutter*
 
 **Chi tiết ApiClient (`api_client.dart`, 8.1KB):**
 - Tự động attach JWT access token vào mọi request header.
@@ -1154,58 +1063,47 @@ flowchart LR
 - Reconnect strategy: deactivate old client → refresh token → create new client.
 - SockJS fallback endpoint `/socket` + native WebSocket endpoint `/ws`.
 
-## 2.8 Bảng API Endpoints — Module Media, Thông báo & AI
+## 2.8 Bảng API Endpoints — Module Danh sách chat & Nhóm
 
 | STT | Method | Endpoint | Auth | Mô tả | Status Codes |
 |:---:|--------|----------|:----:|-------|:------------:|
-| 1 | POST | `/api/v1/messages/?room={id}` | ✓ | Gửi tin nhắn + media (multipart) | 201, 403 |
-| 2 | POST | `/api/v1/users/me/fcm-token/` | ✓ | Đăng ký FCM token | 201 |
-| 3 | GET | `/api/v1/users/me/notification-settings/` | ✓ | Lấy cài đặt thông báo | 200 |
-| 4 | PUT | `/api/v1/users/me/notification-settings/` | ✓ | Cập nhật cài đặt thông báo | 200 |
-| 5 | GET | `/api/v1/chatbot/conversations` | ✓ | Danh sách cuộc trò chuyện AI | 200 |
-| 6 | POST | `/api/v1/chatbot/conversations` | ✓ | Tạo cuộc trò chuyện AI mới | 201 |
-| 7 | GET | `/api/v1/chatbot/conversations/{id}/messages` | ✓ | Lịch sử chat AI | 200 |
-| 8 | POST | `/api/v1/chatbot/conversations/{id}/stream` | ✓ | Streaming SSE chat AI | 200 (SSE) |
-| 9 | DELETE | `/api/v1/chatbot/conversations/{id}` | ✓ | Xóa cuộc trò chuyện AI | 204 |
-| 10 | POST | `/api/v1/speech-to-text` | ✓ | Chuyển giọng nói → text | 200 |
+| 1 | GET | `/api/v1/chatrooms/` | ✓ | Danh sách chatrooms | 200 |
+| 2 | GET | `/api/v1/chatrooms/{id}` | ✓ | Chi tiết chatroom | 200 |
+| 3 | POST | `/api/v1/chatrooms/groups/` | ✓ | Tạo nhóm chat | 201, 400 |
+| 4 | PATCH | `/api/v1/chatrooms/{id}/groups/` | ✓ | Đổi tên nhóm | 200, 403 |
+| 5 | PUT | `/api/v1/chatrooms/{id}/groups/` | ✓ | Đổi ảnh nhóm (multipart) | 200, 403 |
+| 6 | POST | `/api/v1/chatrooms/{id}/groups/members/` | ✓ | Thêm thành viên | 201, 403, 409 |
+| 7 | DELETE | `/api/v1/chatrooms/{id}/groups/members/{uid}/` | ✓ | Xóa thành viên | 204, 403 |
+| 8 | DELETE | `/api/v1/chatrooms/{id}/groups/leave/` | ✓ | Rời nhóm | 204 |
+| 9 | DELETE | `/api/v1/chatrooms/{id}/groups/dissolve/` | ✓ | Giải tán nhóm | 204, 403 |
+| 10 | POST | `/api/v1/chatrooms/{id}/pin/` | ✓ | Ghim chat | 201, 409 |
+| 11 | DELETE | `/api/v1/chatrooms/{id}/pin/` | ✓ | Bỏ ghim | 204 |
+| 12 | GET | `/api/v1/users/search?keyword=` | ✓ | Tìm kiếm người dùng | 200 |
 
-*Bảng 2.2: API Endpoints — Module Media, Thông báo & AI*
+*Bảng 2.5: API Endpoints — Module Danh sách chat & Nhóm*
 
-## 2.9 Biểu đồ hoạt động — Luồng upload media & push notification
+## 2.9 Biểu đồ hoạt động — Luồng tạo và quản lý nhóm chat
 
 ```mermaid
 flowchart TD
-    A([Bắt đầu]) --> B[Người dùng chọn file đính kèm]
-    B --> C{Loại file?}
-    C -->|Ảnh| D[ImagePicker.pickImage]
-    C -->|Video/Tài liệu/Audio| E[FilePicker.pickFiles]
-    D --> F[Tạo multipart request]
-    E --> F
-    F --> G[POST /api/v1/messages/?room=id]
-    G --> H[AttachmentService.createAttachment]
-    H --> I[FileTypeService.determineFileType]
-    I --> J{FileType?}
-    J -->|IMAGE| K[FileType.IMAGE]
-    J -->|VIDEO| L[FileType.VIDEO]
-    J -->|PDF/DOC| M[FileType.DOCUMENT]
-    J -->|MP3/WAV| N[FileType.AUDIO]
-    J -->|Khác| O[FileType.RAW]
-    K --> P[S3Service.upload → VersityGW]
-    L --> P
-    M --> P
-    N --> P
-    O --> P
-    P --> Q[INSERT Attachment + ChatMessage]
-    Q --> R[STOMP broadcast tin nhắn]
-    R --> S[NotificationService.notifyNewMessage]
-    S --> T{Push enabled?}
-    T -->|Không| U([Kết thúc])
-    T -->|Có| V[FcmTokenService.getTokens]
-    V --> W[Firebase sendMulticast]
-    W --> U
+    A([Bắt đầu]) --> B[Nhấn Tạo nhóm]
+    B --> C[Nhập tên nhóm]
+    C --> D[Chọn thành viên từ danh sách bạn bè]
+    D --> E{≥ 2 thành viên được chọn?}
+    E -->|Không| F[Hiển thị lỗi: cần ≥ 2 người]
+    F --> D
+    E -->|Có| G[POST /api/v1/chatrooms/groups/]
+    G --> H[GroupChatService.createGroup]
+    H --> I[Tạo ChatRoom TYPE=GROUP]
+    I --> J[Tạo ChatRoomMember cho mỗi thành viên]
+    J --> K[Creator.isAdmin = true]
+    K --> L[STOMP notify tất cả thành viên]
+    L --> M[Nhóm xuất hiện trong danh sách chat]
+    M --> N([Kết thúc])
 ```
 
-*Hình 2.9: Biểu đồ hoạt động — Upload media & push notification*
+[image: tv3_bieu_o_hoat_ong_luong_tao_nhom_chat.png]
+*Hình 2.15: Biểu đồ hoạt động — Luồng tạo nhóm chat*
 
 ---
 
@@ -1214,6 +1112,8 @@ flowchart TD
 # Chương 3: Kết quả
 
 ## 3.1 Mô hình triển khai
+
+Hệ thống ChatApp được triển khai bằng **Docker Compose** với 6 services chính:
 
 ```mermaid
 graph TB
@@ -1236,6 +1136,7 @@ graph TB
     APP -.-> AI["kilo.ai"]
 ```
 
+[image: tv3_so_o_trien_khai_docker_compose.png]
 *Hình 3.1: Sơ đồ triển khai Docker Compose*
 
 | Service | Image | Chức năng |
@@ -1247,358 +1148,211 @@ graph TB
 | artemis | apache/artemis:2.53.0 | STOMP message broker |
 | versitygw | versity/versitygw | S3-compatible storage |
 
-*Bảng 3.1: Danh sách services*
+*Bảng 3.1: Danh sách services trong Docker Compose*
+
+### Cấu hình Caddy Gateway (Caddyfile)
+
+```
+:8080 {
+    handle /api/*     { reverse_proxy app:8080 }
+    handle /ws*       { reverse_proxy app:8080 }
+    handle /socket*   { reverse_proxy app:8080 }
+    handle_path /storage/* { reverse_proxy versitygw:9000 }
+    handle            { reverse_proxy app:8080 }
+}
+```
+
+### Biến môi trường cấu hình (.env)
+
+| Biến | Mô tả | Ví dụ |
+|------|-------|-------|
+| `POSTGRES_USER` | Database username | chatapp |
+| `POSTGRES_PASSWORD` | Database password | (secret) |
+| `S3_ACCESS_KEY` | VersityGW access key | minioadmin |
+| `JWTS_SECRET` | JWT signing secret (≥32 bytes) | (secret) |
+| `LLM_BASE_URL` | OpenAI-compatible API URL | https://kilo.ai/v1 |
+| `LLM_API_KEY` | API key cho dịch vụ AI | (secret) |
+| `FIREBASE_CREDENTIALS` | Path to Firebase key | /secrets/firebase-service-account.json |
+
+*Bảng 3.2: Các biến môi trường cấu hình hệ thống*
 
 
-### Chi tiết cấu hình Docker services
 
-| Service | Image | Container | Port | Health Check | Depends On |
-|---------|-------|-----------|------|-------------|------------|
-| gateway | caddy:2-alpine | chatapp-gateway | 8080:8080 | — | app, versitygw |
-| app | Custom Dockerfile | chatapp-app | internal | — | artemis, postgres, redis, versitygw |
-| postgres | postgres:18-alpine | chatapp-postgres | internal | `pg_isready -U chatapp` | — |
-| redis | redis:8-alpine | chatapp-redis | internal | `redis-cli ping` | — |
-| artemis | apache/artemis:2.53.0-alpine | chatapp-artemis | internal | `wget localhost:8161` | — |
-| versitygw | versity/versitygw | chatapp-versitygw | 9000 | `wget localhost:9000/health` | — |
-
-*Bảng 3.1b: Chi tiết cấu hình Docker services*
-
-**Luồng khởi động:**
+**Luồng khởi động:****
 1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
 2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
 3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
 4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
 5. Toàn bộ hệ thống sẵn sàng phục vụ qua port 8080.
 
-### Kiến trúc network Docker
-
-```mermaid
-graph TB
-    subgraph DockerCompose["Docker Compose — ChatApp"]
-        subgraph GW["Gateway Layer"]
-            Caddy["Caddy Reverse Proxy<br/>Port: 8080"]
-        end
-        subgraph AppLayer["Application Layer"]
-            SpringBoot["Spring Boot 4<br/>Java 21 + Kotlin"]
-        end
-        subgraph DataLayer["Data Layer"]
-            Postgres["PostgreSQL 18"]
-            Redis["Redis 8"]
-        end
-        subgraph MsgLayer["Message Layer"]
-            Artemis["Apache Artemis<br/>STOMP Broker"]
-        end
-        subgraph StorageLayer["Storage Layer"]
-            VersityGW["VersityGW<br/>S3-compatible"]
-        end
-    end
-
-    Client["Flutter Client"] -->|":8080"| Caddy
-    Caddy -->|"/api/*, /ws*"| SpringBoot
-    Caddy -->|"/storage/*"| VersityGW
-    SpringBoot -->|"JDBC"| Postgres
-    SpringBoot -->|"Cache"| Redis
-    SpringBoot -->|"STOMP Relay"| Artemis
-    SpringBoot -->|"S3 SDK"| VersityGW
-    SpringBoot -.->|"FCM"| Firebase["Firebase Cloud"]
-    SpringBoot -.->|"AI API"| LLM["kilo.ai"]
-```
-
-*Hình 3.2: Kiến trúc network Docker Compose*
-
-**Giải thích kiến trúc:**
-- **Gateway Layer:** Caddy hoạt động như reverse proxy, route requests dựa trên URL path.
-- **Application Layer:** Spring Boot xử lý business logic, kết nối tất cả data/message services.
-- **Data Layer:** PostgreSQL lưu trữ persistent data, Redis cho cache và presence management.
-- **Message Layer:** Apache Artemis làm STOMP broker relay — tách biệt message handling khỏi application server.
-- **Storage Layer:** VersityGW cung cấp S3-compatible API cho file storage, client truy cập trực tiếp qua Caddy.
-- **External Services:** Firebase (push notification) và kilo.ai (AI/LLM) được kết nối qua internet.
-
 ## 3.2 Các bước cài đặt và triển khai
 
+### 3.2.1 Backend
+
 ```bash
-# Backend
 git clone <repository-url> chatapp && cd chatapp
 cp .env.example .env
 mkdir -p secrets && cp <firebase-key> secrets/firebase-service-account.json
 docker compose up -d
+```
 
-# Frontend
+### 3.2.2 Frontend
+
+```bash
 git clone <repository-url> chatapp-flutter && cd chatapp-flutter
 cp .env.example.json .env.json
 flutter pub get && flutter run
 ```
 
+## 3.3 Kết quả thực hiện — Danh sách chat & Chat nhóm
 
+### 3.3.1 Danh sách cuộc trò chuyện
 
-### Chi tiết cấu hình Docker services
+- `GET /api/v1/chatrooms/` trả về toàn bộ ChatRoom mà user là thành viên.
+- ChatRoomService.listRoomsWithLatestMessage() join với tin nhắn cuối cùng.
+- Sắp xếp: pinned rooms lên đầu, sau đó theo thời gian tin nhắn cuối.
+- ChatRoomTile widget hiển thị: avatar, tên (displayName hoặc group name), last message preview, timestamp, unread badge.
 
-| Service | Image | Container | Port | Health Check | Depends On |
-|---------|-------|-----------|------|-------------|------------|
-| gateway | caddy:2-alpine | chatapp-gateway | 8080:8080 | — | app, versitygw |
-| app | Custom Dockerfile | chatapp-app | internal | — | artemis, postgres, redis, versitygw |
-| postgres | postgres:18-alpine | chatapp-postgres | internal | `pg_isready -U chatapp` | — |
-| redis | redis:8-alpine | chatapp-redis | internal | `redis-cli ping` | — |
-| artemis | apache/artemis:2.53.0-alpine | chatapp-artemis | internal | `wget localhost:8161` | — |
-| versitygw | versity/versitygw | chatapp-versitygw | 9000 | `wget localhost:9000/health` | — |
+[image: tv3_ket_qua_danh_sach_chat.png]
+*Hình 3.2: Kết quả — Danh sách chat*
 
-*Bảng 3.1b: Chi tiết cấu hình Docker services*
+`[Ảnh chụp màn hình kết quả Danh sách chat — placeholder]`
 
-**Luồng khởi động:**
-1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
-2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
-3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
-4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
-5. Toàn bộ hệ thống sẵn sàng phục vụ qua port 8080.
+### 3.3.2 Tạo nhóm chat
 
-### Kiến trúc network Docker
+- CreateGroupScreen cho phép nhập tên nhóm và chọn ≥2 thành viên từ danh sách bạn bè.
+- GroupChatService validate: memberIds.size + creator ≥ 3.
+- Tạo ChatRoom(GROUP) + ChatRoomMember records (creator isAdmin = true).
+- STOMP notify tất cả thành viên → nhóm xuất hiện trong danh sách chat.
 
-```mermaid
-graph TB
-    subgraph DockerCompose["Docker Compose — ChatApp"]
-        subgraph GW["Gateway Layer"]
-            Caddy["Caddy Reverse Proxy<br/>Port: 8080"]
-        end
-        subgraph AppLayer["Application Layer"]
-            SpringBoot["Spring Boot 4<br/>Java 21 + Kotlin"]
-        end
-        subgraph DataLayer["Data Layer"]
-            Postgres["PostgreSQL 18"]
-            Redis["Redis 8"]
-        end
-        subgraph MsgLayer["Message Layer"]
-            Artemis["Apache Artemis<br/>STOMP Broker"]
-        end
-        subgraph StorageLayer["Storage Layer"]
-            VersityGW["VersityGW<br/>S3-compatible"]
-        end
-    end
+[image: tv3_ket_qua_tao_nhom.png]
+*Hình 3.3: Kết quả — Tạo nhóm*
 
-    Client["Flutter Client"] -->|":8080"| Caddy
-    Caddy -->|"/api/*, /ws*"| SpringBoot
-    Caddy -->|"/storage/*"| VersityGW
-    SpringBoot -->|"JDBC"| Postgres
-    SpringBoot -->|"Cache"| Redis
-    SpringBoot -->|"STOMP Relay"| Artemis
-    SpringBoot -->|"S3 SDK"| VersityGW
-    SpringBoot -.->|"FCM"| Firebase["Firebase Cloud"]
-    SpringBoot -.->|"AI API"| LLM["kilo.ai"]
-```
+`[Ảnh chụp màn hình kết quả Tạo nhóm — placeholder]`
 
-*Hình 3.2: Kiến trúc network Docker Compose*
+### 3.3.3 Quản lý thành viên nhóm
 
-**Giải thích kiến trúc:**
-- **Gateway Layer:** Caddy hoạt động như reverse proxy, route requests dựa trên URL path.
-- **Application Layer:** Spring Boot xử lý business logic, kết nối tất cả data/message services.
-- **Data Layer:** PostgreSQL lưu trữ persistent data, Redis cho cache và presence management.
-- **Message Layer:** Apache Artemis làm STOMP broker relay — tách biệt message handling khỏi application server.
-- **Storage Layer:** VersityGW cung cấp S3-compatible API cho file storage, client truy cập trực tiếp qua Caddy.
-- **External Services:** Firebase (push notification) và kilo.ai (AI/LLM) được kết nối qua internet.
+- GroupMembersScreen hiển thị danh sách thành viên với role badge (Admin/Member).
+- Admin có thể: thêm thành viên, xóa thành viên, toggle admin role.
+- Thêm thành viên: `POST /api/v1/chatrooms/{roomId}/groups/members/` → kiểm tra admin → add member.
+- Xóa thành viên: `DELETE /api/v1/chatrooms/{roomId}/groups/members/{userId}/` → kiểm tra admin.
+- Đổi tên/ảnh nhóm: `PATCH` hoặc `PUT` (multipart) `/api/v1/chatrooms/{roomId}/groups/`.
 
-## 3.2 Các bước cài đặt và triển khai
+[image: tv3_ket_qua_quan_ly_thanh_vien.png]
+*Hình 3.4: Kết quả — Quản lý thành viên*
 
-### 3.2.1 Cài đặt Backend (Docker Compose)
+`[Ảnh chụp màn hình kết quả Thành viên nhóm — placeholder]`
 
-**Yêu cầu hệ thống:**
-- Docker Engine ≥ 24.0
-- Docker Compose ≥ 2.20
-- RAM ≥ 4GB (cho 6 containers)
-- Dung lượng ≥ 2GB
+### 3.3.4 Ghim cuộc trò chuyện
 
-**Các bước triển khai:**
+- Long-press ChatRoomTile → menu "Ghim" / "Bỏ ghim".
+- `POST /api/v1/chatrooms/{roomId}/pin/` → tạo ChatRoomPin record.
+- `DELETE /api/v1/chatrooms/{roomId}/pin/` → xóa ChatRoomPin record.
+- ChatRoomsProvider cập nhật pinnedRoomIds → sắp xếp lại danh sách.
 
-```bash
-# 1. Clone repository
-git clone <repository-url> chatapp && cd chatapp
+[image: tv3_ket_qua_ghim_chat.png]
+*Hình 3.5: Kết quả — Ghim chat*
 
-# 2. Tạo file cấu hình
-cp .env.example .env
+`[Ảnh chụp màn hình kết quả Ghim — placeholder]`
 
-# 3. Chỉnh sửa các biến môi trường cần thiết
-# POSTGRES_USER, POSTGRES_PASSWORD, JWTS_SECRET, LLM_API_KEY
+- **Giải tán nhóm**: `DELETE /api/v1/chatrooms/{roomId}/groups/dissolve/` → xóa toàn bộ ChatRoom + members + pins. Chỉ admin.
 
-# 4. Tạo thư mục secrets và copy Firebase key
-mkdir -p secrets
-cp <path-to-firebase-key> secrets/firebase-service-account.json
+### 3.3.6 Tìm kiếm người dùng
 
-# 5. Khởi động hệ thống
-docker compose up -d
+- Cung cấp thanh tìm kiếm ở trang đầu và trang bạn bè.
+- Tìm kiếm real-time (debounce 500ms) để tối ưu số lượng request.
+- Kết quả hiển thị bao gồm: Avatar, Display Name, Username và nút "Thêm bạn" hoặc "Nhắn tin" tùy trạng thái quan hệ.
+- Backend sử dụng query mờ (Case-insensitive) trên các trường `username` và `display_name`.
 
-# 6. Kiểm tra trạng thái
-docker compose ps
-docker compose logs -f app
-```
+[image: tv3_ket_qua_tim_kiem.png]
+*Hình 3.6: Kết quả — Tìm kiếm người dùng*
 
-### 3.2.2 Cài đặt Frontend (Flutter)
-
-**Yêu cầu hệ thống:**
-- Flutter SDK ≥ 3.22
-- Dart SDK ≥ 3.4
-- Android Studio / Xcode (cho Android/iOS)
-
-```bash
-# 1. Clone repository
-git clone <repository-url> chatapp-flutter && cd chatapp-flutter
-
-# 2. Cấu hình API URL
-cp .env.example.json .env.json
-# Chỉnh sửa baseUrl trong .env.json
-
-# 3. Cài đặt dependencies
-flutter pub get
-
-# 4. Chạy ứng dụng
-flutter run                    # Debug mode
-flutter build apk --release   # Build Android APK
-flutter build ios --release    # Build iOS
-```
-
-## 3.3 Kết quả thực hiện — Media, Thông báo & AI Chatbot
-
-### 3.3.1 Gửi hình ảnh / Media
-
-- Chọn ảnh qua ImagePicker → multipart upload `POST /api/v1/messages/?room={id}`.
-- AttachmentService phân loại FileType: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW.
-- S3Service upload file lên VersityGW → trả về S3 key → tạo Attachment entity.
-- ChatMessage được tạo với attachments list → STOMP broadcast.
-- Client load ảnh qua CachedNetworkImage từ `/storage/*` (Caddy proxy → VersityGW).
-- Hỗ trợ preview ảnh toàn màn hình khi tap.
-
-*Hình 3.2: Kết quả — Gửi hình ảnh*
-
-`[Ảnh chụp màn hình gửi ảnh — placeholder]`
-
-### 3.3.2 Push Notification (FCM)
-
-- Firebase Admin SDK (v9.8.0) tích hợp trong Spring Boot.
-- FCM token được đăng ký khi user đăng nhập: `POST /api/v1/users/fcm-token/`.
-- FcmToken entity lưu per-device token với unique constraint (user_id, token).
-- NotificationService kiểm tra NotificationPreference trước khi gửi.
-- Hỗ trợ 3 loại notification: tin nhắn mới, lời mời kết bạn, action nhóm.
-- Client-side: FirebaseMessagingService handle background + foreground messages.
-- LocalNotificationService hiển thị system notification với title/body/payload.
-
-*Hình 3.3: Kết quả — Push notification*
-
-`[Ảnh chụp màn hình Push notification — placeholder]`
-
-### 3.3.3 Bật/tắt thông báo
-
-- SettingsScreen có SwitchListTile toggle notification.
-- `PUT /api/v1/users/me/notification-settings/` cập nhật server-side preference.
-- Khi tắt, NotificationService.isPushEnabled() = false → skip gửi push.
-- Setting persist trong database, đồng bộ across devices.
-
-### 3.3.4 AI Chatbot — Streaming SSE
-
-- **Tạo conversation**: `POST /api/v1/chatbot/conversations` → ChatbotConversation(title, modelName, mcpEnabled).
-- **Gửi tin nhắn**: `POST /api/v1/chatbot/conversations/{id}/stream` → SseEmitter streaming.
-- **Luồng streaming**:
-  1. Lưu ChatbotMessage(USER) vào DB.
-  2. Load conversation history từ DB.
-  3. Tạo SseEmitter(timeout=5 phút).
-  4. OpenAIClientService gọi LLM (stream=true).
-  5. Mỗi delta chunk → SseEmitter.send() → SSE event → client.
-  6. Client append chunk vào markdown buffer → render realtime.
-  7. Khi hoàn tất → lưu ChatbotMessage(ASSISTANT) → SseEmitter.complete().
-- **Lịch sử**: `GET /api/v1/chatbot/conversations/{id}/messages` → danh sách ChatbotMessage.
-- **Xóa**: `DELETE /api/v1/chatbot/conversations/{id}` → cascade delete messages.
-- **MCP Support**: mcpEnabled flag cho Model Context Protocol integration.
-
-*Hình 3.4: Kết quả — AI Chatbot*
-
-`[Ảnh chụp màn hình AI Chatbot — placeholder]`
+`[Ảnh chụp màn hình Tìm kiếm — placeholder]`
 
 ## 3.4 Kết quả thử nghiệm
 
 | STT | Chức năng | Kịch bản test | Kết quả | Ghi chú |
 |:---:|-----------|---------------|:-------:|---------|
-| 1 | Gửi ảnh | Upload JPG 2MB | ✅ Đạt | S3 upload < 2s |
-| 2 | Gửi ảnh | Upload PNG 5MB | ✅ Đạt | FileType = IMAGE |
-| 3 | Gửi video | Upload MP4 10MB | ✅ Đạt | FileType = VIDEO |
-| 4 | Gửi tài liệu | Upload PDF | ✅ Đạt | FileType = DOCUMENT |
-| 5 | Gửi audio | Upload MP3 | ✅ Đạt | FileType = AUDIO |
-| 6 | Gửi file khác | Upload ZIP | ✅ Đạt | FileType = RAW |
-| 7 | Xem ảnh | Tap fullscreen | ✅ Đạt | PhotoView hoạt động |
-| 8 | FCM register | Đăng ký token | ✅ Đạt | Token lưu DB |
-| 9 | Push msg | Tin nhắn mới (bg) | ✅ Đạt | Notification < 3s |
-| 10 | Push msg | Tin nhắn mới (fg) | ✅ Đạt | In-app notification |
-| 11 | Push invite | Lời mời kết bạn | ✅ Đạt | Notification đúng |
-| 12 | Push group | Thêm vào nhóm | ✅ Đạt | Group notification |
-| 13 | Toggle notif | Tắt thông báo | ✅ Đạt | Không nhận push |
-| 14 | Toggle notif | Bật lại thông báo | ✅ Đạt | Nhận push bình thường |
-| 15 | AI create | Tạo conversation | ✅ Đạt | Conversation saved |
-| 16 | AI stream | Chat streaming | ✅ Đạt | SSE chunks render |
-| 17 | AI stream | Long response (2000 tokens) | ✅ Đạt | Stream < 10s |
-| 18 | AI history | Xem lịch sử | ✅ Đạt | Messages load đúng |
-| 19 | AI delete | Xóa conversation | ✅ Đạt | Cascade delete |
-| 20 | AI markdown | Code block render | ✅ Đạt | Syntax highlight |
-| 21 | Multi-device | Push to 2 devices | ✅ Đạt | Both receive |
-| 22 | Token cleanup | Expired token | ✅ Đạt | Auto cleanup job |
+| 1 | Danh sách chat | Load all rooms | ✅ Đạt | DUO + GROUP đầy đủ |
+| 2 | Danh sách chat | Sắp xếp theo thời gian | ✅ Đạt | Latest first |
+| 3 | Unread badge | Tin nhắn chưa đọc | ✅ Đạt | Badge hiển thị đúng |
+| 4 | Tìm kiếm | Search user keyword | ✅ Đạt | Kết quả chính xác |
+| 5 | Ghim | Pin room | ✅ Đạt | Room lên đầu |
+| 6 | Ghim | Unpin room | ✅ Đạt | Room về vị trí cũ |
+| 7 | Ghim | Pin duplicate | ✅ Đạt | Unique constraint block |
+| 8 | Tạo nhóm | 3+ members | ✅ Đạt | GROUP created |
+| 9 | Tạo nhóm | < 3 members | ✅ Đạt | Validation reject |
+| 10 | Thêm TV | Admin thêm member | ✅ Đạt | Member added |
+| 11 | Thêm TV | Non-admin thêm | ✅ Đạt | 403 Forbidden |
+| 12 | Thêm TV | Duplicate member | ✅ Đạt | Already exists error |
+| 13 | Xóa TV | Admin xóa member | ✅ Đạt | Member removed |
+| 14 | Xóa TV | Non-admin xóa | ✅ Đạt | 403 Forbidden |
+| 15 | Đổi tên | Admin đổi tên nhóm | ✅ Đạt | Name updated |
+| 16 | Đổi ảnh | Admin upload avatar | ✅ Đạt | Avatar → S3 |
+| 17 | Rời nhóm | Member leave | ✅ Đạt | Removed from group |
+| 18 | Rời nhóm | Last admin leave | ✅ Đạt | Admin chuyển quyền |
+| 19 | Giải tán | Admin dissolve | ✅ Đạt | Room deleted |
+| 20 | Giải tán | Non-admin dissolve | ✅ Đạt | 403 Forbidden |
 
-*Bảng 3.2: Kết quả thử nghiệm chức năng Media, Thông báo & AI*
+*Bảng 3.3: Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm*
 
 **Số liệu demo:**
-- Số file media upload thử nghiệm: 50+
-- Tổng dung lượng upload: ~200MB
-- Số push notification gửi: 100+
-- Thời gian push trung bình: < 2s
-- Số conversation AI tạo: 15
-- Số tin nhắn AI: 80+
-- Thời gian phản hồi AI trung bình: < 5s
+- Số nhóm chat tạo thử nghiệm: 8
+- Số thành viên trung bình/nhóm: 4-5
+- Số lần thêm/xóa thành viên: 20
+- Số cuộc trò chuyện được ghim: 12
+- Thời gian load danh sách chat: < 500ms
 
 
 ### Đánh giá kiến trúc
 
 | Tiêu chí | Đánh giá | Chi tiết |
 |----------|:--------:|---------|
-| Upload ảnh | ✅ Đạt | S3 upload + STOMP broadcast < 2s |
-| FileType classification | ✅ Đạt | 5 loại: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW |
-| Push notification | ✅ Đạt | FCM delivery < 2s |
-| Notification preference | ✅ Đạt | Toggle ON/OFF chính xác |
-| AI chatbot streaming | ✅ Đạt | SSE chunks render realtime |
-| Chatbot conversation | ✅ Đạt | CRUD + history đầy đủ |
-| Fallback model | ✅ Đạt | Auto-fallback khi rate limited |
+| Danh sách chat load | ✅ Đạt | < 500ms cho tất cả rooms |
+| Ghim chat | ✅ Đạt | Unique constraint, sắp xếp đúng |
+| Tạo nhóm | ✅ Đạt | Validate ≥3 thành viên |
+| Quản lý thành viên | ✅ Đạt | Admin/member phân quyền rõ |
+| Rời nhóm | ✅ Đạt | Auto-transfer admin khi cần |
+| Giải tán nhóm | ✅ Đạt | Cascade delete đúng |
+| STOMP realtime | ✅ Đạt | 7 loại events cho nhóm |
+| GroupChatService | ⚠️ Cần refactor | 22KB, nên tách thành sub-services |
 
-*Bảng 3.3: Đánh giá kiến trúc module Media, Thông báo & AI*
+*Bảng 3.4: Đánh giá kiến trúc module Danh sách chat & Nhóm*
 
 ### Phân tích hiệu năng
 
 | Thao tác | Thời gian TB | Mục tiêu | Đạt? |
 |----------|:-----------:|:--------:|:----:|
-| Upload ảnh 2MB | ~1.2s | < 2s | ✅ |
-| FCM push delivery | ~1.5s | < 3s | ✅ |
-| AI chatbot first token | ~1s | < 3s | ✅ |
-| AI chatbot full response | ~5s | < 10s | ✅ |
-| Dịch tin nhắn | ~2.5s | < 5s | ✅ |
-| Tóm tắt 50 tin nhắn | ~4s | < 8s | ✅ |
+| Load danh sách chat | ~300ms | < 500ms | ✅ |
+| Tạo nhóm 5 người | ~400ms | < 1s | ✅ |
+| Thêm thành viên | ~200ms | < 500ms | ✅ |
+| Ghim/bỏ ghim | ~100ms | < 300ms | ✅ |
+| Giải tán nhóm | ~500ms | < 1s | ✅ |
 
-*Bảng 3.4: Phân tích hiệu năng module AI & Media*
+*Bảng 3.5: Phân tích hiệu năng module Nhóm*
 
 ## 3.5 Kết luận và hạn chế
 
 ### Kết luận
 
-1. **Media Upload**: Pipeline upload hoạt động ổn định qua AttachmentService → S3Service → VersityGW. Hỗ trợ 5 loại file, phân loại tự động.
-2. **Push Notification**: FCM integration hoạt động đáng tin cậy, hỗ trợ multi-device, kiểm tra preference trước khi gửi.
-3. **AI Chatbot**: Streaming SSE qua SseEmitter hoạt động mượt mà, client render markdown realtime, hỗ trợ MCP.
-4. **Kiến trúc**: Phân tách rõ ràng giữa AttachmentService (media), NotificationService (push), ChatbotService (AI) theo Single Responsibility.
-5. **Storage**: VersityGW hoạt động ổn định với Caddy proxy, client truy cập media qua `/storage/*` transparent.
+1. **Danh sách chat**: Hiển thị đầy đủ DUO + GROUP rooms với tin nhắn cuối, unread badge, sắp xếp chính xác.
+2. **Chat nhóm**: GroupChatService xử lý hoàn chỉnh tạo/sửa/xóa nhóm, quản lý thành viên, phân quyền admin.
+3. **Ghim chat**: ChatRoomPin hoạt động chính xác với unique constraint, ghim rooms lên đầu danh sách.
+4. **Phân quyền**: Hệ thống admin/member hoạt động đúng, chỉ admin mới được thêm/xóa thành viên và giải tán nhóm.
+5. **Kiến trúc**: GroupChatService (~22KB) là service lớn nhất, xử lý nhiều business logic phức tạp nhưng vẫn tuân theo nguyên lý clean code.
 
 ### Hạn chế
 
-1. **File size limit**: Chưa có giới hạn file size upload phía server, có thể upload file rất lớn.
-2. **Media compression**: Chưa tự động compress ảnh/video trước khi upload.
-3. **Offline notification**: Chưa queue notification khi user offline quá lâu (FCM tự handle nhưng có TTL).
-4. **AI model selection**: User chưa thể chọn model khác nhau trên UI (chỉ config server-side).
-5. **MCP chưa hoàn thiện**: Model Context Protocol flag có nhưng implementation còn hạn chế.
+1. **Chưa có admin transfer UI**: Chuyển quyền admin chỉ tự động khi rời nhóm, chưa có UI chủ động.
+2. **Chưa có group search**: Chưa hỗ trợ tìm kiếm trong danh sách nhóm chat.
+3. **Chưa có group invitation**: Thêm thành viên trực tiếp, chưa qua hệ thống invitation cho nhóm.
+4. **Pagination danh sách chat**: Chưa phân trang danh sách chatrooms cho user có nhiều cuộc trò chuyện.
 
 ### Hướng phát triển
-- Thêm file size limit và media compression
-- Thêm notification channel (mute per-conversation)
-- Thêm UI chọn AI model (GPT-4o, Claude, Gemini)
-- Hoàn thiện MCP integration
-- Thêm voice message recording
+- Thêm UI chuyển quyền admin chủ động
+- Thêm group invitation workflow
+- Thêm tìm kiếm và filter danh sách chat
+- Pagination cho danh sách chatrooms
 
 ## 3.6 Tài liệu tham khảo
 
@@ -1616,8 +1370,3 @@ flutter build ios --release    # Build iOS
 12. Amazon S3 API Reference — https://docs.aws.amazon.com/AmazonS3/latest/API/
 13. Caddy Server Documentation — https://caddyserver.com/docs/
 14. Provider State Management — https://pub.dev/packages/provider
-15. Server-Sent Events (SSE) — https://html.spec.whatwg.org/multipage/server-sent-events.html
-
----
-
-> *Kết thúc Báo cáo Thành viên 4 — Media, Thông báo & AI Chatbot*

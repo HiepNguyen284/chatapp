@@ -1,0 +1,15 @@
+﻿
+=== bao_cao_thanh_vien_2.md ===
+python : Traceback (most recent call last):
+At line:1 char:1
++ python find_dups.py 2>&1 | Out-File -Encoding utf8 d:\chatapp\dup_rep ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "D:\chatapp\find_dups.py", line 26, in <module>
+    print(f'  Line {pos+1}: {text}')
+  File "C:\Users\minhd\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1ec3' in position 31: character maps to <undefined>

@@ -1,0 +1,15 @@
+
+/* Custom CSS for Mermaid ER Diagrams */
+.er.entityBox { stroke-width: 2px !important; fill: #f8fbff !important; stroke: #1a376c !important; }
+.er.entityLabel { font-size: 26px !important; font-weight: bold !important; fill: #1a376c !important; }
+.er.attributeBoxEven { fill: #ffffff !important; }
+.er.attributeBoxOdd { fill: #f0f4f8 !important; }
+text.er.entityLabel { font-size: 28px !important; font-weight: bold !important; }
+text.er.attributeName { font-size: 24px !important; font-weight: 600 !important; fill: #333333 !important; }
+text.er.attributeType { font-size: 22px !important; fill: #666666 !important; font-style: italic !important; }
+.er.relationshipLine { stroke-width: 3px !important; stroke: #1a376c !important; }
+.er.relationshipLabel { fill: #1a376c !important; font-size: 22px !important; font-weight: bold !important; }
+.er.relationshipLabelBox { fill: #ffffff !important; stroke: #1a376c !important; fill-opacity: 0.9 !important; }
+
+/* Force all text inside ER diagram to be bigger just in case */
+.er text { font-size: 24px !important; font-family: 'Times New Roman', serif !important; }

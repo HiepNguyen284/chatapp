@@ -1,0 +1,1430 @@
+{
+  "bao_cao_thanh_vien_1.md": [
+    {
+      "line": 3,
+      "type": "heading",
+      "text": "# BỘ GIÁO DỤC VÀ ĐÀO TẠO"
+    },
+    {
+      "line": 5,
+      "type": "heading",
+      "text": "## [Tên Trường Đại Học]"
+    },
+    {
+      "line": 7,
+      "type": "heading",
+      "text": "### KHOA CÔNG NGHỆ THÔNG TIN"
+    },
+    {
+      "line": 11,
+      "type": "heading",
+      "text": "# BÁO CÁO BÀI TẬP LỚN"
+    },
+    {
+      "line": 13,
+      "type": "heading",
+      "text": "## Môn: Kiến trúc Phần mềm"
+    },
+    {
+      "line": 20,
+      "type": "heading",
+      "text": "# ỨNG DỤNG NHẮN TIN TRỰC TUYẾN — CHATAPP"
+    },
+    {
+      "line": 45,
+      "type": "heading",
+      "text": "# BẢNG PHÂN CÔNG NHIỆM VỤ"
+    },
+    {
+      "line": 60,
+      "type": "heading",
+      "text": "# MỤC LỤC"
+    },
+    {
+      "line": 67,
+      "type": "heading",
+      "text": "# DANH SÁCH VIẾT TẮT"
+    },
+    {
+      "line": 98,
+      "type": "heading",
+      "text": "# DANH SÁCH HÌNH"
+    },
+    {
+      "line": 129,
+      "type": "heading",
+      "text": "# DANH SÁCH BẢNG"
+    },
+    {
+      "line": 149,
+      "type": "heading",
+      "text": "# Chương 1: Mở đầu"
+    },
+    {
+      "line": 151,
+      "type": "heading",
+      "text": "## 1.1 Giới thiệu ứng dụng và lý do thực hiện"
+    },
+    {
+      "line": 164,
+      "type": "heading",
+      "text": "## 1.2 Concept và mục tiêu"
+    },
+    {
+      "line": 166,
+      "type": "heading",
+      "text": "### Concept"
+    },
+    {
+      "line": 175,
+      "type": "heading",
+      "text": "### Mục tiêu"
+    },
+    {
+      "line": 185,
+      "type": "heading",
+      "text": "## 1.3 Phân tích yêu cầu"
+    },
+    {
+      "line": 187,
+      "type": "heading",
+      "text": "### 1.3.1 Yêu cầu chức năng"
+    },
+    {
+      "line": 215,
+      "type": "heading",
+      "text": "### 1.3.2 Yêu cầu phi chức năng"
+    },
+    {
+      "line": 230,
+      "type": "heading",
+      "text": "## 1.4 Lựa chọn công nghệ"
+    },
+    {
+      "line": 250,
+      "type": "heading",
+      "text": "## 1.5 So sánh với các ứng dụng nhắn tin hiện có"
+    },
+    {
+      "line": 275,
+      "type": "heading",
+      "text": "## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)"
+    },
+    {
+      "line": 279,
+      "type": "heading",
+      "text": "### 1.6.1 Repository Pattern"
+    },
+    {
+      "line": 284,
+      "type": "heading",
+      "text": "### 1.6.2 Service Layer Pattern"
+    },
+    {
+      "line": 289,
+      "type": "heading",
+      "text": "### 1.6.3 DTO Pattern (Data Transfer Object)"
+    },
+    {
+      "line": 294,
+      "type": "heading",
+      "text": "### 1.6.4 Observer Pattern (Pub/Sub)"
+    },
+    {
+      "line": 299,
+      "type": "heading",
+      "text": "### 1.6.5 Strategy Pattern"
+    },
+    {
+      "line": 304,
+      "type": "heading",
+      "text": "### 1.6.6 Proxy Pattern"
+    },
+    {
+      "line": 309,
+      "type": "heading",
+      "text": "### 1.6.7 Builder Pattern"
+    },
+    {
+      "line": 326,
+      "type": "heading",
+      "text": "## 1.7 Đặc tả Use Case chi tiết — Tài khoản & Bạn bè"
+    },
+    {
+      "line": 328,
+      "type": "heading",
+      "text": "### UC-01: Đăng ký tài khoản"
+    },
+    {
+      "line": 342,
+      "type": "heading",
+      "text": "### UC-02: Đăng nhập"
+    },
+    {
+      "line": 356,
+      "type": "heading",
+      "text": "### UC-06: Gửi lời mời kết bạn"
+    },
+    {
+      "line": 370,
+      "type": "heading",
+      "text": "### UC-20: Tóm tắt hội thoại AI"
+    },
+    {
+      "line": 388,
+      "type": "heading",
+      "text": "# Chương 2: Phân tích thiết kế"
+    },
+    {
+      "line": 390,
+      "type": "heading",
+      "text": "## 2.1 Kiến trúc tổng quan"
+    },
+    {
+      "line": 454,
+      "type": "heading",
+      "text": "## 2.2 Biểu đồ Use Case tổng quan"
+    },
+    {
+      "line": 522,
+      "type": "heading",
+      "text": "## 2.3 Biểu đồ Use Case chi tiết — Tài khoản & Quản lý bạn bè"
+    },
+    {
+      "line": 614,
+      "type": "heading",
+      "text": "## 2.4 Biểu đồ lớp — Module Tài khoản & Bạn bè"
+    },
+    {
+      "line": 743,
+      "type": "heading",
+      "text": "## 2.5 Biểu đồ tuần tự"
+    },
+    {
+      "line": 745,
+      "type": "heading",
+      "text": "### 2.5.1 Biểu đồ tuần tự — Đăng nhập & JWT"
+    },
+    {
+      "line": 792,
+      "type": "heading",
+      "text": "### 2.5.2 Biểu đồ tuần tự — Gửi lời mời kết bạn"
+    },
+    {
+      "line": 840,
+      "type": "heading",
+      "text": "### 2.5.3 Biểu đồ tuần tự — Tóm tắt hội thoại AI"
+    },
+    {
+      "line": 882,
+      "type": "heading",
+      "text": "## 2.6 Sơ đồ thực thể quan hệ — ER Diagram"
+    },
+    {
+      "line": 1018,
+      "type": "heading",
+      "text": "## 2.7 Giao diện đáp ứng chức năng"
+    },
+    {
+      "line": 1022,
+      "type": "heading",
+      "text": "### 2.7.1 Màn hình Đăng nhập (LoginScreen)"
+    },
+    {
+      "line": 1039,
+      "type": "heading",
+      "text": "## 2.8 Bảng API Endpoints — Module Tài khoản & Bạn bè"
+    },
+    {
+      "line": 1065,
+      "type": "heading",
+      "text": "## 2.9 Biểu đồ hoạt động — Luồng đăng nhập & kết nối WebSocket"
+    },
+    {
+      "line": 1106,
+      "type": "heading",
+      "text": "# Chương 3: Kết quả"
+    },
+    {
+      "line": 1108,
+      "type": "heading",
+      "text": "## 3.1 Mô hình triển khai"
+    },
+    {
+      "line": 1153,
+      "type": "heading",
+      "text": "### Chi tiết cấu hình services"
+    },
+    {
+      "line": 1166,
+      "type": "heading",
+      "text": "### Cấu hình Caddy Gateway (Caddyfile)"
+    },
+    {
+      "line": 1184,
+      "type": "heading",
+      "text": "### Biến môi trường cấu hình (.env)"
+    },
+    {
+      "line": 1208,
+      "type": "heading",
+      "text": "## 3.2 Các bước cài đặt và triển khai"
+    },
+    {
+      "line": 1210,
+      "type": "heading",
+      "text": "### 3.2.1 Cài đặt và triển khai"
+    },
+    {
+      "line": 1216,
+      "type": "heading",
+      "text": "## 3.3 Kết quả thực hiện — Tài khoản & Bạn bè"
+    },
+    {
+      "line": 1218,
+      "type": "heading",
+      "text": "### 3.3.1 Đăng ký tài khoản"
+    },
+    {
+      "line": 1227,
+      "type": "heading",
+      "text": "### 3.3.2 Đăng nhập & JWT Authentication"
+    },
+    {
+      "line": 1232,
+      "type": "heading",
+      "text": "### 3.3.3 Quên mật khẩu"
+    },
+    {
+      "line": 1236,
+      "type": "heading",
+      "text": "### 3.3.4 Cập nhật Profile"
+    },
+    {
+      "line": 1240,
+      "type": "heading",
+      "text": "### 3.3.5 Quản lý bạn bè"
+    },
+    {
+      "line": 1255,
+      "type": "heading",
+      "text": "### 3.3.6 Chặn người dùng"
+    },
+    {
+      "line": 1261,
+      "type": "heading",
+      "text": "### 3.3.7 Trạng thái Online/Offline"
+    },
+    {
+      "line": 1268,
+      "type": "heading",
+      "text": "### 3.3.8 Tóm tắt hội thoại AI"
+    },
+    {
+      "line": 1275,
+      "type": "heading",
+      "text": "## 3.4 Kết quả thử nghiệm"
+    },
+    {
+      "line": 1312,
+      "type": "heading",
+      "text": "## 3.5 Kết luận và hạn chế"
+    },
+    {
+      "line": 1314,
+      "type": "heading",
+      "text": "### Kết luận"
+    },
+    {
+      "line": 1324,
+      "type": "heading",
+      "text": "### Hạn chế"
+    },
+    {
+      "line": 1332,
+      "type": "heading",
+      "text": "### Hướng phát triển"
+    },
+    {
+      "line": 1340,
+      "type": "heading",
+      "text": "## 3.6 Tài liệu tham khảo"
+    }
+  ],
+  "bao_cao_thanh_vien_2.md": [
+    {
+      "line": 3,
+      "type": "heading",
+      "text": "# BỘ GIÁO DỤC VÀ ĐÀO TẠO"
+    },
+    {
+      "line": 5,
+      "type": "heading",
+      "text": "## [Tên Trường Đại Học]"
+    },
+    {
+      "line": 7,
+      "type": "heading",
+      "text": "### KHOA CÔNG NGHỆ THÔNG TIN"
+    },
+    {
+      "line": 11,
+      "type": "heading",
+      "text": "# BÁO CÁO BÀI TẬP LỚN"
+    },
+    {
+      "line": 13,
+      "type": "heading",
+      "text": "## Môn: Kiến trúc Phần mềm"
+    },
+    {
+      "line": 20,
+      "type": "heading",
+      "text": "# ỨNG DỤNG NHẮN TIN TRỰC TUYẾN — CHATAPP"
+    },
+    {
+      "line": 45,
+      "type": "heading",
+      "text": "# BẢNG PHÂN CÔNG NHIỆM VỤ"
+    },
+    {
+      "line": 60,
+      "type": "heading",
+      "text": "# MỤC LỤC"
+    },
+    {
+      "line": 91,
+      "type": "heading",
+      "text": "# DANH SÁCH VIẾT TẮT"
+    },
+    {
+      "line": 121,
+      "type": "heading",
+      "text": "# DANH SÁCH HÌNH"
+    },
+    {
+      "line": 151,
+      "type": "heading",
+      "text": "# DANH SÁCH BẢNG"
+    },
+    {
+      "line": 171,
+      "type": "heading",
+      "text": "# Chương 1: Mở đầu"
+    },
+    {
+      "line": 173,
+      "type": "heading",
+      "text": "## 1.1 Giới thiệu ứng dụng và lý do thực hiện"
+    },
+    {
+      "line": 186,
+      "type": "heading",
+      "text": "## 1.2 Concept và mục tiêu"
+    },
+    {
+      "line": 188,
+      "type": "heading",
+      "text": "### Concept"
+    },
+    {
+      "line": 197,
+      "type": "heading",
+      "text": "### Mục tiêu"
+    },
+    {
+      "line": 207,
+      "type": "heading",
+      "text": "## 1.3 Phân tích yêu cầu"
+    },
+    {
+      "line": 209,
+      "type": "heading",
+      "text": "### 1.3.1 Yêu cầu chức năng"
+    },
+    {
+      "line": 236,
+      "type": "heading",
+      "text": "### 1.3.2 Yêu cầu phi chức năng"
+    },
+    {
+      "line": 251,
+      "type": "heading",
+      "text": "## 1.4 Lựa chọn công nghệ"
+    },
+    {
+      "line": 276,
+      "type": "heading",
+      "text": "## 1.5 So sánh với các ứng dụng nhắn tin hiện có"
+    },
+    {
+      "line": 299,
+      "type": "heading",
+      "text": "## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)"
+    },
+    {
+      "line": 303,
+      "type": "heading",
+      "text": "### 1.6.1 Repository Pattern"
+    },
+    {
+      "line": 308,
+      "type": "heading",
+      "text": "### 1.6.2 Service Layer Pattern"
+    },
+    {
+      "line": 312,
+      "type": "heading",
+      "text": "### 1.6.3 DTO Pattern (Data Transfer Object)"
+    },
+    {
+      "line": 316,
+      "type": "heading",
+      "text": "### 1.6.4 Observer Pattern (Pub/Sub)"
+    },
+    {
+      "line": 321,
+      "type": "heading",
+      "text": "### 1.6.5 Strategy Pattern"
+    },
+    {
+      "line": 325,
+      "type": "heading",
+      "text": "### 1.6.6 Proxy Pattern"
+    },
+    {
+      "line": 329,
+      "type": "heading",
+      "text": "### 1.6.7 Builder Pattern"
+    },
+    {
+      "line": 346,
+      "type": "heading",
+      "text": "## 1.7 Đặc tả Use Case chi tiết — Chat cá nhân & Tin nhắn"
+    },
+    {
+      "line": 348,
+      "type": "heading",
+      "text": "### UC-08: Gửi tin nhắn 1-1"
+    },
+    {
+      "line": 362,
+      "type": "heading",
+      "text": "### UC-12: Thu hồi tin nhắn"
+    },
+    {
+      "line": 376,
+      "type": "heading",
+      "text": "### UC-17: Dịch tin nhắn AI"
+    },
+    {
+      "line": 394,
+      "type": "heading",
+      "text": "# Chương 2: Phân tích thiết kế"
+    },
+    {
+      "line": 396,
+      "type": "heading",
+      "text": "## 2.1 Kiến trúc tổng quan"
+    },
+    {
+      "line": 460,
+      "type": "heading",
+      "text": "## 2.2 Biểu đồ Use Case tổng quan"
+    },
+    {
+      "line": 528,
+      "type": "heading",
+      "text": "## 2.3 Biểu đồ Use Case chi tiết — Chat cá nhân & Quản lý tin nhắn"
+    },
+    {
+      "line": 593,
+      "type": "heading",
+      "text": "## 2.4 Biểu đồ lớp — Module Chat cá nhân & Tin nhắn"
+    },
+    {
+      "line": 699,
+      "type": "heading",
+      "text": "## 2.5 Biểu đồ tuần tự"
+    },
+    {
+      "line": 701,
+      "type": "heading",
+      "text": "### 2.5.1 Biểu đồ tuần tự — Gửi tin nhắn 1-1"
+    },
+    {
+      "line": 741,
+      "type": "heading",
+      "text": "### 2.5.2 Biểu đồ tuần tự — Đánh dấu đã xem"
+    },
+    {
+      "line": 772,
+      "type": "heading",
+      "text": "### 2.5.3 Biểu đồ tuần tự — Dịch tin nhắn AI"
+    },
+    {
+      "line": 807,
+      "type": "heading",
+      "text": "### 2.5.4 Biểu đồ tuần tự — Video Call (Agora RTC)"
+    },
+    {
+      "line": 843,
+      "type": "heading",
+      "text": "### 2.5.5 Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)"
+    },
+    {
+      "line": 887,
+      "type": "heading",
+      "text": "### 2.5.6 Biểu đồ tuần tự — Voice-to-Text (Chuyển đổi giọng nói thành văn bản)"
+    },
+    {
+      "line": 912,
+      "type": "heading",
+      "text": "### 2.5.7 Chi tiết mô hình sự kiện WebSocket (STOMP Events)"
+    },
+    {
+      "line": 934,
+      "type": "heading",
+      "text": "## 2.6 Sơ đồ thực thể quan hệ — ER Diagram"
+    },
+    {
+      "line": 1077,
+      "type": "heading",
+      "text": "## 2.7 Giao diện đáp ứng chức năng"
+    },
+    {
+      "line": 1079,
+      "type": "heading",
+      "text": "### 2.7.1 Màn hình Chat (ChatScreen)"
+    },
+    {
+      "line": 1097,
+      "type": "heading",
+      "text": "### 2.7.2 Widget MessageBubble"
+    },
+    {
+      "line": 1177,
+      "type": "heading",
+      "text": "## 2.8 Bảng API Endpoints — Module Chat & Tin nhắn"
+    },
+    {
+      "line": 1196,
+      "type": "heading",
+      "text": "## 2.9 Biểu đồ hoạt động — Luồng gửi và nhận tin nhắn realtime"
+    },
+    {
+      "line": 1227,
+      "type": "heading",
+      "text": "# Chương 3: Kết quả"
+    },
+    {
+      "line": 1229,
+      "type": "heading",
+      "text": "## 3.1 Mô hình triển khai"
+    },
+    {
+      "line": 1279,
+      "type": "heading",
+      "text": "### Chi tiết cấu hình Docker services"
+    },
+    {
+      "line": 1292,
+      "type": "heading",
+      "text": "### Kiến trúc network Docker"
+    },
+    {
+      "line": 1312,
+      "type": "heading",
+      "text": "### Cấu hình Caddy Gateway (Caddyfile)"
+    },
+    {
+      "line": 1329,
+      "type": "heading",
+      "text": "### Biến môi trường cấu hình (.env)"
+    },
+    {
+      "line": 1353,
+      "type": "heading",
+      "text": "## 3.2 Các bước cài đặt và triển khai"
+    },
+    {
+      "line": 1355,
+      "type": "heading",
+      "text": "### 3.2.1 Yêu cầu hệ thống"
+    },
+    {
+      "line": 1361,
+      "type": "heading",
+      "text": "### 3.2.2 Các bước triển khai Backend"
+    },
+    {
+      "line": 1364,
+      "type": "heading",
+      "text": "# 1. Clone repository"
+    },
+    {
+      "line": 1366,
+      "type": "heading",
+      "text": "# 2. Tạo file .env từ template"
+    },
+    {
+      "line": 1368,
+      "type": "heading",
+      "text": "# 3. Đặt Firebase service account key"
+    },
+    {
+      "line": 1370,
+      "type": "heading",
+      "text": "# 4. Khởi động toàn bộ hệ thống"
+    },
+    {
+      "line": 1374,
+      "type": "heading",
+      "text": "### 3.2.3 Các bước chạy Frontend"
+    },
+    {
+      "line": 1377,
+      "type": "heading",
+      "text": "# 1. Clone repository Flutter"
+    },
+    {
+      "line": 1379,
+      "type": "heading",
+      "text": "# 2. Cấu hình kết nối server"
+    },
+    {
+      "line": 1381,
+      "type": "heading",
+      "text": "# 3. Cài đặt dependencies & chạy"
+    },
+    {
+      "line": 1386,
+      "type": "heading",
+      "text": "## 3.2 Các bước cài đặt và triển khai"
+    },
+    {
+      "line": 1388,
+      "type": "heading",
+      "text": "### 3.2.1 Backend"
+    },
+    {
+      "line": 1398,
+      "type": "heading",
+      "text": "### 3.2.2 Frontend"
+    },
+    {
+      "line": 1406,
+      "type": "heading",
+      "text": "## 3.3 Kết quả thực hiện — Chat cá nhân & Quản lý tin nhắn"
+    },
+    {
+      "line": 1408,
+      "type": "heading",
+      "text": "### 3.3.1 Gửi/nhận tin nhắn văn bản 1-1"
+    },
+    {
+      "line": 1419,
+      "type": "heading",
+      "text": "### 3.3.2 Typing indicator"
+    },
+    {
+      "line": 1430,
+      "type": "heading",
+      "text": "### 3.3.3 Trạng thái đã xem"
+    },
+    {
+      "line": 1441,
+      "type": "heading",
+      "text": "### 3.3.4 Chỉnh sửa và Thu hồi tin nhắn"
+    },
+    {
+      "line": 1451,
+      "type": "heading",
+      "text": "### 3.3.5 Dịch tin nhắn AI"
+    },
+    {
+      "line": 1462,
+      "type": "heading",
+      "text": "## 3.4 Kết quả thử nghiệm"
+    },
+    {
+      "line": 1495,
+      "type": "heading",
+      "text": "### Đánh giá kiến trúc"
+    },
+    {
+      "line": 1510,
+      "type": "heading",
+      "text": "### Phân tích hiệu năng"
+    },
+    {
+      "line": 1524,
+      "type": "heading",
+      "text": "## 3.5 Kết luận và hạn chế"
+    },
+    {
+      "line": 1526,
+      "type": "heading",
+      "text": "### Kết luận"
+    },
+    {
+      "line": 1534,
+      "type": "heading",
+      "text": "### Hạn chế"
+    },
+    {
+      "line": 1541,
+      "type": "heading",
+      "text": "### Hướng phát triển"
+    },
+    {
+      "line": 1547,
+      "type": "heading",
+      "text": "## 3.6 Tài liệu tham khảo"
+    }
+  ],
+  "bao_cao_thanh_vien_3.md": [
+    {
+      "line": 3,
+      "type": "heading",
+      "text": "# BỘ GIÁO DỤC VÀ ĐÀO TẠO"
+    },
+    {
+      "line": 5,
+      "type": "heading",
+      "text": "## [Tên Trường Đại Học]"
+    },
+    {
+      "line": 7,
+      "type": "heading",
+      "text": "### KHOA CÔNG NGHỆ THÔNG TIN"
+    },
+    {
+      "line": 11,
+      "type": "heading",
+      "text": "# BÁO CÁO BÀI TẬP LỚN"
+    },
+    {
+      "line": 13,
+      "type": "heading",
+      "text": "## Môn: Kiến trúc Phần mềm"
+    },
+    {
+      "line": 20,
+      "type": "heading",
+      "text": "# ỨNG DỤNG NHẮN TIN TRỰC TUYẾN — CHATAPP"
+    },
+    {
+      "line": 45,
+      "type": "heading",
+      "text": "# BẢNG PHÂN CÔNG NHIỆM VỤ"
+    },
+    {
+      "line": 60,
+      "type": "heading",
+      "text": "# MỤC LỤC"
+    },
+    {
+      "line": 67,
+      "type": "heading",
+      "text": "# DANH SÁCH VIẾT TẮT"
+    },
+    {
+      "line": 97,
+      "type": "heading",
+      "text": "# DANH SÁCH HÌNH"
+    },
+    {
+      "line": 123,
+      "type": "heading",
+      "text": "# DANH SÁCH BẢNG"
+    },
+    {
+      "line": 143,
+      "type": "heading",
+      "text": "# Chương 1: Mở đầu"
+    },
+    {
+      "line": 145,
+      "type": "heading",
+      "text": "## 1.1 Giới thiệu ứng dụng và lý do thực hiện"
+    },
+    {
+      "line": 158,
+      "type": "heading",
+      "text": "## 1.2 Concept và mục tiêu"
+    },
+    {
+      "line": 160,
+      "type": "heading",
+      "text": "### Concept"
+    },
+    {
+      "line": 169,
+      "type": "heading",
+      "text": "### Mục tiêu"
+    },
+    {
+      "line": 179,
+      "type": "heading",
+      "text": "## 1.3 Phân tích yêu cầu"
+    },
+    {
+      "line": 181,
+      "type": "heading",
+      "text": "### 1.3.1 Yêu cầu chức năng"
+    },
+    {
+      "line": 209,
+      "type": "heading",
+      "text": "### 1.3.2 Yêu cầu phi chức năng"
+    },
+    {
+      "line": 224,
+      "type": "heading",
+      "text": "## 1.4 Lựa chọn công nghệ"
+    },
+    {
+      "line": 249,
+      "type": "heading",
+      "text": "## 1.5 So sánh với các ứng dụng nhắn tin hiện có"
+    },
+    {
+      "line": 262,
+      "type": "heading",
+      "text": "## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)"
+    },
+    {
+      "line": 281,
+      "type": "heading",
+      "text": "## 1.7 Đặc tả Use Case chi tiết — Danh sách chat & Nhóm"
+    },
+    {
+      "line": 283,
+      "type": "heading",
+      "text": "### UC-09: Tạo nhóm chat"
+    },
+    {
+      "line": 297,
+      "type": "heading",
+      "text": "### UC-13: Ghim cuộc trò chuyện"
+    },
+    {
+      "line": 311,
+      "type": "heading",
+      "text": "### UC-15: Quản lý thành viên nhóm"
+    },
+    {
+      "line": 328,
+      "type": "heading",
+      "text": "# Chương 2: Phân tích thiết kế"
+    },
+    {
+      "line": 330,
+      "type": "heading",
+      "text": "## 2.1 Kiến trúc tổng quan"
+    },
+    {
+      "line": 385,
+      "type": "heading",
+      "text": "## 2.2 Biểu đồ Use Case tổng quan"
+    },
+    {
+      "line": 441,
+      "type": "heading",
+      "text": "## 2.3 Biểu đồ Use Case chi tiết — Danh sách chat & Chat nhóm"
+    },
+    {
+      "line": 508,
+      "type": "heading",
+      "text": "## 2.4 Biểu đồ lớp — Module Danh sách chat & Chat nhóm"
+    },
+    {
+      "line": 602,
+      "type": "heading",
+      "text": "## 2.5 Biểu đồ tuần tự"
+    },
+    {
+      "line": 604,
+      "type": "heading",
+      "text": "### 2.5.1 Biểu đồ tuần tự — Tạo nhóm chat"
+    },
+    {
+      "line": 641,
+      "type": "heading",
+      "text": "### 2.5.2 Biểu đồ tuần tự — Thêm thành viên vào nhóm"
+    },
+    {
+      "line": 678,
+      "type": "heading",
+      "text": "### 2.5.3 Biểu đồ tuần tự — Ghim cuộc trò chuyện"
+    },
+    {
+      "line": 708,
+      "type": "heading",
+      "text": "### 2.5.4 Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm"
+    },
+    {
+      "line": 747,
+      "type": "heading",
+      "text": "### 2.5.5 Chi tiết mô hình sự kiện WebSocket — Module Nhóm"
+    },
+    {
+      "line": 770,
+      "type": "heading",
+      "text": "## 2.6 Sơ đồ thực thể quan hệ — ER Diagram"
+    },
+    {
+      "line": 908,
+      "type": "heading",
+      "text": "## 2.7 Giao diện đáp ứng chức năng"
+    },
+    {
+      "line": 910,
+      "type": "heading",
+      "text": "### 2.7.1 Màn hình Danh sách cuộc trò chuyện (ChatListScreen)"
+    },
+    {
+      "line": 926,
+      "type": "heading",
+      "text": "### 2.7.2 Màn hình Tạo nhóm (CreateGroupScreen)"
+    },
+    {
+      "line": 943,
+      "type": "heading",
+      "text": "### 2.7.3 Màn hình Quản lý thành viên nhóm (GroupMembersScreen)"
+    },
+    {
+      "line": 960,
+      "type": "heading",
+      "text": "### 2.7.4 Màn hình Trang chủ (HomeScreen)"
+    },
+    {
+      "line": 1090,
+      "type": "heading",
+      "text": "## 2.8 Bảng API Endpoints — Module Danh sách chat & Nhóm"
+    },
+    {
+      "line": 1108,
+      "type": "heading",
+      "text": "## 2.9 Biểu đồ hoạt động — Luồng tạo và quản lý nhóm chat"
+    },
+    {
+      "line": 1134,
+      "type": "heading",
+      "text": "# Chương 3: Kết quả"
+    },
+    {
+      "line": 1136,
+      "type": "heading",
+      "text": "## 3.1 Mô hình triển khai"
+    },
+    {
+      "line": 1174,
+      "type": "heading",
+      "text": "### Cấu hình Caddy Gateway (Caddyfile)"
+    },
+    {
+      "line": 1186,
+      "type": "heading",
+      "text": "### Biến môi trường cấu hình (.env)"
+    },
+    {
+      "line": 1209,
+      "type": "heading",
+      "text": "## 3.2 Các bước cài đặt và triển khai"
+    },
+    {
+      "line": 1211,
+      "type": "heading",
+      "text": "### 3.2.1 Cài đặt và triển khai"
+    },
+    {
+      "line": 1217,
+      "type": "heading",
+      "text": "## 3.3 Kết quả thực hiện — Danh sách chat & Chat nhóm"
+    },
+    {
+      "line": 1219,
+      "type": "heading",
+      "text": "### 3.3.1 Danh sách cuộc trò chuyện"
+    },
+    {
+      "line": 1230,
+      "type": "heading",
+      "text": "### 3.3.2 Tạo nhóm chat"
+    },
+    {
+      "line": 1241,
+      "type": "heading",
+      "text": "### 3.3.3 Quản lý thành viên nhóm"
+    },
+    {
+      "line": 1253,
+      "type": "heading",
+      "text": "### 3.3.4 Ghim cuộc trò chuyện"
+    },
+    {
+      "line": 1264,
+      "type": "heading",
+      "text": "### 3.3.5 Rời nhóm & Giải tán nhóm"
+    },
+    {
+      "line": 1269,
+      "type": "heading",
+      "text": "## 3.4 Kết quả thử nghiệm"
+    },
+    {
+      "line": 1304,
+      "type": "heading",
+      "text": "### Đánh giá kiến trúc"
+    },
+    {
+      "line": 1319,
+      "type": "heading",
+      "text": "### Phân tích hiệu năng"
+    },
+    {
+      "line": 1331,
+      "type": "heading",
+      "text": "## 3.5 Kết luận và hạn chế"
+    },
+    {
+      "line": 1333,
+      "type": "heading",
+      "text": "### Kết luận"
+    },
+    {
+      "line": 1341,
+      "type": "heading",
+      "text": "### Hạn chế"
+    },
+    {
+      "line": 1348,
+      "type": "heading",
+      "text": "### Hướng phát triển"
+    },
+    {
+      "line": 1354,
+      "type": "heading",
+      "text": "## 3.6 Tài liệu tham khảo"
+    }
+  ],
+  "bao_cao_thanh_vien_4.md": [
+    {
+      "line": 3,
+      "type": "heading",
+      "text": "# BỘ GIÁO DỤC VÀ ĐÀO TẠO"
+    },
+    {
+      "line": 5,
+      "type": "heading",
+      "text": "## [Tên Trường Đại Học]"
+    },
+    {
+      "line": 7,
+      "type": "heading",
+      "text": "### KHOA CÔNG NGHỆ THÔNG TIN"
+    },
+    {
+      "line": 11,
+      "type": "heading",
+      "text": "# BÁO CÁO BÀI TẬP LỚN"
+    },
+    {
+      "line": 13,
+      "type": "heading",
+      "text": "## Môn: Kiến trúc Phần mềm"
+    },
+    {
+      "line": 20,
+      "type": "heading",
+      "text": "# ỨNG DỤNG NHẮN TIN TRỰC TUYẾN — CHATAPP"
+    },
+    {
+      "line": 45,
+      "type": "heading",
+      "text": "# BẢNG PHÂN CÔNG NHIỆM VỤ"
+    },
+    {
+      "line": 60,
+      "type": "heading",
+      "text": "# MỤC LỤC"
+    },
+    {
+      "line": 67,
+      "type": "heading",
+      "text": "# DANH SÁCH VIẾT TẮT"
+    },
+    {
+      "line": 96,
+      "type": "heading",
+      "text": "# DANH SÁCH HÌNH"
+    },
+    {
+      "line": 120,
+      "type": "heading",
+      "text": "# DANH SÁCH BẢNG"
+    },
+    {
+      "line": 140,
+      "type": "heading",
+      "text": "# Chương 1: Mở đầu"
+    },
+    {
+      "line": 142,
+      "type": "heading",
+      "text": "## 1.1 Giới thiệu ứng dụng và lý do thực hiện"
+    },
+    {
+      "line": 155,
+      "type": "heading",
+      "text": "## 1.2 Concept và mục tiêu"
+    },
+    {
+      "line": 157,
+      "type": "heading",
+      "text": "### Concept"
+    },
+    {
+      "line": 166,
+      "type": "heading",
+      "text": "### Mục tiêu"
+    },
+    {
+      "line": 176,
+      "type": "heading",
+      "text": "## 1.3 Phân tích yêu cầu"
+    },
+    {
+      "line": 178,
+      "type": "heading",
+      "text": "### 1.3.1 Yêu cầu chức năng"
+    },
+    {
+      "line": 204,
+      "type": "heading",
+      "text": "### 1.3.2 Yêu cầu phi chức năng"
+    },
+    {
+      "line": 219,
+      "type": "heading",
+      "text": "## 1.4 Lựa chọn công nghệ"
+    },
+    {
+      "line": 244,
+      "type": "heading",
+      "text": "## 1.5 So sánh với các ứng dụng nhắn tin hiện có"
+    },
+    {
+      "line": 257,
+      "type": "heading",
+      "text": "## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)"
+    },
+    {
+      "line": 277,
+      "type": "heading",
+      "text": "## 1.7 Đặc tả Use Case chi tiết — Media, Thông báo & AI"
+    },
+    {
+      "line": 279,
+      "type": "heading",
+      "text": "### UC-10: Gửi hình ảnh trong chat"
+    },
+    {
+      "line": 293,
+      "type": "heading",
+      "text": "### UC-18: Chat với AI Bot (Streaming)"
+    },
+    {
+      "line": 307,
+      "type": "heading",
+      "text": "### UC-15: Nhận push notification"
+    },
+    {
+      "line": 324,
+      "type": "heading",
+      "text": "# Chương 2: Phân tích thiết kế"
+    },
+    {
+      "line": 326,
+      "type": "heading",
+      "text": "## 2.1 Kiến trúc tổng quan"
+    },
+    {
+      "line": 369,
+      "type": "heading",
+      "text": "## 2.2 Biểu đồ Use Case tổng quan"
+    },
+    {
+      "line": 420,
+      "type": "heading",
+      "text": "## 2.3 Biểu đồ Use Case chi tiết — Media, Thông báo & AI Chatbot"
+    },
+    {
+      "line": 489,
+      "type": "heading",
+      "text": "## 2.4 Biểu đồ lớp — Module Media, Thông báo & AI"
+    },
+    {
+      "line": 602,
+      "type": "heading",
+      "text": "## 2.5 Biểu đồ tuần tự"
+    },
+    {
+      "line": 604,
+      "type": "heading",
+      "text": "### 2.5.1 Biểu đồ tuần tự — Gửi hình ảnh"
+    },
+    {
+      "line": 649,
+      "type": "heading",
+      "text": "### 2.5.2 Biểu đồ tuần tự — Push notification"
+    },
+    {
+      "line": 682,
+      "type": "heading",
+      "text": "### 2.5.3 Biểu đồ tuần tự — Chatbot AI streaming"
+    },
+    {
+      "line": 728,
+      "type": "heading",
+      "text": "### 2.5.4 Biểu đồ tuần tự — Chatbot AI Streaming (SSE)"
+    },
+    {
+      "line": 792,
+      "type": "heading",
+      "text": "### 2.5.5 Biểu đồ tuần tự — Push Notification (FCM)"
+    },
+    {
+      "line": 835,
+      "type": "heading",
+      "text": "### 2.5.5 Biểu đồ tuần tự — Video Call (Agora RTC)"
+    },
+    {
+      "line": 871,
+      "type": "heading",
+      "text": "## 2.6 Sơ đồ thực thể quan hệ — ER Diagram"
+    },
+    {
+      "line": 1010,
+      "type": "heading",
+      "text": "## 2.7 Giao diện đáp ứng chức năng"
+    },
+    {
+      "line": 1012,
+      "type": "heading",
+      "text": "### 2.7.1 Gửi hình ảnh trong ChatScreen"
+    },
+    {
+      "line": 1022,
+      "type": "heading",
+      "text": "### 2.7.2 Màn hình AI Chatbot (ChatbotScreen)"
+    },
+    {
+      "line": 1040,
+      "type": "heading",
+      "text": "### 2.7.3 Màn hình Cài đặt thông báo"
+    },
+    {
+      "line": 1170,
+      "type": "heading",
+      "text": "## 2.8 Bảng API Endpoints — Module Media, Thông báo & AI"
+    },
+    {
+      "line": 1187,
+      "type": "heading",
+      "text": "## 2.9 Biểu đồ hoạt động — Luồng upload media & push notification"
+    },
+    {
+      "line": 1227,
+      "type": "heading",
+      "text": "# Chương 3: Kết quả"
+    },
+    {
+      "line": 1229,
+      "type": "heading",
+      "text": "## 3.1 Mô hình triển khai"
+    },
+    {
+      "line": 1273,
+      "type": "heading",
+      "text": "## 3.2 Các bước cài đặt và triển khai"
+    },
+    {
+      "line": 1276,
+      "type": "heading",
+      "text": "# Backend"
+    },
+    {
+      "line": 1282,
+      "type": "heading",
+      "text": "# Frontend"
+    },
+    {
+      "line": 1290,
+      "type": "heading",
+      "text": "## 3.3 Kết quả thực hiện — Media, Thông báo & AI Chatbot"
+    },
+    {
+      "line": 1292,
+      "type": "heading",
+      "text": "### 3.3.1 Gửi hình ảnh / Media"
+    },
+    {
+      "line": 1305,
+      "type": "heading",
+      "text": "### 3.3.2 Push Notification (FCM)"
+    },
+    {
+      "line": 1319,
+      "type": "heading",
+      "text": "### 3.3.3 Bật/tắt thông báo"
+    },
+    {
+      "line": 1326,
+      "type": "heading",
+      "text": "### 3.3.4 AI Chatbot — Streaming SSE"
+    },
+    {
+      "line": 1346,
+      "type": "heading",
+      "text": "## 3.4 Kết quả thử nghiệm"
+    },
+    {
+      "line": 1385,
+      "type": "heading",
+      "text": "### Đánh giá kiến trúc"
+    },
+    {
+      "line": 1399,
+      "type": "heading",
+      "text": "### Phân tích hiệu năng"
+    },
+    {
+      "line": 1412,
+      "type": "heading",
+      "text": "## 3.5 Kết luận và hạn chế"
+    },
+    {
+      "line": 1414,
+      "type": "heading",
+      "text": "### Kết luận"
+    },
+    {
+      "line": 1422,
+      "type": "heading",
+      "text": "### Hạn chế"
+    },
+    {
+      "line": 1430,
+      "type": "heading",
+      "text": "### Hướng phát triển"
+    },
+    {
+      "line": 1437,
+      "type": "heading",
+      "text": "## 3.6 Tài liệu tham khảo"
+    }
+  ]
+}

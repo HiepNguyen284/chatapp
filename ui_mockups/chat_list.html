@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp Chat List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .mobile-container {
+            width: 375px; height: 812px;
+            background-color: white;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="mobile-container shadow-2xl">
+        <!-- Status Bar -->
+        <div class="h-12 w-full flex justify-between items-center px-5 text-sm font-semibold pt-3 bg-white">
+            <span>9:41</span>
+            <div class="flex gap-1.5 items-center">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="px-5 pt-4 pb-2 bg-white">
+            <div class="flex justify-between items-center mb-5">
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Đoạn chat</h1>
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 transition">
+                    <i class="fas fa-pen text-sm"></i>
+                </button>
+            </div>
+            
+            <!-- Search -->
+            <div class="relative mb-2">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input type="text" class="block w-full pl-10 pr-3 py-2.5 border-none rounded-2xl bg-gray-100 text-sm focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500 font-medium" placeholder="Tìm kiếm...">
+            </div>
+        </div>
+
+        <!-- Chat List -->
+        <div class="flex-1 overflow-y-auto bg-white hide-scrollbar pb-20">
+            <!-- Pinned Item -->
+            <div class="flex items-center px-5 py-3 hover:bg-gray-50 cursor-pointer relative bg-blue-50/30">
+                <div class="relative">
+                    <img src="https://ui-avatars.com/api/?name=Nhom+BTL&background=0D8ABC&color=fff" class="w-14 h-14 rounded-full">
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                        <i class="fas fa-users text-white text-[10px]"></i>
+                    </div>
+                </div>
+                <div class="ml-4 flex-1 border-b border-gray-100 pb-3 pt-1">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 class="text-base font-semibold text-gray-900">Nhóm BTL Kiến trúc PM</h3>
+                        <span class="text-xs text-gray-500">14:20</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-500 truncate pr-4 max-w-[200px]">Trần Bảo: Đã update báo cáo nhé anh em</p>
+                        <i class="fas fa-thumbtack text-gray-400 text-xs rotate-45"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unread Item -->
+            <div class="flex items-center px-5 py-3 hover:bg-gray-50 cursor-pointer relative">
+                <div class="relative">
+                    <img src="https://ui-avatars.com/api/?name=Le+Anh&background=EF4444&color=fff" class="w-14 h-14 rounded-full">
+                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white"></div>
+                </div>
+                <div class="ml-4 flex-1 border-b border-gray-100 pb-3 pt-1">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 class="text-base font-bold text-gray-900">Lê Anh</h3>
+                        <span class="text-xs text-blue-600 font-semibold">12:30</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-900 font-semibold truncate pr-4 max-w-[200px]">Gửi cho mình xin file thiết kế với</p>
+                        <div class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-[10px] text-white font-bold">2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Read Item -->
+            <div class="flex items-center px-5 py-3 hover:bg-gray-50 cursor-pointer relative">
+                <div class="relative">
+                    <img src="https://ui-avatars.com/api/?name=AI+Bot&background=8B5CF6&color=fff" class="w-14 h-14 rounded-full">
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full border-2 border-white flex items-center justify-center shadow-sm">
+                        <i class="fas fa-robot text-purple-500 text-[10px]"></i>
+                    </div>
+                </div>
+                <div class="ml-4 flex-1 border-b border-gray-100 pb-3 pt-1">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 class="text-base font-semibold text-gray-900">Trợ lý AI</h3>
+                        <span class="text-xs text-gray-500">Hôm qua</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-500 truncate pr-4 max-w-[200px]">Dưới đây là tóm tắt cuộc họp của bạn...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Read Item 2 -->
+            <div class="flex items-center px-5 py-3 hover:bg-gray-50 cursor-pointer relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 border-b border-gray-100 pb-3 pt-1">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 class="text-base font-semibold text-gray-900">Nguyễn Ngọc</h3>
+                        <span class="text-xs text-gray-500">T.3</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-500 truncate pr-4 max-w-[200px]">Bạn: Ok hẹn gặp lại nhé</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="h-20 bg-white border-t border-gray-200 flex justify-around items-center px-2 pb-5 absolute bottom-0 w-full z-20">
+            <div class="flex flex-col items-center gap-1 text-blue-600 cursor-pointer w-16">
+                <i class="fas fa-comment text-xl"></i>
+                <span class="text-[10px] font-semibold">Đoạn chat</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 cursor-pointer w-16">
+                <i class="fas fa-user-friends text-xl"></i>
+                <span class="text-[10px] font-medium">Bạn bè</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 cursor-pointer w-16 relative">
+                <div class="absolute -top-1 right-2 w-2 h-2 bg-red-500 rounded-full"></div>
+                <i class="fas fa-bell text-xl"></i>
+                <span class="text-[10px] font-medium">Thông báo</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 cursor-pointer w-16">
+                <i class="fas fa-cog text-xl"></i>
+                <span class="text-[10px] font-medium">Cài đặt</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
