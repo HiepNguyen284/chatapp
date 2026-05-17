@@ -185,13 +185,13 @@ def convert_report(md_file, prefix, output_file):
     author_name = "Sinh viên"
     author_id = "MSSV"
     if 'thanh_vien_1' in md_file:
-        author_name, author_id = "Nguyễn Quang Minh", "B22DCCN538"
-    elif 'thanh_vien_3' in md_file:
-        author_name, author_id = "Đặng Hữu Hoàng Quân", "B22DCCN658"
+        author_name, author_id = "Nguyễn Văn Duy", "B22DCCN154"
     elif 'thanh_vien_2' in md_file:
         author_name, author_id = "Nguyễn Hoàng Hiệp", "B22DCCN298"
+    elif 'thanh_vien_3' in md_file:
+        author_name, author_id = "Nguyễn Quang Minh", "B22DCCN538"
     elif 'thanh_vien_4' in md_file:
-        author_name, author_id = "Nguyễn Văn Duy", "B22DCCN154"
+        author_name, author_id = "Đặng Hữu Hoàng Quân", "B22DCCN658"
         
     create_cover_page(doc, author_name, author_id)
     
@@ -204,7 +204,7 @@ def convert_report(md_file, prefix, output_file):
     is_landscape_mode = False
     mermaid_count = 0
     skip_div = False
-    figure_captions = re.findall(r'\*H.nh (\d+\.\d+):', content)
+    figure_captions = re.findall(r'[*_]H.nh (\d+\.\d+):', content)
     
     while i < len(lines):
         line = lines[i].rstrip('\r')
@@ -264,16 +264,12 @@ def convert_report(md_file, prefix, output_file):
             # Title sections get H1
             if text == 'MỤC LỤC':
                 add_toc(doc, text)
-            elif text in ['DANH SÃCH VIáº¾T Táº®T', 'DANH SÃCH HÃŒNH', 'DANH SÃCH Báº¢NG']:
+            elif text in ['DANH SÁCH VIẾT TẮT', 'DANH SÁCH HÌNH', 'DANH SÁCH BẢNG']:
                 heading(doc, text, 1)
             elif text.startswith('BẢNG PHÂN CÔNG'):
                 heading(doc, text, 1)
-            elif text.startswith('Bá»˜ GIÃO Dá»¤C') or text.startswith('BÃO CÃO') or text.startswith('ỨNG DỤNG'):
+            elif text.startswith('BỘ GIÁO DỤC') or text.startswith('BÁO CÁO') or text.startswith('ỨNG DỤNG'):
                 pass
-
-
-
-
             elif text.startswith('Chương'):
                 heading(doc, text, 1)
             else:
@@ -339,7 +335,7 @@ def convert_report(md_file, prefix, output_file):
             continue
         
         # Caption lines *Bảng x.x:* or *Hình x.x:*
-        cap_match = re.match(r'^\*(Bảng \d+\.\d+|Hình \d+\.\d+):\s*(.*)\*$', line.strip())
+        cap_match = re.match(r'^[*_](Bảng \d+\.\d+|Hình \d+\.\d+):\s*(.*?)[*_]$', line.strip())
         if cap_match:
             is_bang = cap_match.group(1).startswith('Bảng')
             if is_bang and 'Bảng 0.' in cap_match.group(1):
@@ -429,7 +425,7 @@ def convert_report(md_file, prefix, output_file):
             # Look ahead to find the caption for sequence detection
             caption_text = ""
             for j in range(i+1, min(i+15, len(lines))):
-                m_cap = re.search(r'\*Hình (\d+\.\d+):\s*(.*)\*', lines[j])
+                m_cap = re.search(r'[*_]Hình (\d+\.\d+):\s*(.*?)[*_]', lines[j])
                 if m_cap:
                     caption_text = m_cap.group(2)
                     break

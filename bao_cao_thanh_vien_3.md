@@ -74,9 +74,8 @@
 | Bảng 1.1 | Yêu cầu chức năng |
 | Bảng 1.2 | Yêu cầu phi chức năng |
 | Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 3.1 | Chi tiết cấu hình services trong Docker Compose |
-| Bảng 3.2 | Các biến môi trường cấu hình hệ thống |
-| Bảng 3.3 | Kết quả thử nghiệm chức năng Tài khoản & Bạn bè |
+| Bảng 3.1 | Danh sách services trong Docker Compose |
+| Bảng 3.2 | Kết quả thử nghiệm chức năng Tài khoản & Bạn bè |
 
 *Bảng 0.4: Danh sách bảng*
 
@@ -184,63 +183,6 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 | **Containerization** | Docker Compose | — | Triển khai multi-service dễ dàng, reproducible environment |
 
 *Bảng 1.3: So sánh lựa chọn công nghệ*
-
-
-### UC-01: Đăng ký tài khoản
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Đăng ký tài khoản mới |
-| **Actor** | Người dùng (chưa đăng nhập) |
-| **Tiền điều kiện** | Người dùng chưa có tài khoản, đang ở màn hình Đăng ký |
-| **Hậu điều kiện** | Tài khoản mới được tạo trong database, password được mã hóa Argon2 |
-| **Luồng chính** | 1. Người dùng nhập username và password. 2. Hệ thống kiểm tra username không trùng. 3. Hệ thống mã hóa password bằng Argon2. 4. Lưu User entity vào PostgreSQL. 5. Trả về 201 Created. 6. Chuyển sang màn hình đăng nhập. |
-| **Luồng ngoại lệ** | 2a. Username đã tồn tại → trả lỗi 409 Conflict, hiển thị thông báo. |
-| **API** | `POST /api/v1/users/register/` |
-
-*Bảng 1.6: Đặc tả UC-01 — Đăng ký tài khoản*
-
-### UC-02: Đăng nhập
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Đăng nhập vào hệ thống |
-| **Actor** | Người dùng (có tài khoản) |
-| **Tiền điều kiện** | Tài khoản đã tồn tại trong database |
-| **Hậu điều kiện** | JWT token pair được tạo, WebSocket connected, trạng thái online |
-| **Luồng chính** | 1. Nhập username, password. 2. Gửi `POST /api/v1/users/token/`. 3. JwtsService xác thực password (Argon2). 4. Tạo access token (HMAC-SHA256) + refresh token. 5. Lưu refresh token vào Redis. 6. Client lưu token vào SharedPreferences. 7. Kết nối WebSocket `/ws`. 8. PresenceService cập nhật online trong Redis. |
-| **Luồng ngoại lệ** | 3a. Sai password → 401 Unauthorized. 2b. Username không tồn tại → 401. |
-| **API** | `POST /api/v1/users/token/` |
-
-*Bảng 1.7: Đặc tả UC-02 — Đăng nhập*
-
-### UC-06: Gửi lời mời kết bạn
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Gửi lời mời kết bạn |
-| **Actor** | Người dùng (đã đăng nhập) |
-| **Tiền điều kiện** | 2 user chưa là bạn bè, không bị chặn, chưa có lời mời PENDING |
-| **Hậu điều kiện** | Invitation(PENDING) được tạo, người nhận được thông báo realtime |
-| **Luồng chính** | 1. Tìm kiếm user theo keyword. 2. Chọn user, nhấn "Kết bạn". 3. Gửi `POST /api/v1/invitations/`. 4. UserBlockService kiểm tra block status. 5. InvitationSendService kiểm tra duplicate. 6. Tạo Invitation(PENDING). 7. STOMP notify receiver. 8. FCM push notification. |
-| **Luồng ngoại lệ** | 4a. Bị chặn → 403 Forbidden. 5a. Đã có lời mời PENDING → 409 Conflict. |
-| **API** | `POST /api/v1/invitations/` |
-
-*Bảng 1.8: Đặc tả UC-06 — Gửi lời mời kết bạn*
-
-### UC-20: Tóm tắt hội thoại AI
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Tóm tắt nội dung hội thoại bằng AI |
-| **Actor** | Người dùng (thành viên chatroom) |
-| **Tiền điều kiện** | Chatroom có tin nhắn, dịch vụ AI đã cấu hình |
-| **Hậu điều kiện** | Bản tóm tắt tiếng Việt được hiển thị cho người dùng |
-| **Luồng chính** | 1. Nhấn "Tóm tắt hội thoại". 2. `POST /api/v1/messages/summarize`. 3. SummaryService lấy tin nhắn từ DB. 4. PromptService xây dựng prompt tiếng Việt. 5. OpenAIClientService gọi LLM (kilo.ai). 6. LLM trả về tóm tắt. 7. Hiển thị kết quả. |
-| **Luồng ngoại lệ** | 5a. LLM rate limited → thử fallback model. 5b. Timeout → trả lỗi 504. |
-| **API** | `POST /api/v1/messages/summarize` |
-
-*Bảng 1.9: Đặc tả UC-20 — Tóm tắt hội thoại AI*
 
 ---
 
@@ -958,60 +900,16 @@ graph TB
 [image: tv1_so_o_trien_khai_docker_compose.png]
 *Hình 3.1: Sơ đồ triển khai Docker Compose*
 
-### Chi tiết cấu hình services
+| Service | Image | Chức năng |
+|---------|-------|-----------|
+| gateway | caddy:2-alpine | Reverse proxy & routing |
+| app | Custom Dockerfile | Spring Boot application |
+| postgres | postgres:18-alpine | Relational database |
+| redis | redis:8-alpine | Cache & presence layer |
+| artemis | apache/artemis:2.53.0-alpine | STOMP message broker |
+| versitygw | versity/versitygw:latest | S3-compatible object storage |
 
-| Service | Image | Container | Port | Volume | Health Check | Depends On |
-|---------|-------|-----------|------|--------|-------------|------------|
-| gateway | caddy:2-alpine | chatapp-gateway | 8080:8080 | Caddyfile (ro) | — | app, versitygw |
-| app | Custom Dockerfile | chatapp-app | internal | secrets (ro) | — | artemis, postgres, redis, versitygw |
-| postgres | postgres:18-alpine | chatapp-postgres | internal | .postgres | `pg_isready -U chatapp` | — |
-| redis | redis:8-alpine | chatapp-redis | internal | redis_data | `redis-cli ping` | — |
-| artemis | apache/artemis:2.53.0-alpine | chatapp-artemis | internal | — | `wget http://localhost:8161` | — |
-| versitygw | versity/versitygw:latest | chatapp-versitygw | 9000 | versitygw_data | `wget http://localhost:9000/health` | — |
-
-*Bảng 3.1: Chi tiết cấu hình services trong Docker Compose*
-
-### Cấu hình Caddy Gateway (Caddyfile)
-
-```
-:8080 {
-    handle /api/*     { reverse_proxy app:8080 }
-    handle /ws*       { reverse_proxy app:8080 }
-    handle /socket*   { reverse_proxy app:8080 }
-    handle_path /storage/* { reverse_proxy versitygw:9000 }
-    handle            { reverse_proxy app:8080 }
-}
-```
-
-**Giải thích routing:**
-- `/api/*` — REST API requests → Spring Boot
-- `/ws*` và `/socket*` — WebSocket connections (STOMP) → Spring Boot
-- `/storage/*` — Truy cập trực tiếp file media từ VersityGW (dùng `handle_path` để strip prefix)
-- `handle` (default) — Fallback tất cả request khác → Spring Boot
-
-### Biến môi trường cấu hình (.env)
-
-| Biến | Mô tả | Ví dụ |
-|------|-------|-------|
-| `POSTGRES_USER` | Database username | chatapp |
-| `POSTGRES_PASSWORD` | Database password | (secret) |
-| `POSTGRES_DB` | Database name | chatapp |
-| `S3_ACCESS_KEY` | VersityGW access key | minioadmin |
-| `S3_SECRET_KEY` | VersityGW secret key | (secret) |
-| `JWTS_SECRET` | JWT signing secret (≥32 bytes) | (secret) |
-| `LLM_BASE_URL` | OpenAI-compatible API URL | https://kilo.ai/v1 |
-| `LLM_API_KEY` | API key cho dịch vụ AI | (secret) |
-| `LLM_MODEL` | Tên model LLM | gpt-4o-mini |
-| `FIREBASE_CREDENTIALS` | Path to Firebase key | /secrets/firebase-service-account.json |
-
-*Bảng 3.2: Các biến môi trường cấu hình hệ thống*
-
-**Luồng khởi động:**
-1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
-2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
-3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
-4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
-5. Toàn bộ hệ thống sẵn sàng phục vụ qua port 8080.
+*Bảng 3.1: Danh sách services trong Docker Compose*
 
 ## 3.2 Các bước cài đặt và triển khai
 
@@ -1121,7 +1019,7 @@ flutter pub get && flutter run
 | 21 | Tóm tắt AI | Tóm tắt 50 tin nhắn | ✅ Đạt | Trả về < 5s |
 | 22 | STOMP notify | Lời mời realtime | ✅ Đạt | Receiver nhận < 1s |
 
-*Bảng 3.3: Kết quả thử nghiệm chức năng Tài khoản & Bạn bè*
+*Bảng 3.2: Kết quả thử nghiệm chức năng Tài khoản & Bạn bè*
 
 **Số liệu demo:**
 - Số user đăng ký thử nghiệm: 10

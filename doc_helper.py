@@ -179,6 +179,7 @@ def create_doc():
         hpf.space_after        = sa
         hpf.line_spacing       = LS
         hpf.page_break_before  = pbr   # H1 always starts new page
+        hpf.keep_with_next     = True
 
     # ── List Bullet ───────────────────────────────────────────
     lb = doc.styles['List Bullet']
@@ -303,6 +304,24 @@ def _tbl_borders(tbl, color_hex, sz='12'):
     tblPr.append(tblBdr)
 
 
+def _tbl_borders_elegant(tbl, color_hex, sz='4'):
+    """Set solid elegant borders on all edges (top, bottom, left, right, insideH, insideV)."""
+    tblEl = tbl._tbl
+    tblPr = tblEl.find(qn('w:tblPr'))
+    if tblPr is None:
+        tblPr = OxmlElement('w:tblPr')
+        tblEl.insert(0, tblPr)
+    tblBdr = OxmlElement('w:tblBorders')
+    for edge in ['top', 'bottom', 'left', 'right', 'insideH', 'insideV']:
+        bd = OxmlElement(f'w:{edge}')
+        bd.set(qn('w:val'),   'single')
+        bd.set(qn('w:sz'),    sz)
+        bd.set(qn('w:color'), color_hex)
+        bd.set(qn('w:space'), '0')
+        tblBdr.append(bd)
+    tblPr.append(tblBdr)
+
+
 def _cell_margins(cell, top=72, bottom=72, left=113, right=113):
     """Set inner cell padding (values in twentieths of a point)."""
     tcPr  = cell._tc.get_or_add_tcPr()
@@ -418,8 +437,12 @@ def _old_unused_code(doc, title, *body_lines):
 
 def add_table(doc, headers, rows, col_widths=None):
     t = doc.add_table(rows=1 + len(rows), cols=len(headers))
-    t.style = 'Table Grid'
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    _tbl_borders_elegant(t, 'AECCE8', sz='4')
+
+    for row in t.rows:
+        for cell in row.cells:
+            _cell_margins(cell, top=100, bottom=100, left=150, right=150)
 
     if col_widths:
         for ci, w in enumerate(col_widths):

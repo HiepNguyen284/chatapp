@@ -1,0 +1,204 @@
+
+==================== bao_cao_thanh_vien_1.md ====================
+Line 1: # BẢNG PHÂN CÔNG NHIỆM VỤ
+Line 14: # MỤC LỤC
+Line 20: # DANH SÁCH VIẾT TẮT
+Line 50: # DANH SÁCH HÌNH
+Line 76: # DANH SÁCH BẢNG
+Line 93: # Chương 1: Mở đầu
+Line 95: ## 1.1 Giới thiệu ứng dụng và lý do thực hiện
+Line 108: ## 1.2 Concept và mục tiêu
+Line 110: ### Concept
+Line 119: ### Mục tiêu
+Line 129: ## 1.3 Phân tích yêu cầu
+Line 131: ### 1.3.1 Yêu cầu chức năng
+Line 157: ### 1.3.2 Yêu cầu phi chức năng
+Line 172: ## 1.4 Lựa chọn công nghệ
+Line 200: # Chương 2: Phân tích thiết kế
+Line 202: ## 2.1 Kiến trúc tổng quan
+Line 246: ## 2.2 Biểu đồ Use Case tổng quan
+Line 298: ## 2.3 Biểu đồ Use Case chi tiết — Media, Thông báo & AI Chatbot
+Line 368: ## 2.4 Biểu đồ lớp — Module Media, Thông báo & AI
+Line 482: ### 2.5 Biểu đồ tuần tự
+Line 484: ### 2.5.1 Biểu đồ tuần tự — Gửi hình ảnh
+Line 530: ### 2.5.2 Biểu đồ tuần tự — Push notification
+Line 564: ### 2.5.3 Biểu đồ tuần tự — Chatbot AI streaming (SSE)
+Line 610: ### 2.5.4 Biểu đồ tuần tự — Video Call (Agora RTC)
+Line 647: ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
+Line 759: ## 2.7 Giao diện đáp ứng chức năng
+Line 761: ### 2.7.1 Gửi hình ảnh trong ChatScreen
+Line 772: ### 2.7.2 Màn hình AI Chatbot (ChatbotScreen)
+Line 792: ### 2.7.3 Màn hình Cài đặt thông báo
+Line 809: # Chương 3: Kết quả
+Line 811: ## 3.1 Mô hình triển khai
+Line 837: ## 3.2 Các bước cài đặt và triển khai
+Line 839: ### 3.2.1 Backend
+Line 848: ### 3.2.2 Frontend
+Line 856: ## 3.3 Kết quả thực hiện — Media, Thông báo & AI Chatbot
+Line 858: ### 3.3.1 Gửi hình ảnh / Media
+Line 872: ### 3.3.2 Push Notification (FCM)
+Line 887: ### 3.3.3 Bật/tắt thông báo
+Line 894: ### 3.3.4 AI Chatbot — Streaming SSE
+Line 915: ### 3.3.5 Gọi video 1-1 (Agora RTC)
+Line 928: ## 3.4 Kết quả thử nghiệm
+Line 967: ### Đánh giá kiến trúc
+Line 981: ### Phân tích hiệu năng
+Line 992: ## 3.5 Kết luận và hạn chế
+Line 994: ### Kết luận
+Line 1002: ### Hạn chế
+Line 1010: ### Hướng phát triển
+Line 1018: ## 3.6 Tài liệu tham khảo
+
+==================== bao_cao_thanh_vien_2.md ====================
+Line 1: # BẢNG PHÂN CÔNG NHIỆM VỤ
+Line 14: # MỤC LỤC
+Line 20: # DANH SÁCH VIẾT TẮT
+Line 49: # DANH SÁCH HÌNH
+Line 78: # DANH SÁCH BẢNG
+Line 94: # Chương 1: Mở đầu
+Line 96: ## 1.1 Giới thiệu ứng dụng và lý do thực hiện
+Line 109: ## 1.2 Concept và mục tiêu
+Line 111: ### Concept
+Line 120: ### Mục tiêu
+Line 130: ## 1.3 Phân tích yêu cầu
+Line 132: ### 1.3.1 Yêu cầu chức năng
+Line 159: ### 1.3.2 Yêu cầu phi chức năng
+Line 174: ## 1.4 Lựa chọn công nghệ
+Line 198: # Chương 2: Phân tích thiết kế
+Line 200: ## 2.1 Kiến trúc tổng quan
+Line 265: ## 2.2 Biểu đồ Use Case tổng quan
+Line 334: ## 2.3 Biểu đồ Use Case chi tiết — Chat cá nhân & Quản lý tin nhắn
+Line 400: ## 2.4 Biểu đồ lớp — Module Chat cá nhân & Tin nhắn
+Line 507: ## 2.5 Biểu đồ tuần tự
+Line 509: ### 2.5.1 Biểu đồ tuần tự — Gửi tin nhắn 1-1
+Line 550: ### 2.5.2 Biểu đồ tuần tự — Đánh dấu đã xem
+Line 582: ### 2.5.3 Biểu đồ tuần tự — Dịch tin nhắn AI
+Line 616: ### 2.5.4 Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)
+Line 662: ### 2.5.5 Biểu đồ tuần tự — Voice-to-Text (Chuyển đổi giọng nói thành văn bản)
+Line 690: ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
+Line 806: ## 2.7 Giao diện đáp ứng chức năng
+Line 808: ### 2.7.1 Màn hình Chat (ChatScreen)
+Line 828: ### 2.7.2 Widget MessageBubble
+Line 857: # Chương 3: Kết quả
+Line 859: ## 3.1 Mô hình triển khai
+Line 913: ## 3.2 Các bước cài đặt và triển khai
+Line 915: ### 3.2.1 Yêu cầu hệ thống
+Line 922: ### 3.2.2 Các bước triển khai Backend
+Line 925: # 1. Clone repository
+Line 927: # 2. Tạo file .env từ template
+Line 929: # 3. Đặt Firebase service account key
+Line 931: # 4. Khởi động toàn bộ hệ thống
+Line 935: ### 3.2.3 Các bước chạy Frontend
+Line 938: # 1. Clone repository Flutter
+Line 940: # 2. Cấu hình kết nối server
+Line 942: # 3. Cài đặt dependencies & chạy
+Line 946: ## 3.3 Kết quả thực hiện — Chat cá nhân & Quản lý tin nhắn
+Line 948: ### 3.3.1 Gửi/nhận tin nhắn văn bản 1-1
+Line 960: ### 3.3.2 Typing indicator
+Line 972: ### 3.3.3 Trạng thái đã xem
+Line 984: ### 3.3.4 Chỉnh sửa và Thu hồi tin nhắn
+Line 995: ### 3.3.5 Dịch tin nhắn AI
+Line 1005: ### 3.3.6 Chuyển giọng nói thành văn bản (Voice-to-Text)
+Line 1017: ## 3.4 Kết quả thử nghiệm
+Line 1050: ## 3.5 Kết luận và hạn chế
+Line 1052: ### Kết luận
+Line 1060: ### Hạn chế
+Line 1067: ### Hướng phát triển
+Line 1074: ## 3.6 Tài liệu tham khảo
+
+==================== bao_cao_thanh_vien_3.md ====================
+Line 1: # BẢNG PHÂN CÔNG NHIỆM VỤ
+Line 14: # MỤC LỤC
+Line 19: # DANH SÁCH VIẾT TẮT
+Line 48: # DANH SÁCH HÌNH
+Line 70: # DANH SÁCH BẢNG
+Line 86: # Chương 1: Mở đầu
+Line 88: ## 1.1 Giới thiệu ứng dụng và lý do thực hiện
+Line 101: ## 1.2 Concept và mục tiêu
+Line 103: ### Concept
+Line 112: ### Mục tiêu
+Line 122: ## 1.3 Phân tích yêu cầu
+Line 124: ### 1.3.1 Yêu cầu chức năng
+Line 152: ### 1.3.2 Yêu cầu phi chức năng
+Line 167: ## 1.4 Lựa chọn công nghệ
+Line 191: # Chương 2: Phân tích thiết kế
+Line 193: ## 2.1 Kiến trúc tổng quan
+Line 258: ## 2.2 Biểu đồ Use Case tổng quan
+Line 327: ## 2.3 Biểu đồ Use Case chi tiết — Tài khoản & Quản lý bạn bè
+Line 420: ## 2.4 Biểu đồ lớp — Module Tài khoản & Bạn bè
+Line 550: ## 2.5 Biểu đồ tuần tự
+Line 552: ### 2.5.1 Biểu đồ tuần tự — Đăng nhập & JWT
+Line 600: ### 2.5.2 Biểu đồ tuần tự — Gửi lời mời kết bạn
+Line 649: ### 2.5.3 Biểu đồ tuần tự — Tóm tắt hội thoại AI
+Line 692: ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
+Line 828: ## 2.7 Giao diện đáp ứng chức năng
+Line 832: ### 2.7.1 Màn hình Đăng nhập (LoginScreen)
+Line 855: # Chương 3: Kết quả
+Line 857: ## 3.1 Mô hình triển khai
+Line 914: ## 3.2 Các bước cài đặt và triển khai
+Line 916: ### 3.2.1 Backend
+Line 925: ### 3.2.2 Frontend
+Line 933: ## 3.3 Kết quả thực hiện — Tài khoản & Bạn bè
+Line 935: ### 3.3.1 Đăng ký tài khoản
+Line 945: ### 3.3.2 Đăng nhập & JWT Authentication
+Line 950: ### 3.3.3 Quên mật khẩu
+Line 954: ### 3.3.4 Cập nhật Profile
+Line 958: ### 3.3.5 Quản lý bạn bè
+Line 975: ### 3.3.6 Chặn người dùng
+Line 981: ### 3.3.7 Trạng thái Online/Offline
+Line 988: ### 3.3.8 Tóm tắt hội thoại AI
+Line 995: ## 3.4 Kết quả thử nghiệm
+Line 1032: ## 3.5 Kết luận và hạn chế
+Line 1034: ### Kết luận
+Line 1044: ### Hạn chế
+Line 1052: ### Hướng phát triển
+Line 1060: ## 3.6 Tài liệu tham khảo
+
+==================== bao_cao_thanh_vien_4.md ====================
+Line 1: # BẢNG PHÂN CÔNG NHIỆM VỤ
+Line 14: # MỤC LỤC
+Line 19: # DANH SÁCH VIẾT TẮT
+Line 47: # DANH SÁCH HÌNH
+Line 75: # DANH SÁCH BẢNG
+Line 91: # Chương 1: Mở đầu
+Line 93: ## 1.1 Giới thiệu ứng dụng và lý do thực hiện
+Line 106: ## 1.2 Concept và mục tiêu
+Line 108: ### Concept
+Line 117: ### Mục tiêu
+Line 127: ## 1.3 Phân tích yêu cầu
+Line 129: ### 1.3.1 Yêu cầu chức năng
+Line 157: ### 1.3.2 Yêu cầu phi chức năng
+Line 172: ## 1.4 Lựa chọn công nghệ
+Line 196: # Chương 2: Phân tích thiết kế
+Line 198: ## 2.1 Kiến trúc tổng quan
+Line 254: ## 2.2 Biểu đồ Use Case tổng quan
+Line 311: ## 2.3 Biểu đồ Use Case chi tiết — Danh sách chat & Chat nhóm
+Line 379: ## 2.4 Biểu đồ lớp — Module Danh sách chat & Chat nhóm
+Line 474: ## 2.5 Biểu đồ tuần tự
+Line 476: ### 2.5.1 Biểu đồ tuần tự — Tạo nhóm chat
+Line 514: ### 2.5.2 Biểu đồ tuần tự — Thêm thành viên vào nhóm
+Line 552: ### 2.5.3 Biểu đồ tuần tự — Ghim cuộc trò chuyện
+Line 583: ### 2.5.4 Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm
+Line 625: ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
+Line 736: ## 2.7 Giao diện đáp ứng chức năng
+Line 738: ### 2.7.1 Màn hình Danh sách cuộc trò chuyện (ChatListScreen)
+Line 755: ### 2.7.2 Màn hình Tạo nhóm (CreateGroupScreen)
+Line 773: ### 2.7.3 Màn hình Quản lý thành viên nhóm (GroupMembersScreen)
+Line 791: ### 2.7.4 Màn hình Trang chủ (HomeScreen)
+Line 806: # Chương 3: Kết quả
+Line 808: ## 3.1 Mô hình triển khai
+Line 847: ## 3.2 Các bước cài đặt và triển khai
+Line 849: ### 3.2.1 Backend
+Line 858: ### 3.2.2 Frontend
+Line 866: ## 3.3 Kết quả thực hiện — Danh sách chat & Chat nhóm
+Line 868: ### 3.3.1 Danh sách cuộc trò chuyện
+Line 880: ### 3.3.2 Tạo nhóm chat
+Line 892: ### 3.3.3 Quản lý thành viên nhóm
+Line 905: ### 3.3.4 Ghim cuộc trò chuyện
+Line 919: ### 3.3.6 Tìm kiếm người dùng
+Line 931: ## 3.4 Kết quả thử nghiệm
+Line 968: ## 3.5 Kết luận và hạn chế
+Line 970: ### Kết luận
+Line 978: ### Hạn chế
+Line 985: ### Hướng phát triển
+Line 991: ## 3.6 Tài liệu tham khảo

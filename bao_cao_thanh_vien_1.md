@@ -58,18 +58,16 @@ _Bảng 0.2: Danh sách viết tắt_
 | Hình 2.5  | Biểu đồ tuần tự — Gửi hình ảnh                    |
 | Hình 2.6  | Biểu đồ tuần tự — Push notification               |
 | Hình 2.7  | Biểu đồ tuần tự — Chatbot AI streaming            |
-| Hình 2.8  | Biểu đồ tuần tự — Chatbot AI Streaming            |
-| Hình 2.9  | Biểu đồ tuần tự — Push Notification (FCM)         |
-| Hình 2.10 | Biểu đồ tuần tự — Video Call (Agora RTC)          |
-| Hình 2.11 | Biểu đồ tuần tự — Video Call (Agora RTC)          |
-| Hình 2.12 | Sơ đồ thực thể quan hệ (ER Diagram)               |
-| Hình 2.13 | Giao diện ChatScreen — Gửi hình ảnh               |
-| Hình 2.14 | Giao diện AI Chatbot                              |
-| Hình 2.15 | Giao diện Cài đặt thông báo                       |
+| Hình 2.8  | Biểu đồ tuần tự — Video Call (Agora RTC)          |
+| Hình 2.9  | Sơ đồ thực thể quan hệ (ER Diagram)               |
+| Hình 2.10 | Giao diện ChatScreen — Gửi hình ảnh               |
+| Hình 2.11 | Giao diện AI Chatbot                              |
+| Hình 2.12 | Giao diện Cài đặt thông báo                       |
 | Hình 3.1  | Sơ đồ triển khai Docker Compose                   |
 | Hình 3.2  | Kết quả — Gửi hình ảnh                            |
 | Hình 3.3  | Kết quả — Push notification                       |
 | Hình 3.4  | Kết quả — AI Chatbot                              |
+| Hình 3.5  | Kết quả — Gọi video 1-1                           |
 
 _Bảng 0.3: Danh sách hình_
 
@@ -77,11 +75,14 @@ _Bảng 0.3: Danh sách hình_
 
 # DANH SÁCH BẢNG
 
-| Bảng 1.1 | Yêu cầu chức năng |
-| Bảng 1.2 | Yêu cầu phi chức năng |
-| Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 3.1 | Danh sách services |
-| Bảng 3.2 | Kết quả thử nghiệm chức năng Media, Thông báo & AI |
+| Ký hiệu  | Mô tả                                             |
+| -------- | ------------------------------------------------- |
+| Bảng 1.1 | Yêu cầu chức năng                                 |
+| Bảng 1.2 | Yêu cầu phi chức năng                             |
+| Bảng 1.3 | So sánh lựa chọn công nghệ                        |
+| Bảng 3.1 | Kết quả thử nghiệm chức năng Media, Thông báo & AI |
+| Bảng 3.2 | Đánh giá kiến trúc module Media, Thông báo & AI   |
+| Bảng 3.3 | Phân tích hiệu năng module AI & Media             |
 
 _Bảng 0.4: Danh sách bảng_
 
@@ -752,7 +753,7 @@ erDiagram
 ```
 
 [image: tv4_so_o_thuc_the_quan_he_er_diagram.png]
-_Hình 2.12: Sơ đồ thực thể quan hệ (ER Diagram)_
+_Hình 2.9: Sơ đồ thực thể quan hệ (ER Diagram)_
 **★ Entity thuộc phạm vi Thành viên 1:** ATTACHMENT, FCM_TOKEN, CHATBOT_CONVERSATION, CHATBOT_MESSAGE.
 
 ## 2.7 Giao diện đáp ứng chức năng
@@ -764,7 +765,7 @@ _Hình 2.12: Sơ đồ thực thể quan hệ (ER Diagram)_
 **Mô tả:** Trong ChatScreen, nút đính kèm (📎) mở ImagePicker để chọn ảnh từ gallery hoặc camera. Ảnh được preview trước khi gửi. Sau khi gửi, ảnh hiển thị trong MessageBubble qua CachedNetworkImage, load từ `/storage/*` qua Caddy Gateway.
 
 [image: tv4_giao_dien_chatscreen_gui_hinh_anh.png]
-_Hình 2.13: Giao diện ChatScreen — Gửi hình ảnh_
+_Hình 2.10: Giao diện ChatScreen — Gửi hình ảnh_
 
 `[Ảnh chụp màn hình gửi ảnh — placeholder]`
 
@@ -784,7 +785,7 @@ _Hình 2.13: Giao diện ChatScreen — Gửi hình ảnh_
 - Input bar gửi tin nhắn
 
 [image: tv4_giao_dien_ai_chatbot.png]
-_Hình 2.14: Giao diện AI Chatbot_
+_Hình 2.11: Giao diện AI Chatbot_
 
 `[Ảnh chụp màn hình Chatbot — placeholder]`
 
@@ -795,7 +796,7 @@ _Hình 2.14: Giao diện AI Chatbot_
 **Mô tả:** Trong SettingsScreen, có toggle switch bật/tắt thông báo đẩy. Gọi `PUT /api/v1/users/me/notification-settings/` để cập nhật server-side preference.
 
 [image: tv4_giao_dien_cai_at_thong_bao.png]
-_Hình 2.15: Giao diện Cài đặt thông báo_
+_Hình 2.12: Giao diện Cài đặt thông báo_
 
 `[Ảnh chụp màn hình Notification settings — placeholder]`
 
@@ -803,103 +804,7 @@ _Hình 2.15: Giao diện Cài đặt thông báo_
 
 <div style="page-break-before: always;"></div>
 
-**Chi tiết cấu hình WebSocket (WebSocketConfig.kt):**
 
-```kotlin
-@Configuration
-@EnableWebSocketMessageBroker
-class WebSocketConfig : WebSocketMessageBrokerConfigurer {
-    override fun configureMessageBroker(registry: MessageBrokerRegistry) {
-        registry.enableStompBrokerRelay("/topic", "/queue")
-               .setRelayHost(relayHost)  // Apache Artemis
-               .setRelayPort(relayPort)  // 61613
-        registry.setApplicationDestinationPrefixes("/app")
-    }
-    override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/socket").withSockJS()  // SockJS fallback
-        registry.addEndpoint("/ws")                    // Native WebSocket
-    }
-}
-```
-
-**Chi tiết cấu hình Security (SecurityConfig.kt):**
-
-```kotlin
-@Bean
-fun passwordEncoder() = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-
-@Bean
-fun filterChain(http: HttpSecurity): SecurityFilterChain {
-    http {
-        oauth2ResourceServer { jwt { jwtDecoder = jwtDecoder } }
-        authorizeHttpRequests {
-            authorize("/api/v1/messages/**", authenticated)
-            authorize("/api/v1/chatbot/**", authenticated)
-            authorize("/api/v1/invitations/**", authenticated)
-            authorize("/api/v1/users/me/**", authenticated)
-            authorize(anyRequest, permitAll)
-        }
-    }
-}
-```
-
-## 2.8 Bảng API Endpoints — Module Media, Thông báo & AI
-
-| STT | Method | Endpoint                                      | Auth | Mô tả                            | Status Codes |
-| :-: | ------ | --------------------------------------------- | :--: | -------------------------------- | :----------: |
-|  1  | POST   | `/api/v1/messages/?room={id}`                 |  ✓   | Gửi tin nhắn + media (multipart) |   201, 403   |
-|  2  | POST   | `/api/v1/users/me/fcm-token/`                 |  ✓   | Đăng ký FCM token                |     201      |
-|  3  | GET    | `/api/v1/users/me/notification-settings/`     |  ✓   | Lấy cài đặt thông báo            |     200      |
-|  4  | PUT    | `/api/v1/users/me/notification-settings/`     |  ✓   | Cập nhật cài đặt thông báo       |     200      |
-|  5  | GET    | `/api/v1/chatbot/conversations`               |  ✓   | Danh sách cuộc trò chuyện AI     |     200      |
-|  6  | POST   | `/api/v1/chatbot/conversations`               |  ✓   | Tạo cuộc trò chuyện AI mới       |     201      |
-|  7  | GET    | `/api/v1/chatbot/conversations/{id}/messages` |  ✓   | Lịch sử chat AI                  |     200      |
-|  8  | POST   | `/api/v1/chatbot/conversations/{id}/stream`   |  ✓   | Streaming SSE chat AI            |  200 (SSE)   |
-|  9  | DELETE | `/api/v1/chatbot/conversations/{id}`          |  ✓   | Xóa cuộc trò chuyện AI           |     204      |
-| 10  | POST   | `/api/v1/speech-to-text`                      |  ✓   | Chuyển giọng nói → text          |     200      |
-
-_Bảng 2.4: API Endpoints — Module Media, Thông báo & AI_
-
-## 2.9 Biểu đồ hoạt động — Luồng upload media & push notification
-
-```mermaid
-flowchart TD
-    A([Bắt đầu]) --> B[Người dùng chọn file đính kèm]
-    B --> C{Loại file?}
-    C -->|Ảnh| D[ImagePicker.pickImage]
-    C -->|Video/Tài liệu/Audio| E[FilePicker.pickFiles]
-    D --> F[Tạo multipart request]
-    E --> F
-    F --> G[POST /api/v1/messages/?room=id]
-    G --> H[AttachmentService.createAttachment]
-    H --> I[FileTypeService.determineFileType]
-    I --> J{FileType?}
-    J -->|IMAGE| K[FileType.IMAGE]
-    J -->|VIDEO| L[FileType.VIDEO]
-    J -->|PDF/DOC| M[FileType.DOCUMENT]
-    J -->|MP3/WAV| N[FileType.AUDIO]
-    J -->|Khác| O[FileType.RAW]
-    K --> P[S3Service.upload → VersityGW]
-    L --> P
-    M --> P
-    N --> P
-    O --> P
-    P --> Q[INSERT Attachment + ChatMessage]
-    Q --> R[STOMP broadcast tin nhắn]
-    R --> S[NotificationService.notifyNewMessage]
-    S --> T{Push enabled?}
-    T -->|Không| U([Kết thúc])
-    T -->|Có| V[FcmTokenService.getTokens]
-    V --> W[Firebase sendMulticast]
-    W --> U
-```
-
-[image: tv4_bieu_o_hoat_ong_upload_media_push_notification.png]
-_Hình 2.17: Biểu đồ hoạt động — Upload media & push notification_
-
----
-
-<div style="page-break-before: always;"></div>
 
 # Chương 3: Kết quả
 
@@ -1002,6 +907,9 @@ _Hình 3.3: Kết quả — Push notification_
 - **Xóa**: `DELETE /api/v1/chatbot/conversations/{id}` → cascade delete messages.
 - **MCP Support**: mcpEnabled flag cho Model Context Protocol integration.
 
+[image: tv4_ket_qua_ai_chatbot.png]
+_Hình 3.4: Kết quả — AI Chatbot_
+
 `[Ảnh chụp màn hình AI Chatbot — placeholder]`
 
 ### 3.3.5 Gọi video 1-1 (Agora RTC)
@@ -1044,7 +952,7 @@ _Hình 3.5: Kết quả — Gọi video 1-1_
 | 21  | Multi-device  | Push to 2 devices           | ✅ Đạt  | Both receive          |
 | 22  | Token cleanup | Expired token               | ✅ Đạt  | Auto cleanup job      |
 
-_Bảng 3.2: Kết quả thử nghiệm chức năng Media, Thông báo & AI_
+_Bảng 3.1: Kết quả thử nghiệm chức năng Media, Thông báo & AI_
 
 **Số liệu demo:**
 
@@ -1068,7 +976,7 @@ _Bảng 3.2: Kết quả thử nghiệm chức năng Media, Thông báo & AI_
 | Chatbot conversation    |  ✅ Đạt  | CRUD + history đầy đủ                      |
 | Fallback model          |  ✅ Đạt  | Auto-fallback khi rate limited             |
 
-_Bảng 3.3: Đánh giá kiến trúc module Media, Thông báo & AI_
+_Bảng 3.2: Đánh giá kiến trúc module Media, Thông báo & AI_
 
 ### Phân tích hiệu năng
 
@@ -1079,7 +987,7 @@ _Bảng 3.3: Đánh giá kiến trúc module Media, Thông báo & AI_
 | AI chatbot first token   |     ~1s      |   < 3s   |  ✅  |
 | AI chatbot full response |     ~5s      |  < 10s   |  ✅  |
 
-_Bảng 3.4: Phân tích hiệu năng module AI & Media_
+_Bảng 3.3: Phân tích hiệu năng module AI & Media_
 
 ## 3.5 Kết luận và hạn chế
 

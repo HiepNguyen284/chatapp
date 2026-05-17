@@ -61,12 +61,12 @@
 | Hình 2.11 | Giao diện Tạo nhóm |
 | Hình 2.12 | Giao diện Quản lý thành viên nhóm |
 | Hình 2.13 | Giao diện Trang chủ (Tabs) |
-| Hình 2.15 | Biểu đồ hoạt động — Luồng tạo nhóm chat |
 | Hình 3.1 | Sơ đồ triển khai Docker Compose |
 | Hình 3.2 | Kết quả — Danh sách chat |
 | Hình 3.3 | Kết quả — Tạo nhóm |
 | Hình 3.4 | Kết quả — Quản lý thành viên |
 | Hình 3.5 | Kết quả — Ghim chat |
+| Hình 3.6 | Kết quả — Tìm kiếm người dùng |
 
 *Bảng 0.3: Danh sách hình*
 
@@ -79,11 +79,8 @@
 | Bảng 1.1 | Yêu cầu chức năng |
 | Bảng 1.2 | Yêu cầu phi chức năng |
 | Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 1.6 | Đặc tả UC-09 — Tạo nhóm chat |
-| Bảng 1.7 | Đặc tả UC-13 — Ghim cuộc trò chuyện |
-| Bảng 1.8 | Đặc tả UC-15 — Quản lý thành viên nhóm |
-| Bảng 2.1 | Danh sách STOMP events — Module Nhóm |
-| Bảng 2.5 | API Endpoints — Module Danh sách chat & Nhóm |
+| Bảng 3.1 | Danh sách services trong Docker Compose |
+| Bảng 3.2 | Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm |
 
 *Bảng 0.4: Danh sách bảng*
 
@@ -191,55 +188,6 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 | **Containerization** | Docker Compose | — | Triển khai multi-service |
 
 *Bảng 1.3: So sánh lựa chọn công nghệ*
-
----
-
-<div style="page-break-before: always;"></div>
-
-
-
-## 1.7 Đặc tả Use Case chi tiết — Danh sách chat & Nhóm
-
-### UC-09: Tạo nhóm chat
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Tạo nhóm chat mới |
-| **Actor** | Người dùng (đã đăng nhập) |
-| **Tiền điều kiện** | User đã có ≥2 bạn bè để mời |
-| **Hậu điều kiện** | ChatRoom(GROUP) được tạo, tất cả thành viên được thông báo |
-| **Luồng chính** | 1. Nhấn "Tạo nhóm". 2. Nhập tên nhóm, chọn ≥2 thành viên. 3. `POST /api/v1/chatrooms/groups/`. 4. GroupChatService validate memberIds.size + creator ≥ 3. 5. Tạo ChatRoom(GROUP) + ChatRoomMember records. 6. Creator có isAdmin = true. 7. STOMP notify tất cả thành viên. |
-| **Luồng ngoại lệ** | 4a. < 3 thành viên → 400 Bad Request. |
-| **API** | `POST /api/v1/chatrooms/groups/` |
-
-*Bảng 1.6: Đặc tả UC-09 — Tạo nhóm chat*
-
-### UC-13: Ghim cuộc trò chuyện
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Ghim/bỏ ghim cuộc trò chuyện |
-| **Actor** | Người dùng (thành viên chatroom) |
-| **Tiền điều kiện** | ChatRoom tồn tại, user là thành viên |
-| **Hậu điều kiện** | ChatRoomPin record được tạo/xóa, danh sách chat sắp xếp lại |
-| **Luồng chính** | 1. Long-press ChatRoomTile → "Ghim". 2. `POST /api/v1/chatrooms/{id}/pin/`. 3. Tạo ChatRoomPin (unique user_id + chat_room_id). 4. ChatRoomsProvider cập nhật pinnedRoomIds. 5. Rooms ghim lên đầu danh sách. |
-| **Luồng ngoại lệ** | 3a. Đã ghim → 409 Conflict. |
-| **API** | `POST /api/v1/chatrooms/{id}/pin/` (ghim), `DELETE` (bỏ ghim) |
-
-*Bảng 1.7: Đặc tả UC-13 — Ghim cuộc trò chuyện*
-
-*Bảng 1.8: Đặc tả UC-15 — Quản lý thành viên nhóm*
-
-### UC-14: Tìm kiếm người dùng
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Tìm kiếm người dùng theo tên hoặc username |
-| **Actor** | Người dùng |
-| **Tiền điều kiện** | User đã đăng nhập |
-| **Hậu điều kiện** | Danh sách kết quả phù hợp hiển thị |
-| **Luồng chính** | 1. Nhấn icon tìm kiếm (🔍). 2. Nhập từ khóa (keyword). 3. `GET /api/v1/users/search?keyword=`. 4. UserService sử dụng `ILIKE` trong PostgreSQL để tìm kiếm mờ. 5. Trả về danh sách `UserSearchDto`. 6. Hiển thị kết quả trên UI. |
-| **API** | `GET /api/v1/users/search?keyword=` |
 
 ---
 
@@ -672,28 +620,7 @@ sequenceDiagram
 [image: tv3_bieu_o_tuan_tu_roi_nhom_giai_tan_nhom.png]
 *Hình 2.8: Biểu đồ tuần tự — Rời nhóm & Giải tán nhóm*
 
-### 2.5.5 Chi tiết mô hình sự kiện WebSocket — Module Nhóm
 
-Hệ thống sử dụng nhiều loại STOMP event để đồng bộ trạng thái nhóm realtime:
-
-| Event | STOMP Destination | Payload | Trigger |
-|-------|-------------------|---------|---------|
-| Group Created | `/user/queue/chatrooms/created/` | `ChatRoomCreatedEvent` | Tạo nhóm mới |
-| Group Updated | `/user/queue/groups/group_updated` | `GroupUpdatedEvent` | Đổi tên/ảnh nhóm |
-| Members Added | `/user/queue/groups/members_added` | `GroupMembersAddedEvent` | Thêm thành viên |
-| Member Removed | `/user/queue/groups/member_removed` | `GroupMemberRemovedEvent` | Xóa thành viên |
-| Group Added | `/user/queue/groups/added` | `GroupAddedEvent` | Được thêm vào nhóm |
-| Room Pinned | `/user/queue/chatrooms/pinned` | `ChatRoomPinnedEvent` | Ghim/bỏ ghim |
-| Friend Removed | `/user/queue/friends/removed/` | `FriendRemovedEvent` | Giải tán nhóm |
-
-*Bảng 2.1: Danh sách STOMP events — Module Nhóm*
-
-**Đặc điểm kỹ thuật RealtimeService (Flutter):**
-- File: `lib/services/realtime_service.dart` — 1021 dòng, 30KB
-- Quản lý 15+ `StreamController.broadcast()` cho các loại event khác nhau
-- `_requestedRooms` Set theo dõi rooms cần subscribe
-- `_activeRoomSubscriptions`, `_activeTypingSubscriptions`, `_activeReadSubscriptions` ngăn duplicate subscriptions
-- Auto-reconnect với fresh JWT token sau 4 giây khi connection drop
 
 ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
 
@@ -876,55 +803,6 @@ erDiagram
 
 <div style="page-break-before: always;"></div>
 
-
-
-
-## 2.8 Bảng API Endpoints — Module Danh sách chat & Nhóm
-
-| STT | Method | Endpoint | Auth | Mô tả | Status Codes |
-|:---:|--------|----------|:----:|-------|:------------:|
-| 1 | GET | `/api/v1/chatrooms/` | ✓ | Danh sách chatrooms | 200 |
-| 2 | GET | `/api/v1/chatrooms/{id}` | ✓ | Chi tiết chatroom | 200 |
-| 3 | POST | `/api/v1/chatrooms/groups/` | ✓ | Tạo nhóm chat | 201, 400 |
-| 4 | PATCH | `/api/v1/chatrooms/{id}/groups/` | ✓ | Đổi tên nhóm | 200, 403 |
-| 5 | PUT | `/api/v1/chatrooms/{id}/groups/` | ✓ | Đổi ảnh nhóm (multipart) | 200, 403 |
-| 6 | POST | `/api/v1/chatrooms/{id}/groups/members/` | ✓ | Thêm thành viên | 201, 403, 409 |
-| 7 | DELETE | `/api/v1/chatrooms/{id}/groups/members/{uid}/` | ✓ | Xóa thành viên | 204, 403 |
-| 8 | DELETE | `/api/v1/chatrooms/{id}/groups/leave/` | ✓ | Rời nhóm | 204 |
-| 9 | DELETE | `/api/v1/chatrooms/{id}/groups/dissolve/` | ✓ | Giải tán nhóm | 204, 403 |
-| 10 | POST | `/api/v1/chatrooms/{id}/pin/` | ✓ | Ghim chat | 201, 409 |
-| 11 | DELETE | `/api/v1/chatrooms/{id}/pin/` | ✓ | Bỏ ghim | 204 |
-| 12 | GET | `/api/v1/users/search?keyword=` | ✓ | Tìm kiếm người dùng | 200 |
-
-*Bảng 2.5: API Endpoints — Module Danh sách chat & Nhóm*
-
-## 2.9 Biểu đồ hoạt động — Luồng tạo và quản lý nhóm chat
-
-```mermaid
-flowchart TD
-    A([Bắt đầu]) --> B[Nhấn Tạo nhóm]
-    B --> C[Nhập tên nhóm]
-    C --> D[Chọn thành viên từ danh sách bạn bè]
-    D --> E{≥ 2 thành viên được chọn?}
-    E -->|Không| F[Hiển thị lỗi: cần ≥ 2 người]
-    F --> D
-    E -->|Có| G[POST /api/v1/chatrooms/groups/]
-    G --> H[GroupChatService.createGroup]
-    H --> I[Tạo ChatRoom TYPE=GROUP]
-    I --> J[Tạo ChatRoomMember cho mỗi thành viên]
-    J --> K[Creator.isAdmin = true]
-    K --> L[STOMP notify tất cả thành viên]
-    L --> M[Nhóm xuất hiện trong danh sách chat]
-    M --> N([Kết thúc])
-```
-
-[image: tv3_bieu_o_hoat_ong_luong_tao_nhom_chat.png]
-*Hình 2.15: Biểu đồ hoạt động — Luồng tạo nhóm chat*
-
----
-
-<div style="page-break-before: always;"></div>
-
 # Chương 3: Kết quả
 
 ## 3.1 Mô hình triển khai
@@ -965,18 +843,6 @@ graph TB
 | versitygw | versity/versitygw | S3-compatible storage |
 
 *Bảng 3.1: Danh sách services trong Docker Compose*
-
-### Cấu hình Caddy Gateway (Caddyfile)
-
-```
-:8080 {
-    handle /api/*     { reverse_proxy app:8080 }
-    handle /ws*       { reverse_proxy app:8080 }
-    handle /socket*   { reverse_proxy app:8080 }
-    handle_path /storage/* { reverse_proxy versitygw:9000 }
-    handle            { reverse_proxy app:8080 }
-}
-```
 
 ## 3.2 Các bước cài đặt và triển khai
 
@@ -1087,7 +953,7 @@ flutter pub get && flutter run
 | 19 | Giải tán | Admin dissolve | ✅ Đạt | Room deleted |
 | 20 | Giải tán | Non-admin dissolve | ✅ Đạt | 403 Forbidden |
 
-*Bảng 3.3: Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm*
+*Bảng 3.2: Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm*
 
 **Số liệu demo:**
 - Số nhóm chat tạo thử nghiệm: 8
@@ -1097,32 +963,7 @@ flutter pub get && flutter run
 - Thời gian load danh sách chat: < 500ms
 
 
-### Đánh giá kiến trúc
 
-| Tiêu chí | Đánh giá | Chi tiết |
-|----------|:--------:|---------|
-| Danh sách chat load | ✅ Đạt | < 500ms cho tất cả rooms |
-| Ghim chat | ✅ Đạt | Unique constraint, sắp xếp đúng |
-| Tạo nhóm | ✅ Đạt | Validate ≥3 thành viên |
-| Quản lý thành viên | ✅ Đạt | Admin/member phân quyền rõ |
-| Rời nhóm | ✅ Đạt | Auto-transfer admin khi cần |
-| Giải tán nhóm | ✅ Đạt | Cascade delete đúng |
-| STOMP realtime | ✅ Đạt | 7 loại events cho nhóm |
-| GroupChatService | ⚠️ Cần refactor | 22KB, nên tách thành sub-services |
-
-*Bảng 3.4: Đánh giá kiến trúc module Danh sách chat & Nhóm*
-
-### Phân tích hiệu năng
-
-| Thao tác | Thời gian TB | Mục tiêu | Đạt? |
-|----------|:-----------:|:--------:|:----:|
-| Load danh sách chat | ~300ms | < 500ms | ✅ |
-| Tạo nhóm 5 người | ~400ms | < 1s | ✅ |
-| Thêm thành viên | ~200ms | < 500ms | ✅ |
-| Ghim/bỏ ghim | ~100ms | < 300ms | ✅ |
-| Giải tán nhóm | ~500ms | < 1s | ✅ |
-
-*Bảng 3.5: Phân tích hiệu năng module Nhóm*
 
 ## 3.5 Kết luận và hạn chế
 
