@@ -61,7 +61,6 @@
 | Hình 2.11 | Giao diện Tạo nhóm |
 | Hình 2.12 | Giao diện Quản lý thành viên nhóm |
 | Hình 2.13 | Giao diện Trang chủ (Tabs) |
-| Hình 2.14 | Luồng dữ liệu Provider trong Flutter |
 | Hình 2.15 | Biểu đồ hoạt động — Luồng tạo nhóm chat |
 | Hình 3.1 | Sơ đồ triển khai Docker Compose |
 | Hình 3.2 | Kết quả — Danh sách chat |
@@ -80,21 +79,11 @@
 | Bảng 1.1 | Yêu cầu chức năng |
 | Bảng 1.2 | Yêu cầu phi chức năng |
 | Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 1.4 | So sánh ChatApp với các ứng dụng nhắn tin hiện có |
-| Bảng 1.5 | Tổng hợp các mẫu thiết kế áp dụng |
 | Bảng 1.6 | Đặc tả UC-09 — Tạo nhóm chat |
 | Bảng 1.7 | Đặc tả UC-13 — Ghim cuộc trò chuyện |
 | Bảng 1.8 | Đặc tả UC-15 — Quản lý thành viên nhóm |
 | Bảng 2.1 | Danh sách STOMP events — Module Nhóm |
-| Bảng 2.2 | Chi tiết các trường entity trong hệ thống |
-| Bảng 2.3 | Cấu trúc phân lớp Flutter Frontend |
-| Bảng 2.4 | Danh sách services trong Flutter Frontend |
 | Bảng 2.5 | API Endpoints — Module Danh sách chat & Nhóm |
-| Bảng 3.1 | Danh sách services trong Docker Compose |
-| Bảng 3.2 | Các biến môi trường cấu hình hệ thống |
-| Bảng 3.3 | Kết quả thử nghiệm chức năng Danh sách chat & Chat nhóm |
-| Bảng 3.4 | Đánh giá kiến trúc module Danh sách chat & Nhóm |
-| Bảng 3.5 | Phân tích hiệu năng module Nhóm |
 
 *Bảng 0.4: Danh sách bảng*
 
@@ -208,37 +197,6 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 <div style="page-break-before: always;"></div>
 
 
-## 1.5 So sánh với các ứng dụng nhắn tin hiện có
-
-| Tiêu chí | ChatApp | Zalo | Telegram | Messenger |
-|----------|---------|------|----------|-----------|
-| **Nền tảng** | Android, iOS, Web (Flutter) | Android, iOS, Web, Desktop | Đa nền tảng | Android, iOS, Web |
-| **Nhắn tin realtime** | STOMP WebSocket | Proprietary | MTProto | Proprietary |
-| **Nhóm chat** | ≥3 thành viên, admin/member | ≥3, nhiều quyền | ≥3, supergroup 200K | ≥3, admin |
-| **AI tích hợp** | Tóm tắt, dịch, chatbot (LLM) | Không | Bot API | Meta AI |
-| **Self-hosted** | Docker Compose | Không | TDLib | Không |
-| **Mã hóa password** | Argon2 (state-of-the-art) | Không rõ | Không rõ | Không rõ |
-
-*Bảng 1.4: So sánh ChatApp với các ứng dụng nhắn tin hiện có*
-
-## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)
-
-| Mẫu thiết kế | Loại (GoF) | Vị trí áp dụng | Lợi ích chính |
-|---------------|------------|-----------------|---------------|
-| Repository | Structural | JPA Repositories | Tách data access, testability |
-| Service Layer | Architectural | Service classes | Single Responsibility |
-| DTO | Structural | API request/response | Bảo vệ domain model |
-| Observer | Behavioral | STOMP, FCM | Loose coupling, realtime |
-| Strategy | Behavioral | FileTypeService | Open/Closed Principle |
-| Proxy | Structural | Caddy, Security | Access control, routing |
-| Builder | Creational | PromptService | Readable construction |
-
-*Bảng 1.5: Tổng hợp các mẫu thiết kế áp dụng*
-
-**Chi tiết áp dụng trong module Danh sách chat & Nhóm:**
-- **Repository Pattern:** `ChatRoomRepository`, `ChatRoomMemberRepository`, `ChatRoomPinRepository` tách biệt truy vấn DB.
-- **Service Layer:** `GroupChatService` (~22KB, lớn nhất hệ thống) đóng gói toàn bộ business logic quản lý nhóm.
-- **Observer Pattern:** STOMP events cho group updates — `/user/queue/groups/group_updated`, `/user/queue/groups/member_removed`, `/user/queue/groups/members_added`.
 
 ## 1.7 Đặc tả Use Case chi tiết — Danh sách chat & Nhóm
 
@@ -846,35 +804,7 @@ erDiagram
 
 [image: tv3_so_o_thuc_the_quan_he_er_diagram.png]
 *Hình 2.9: Sơ đồ thực thể quan hệ (ER Diagram)*
-**Chi tiết các trường quan trọng:**
-
-| Entity | Trường | Kiểu | Constraint | Mô tả |
-|--------|--------|------|-----------|-------|
-| USER | username | String | UNIQUE, NOT NULL | Tên đăng nhập duy nhất |
-| USER | password | String | NOT NULL | Mã hóa Argon2 |
-| USER | display_name | String | Nullable | Tên hiển thị |
-| CHAT_ROOM | type | Enum | NOT NULL | DUO hoặc GROUP |
-| CHAT_ROOM | name | String | Nullable | Tên nhóm (NULL cho DUO) |
-| CHAT_MESSAGE | status | Enum | NOT NULL | SENT / RECALLED |
-| CHAT_MESSAGE | reply_to_id | Long | FK, Nullable | Tin nhắn được trả lời |
-| CHAT_ROOM_MEMBER | is_admin | Boolean | NOT NULL | Quyền admin trong nhóm |
-| CHAT_ROOM_PIN | (user, room) | — | UNIQUE | Ngăn ghim trùng |
-| ATTACHMENT | type | Enum | NOT NULL | IMAGE/VIDEO/DOCUMENT/AUDIO/RAW |
-| FCM_TOKEN | (user, token) | — | UNIQUE | Ngăn đăng ký trùng |
-| CHATBOT_MESSAGE | role | Enum | NOT NULL | USER/ASSISTANT/SYSTEM/TOOL |
-| INVITATION | status | Enum | NOT NULL | PENDING/ACCEPTED/REJECTED |
-
-*Bảng 2.2: Chi tiết các trường entity trong hệ thống*
-
-**Các ràng buộc quan trọng:**
-- **Cascade Delete:** Khi xóa ChatRoom → cascade xóa ChatMessage, ChatRoomMember, ChatRoomPin, ChatRoomReadState.
-- **Unique Constraints:** (user_id, chat_room_id) trong ChatRoomPin, (user_id, token) trong FcmToken, (blocker_id, blocked_id) trong UserBlock.
-- **Foreign Key References:** ChatMessage.sender_id → User, ChatMessage.room_id → ChatRoom, Invitation.sender_id → User.
-- **Index Strategy:** Index trên username (User), 
-oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
-
-
-**★ Entity thuộc phạm vi Thành viên 3:** CHAT_ROOM (GROUP), CHAT_ROOM_MEMBER, CHAT_ROOM_PIN, CHAT_ROOM_READ_STATE.
+**★ Entity thuộc phạm vi Thành viên 4:** CHAT_ROOM (GROUP), CHAT_ROOM_MEMBER, CHAT_ROOM_PIN, CHAT_ROOM_READ_STATE.
 
 ## 2.7 Giao diện đáp ứng chức năng
 
@@ -948,120 +878,6 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 
 
 
-**Chi tiết cấu hình WebSocket (WebSocketConfig.kt):**
-
-```kotlin
-@Configuration
-@EnableWebSocketMessageBroker
-class WebSocketConfig : WebSocketMessageBrokerConfigurer {
-    override fun configureMessageBroker(registry: MessageBrokerRegistry) {
-        registry.enableStompBrokerRelay("/topic", "/queue")
-               .setRelayHost(relayHost)  // Apache Artemis
-               .setRelayPort(relayPort)  // 61613
-        registry.setApplicationDestinationPrefixes("/app")
-    }
-    override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/socket").withSockJS()  // SockJS fallback
-        registry.addEndpoint("/ws")                    // Native WebSocket
-    }
-}
-```
-
-**Giải thích:**
-- STOMP Broker Relay kết nối đến Apache Artemis (external broker) thay vì sử dụng simple broker.
-- Hai endpoints: `/socket` (SockJS fallback cho trình duyệt cũ) và `/ws` (native WebSocket cho Flutter).
-- `WebSocketAuthenticationInterceptor` xác thực JWT token trong STOMP CONNECT frame.
-- Application destination prefix `/app` cho messages từ client → server (typing indicator, read receipt).
-
-**Chi tiết cấu hình Security (SecurityConfig.kt):**
-
-```kotlin
-@Bean
-fun passwordEncoder() = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-
-@Bean
-fun filterChain(http: HttpSecurity): SecurityFilterChain {
-    http {
-        oauth2ResourceServer { jwt { jwtDecoder = jwtDecoder } }
-        authorizeHttpRequests {
-            authorize("/api/v1/messages/**", authenticated)
-            authorize("/api/v1/chatbot/**", authenticated)
-            authorize("/api/v1/invitations/**", authenticated)
-            authorize("/api/v1/users/me/**", authenticated)
-            authorize(anyRequest, permitAll)
-        }
-    }
-}
-```
-
-**Giải thích:**
-- Sử dụng **Argon2PasswordEncoder** (PHC winner 2015) — bảo mật hơn BCrypt nhờ memory-hard function.
-- JWT xác thực qua **HMAC-SHA256** (symmetric key ≥ 32 bytes) với NimbusJwtDecoder.
-- Các endpoint `/api/v1/messages/**`, `/api/v1/chatbot/**`, `/api/v1/invitations/**`, `/api/v1/users/me/**` yêu cầu authenticated.
-- Các endpoint public: đăng ký, đăng nhập, tìm kiếm user, quên mật khẩu.
-
-
-**Chi tiết kiến trúc Flutter Frontend:**
-
-Hệ thống Flutter sử dụng **Provider** (official state management) với cấu trúc phân lớp rõ ràng:
-
-| Layer | Thư mục | Chức năng | Ví dụ |
-|-------|---------|-----------|-------|
-| **Models** | `lib/models/` | Data classes (JSON serialization) | `ChatRoomModel`, `MessageReceiveModel` |
-| **Services** | `lib/services/` | API calls, business logic | `RealtimeService` (30KB), `ChatbotService` |
-| **Providers** | `lib/providers/` | State management (ChangeNotifier) | `ChatRoomsProvider`, `AuthProvider` |
-| **Screens** | `lib/screens/` | UI pages | `ChatScreen`, `ChatbotScreen` |
-| **Widgets** | `lib/widgets/` | Reusable UI components | `MessageBubble`, `AppAvatar` |
-| **Utils** | `lib/utils/` | Helpers, formatters | Date formatting, error handling |
-| **Core** | `lib/core/` | Constants, theme | `AppConstants`, base URL |
-
-*Bảng 2.3: Cấu trúc phân lớp Flutter Frontend*
-
-**Các service chính (Frontend):**
-
-| Service | File | Kích thước | Chức năng |
-|---------|------|-----------|-----------|
-| RealtimeService | `realtime_service.dart` | 30KB (1021 dòng) | WebSocket STOMP, 15+ event types |
-| MessageService | `message_service.dart` | 8.6KB | CRUD tin nhắn, multipart upload |
-| GroupChatService | `group_chat_service.dart` | 8KB | Quản lý nhóm chat |
-| ChatbotService | `chatbot_service.dart` | 5.4KB | AI chatbot SSE streaming |
-| ApiClient | `api_client.dart` | 8.1KB | HTTP client, JWT refresh, error handling |
-| LocalNotificationService | `local_notification_service.dart` | 5.3KB | Hiển thị notification trên device |
-| FcmTokenManagerService | `fcm_token_manager_service.dart` | 3.8KB | Quản lý FCM token lifecycle |
-| AgoraService | `agora_service.dart` | 6.9KB | Video call via Agora RTC |
-
-*Bảng 2.4: Danh sách services trong Flutter Frontend*
-
-**Luồng dữ liệu Provider:**
-
-`mermaid
-flowchart LR
-    UI[Screen/Widget] -->|listen| Provider
-    Provider -->|call| Service
-    Service -->|HTTP| ApiClient
-    ApiClient -->|REST| CaddyGW[Caddy Gateway]
-    Service -->|STOMP| RealtimeService
-    RealtimeService -->|WebSocket| CaddyGW
-    Provider -->|notifyListeners| UI
-`
-
-[image: tv3_luong_du_lieu_provider_trong_flutter.png]
-*Hình 2.14: Luồng dữ liệu Provider trong Flutter*
-
-**Chi tiết ApiClient (`api_client.dart`, 8.1KB):**
-- Tự động attach JWT access token vào mọi request header.
-- Khi nhận 401 Unauthorized, tự động refresh access token và retry request.
-- Sử dụng `TokenStorageService` (SharedPreferences) để lưu/đọc token.
-- Support multipart/form-data upload cho ảnh và media files.
-- Centralized error handling: parse error response từ server.
-
-**Chi tiết RealtimeService (`realtime_service.dart`, 30KB):**
-- Quản lý lifecycle WebSocket: connect, disconnect, reconnect.
-- 15+ `StreamController.broadcast()` cho các loại event.
-- `_requestedRooms` Set: theo dõi rooms cần subscribe.
-- `_activeRoomSubscriptions`: ngăn duplicate STOMP subscriptions.
-- Reconnect strategy: deactivate old client → refresh token → create new client.
-- SockJS fallback endpoint `/socket` + native WebSocket endpoint `/ws`.
 
 ## 2.8 Bảng API Endpoints — Module Danh sách chat & Nhóm
 
@@ -1161,29 +977,6 @@ graph TB
     handle            { reverse_proxy app:8080 }
 }
 ```
-
-### Biến môi trường cấu hình (.env)
-
-| Biến | Mô tả | Ví dụ |
-|------|-------|-------|
-| `POSTGRES_USER` | Database username | chatapp |
-| `POSTGRES_PASSWORD` | Database password | (secret) |
-| `S3_ACCESS_KEY` | VersityGW access key | minioadmin |
-| `JWTS_SECRET` | JWT signing secret (≥32 bytes) | (secret) |
-| `LLM_BASE_URL` | OpenAI-compatible API URL | https://kilo.ai/v1 |
-| `LLM_API_KEY` | API key cho dịch vụ AI | (secret) |
-| `FIREBASE_CREDENTIALS` | Path to Firebase key | /secrets/firebase-service-account.json |
-
-*Bảng 3.2: Các biến môi trường cấu hình hệ thống*
-
-
-
-**Luồng khởi động:****
-1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
-2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
-3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
-4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
-5. Toàn bộ hệ thống sẵn sàng phục vụ qua port 8080.
 
 ## 3.2 Các bước cài đặt và triển khai
 

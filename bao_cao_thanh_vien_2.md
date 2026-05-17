@@ -1,102 +1,91 @@
 # BẢNG PHÂN CÔNG NHIỆM VỤ
 
-| STT | Họ và tên | MSSV | Nhiệm vụ cụ thể | Đóng góp (%) |
-|:---:|-----------|------|------------------|:------------:|
-| 1 | Nguyễn Văn Duy | B22DCCN154 | Gửi hình ảnh/media, Thông báo đẩy (FCM), Chatbot AI streaming, Video Call (Agora) | 25% |
-| 2 | Nguyễn Hoàng Hiệp | B22DCCN298 | Chat cá nhân 1-1, Gửi/nhận tin nhắn, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI, Voice-to-Text | 25% |
-| 3 | Nguyễn Quang Minh | B22DCCN538 | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI | 25% |
-| 4 | Đặng Hữu Hoàng Quân | B22DCCN658 | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin | 25% |
+| STT | Họ và tên           | MSSV       | Nhiệm vụ cụ thể                                                                                                          | Đóng góp (%) |
+| :-: | ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ | :----------: |
+|  1  | Nguyễn Văn Duy      | B22DCCN154 | Gửi hình ảnh/media, Thông báo đẩy (FCM), Chatbot AI streaming, Video Call (Agora)                                        |     25%      |
+|  2  | Nguyễn Hoàng Hiệp   | B22DCCN298 | Chat cá nhân 1-1, Gửi/nhận tin nhắn, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI, Voice-to-Text  |     25%      |
+|  3  | Nguyễn Quang Minh   | B22DCCN538 | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI |     25%      |
+|  4  | Đặng Hữu Hoàng Quân | B22DCCN658 | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin                      |     25%      |
 
-*Bảng 0.1: Bảng phân công nhiệm vụ các thành viên*
+_Bảng 0.1: Bảng phân công nhiệm vụ các thành viên_
 
 ---
 
 # MỤC LỤC
+
 ---
 
 <div style="page-break-before: always;"></div>
 
 # DANH SÁCH VIẾT TẮT
 
-| Viết tắt | Ý nghĩa |
-|----------|---------|
-| API | Application Programming Interface |
-| CRUD | Create, Read, Update, Delete |
-| DTO | Data Transfer Object |
-| FCM | Firebase Cloud Messaging |
-| GVHD | Giảng viên hướng dẫn |
-| HTTP | HyperText Transfer Protocol |
-| JPA | Java Persistence API |
-| JWT | JSON Web Token |
-| LLM | Large Language Model |
-| MSSV | Mã số sinh viên |
-| ORM | Object-Relational Mapping |
-| REST | Representational State Transfer |
-| S3 | Simple Storage Service |
-| SDK | Software Development Kit |
-| SQL | Structured Query Language |
-| SSE | Server-Sent Events |
-| STOMP | Simple Text Oriented Messaging Protocol |
-| UI | User Interface |
-| UML | Unified Modeling Language |
+| Viết tắt  | Ý nghĩa                                         |
+| --------- | ----------------------------------------------- |
+| API       | Application Programming Interface               |
+| CRUD      | Create, Read, Update, Delete                    |
+| DTO       | Data Transfer Object                            |
+| FCM       | Firebase Cloud Messaging                        |
+| GVHD      | Giảng viên hướng dẫn                            |
+| HTTP      | HyperText Transfer Protocol                     |
+| JPA       | Java Persistence API                            |
+| JWT       | JSON Web Token                                  |
+| LLM       | Large Language Model                            |
+| MSSV      | Mã số sinh viên                                 |
+| ORM       | Object-Relational Mapping                       |
+| REST      | Representational State Transfer                 |
+| S3        | Simple Storage Service                          |
+| SDK       | Software Development Kit                        |
+| SQL       | Structured Query Language                       |
+| SSE       | Server-Sent Events                              |
+| STOMP     | Simple Text Oriented Messaging Protocol         |
+| UI        | User Interface                                  |
+| UML       | Unified Modeling Language                       |
 | WebSocket | Giao thức truyền thông hai chiều thời gian thực |
 
-*Bảng 0.2: Danh sách viết tắt*
+_Bảng 0.2: Danh sách viết tắt_
 
 ---
 
 # DANH SÁCH HÌNH
 
-| Ký hiệu | Mô tả |
-|----------|-------|
-| Hình 2.1 | Sơ đồ kiến trúc tổng quan hệ thống ChatApp |
-| Hình 2.2 | Biểu đồ Use Case tổng quan |
-| Hình 2.3 | Biểu đồ Use Case chi tiết — Chat cá nhân & Tin nhắn |
-| Hình 2.4 | Biểu đồ lớp — Module Chat cá nhân & Tin nhắn |
-| Hình 2.5 | Biểu đồ tuần tự — Gửi tin nhắn 1-1 |
-| Hình 2.6 | Biểu đồ tuần tự — Đánh dấu đã xem |
-| Hình 2.7 | Biểu đồ tuần tự — Dịch tin nhắn AI |
-| Hình 2.8 | Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết) |
-| Hình 2.9 | Biểu đồ tuần tự — Tính năng Voice-to-Text |
-| Hình 2.10 | Sơ đồ thực thể quan hệ (ER Diagram) |
-| Hình 2.11 | Giao diện ChatScreen — Bong bóng tin nhắn |
-| Hình 2.12 | Giao diện ChatScreen — Thanh nhập tin nhắn |
-| Hình 2.13 | Giao diện Typing indicator |
-| Hình 2.14 | Biểu đồ hoạt động — Luồng gửi và nhận tin nhắn |
-| Hình 3.1 | Sơ đồ triển khai Docker Compose |
-| Hình 3.2 | Kiến trúc network Docker Compose |
-| Hình 3.3 | Kết quả — Gửi tin nhắn |
-| Hình 3.4 | Kết quả — Typing indicator |
-| Hình 3.5 | Kết quả — Đã xem |
-| Hình 3.6 | Kết quả — Xóa tin nhắn |
-| Hình 3.7 | Kết quả — Dịch tin nhắn AI |
+| Ký hiệu   | Mô tả                                               |
+| --------- | --------------------------------------------------- |
+| Hình 2.1  | Sơ đồ kiến trúc tổng quan hệ thống ChatApp          |
+| Hình 2.2  | Biểu đồ Use Case tổng quan                          |
+| Hình 2.3  | Biểu đồ Use Case chi tiết — Chat cá nhân & Tin nhắn |
+| Hình 2.4  | Biểu đồ lớp — Module Chat cá nhân & Tin nhắn        |
+| Hình 2.5  | Biểu đồ tuần tự — Gửi tin nhắn 1-1                  |
+| Hình 2.6  | Biểu đồ tuần tự — Đánh dấu đã xem                   |
+| Hình 2.7  | Biểu đồ tuần tự — Dịch tin nhắn AI                  |
+| Hình 2.8  | Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)       |
+| Hình 2.9  | Biểu đồ tuần tự — Tính năng Voice-to-Text           |
+| Hình 2.10 | Sơ đồ thực thể quan hệ (ER Diagram)                 |
+| Hình 2.11 | Giao diện ChatScreen — Bong bóng tin nhắn           |
+| Hình 2.12 | Giao diện ChatScreen — Thanh nhập tin nhắn          |
+| Hình 2.13 | Giao diện Typing indicator                          |
+| Hình 3.1  | Sơ đồ triển khai Docker Compose                     |
+| Hình 3.2  | Kết quả — Gửi tin nhắn                              |
+| Hình 3.3  | Kết quả — Typing indicator                          |
+| Hình 3.4  | Kết quả — Đã xem                                    |
+| Hình 3.5  | Kết quả — Xóa tin nhắn                              |
+| Hình 3.6  | Kết quả — Dịch tin nhắn AI                          |
 
-*Bảng 0.3: Danh sách hình*
+_Bảng 0.3: Danh sách hình_
 
 ---
 
 # DANH SÁCH BẢNG
 
-| Ký hiệu | Mô tả |
-|----------|-------|
-| Bảng 1.1 | Yêu cầu chức năng |
-| Bảng 1.2 | Yêu cầu phi chức năng |
-| Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 1.4 | So sánh ChatApp với các ứng dụng nhắn tin hiện có |
-| Bảng 1.5 | Tổng hợp các mẫu thiết kế áp dụng trong ChatApp |
-| Bảng 1.6 | Đặc tả UC-08 — Gửi tin nhắn 1-1 |
-| Bảng 1.7 | Đặc tả UC-12 — Thu hồi tin nhắn |
-| Bảng 1.8 | Đặc tả UC-17 — Dịch tin nhắn AI |
-| Bảng 2.1 | Danh sách STOMP events — Module Chat |
-| Bảng 2.2 | Chi tiết các trường entity trong hệ thống |
-| Bảng 2.3 | API Endpoints — Module Chat & Tin nhắn |
-| Bảng 3.1 | Danh sách services trong Docker Compose |
-| Bảng 3.2 | Các biến môi trường cấu hình hệ thống |
+| Ký hiệu  | Mô tả                                                |
+| -------- | ---------------------------------------------------- |
+| Bảng 1.1 | Yêu cầu chức năng                                    |
+| Bảng 1.2 | Yêu cầu phi chức năng                                |
+| Bảng 1.3 | So sánh lựa chọn công nghệ                           |
+| Bảng 3.1 | Danh sách services trong Docker Compose              |
+| Bảng 3.2 | Các biến môi trường cấu hình hệ thống                |
 | Bảng 3.3 | Kết quả thử nghiệm chức năng Chat cá nhân & Tin nhắn |
-| Bảng 3.4 | Đánh giá kiến trúc module Chat & Tin nhắn |
-| Bảng 3.5 | Phân tích hiệu năng module Chat |
 
-*Bảng 0.4: Danh sách bảng*
+_Bảng 0.4: Danh sách bảng_
 
 ---
 
@@ -142,183 +131,90 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 ### 1.3.1 Yêu cầu chức năng
 
-| STT | Mã | Yêu cầu | Mô tả |
-|:---:|-----|---------|-------|
-| 1 | FR-01 | Đăng ký tài khoản | Người dùng tạo tài khoản với username và password |
-| 2 | FR-02 | Đăng nhập | Xác thực bằng username/password, trả về JWT token pair |
-| 3 | FR-03 | Quên mật khẩu | Gửi email chứa link reset mật khẩu |
-| 4 | FR-04 | Đổi mật khẩu | Thay đổi mật khẩu khi đã đăng nhập |
-| 5 | FR-05 | Cập nhật profile | Thay đổi displayName và avatar |
-| 6 | FR-06 | Quản lý bạn bè | Gửi/nhận/chấp nhận/từ chối lời mời kết bạn |
-| 7 | FR-07 | Chặn người dùng | Chặn/bỏ chặn user, ngăn gửi tin nhắn và lời mời |
-| 8 | FR-08 | Nhắn tin 1-1 | Gửi/nhận tin nhắn văn bản thời gian thực (DUO) |
-| 9 | FR-09 | Nhắn tin nhóm | Tạo nhóm (≥3 người), gửi tin nhắn trong nhóm |
-| 10 | FR-10 | Gửi media | Upload hình ảnh, video, tài liệu, âm thanh |
-| 11 | FR-11 | Trạng thái tin nhắn | Typing indicator, đã gửi, đã xem |
-| 12 | FR-12 | Xóa tin nhắn | Thu hồi (recall) tin nhắn đã gửi |
-| 13 | FR-13 | Ghim cuộc trò chuyện | Ghim/bỏ ghim chatroom lên đầu danh sách |
-| 14 | FR-14 | Tìm kiếm | Tìm kiếm người dùng theo keyword |
-| 15 | FR-15 | Thông báo đẩy | Push notification khi có tin nhắn mới, lời mời |
-| 16 | FR-16 | Tóm tắt AI | Tóm tắt nội dung hội thoại bằng LLM |
-| 17 | FR-17 | Dịch tin nhắn AI | Dịch nội dung tin nhắn sang ngôn ngữ chọn |
-| 18 | FR-18 | Chatbot AI | Trò chuyện với AI chatbot, hỗ trợ streaming SSE |
-| 19 | FR-19 | Gọi video | Video call 1-1 qua Agora RTC |
-| 20 | FR-20 | Trạng thái online | Hiển thị trạng thái online/offline (Redis presence) |
+| STT | Mã    | Yêu cầu              | Mô tả                                                  |
+| :-: | ----- | -------------------- | ------------------------------------------------------ |
+|  1  | FR-01 | Đăng ký tài khoản    | Người dùng tạo tài khoản với username và password      |
+|  2  | FR-02 | Đăng nhập            | Xác thực bằng username/password, trả về JWT token pair |
+|  3  | FR-03 | Quên mật khẩu        | Gửi email chứa link reset mật khẩu                     |
+|  4  | FR-04 | Đổi mật khẩu         | Thay đổi mật khẩu khi đã đăng nhập                     |
+|  5  | FR-05 | Cập nhật profile     | Thay đổi displayName và avatar                         |
+|  6  | FR-06 | Quản lý bạn bè       | Gửi/nhận/chấp nhận/từ chối lời mời kết bạn             |
+|  7  | FR-07 | Chặn người dùng      | Chặn/bỏ chặn user, ngăn gửi tin nhắn và lời mời        |
+|  8  | FR-08 | Nhắn tin 1-1         | Gửi/nhận tin nhắn văn bản thời gian thực (DUO)         |
+|  9  | FR-09 | Nhắn tin nhóm        | Tạo nhóm (≥3 người), gửi tin nhắn trong nhóm           |
+| 10  | FR-10 | Gửi media            | Upload hình ảnh, video, tài liệu, âm thanh             |
+| 11  | FR-11 | Trạng thái tin nhắn  | Typing indicator, đã gửi, đã xem                       |
+| 12  | FR-12 | Xóa tin nhắn         | Thu hồi (recall) tin nhắn đã gửi                       |
+| 13  | FR-13 | Ghim cuộc trò chuyện | Ghim/bỏ ghim chatroom lên đầu danh sách                |
+| 14  | FR-14 | Tìm kiếm             | Tìm kiếm người dùng theo keyword                       |
+| 15  | FR-15 | Thông báo đẩy        | Push notification khi có tin nhắn mới, lời mời         |
+| 16  | FR-16 | Tóm tắt AI           | Tóm tắt nội dung hội thoại bằng LLM                    |
+| 17  | FR-17 | Dịch tin nhắn AI     | Dịch nội dung tin nhắn sang ngôn ngữ chọn              |
+| 18  | FR-18 | Chatbot AI           | Trò chuyện với AI chatbot, hỗ trợ streaming SSE        |
+| 19  | FR-19 | Gọi video            | Video call 1-1 qua Agora RTC                           |
+| 20  | FR-20 | Trạng thái online    | Hiển thị trạng thái online/offline (Redis presence)    |
 
-*Bảng 1.1: Yêu cầu chức năng*
+_Bảng 1.1: Yêu cầu chức năng_
 
 ### 1.3.2 Yêu cầu phi chức năng
 
-| STT | Mã | Yêu cầu | Mô tả |
-|:---:|-----|---------|-------|
-| 1 | NFR-01 | Hiệu năng | Tin nhắn gửi/nhận trong < 500ms qua WebSocket |
-| 2 | NFR-02 | Bảo mật | JWT authentication, mã hóa password với Argon2 |
-| 3 | NFR-03 | Khả dụng | Hệ thống hoạt động 24/7 với Docker containerization |
-| 4 | NFR-04 | Khả năng mở rộng | Kiến trúc tách biệt cho phép scale từng service |
-| 5 | NFR-05 | Tương thích | Hỗ trợ Android, iOS, Web qua Flutter |
-| 6 | NFR-06 | Cache | Redis cache cho user info và presence |
-| 7 | NFR-07 | Lưu trữ | S3-compatible storage cho media files |
-| 8 | NFR-08 | Triển khai | Docker Compose one-command deployment |
+| STT | Mã     | Yêu cầu          | Mô tả                                               |
+| :-: | ------ | ---------------- | --------------------------------------------------- |
+|  1  | NFR-01 | Hiệu năng        | Tin nhắn gửi/nhận trong < 500ms qua WebSocket       |
+|  2  | NFR-02 | Bảo mật          | JWT authentication, mã hóa password với Argon2      |
+|  3  | NFR-03 | Khả dụng         | Hệ thống hoạt động 24/7 với Docker containerization |
+|  4  | NFR-04 | Khả năng mở rộng | Kiến trúc tách biệt cho phép scale từng service     |
+|  5  | NFR-05 | Tương thích      | Hỗ trợ Android, iOS, Web qua Flutter                |
+|  6  | NFR-06 | Cache            | Redis cache cho user info và presence               |
+|  7  | NFR-07 | Lưu trữ          | S3-compatible storage cho media files               |
+|  8  | NFR-08 | Triển khai       | Docker Compose one-command deployment               |
 
-*Bảng 1.2: Yêu cầu phi chức năng*
+_Bảng 1.2: Yêu cầu phi chức năng_
 
 ## 1.4 Lựa chọn công nghệ
 
-| Thành phần | Công nghệ | Phiên bản | Lý do lựa chọn |
-|------------|-----------|-----------|-----------------|
-| **Backend Framework** | Spring Boot | 4.0.5 | Framework Java phổ biến nhất, hệ sinh thái lớn, hỗ trợ WebSocket, Security, JPA, Mail |
-| **Ngôn ngữ Backend** | Java + Kotlin | Java 21, Kotlin 2.2 | Java 21 với virtual threads, Kotlin bổ sung cú pháp ngắn gọn cho một số service |
-| **Frontend Framework** | Flutter | Dart SDK ^3.5 | Đa nền tảng (Android, iOS, Web), hot reload, hiệu năng native |
-| **Database** | PostgreSQL | 18 | RDBMS mã nguồn mở mạnh mẽ, hỗ trợ ACID, JSON, full-text search |
-| **Cache** | Redis | 8 | In-memory cache nhanh, hỗ trợ pub/sub cho presence tracking |
-| **Message Broker** | Apache Artemis | 2.53.0 | JMS broker hỗ trợ STOMP protocol, tích hợp tốt với Spring WebSocket |
-| **Object Storage** | VersityGW | Latest | S3-compatible, tự host, lưu trữ hình ảnh/tệp đính kèm |
-| **API Gateway** | Caddy | 2 Alpine | Reverse proxy tự động HTTPS, cấu hình đơn giản, hiệu năng cao |
-| **Push Notification** | Firebase Admin SDK | 9.8.0 | Dịch vụ push notification miễn phí, đáng tin cậy, hỗ trợ Android/iOS |
-| **Video Call** | Agora RTC | 6.2.0 | SDK video call chất lượng cao, low latency |
-| **AI Service** | OpenAI Java SDK | 4.30.0 | Tích hợp LLM cho tóm tắt, dịch thuật, chatbot |
-| **State Management** | Provider | 6.1.2 | Quản lý state đơn giản, official recommendation từ Flutter team |
-| **Containerization** | Docker Compose | — | Triển khai multi-service dễ dàng, reproducible environment |
+| Thành phần            | Công nghệ   | Phiên bản | Lý do lựa chọn              |
+| --------------------- | ----------- | --------- | --------------------------- |
+| **Backend Framework** | Spring Boot | 4.0.5     | Framework Java phổ nhắn 1-1 |
 
-*Bảng 1.3: So sánh lựa chọn công nghệ*
+| Thành phần         | Mô tả                                                                                                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên UC**         | Gửi tin nhắn văn bản trong chat 1-1                                                                                                                                                                                                         |
+| **Actor**          | Người dùng (đã đăng nhập)                                                                                                                                                                                                                   |
+| **Tiền điều kiện** | 2 user đã là bạn bè, ChatRoom(DUO) tồn tại, WebSocket connected                                                                                                                                                                             |
+| **Hậu điều kiện**  | ChatMessage được lưu vào DB, STOMP broadcast đến receiver                                                                                                                                                                                   |
+| **Luồng chính**    | 1. Nhập nội dung tin nhắn. 2. Nhấn gửi. 3. `POST /api/v1/messages/?room={id}`. 4. MessageService tạo ChatMessage. 5. STOMP broadcast đến `/queue/chat/{roomId}`. 6. Receiver nhận message realtime. 7. FCM push notification (nếu offline). |
+| **Luồng ngoại lệ** | 4a. User bị block → 403 Forbidden. 4b. Room không tồn tại → 404.                                                                                                                                                                            |
+| **API**            | `POST /api/v1/messages/?room={roomId}`                                                                                                                                                                                                      |
 
----
-
-<div style="page-break-before: always;"></div>
-
-
-## 1.5 So sánh với các ứng dụng nhắn tin hiện có
-
-| Tiêu chí | ChatApp | Zalo | Telegram | Messenger |
-|----------|---------|------|----------|-----------|
-| **Nền tảng** | Android, iOS, Web (Flutter) | Android, iOS, Web, Desktop | Đa nền tảng | Android, iOS, Web |
-| **Nhắn tin realtime** | STOMP WebSocket | Proprietary | MTProto | Proprietary |
-| **Nhóm chat** | ≥3 thành viên, admin/member | ≥3, nhiều quyền | ≥3, supergroup 200K | ≥3, admin |
-| **Gửi media** | Hình ảnh, video, tài liệu, âm thanh | Đầy đủ + stories | Đầy đủ + kênh | Đầy đủ + stories |
-| **AI tích hợp** | Tóm tắt, dịch, chatbot (LLM) | Không | Bot API | Meta AI |
-| **Thông báo đẩy** | FCM | Proprietary | Proprietary | Proprietary |
-| **Video call** | Agora RTC 1-1 | 1-1, nhóm | 1-1, nhóm | 1-1, nhóm |
-| **Mã nguồn** | Mở (source code BTL) | Đóng | Client mở | Đóng |
-| **Self-hosted** | Docker Compose | Không | TDLib | Không |
-| **Mã hóa password** | Argon2 (state-of-the-art) | Không rõ | Không rõ | Không rõ |
-
-*Bảng 1.4: So sánh ChatApp với các ứng dụng nhắn tin hiện có*
-
-**Điểm mạnh của ChatApp:**
-- Tích hợp AI trực tiếp vào chat (tóm tắt, dịch thuật) — tính năng mà Zalo và Telegram chưa có sẵn.
-- Self-hosted hoàn toàn qua Docker Compose, kiểm soát hoàn toàn dữ liệu.
-- Kiến trúc rõ ràng, phù hợp cho nghiên cứu và học tập kiến trúc phần mềm.
-- Sử dụng Argon2 (thuật toán mã hóa mật khẩu đạt giải PHC 2015) — bảo mật hơn BCrypt.
-
-## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)
-
-Hệ thống ChatApp áp dụng nhiều mẫu thiết kế (Design Patterns) theo phân loại GoF và các mẫu kiến trúc phần mềm hiện đại:
-
-### 1.6.1 Repository Pattern
-- **Áp dụng:** Tất cả JPA Repositories (`UserRepository`, `ChatRoomRepository`, `InvitationRepository`, v.v.)
-- **Mục đích:** Tách biệt logic truy cập dữ liệu khỏi business logic.
-- **Ví dụ:** `UserRepository.findByUsername(username)` trả về `Optional<User>`.
-
-### 1.6.2 Service Layer Pattern
-- **Áp dụng:** Tất cả Service classes (`MessageService`, `GroupChatService`, `ChatbotService`, v.v.)
-- **Mục đích:** Đóng gói business logic vào các service riêng biệt, mỗi service đảm nhiệm một nhóm chức năng.
-
-### 1.6.3 DTO Pattern (Data Transfer Object)
-- **Áp dụng:** Toàn bộ DTO classes (`MessageSendDto`, `MessageReceiveDto`, `MessageTranslateRequestDto`, v.v.)
-- **Mục đích:** Tách biệt domain model khỏi API contract, chỉ truyền dữ liệu cần thiết qua network.
-
-### 1.6.4 Observer Pattern (Pub/Sub)
-- **Áp dụng:** STOMP WebSocket messaging — `/queue/chat/{roomId}`, typing indicators, read receipts
-- **Mục đích:** Gửi thông báo realtime đến nhiều subscriber mà không cần coupling trực tiếp.
-- **Ví dụ:** Khi gửi tin nhắn, MessageService publish message đến STOMP topic, tất cả subscribers trong room đều nhận được.
-
-### 1.6.5 Strategy Pattern
-- **Áp dụng:** `FileTypeService` — phân loại file dựa trên extension, `PromptService` — xây dựng prompt theo ngôn ngữ
-- **Mục đích:** Cho phép thay đổi logic phân loại/xử lý mà không ảnh hưởng caller.
-
-### 1.6.6 Proxy Pattern
-- **Áp dụng:** Caddy reverse proxy, Spring Security filter chain
-- **Mục đích:** Kiểm soát truy cập, routing, và xác thực trước khi request đến ứng dụng.
-
-### 1.6.7 Builder Pattern
-- **Áp dụng:** Prompt construction trong `PromptService`, message construction
-- **Mục đích:** Xây dựng đối tượng phức tạp từng bước.
-- **Ví dụ:** `PromptService.buildTranslationPrompt()` sử dụng `buildString {}` để tạo prompt có cấu trúc.
-
-| Mẫu thiết kế | Loại (GoF) | Vị trí áp dụng | Lợi ích chính |
-|---------------|------------|-----------------|---------------|
-| Repository | Structural | JPA Repositories | Tách data access, testability |
-| Service Layer | Architectural | Service classes | Single Responsibility |
-| DTO | Structural | API request/response | Bảo vệ domain model |
-| Observer | Behavioral | STOMP, FCM | Loose coupling, realtime |
-| Strategy | Behavioral | FileTypeService, PromptService | Open/Closed Principle |
-| Proxy | Structural | Caddy, Security | Access control, routing |
-| Builder | Creational | PromptService | Readable construction |
-
-*Bảng 1.5: Tổng hợp các mẫu thiết kế áp dụng trong ChatApp*
-
-## 1.7 Đặc tả Use Case chi tiết — Chat cá nhân & Tin nhắn
-
-### UC-08: Gửi tin nhắn 1-1
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Gửi tin nhắn văn bản trong chat 1-1 |
-| **Actor** | Người dùng (đã đăng nhập) |
-| **Tiền điều kiện** | 2 user đã là bạn bè, ChatRoom(DUO) tồn tại, WebSocket connected |
-| **Hậu điều kiện** | ChatMessage được lưu vào DB, STOMP broadcast đến receiver |
-| **Luồng chính** | 1. Nhập nội dung tin nhắn. 2. Nhấn gửi. 3. `POST /api/v1/messages/?room={id}`. 4. MessageService tạo ChatMessage. 5. STOMP broadcast đến `/queue/chat/{roomId}`. 6. Receiver nhận message realtime. 7. FCM push notification (nếu offline). |
-| **Luồng ngoại lệ** | 4a. User bị block → 403 Forbidden. 4b. Room không tồn tại → 404. |
-| **API** | `POST /api/v1/messages/?room={roomId}` |
-
-*Bảng 1.6: Đặc tả UC-08 — Gửi tin nhắn 1-1*
+_Bảng 1.6: Đặc tả UC-08 — Gửi tin nhắn 1-1_
 
 ### UC-12: Thu hồi tin nhắn
 
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Thu hồi (recall) tin nhắn đã gửi |
-| **Actor** | Người gửi tin nhắn |
-| **Tiền điều kiện** | Tin nhắn thuộc về sender, tin nhắn chưa bị thu hồi |
-| **Hậu điều kiện** | ChatMessage.status = RECALLED, nội dung bị ẩn |
-| **Luồng chính** | 1. Long-press tin nhắn → menu "Thu hồi". 2. `PATCH /api/v1/messages/{id}` body: {status: "RECALLED"}. 3. MessageChangesService kiểm tra quyền sở hữu. 4. Cập nhật status → RECALLED. 5. STOMP broadcast message update. |
-| **Luồng ngoại lệ** | 3a. Không phải sender → 403 Forbidden. |
-| **API** | `PATCH /api/v1/messages/{id}` |
+| Thành phần         | Mô tả                                                                                                                                                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên UC**         | Thu hồi (recall) tin nhắn đã gửi                                                                                                                                                                                        |
+| **Actor**          | Người gửi tin nhắn                                                                                                                                                                                                      |
+| **Tiền điều kiện** | Tin nhắn thuộc về sender, tin nhắn chưa bị thu hồi                                                                                                                                                                      |
+| **Hậu điều kiện**  | ChatMessage.status = RECALLED, nội dung bị ẩn                                                                                                                                                                           |
+| **Luồng chính**    | 1. Long-press tin nhắn → menu "Thu hồi". 2. `PATCH /api/v1/messages/{id}` body: {status: "RECALLED"}. 3. MessageChangesService kiểm tra quyền sở hữu. 4. Cập nhật status → RECALLED. 5. STOMP broadcast message update. |
+| **Luồng ngoại lệ** | 3a. Không phải sender → 403 Forbidden.                                                                                                                                                                                  |
+| **API**            | `PATCH /api/v1/messages/{id}`                                                                                                                                                                                           |
 
-*Bảng 1.7: Đặc tả UC-12 — Thu hồi tin nhắn*
+_Bảng 1.7: Đặc tả UC-12 — Thu hồi tin nhắn_
 
-*Bảng 1.8: Đặc tả UC-17 — Dịch tin nhắn AI*
+_Bảng 1.8: Đặc tả UC-17 — Dịch tin nhắn AI_
 
 ### UC-21: Chuyển giọng nói thành văn bản (Voice-to-Text)
 
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Chuyển đổi giọng nói thành văn bản khi nhập tin nhắn |
-| **Actor** | Người dùng |
-| **Tiền điều kiện** | Đã cấp quyền truy cập Micro |
-| **Hậu điều kiện** | Văn bản được điền vào ô nhập liệu |
-| **Luồng chính** | 1. Nhấn icon Micro ở ô nhập liệu. 2. Thu âm giọng nói. 3. Gửi file âm thanh đến `SpeechToTextService`. 4. Sử dụng Google Speech-to-Text API để nhận diện. 5. Trả về văn bản kết quả. 6. Điền văn bản vào `TextEditingController`. |
-| **Luồng ngoại lệ** | 4a. Không nhận diện được → thông báo thử lại. |
+| Thành phần         | Mô tả                                                                                                                                                                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên UC**         | Chuyển đổi giọng nói thành văn bản khi nhập tin nhắn                                                                                                                                                                              |
+| **Actor**          | Người dùng                                                                                                                                                                                                                        |
+| **Tiền điều kiện** | Đã cấp quyền truy cập Micro                                                                                                                                                                                                       |
+| **Hậu điều kiện**  | Văn bản được điền vào ô nhập liệu                                                                                                                                                                                                 |
+| **Luồng chính**    | 1. Nhấn icon Micro ở ô nhập liệu. 2. Thu âm giọng nói. 3. Gửi file âm thanh đến `SpeechToTextService`. 4. Sử dụng Google Speech-to-Text API để nhận diện. 5. Trả về văn bản kết quả. 6. Điền văn bản vào `TextEditingController`. |
+| **Luồng ngoại lệ** | 4a. Không nhận diện được → thông báo thử lại.                                                                                                                                                                                     |
 
 ---
 
@@ -376,7 +272,7 @@ graph TB
 ```
 
 [image: tv2_so_o_kien_truc_tong_quan_he_thong_chatapp.png]
-*Hình 2.1: Sơ đồ kiến trúc tổng quan hệ thống ChatApp*
+_Hình 2.1: Sơ đồ kiến trúc tổng quan hệ thống ChatApp_
 
 **Mô tả các khối:**
 
@@ -456,7 +352,7 @@ graph LR
 ```
 
 [image: tv2_bieu_o_use_case_tong_quan.png]
-*Hình 2.2: Biểu đồ Use Case tổng quan*
+_Hình 2.2: Biểu đồ Use Case tổng quan_
 
 ---
 
@@ -508,7 +404,7 @@ graph LR
 ```
 
 [image: tv2_bieu_o_use_case_chi_tiet_chat_ca_nhan_tin_nhan.png]
-*Hình 2.3: Biểu đồ Use Case chi tiết — Chat cá nhân & Tin nhắn*
+_Hình 2.3: Biểu đồ Use Case chi tiết — Chat cá nhân & Tin nhắn_
 
 **Mô tả chi tiết các Use Case:**
 
@@ -623,7 +519,7 @@ classDiagram
 ```
 
 [image: tv2_bieu_o_lop_module_chat_ca_nhan_tin_nhan.png]
-*Hình 2.4: Biểu đồ lớp — Module Chat cá nhân & Tin nhắn*
+_Hình 2.4: Biểu đồ lớp — Module Chat cá nhân & Tin nhắn_
 
 **Giải thích:**
 
@@ -674,7 +570,7 @@ sequenceDiagram
 ```
 
 [image: tv2_bieu_o_tuan_tu_gui_tin_nhan_1_1.png]
-*Hình 2.5: Biểu đồ tuần tự — Gửi tin nhắn 1-1*
+_Hình 2.5: Biểu đồ tuần tự — Gửi tin nhắn 1-1_
 
 ### 2.5.2 Biểu đồ tuần tự — Đánh dấu đã xem
 
@@ -706,7 +602,7 @@ sequenceDiagram
 ```
 
 [image: tv2_bieu_o_tuan_tu_anh_dau_a_xem.png]
-*Hình 2.6: Biểu đồ tuần tự — Đánh dấu đã xem*
+_Hình 2.6: Biểu đồ tuần tự — Đánh dấu đã xem_
 
 ### 2.5.3 Biểu đồ tuần tự — Dịch tin nhắn AI
 
@@ -740,9 +636,7 @@ sequenceDiagram
 ```
 
 [image: tv2_bieu_o_tuan_tu_dich_tin_nhan_ai.png]
-*Hình 2.7: Biểu đồ tuần tự — Dịch tin nhắn AI*
-
-
+_Hình 2.7: Biểu đồ tuần tự — Dịch tin nhắn AI_
 
 ### 2.5.4 Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)
 
@@ -781,9 +675,10 @@ sequenceDiagram
 ```
 
 [image: tv2_bieu_o_tuan_tu_dich_tin_nhan_ai_chi_tiet.png]
-*Hình 2.8: Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)*
+_Hình 2.8: Biểu đồ tuần tự — Dịch tin nhắn AI (chi tiết)_
 
 **Đặc điểm kỹ thuật của TranslationService:**
+
 - Hỗ trợ 20+ ngôn ngữ (Vietnamese, English, Chinese, Japanese, Korean, French, German, v.v.)
 - Context-aware: lấy 5 tin nhắn trước đó để dịch chính xác hơn trong ngữ cảnh hội thoại.
 - Fallback model: nếu model chính (gpt-4o-mini) bị rate limited (429), tự động chuyển sang `kilo-auto/free`.
@@ -799,7 +694,7 @@ sequenceDiagram
     participant App as Flutter App
     participant API as Chat API (Spring)
     participant Google as Google Speech API
-    
+
     User->>App: Nhấn giữ nút Voice
     App-->>User: Hiển thị UI Recording
     User->>App: Thả nút (Kết thúc)
@@ -813,24 +708,25 @@ sequenceDiagram
 ```
 
 [image: tv2_bieu_o_tuan_tu_tinh_nang_voice_to_text.png]
-*Hình 2.9: Biểu đồ tuần tự — Tính năng Voice-to-Text*
+_Hình 2.9: Biểu đồ tuần tự — Tính năng Voice-to-Text_
 
 ### 2.5.6 Chi tiết mô hình sự kiện WebSocket (STOMP Events)
 
 Hệ thống sử dụng 15+ loại sự kiện STOMP để đảm bảo tính realtime. Dưới đây là các event liên quan đến module Chat & Tin nhắn:
 
-| Event | STOMP Destination | Payload | Mô tả |
-|-------|-------------------|---------|-------|
-| New Message | `/user/queue/chat/{roomId}` | `MessageReceiveModel` | Tin nhắn mới trong room |
-| Typing Status | `/user/queue/typing/{roomId}` | `TypingStatusEvent` | Trạng thái đang gõ |
-| Read Status | `/user/queue/read/{roomId}` | `ReadStatusEvent` | Đã đọc tin nhắn |
-| Video Call | `/user/queue/calls/video` | `VideoCallEvent` | Cuộc gọi video đến |
-| Video Rejected | `/user/queue/calls/video_rejected` | `VideoCallRejectedEvent` | Từ chối cuộc gọi |
-| Presence Update | `/user/queue/presence/` | `PresenceUpdateEvent` | Online/offline |
+| Event           | STOMP Destination                  | Payload                  | Mô tả                   |
+| --------------- | ---------------------------------- | ------------------------ | ----------------------- |
+| New Message     | `/user/queue/chat/{roomId}`        | `MessageReceiveModel`    | Tin nhắn mới trong room |
+| Typing Status   | `/user/queue/typing/{roomId}`      | `TypingStatusEvent`      | Trạng thái đang gõ      |
+| Read Status     | `/user/queue/read/{roomId}`        | `ReadStatusEvent`        | Đã đọc tin nhắn         |
+| Video Call      | `/user/queue/calls/video`          | `VideoCallEvent`         | Cuộc gọi video đến      |
+| Video Rejected  | `/user/queue/calls/video_rejected` | `VideoCallRejectedEvent` | Từ chối cuộc gọi        |
+| Presence Update | `/user/queue/presence/`            | `PresenceUpdateEvent`    | Online/offline          |
 
-*Bảng 2.1: Danh sách STOMP events — Module Chat*
+_Bảng 2.1: Danh sách STOMP events — Module Chat_
 
 **Cơ chế reconnect:**
+
 - `RealtimeService` (1021 dòng, 30KB) quản lý toàn bộ kết nối WebSocket.
 - Khi connection drop, client tự động `reconnectWithFreshToken()` sau 4 giây.
 - Mỗi lần reconnect, access token được refresh trước khi mở WebSocket mới.
@@ -950,35 +846,7 @@ erDiagram
 ```
 
 [image: tv2_so_o_thuc_the_quan_he_er_diagram.png]
-*Hình 2.10: Sơ đồ thực thể quan hệ (ER Diagram)*
-**Chi tiết các trường quan trọng:**
-
-| Entity | Trường | Kiểu | Constraint | Mô tả |
-|--------|--------|------|-----------|-------|
-| USER | username | String | UNIQUE, NOT NULL | Tên đăng nhập duy nhất |
-| USER | password | String | NOT NULL | Mã hóa Argon2 |
-| USER | display_name | String | Nullable | Tên hiển thị |
-| CHAT_ROOM | type | Enum | NOT NULL | DUO hoặc GROUP |
-| CHAT_ROOM | name | String | Nullable | Tên nhóm (NULL cho DUO) |
-| CHAT_MESSAGE | status | Enum | NOT NULL | SENT / RECALLED |
-| CHAT_MESSAGE | reply_to_id | Long | FK, Nullable | Tin nhắn được trả lời |
-| CHAT_ROOM_MEMBER | is_admin | Boolean | NOT NULL | Quyền admin trong nhóm |
-| CHAT_ROOM_PIN | (user, room) | — | UNIQUE | Ngăn ghim trùng |
-| ATTACHMENT | type | Enum | NOT NULL | IMAGE/VIDEO/DOCUMENT/AUDIO/RAW |
-| FCM_TOKEN | (user, token) | — | UNIQUE | Ngăn đăng ký trùng |
-| CHATBOT_MESSAGE | role | Enum | NOT NULL | USER/ASSISTANT/SYSTEM/TOOL |
-| INVITATION | status | Enum | NOT NULL | PENDING/ACCEPTED/REJECTED |
-
-*Bảng 2.2: Chi tiết các trường entity trong hệ thống*
-
-**Các ràng buộc quan trọng:**
-- **Cascade Delete:** Khi xóa ChatRoom → cascade xóa ChatMessage, ChatRoomMember, ChatRoomPin, ChatRoomReadState.
-- **Unique Constraints:** (user_id, chat_room_id) trong ChatRoomPin, (user_id, token) trong FcmToken, (blocker_id, blocked_id) trong UserBlock.
-- **Foreign Key References:** ChatMessage.sender_id → User, ChatMessage.room_id → ChatRoom, Invitation.sender_id → User.
-- **Index Strategy:** Index trên username (User), 
-oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
-
-
+_Hình 2.10: Sơ đồ thực thể quan hệ (ER Diagram)_
 **★ Entity thuộc phạm vi Thành viên 2:** CHAT_MESSAGE, CHAT_ROOM (DUO), CHAT_ROOM_READ_STATE, ATTACHMENT (tin nhắn).
 
 ## 2.7 Giao diện đáp ứng chức năng
@@ -990,6 +858,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 **Mô tả:** Màn hình chat chính hiển thị cuộc trò chuyện 1-1. Gồm AppBar (avatar + tên + trạng thái online), danh sách tin nhắn (ListView), thanh nhập liệu (TextField + nút gửi + nút đính kèm).
 
 **Các thành phần chính:**
+
 - AppBar: Avatar đối phương, displayName, online/offline indicator, nút gọi video
 - ListView.builder: Hiển thị danh sách MessageBubble, phân trang khi cuộn lên
 - MessageBubble: Bong bóng tin nhắn (trái = nhận, phải = gửi), timestamp, trạng thái
@@ -998,7 +867,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 - Long-press menu: Trả lời, Sửa, Thu hồi, Dịch
 
 [image: tv2_giao_dien_chatscreen_bong_bong_tin_nhan.png]
-*Hình 2.11: Giao diện ChatScreen — Bong bóng tin nhắn*
+_Hình 2.11: Giao diện ChatScreen — Bong bóng tin nhắn_
 
 `[Ảnh chụp màn hình Chat — placeholder]`
 
@@ -1009,6 +878,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 **Mô tả:** Widget hiển thị một tin nhắn đơn lẻ. Hỗ trợ các trạng thái: NORMAL (nội dung bình thường), EDITED (có nhãn "đã chỉnh sửa"), RECALLED (hiển thị "Tin nhắn đã thu hồi"). Hiển thị attachments (hình ảnh, tệp), reply preview, và timestamp.
 
 **Các thành phần chính:**
+
 - Container với border radius (bong bóng trái/phải)
 - Text content hoặc "[Tin nhắn đã thu hồi]"
 - Reply preview (nếu replyTo != null)
@@ -1017,12 +887,12 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 - GestureDetector cho long-press context menu
 
 [image: tv2_giao_dien_chatscreen_thanh_nhap_tin_nhan.png]
-*Hình 2.12: Giao diện ChatScreen — Thanh nhập tin nhắn*
+_Hình 2.12: Giao diện ChatScreen — Thanh nhập tin nhắn_
 
 `[Ảnh chụp màn hình Input bar — placeholder]`
 
 [image: tv2_giao_dien_typing_indicator.png]
-*Hình 2.13: Giao diện Typing indicator*
+_Hình 2.13: Giao diện Typing indicator_
 
 `[Ảnh chụp màn hình Typing — placeholder]`
 
@@ -1030,77 +900,23 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 
 <div style="page-break-before: always;"></div>
 
-
-
-**Chi tiết cấu hình WebSocket (WebSocketConfig.kt):**
-
-```kotlin
-@Configuration
-@EnableWebSocketMessageBroker
-class WebSocketConfig : WebSocketMessageBrokerConfigurer {
-    override fun configureMessageBroker(registry: MessageBrokerRegistry) {
-        registry.enableStompBrokerRelay("/topic", "/queue")
-               .setRelayHost(relayHost)  // Apache Artemis
-               .setRelayPort(relayPort)  // 61613
-        registry.setApplicationDestinationPrefixes("/app")
-    }
-    override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/socket").withSockJS()  // SockJS fallback
-        registry.addEndpoint("/ws")                    // Native WebSocket
-    }
-}
-```
-
-**Giải thích:**
-- STOMP Broker Relay kết nối đến Apache Artemis (external broker) thay vì sử dụng simple broker.
-- Hai endpoints: `/socket` (SockJS fallback cho trình duyệt cũ) và `/ws` (native WebSocket cho Flutter).
-- `WebSocketAuthenticationInterceptor` xác thực JWT token trong STOMP CONNECT frame.
-- Application destination prefix `/app` cho messages từ client → server (typing indicator, read receipt).
-
-**Chi tiết cấu hình Security (SecurityConfig.kt):**
-
-```kotlin
-@Bean
-fun passwordEncoder() = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8()
-
-@Bean
-fun filterChain(http: HttpSecurity): SecurityFilterChain {
-    http {
-        oauth2ResourceServer { jwt { jwtDecoder = jwtDecoder } }
-        authorizeHttpRequests {
-            authorize("/api/v1/messages/**", authenticated)
-            authorize("/api/v1/chatbot/**", authenticated)
-            authorize("/api/v1/invitations/**", authenticated)
-            authorize("/api/v1/users/me/**", authenticated)
-            authorize(anyRequest, permitAll)
-        }
-    }
-}
-```
-
-**Giải thích:**
-- Sử dụng **Argon2PasswordEncoder** (PHC winner 2015) — bảo mật hơn BCrypt nhờ memory-hard function.
-- JWT xác thực qua **HMAC-SHA256** (symmetric key ≥ 32 bytes) với NimbusJwtDecoder.
-- Các endpoint `/api/v1/messages/**`, `/api/v1/chatbot/**`, `/api/v1/invitations/**`, `/api/v1/users/me/**` yêu cầu authenticated.
-- Các endpoint public: đăng ký, đăng nhập, tìm kiếm user, quên mật khẩu.
-
 ## 2.8 Bảng API Endpoints — Module Chat & Tin nhắn
 
-| STT | Method | Endpoint | Auth | Mô tả | Status Codes |
-|:---:|--------|----------|:----:|-------|:------------:|
-| 1 | POST | `/api/v1/messages/?room={id}` | ✓ | Gửi tin nhắn (text/multipart) | 201, 403 |
-| 2 | GET | `/api/v1/messages/?room={id}` | ✓ | Lấy tin nhắn trong room | 200 |
-| 3 | PATCH | `/api/v1/messages/{id}` | ✓ | Cập nhật/thu hồi tin nhắn | 200, 403 |
-| 4 | DELETE | `/api/v1/messages/{id}` | ✓ | Xóa tin nhắn | 204, 403 |
-| 5 | POST | `/api/v1/messages/translate` | ✓ | Dịch tin nhắn AI | 200, 502 |
-| 6 | POST | `/api/v1/messages/summarize` | ✓ | Tóm tắt hội thoại AI | 200, 502 |
-| 7 | GET | `/api/v1/chatrooms/` | ✓ | Danh sách chatrooms | 200 |
-| 8 | GET | `/api/v1/chatrooms/{id}` | ✓ | Chi tiết chatroom | 200 |
-| 9 | POST | `/api/v1/chatrooms/{id}/read/` | ✓ | Đánh dấu đã đọc | 204 |
-| 10 | POST | `/api/v1/users/me/fcm-token/` | ✓ | Đăng ký FCM token | 201 |
-| 11 | PUT | `/api/v1/users/me/notification-settings/` | ✓ | Cập nhật cài đặt thông báo | 200 |
+| STT | Method | Endpoint                                  | Auth | Mô tả                         | Status Codes |
+| :-: | ------ | ----------------------------------------- | :--: | ----------------------------- | :----------: |
+|  1  | POST   | `/api/v1/messages/?room={id}`             |  ✓   | Gửi tin nhắn (text/multipart) |   201, 403   |
+|  2  | GET    | `/api/v1/messages/?room={id}`             |  ✓   | Lấy tin nhắn trong room       |     200      |
+|  3  | PATCH  | `/api/v1/messages/{id}`                   |  ✓   | Cập nhật/thu hồi tin nhắn     |   200, 403   |
+|  4  | DELETE | `/api/v1/messages/{id}`                   |  ✓   | Xóa tin nhắn                  |   204, 403   |
+|  5  | POST   | `/api/v1/messages/translate`              |  ✓   | Dịch tin nhắn AI              |   200, 502   |
+|  6  | POST   | `/api/v1/messages/summarize`              |  ✓   | Tóm tắt hội thoại AI          |   200, 502   |
+|  7  | GET    | `/api/v1/chatrooms/`                      |  ✓   | Danh sách chatrooms           |     200      |
+|  8  | GET    | `/api/v1/chatrooms/{id}`                  |  ✓   | Chi tiết chatroom             |     200      |
+|  9  | POST   | `/api/v1/chatrooms/{id}/read/`            |  ✓   | Đánh dấu đã đọc               |     204      |
+| 10  | POST   | `/api/v1/users/me/fcm-token/`             |  ✓   | Đăng ký FCM token             |     201      |
+| 11  | PUT    | `/api/v1/users/me/notification-settings/` |  ✓   | Cập nhật cài đặt thông báo    |     200      |
 
-*Bảng 2.3: API Endpoints — Module Chat & Tin nhắn*
+_Bảng 2.3: API Endpoints — Module Chat & Tin nhắn_
 
 ## 2.9 Biểu đồ hoạt động — Luồng gửi và nhận tin nhắn realtime
 
@@ -1128,7 +944,7 @@ flowchart TD
 ```
 
 [image: tv2_bieu_o_hoat_ong_luong_gui_va_nhan_tin_nhan.png]
-*Hình 2.14: Biểu đồ hoạt động — Luồng gửi và nhận tin nhắn*
+_Hình 2.14: Biểu đồ hoạt động — Luồng gửi và nhận tin nhắn_
 
 ---
 
@@ -1175,51 +991,18 @@ graph TB
 ```
 
 [image: tv2_so_o_trien_khai_docker_compose.png]
-*Hình 3.1: Sơ đồ triển khai Docker Compose*
+_Hình 3.1: Sơ đồ triển khai Docker Compose_
 
-| Service | Image | Container | Chức năng | Health Check |
-|---------|-------|-----------|-----------|--------------|
-| gateway | caddy:2-alpine | chatapp-gateway | Reverse proxy | — |
-| app | Custom Dockerfile | chatapp-app | Spring Boot app | — |
-| postgres | postgres:18-alpine | chatapp-postgres | Relational DB | pg_isready |
-| redis | redis:8-alpine | chatapp-redis | Cache & presence | redis-cli ping |
-| artemis | apache/artemis:2.53.0 | chatapp-artemis | STOMP broker | wget health |
-| versitygw | versity/versitygw | chatapp-versitygw | S3 storage | wget /health |
+| Service   | Image                 | Container         | Chức năng        | Health Check   |
+| --------- | --------------------- | ----------------- | ---------------- | -------------- |
+| gateway   | caddy:2-alpine        | chatapp-gateway   | Reverse proxy    | —              |
+| app       | Custom Dockerfile     | chatapp-app       | Spring Boot app  | —              |
+| postgres  | postgres:18-alpine    | chatapp-postgres  | Relational DB    | pg_isready     |
+| redis     | redis:8-alpine        | chatapp-redis     | Cache & presence | redis-cli ping |
+| artemis   | apache/artemis:2.53.0 | chatapp-artemis   | STOMP broker     | wget health    |
+| versitygw | versity/versitygw     | chatapp-versitygw | S3 storage       | wget /health   |
 
-*Bảng 3.1: Danh sách services trong Docker Compose*
-### Chi tiết cấu hình Docker services
-
-| Service | Image | Container | Port | Health Check | Depends On |
-|---------|-------|-----------|------|-------------|------------|
-| gateway | caddy:2-alpine | chatapp-gateway | 8080:8080 | — | app, versitygw |
-| app | Custom Dockerfile | chatapp-app | internal | — | artemis, postgres, redis, versitygw |
-| postgres | postgres:18-alpine | chatapp-postgres | internal | `pg_isready -U chatapp` | — |
-| redis | redis:8-alpine | chatapp-redis | internal | `redis-cli ping` | — |
-| artemis | apache/artemis:2.53.0-alpine | chatapp-artemis | internal | `wget localhost:8161` | — |
-| versitygw | versity/versitygw | chatapp-versitygw | 9000 | `wget localhost:9000/health` | — |
-
-*Bảng 3.1b: Chi tiết cấu hình Docker services*
-
-### Kiến trúc network Docker
-
-```mermaid
-graph TB
-    subgraph DockerCompose["Docker Compose"]
-        Caddy["Caddy:8080"] -->|"/api/*, /ws*"| SpringBoot["Spring Boot 4"]
-        Caddy -->|"/storage/*"| VersityGW["VersityGW:9000"]
-        SpringBoot -->|"JDBC"| Postgres["PostgreSQL 18"]
-        SpringBoot -->|"Cache"| Redis["Redis 8"]
-        SpringBoot -->|"STOMP"| Artemis["Artemis Broker"]
-        SpringBoot -->|"S3"| VersityGW
-    end
-    Client["Flutter"] -->|":8080"| Caddy
-    SpringBoot -.->|"FCM"| Firebase["Firebase"]
-    SpringBoot -.->|"AI"| LLM["kilo.ai"]
-```
-
-[image: tv2_kien_truc_network_docker_compose.png]
-*Hình 3.2: Kiến trúc network Docker Compose*
-
+_Bảng 3.1: Danh sách services trong Docker Compose_
 
 ### Cấu hình Caddy Gateway (Caddyfile)
 
@@ -1234,37 +1017,39 @@ graph TB
 ```
 
 **Giải thích routing:**
+
 - `/api/*` — REST API requests → Spring Boot
 - `/ws*` và `/socket*` — WebSocket connections (STOMP) → Spring Boot
 - `/storage/*` — Truy cập trực tiếp file media từ VersityGW (dùng `handle_path` để strip prefix)
 
 ### Biến môi trường cấu hình (.env)
 
-| Biến | Mô tả | Ví dụ |
-|------|-------|-------|
-| `POSTGRES_USER` | Database username | chatapp |
-| `POSTGRES_PASSWORD` | Database password | (secret) |
-| `POSTGRES_DB` | Database name | chatapp |
-| `S3_ACCESS_KEY` | VersityGW access key | minioadmin |
-| `S3_SECRET_KEY` | VersityGW secret key | (secret) |
-| `JWTS_SECRET` | JWT signing secret (≥32 bytes) | (secret) |
-| `LLM_BASE_URL` | OpenAI-compatible API URL | https://kilo.ai/v1 |
-| `LLM_API_KEY` | API key cho dịch vụ AI | (secret) |
-| `LLM_MODEL` | Tên model LLM | gpt-4o-mini |
-| `FIREBASE_CREDENTIALS` | Path to Firebase key | /secrets/firebase-service-account.json |
+| Biến                   | Mô tả                          | Ví dụ                                  |
+| ---------------------- | ------------------------------ | -------------------------------------- |
+| `POSTGRES_USER`        | Database username              | chatapp                                |
+| `POSTGRES_PASSWORD`    | Database password              | (secret)                               |
+| `POSTGRES_DB`          | Database name                  | chatapp                                |
+| `S3_ACCESS_KEY`        | VersityGW access key           | minioadmin                             |
+| `S3_SECRET_KEY`        | VersityGW secret key           | (secret)                               |
+| `JWTS_SECRET`          | JWT signing secret (≥32 bytes) | (secret)                               |
+| `LLM_BASE_URL`         | OpenAI-compatible API URL      | https://kilo.ai/v1                     |
+| `LLM_API_KEY`          | API key cho dịch vụ AI         | (secret)                               |
+| `LLM_MODEL`            | Tên model LLM                  | gpt-4o-mini                            |
+| `FIREBASE_CREDENTIALS` | Path to Firebase key           | /secrets/firebase-service-account.json |
 
-*Bảng 3.2: Các biến môi trường cấu hình hệ thống*
+_Bảng 3.2: Các biến môi trường cấu hình hệ thống_
 
 **Luồng khởi động:**
+
 1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
 2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
 3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
 4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
 
-
 ## 3.2 Các bước cài đặt và triển khai
 
 ### 3.2.1 Yêu cầu hệ thống
+
 - **Docker** và **Docker Compose** đã cài đặt
 - **Flutter SDK** (Dart ^3.5) cho client
 - **Git** để clone repository
@@ -1293,6 +1078,7 @@ cp .env.example.json .env.json
 # 3. Cài đặt dependencies & chạy
 flutter pub get && flutter run
 ```
+
 ## 3.3 Kết quả thực hiện — Chat cá nhân & Quản lý tin nhắn
 
 ### 3.3.1 Gửi/nhận tin nhắn văn bản 1-1
@@ -1303,7 +1089,7 @@ flutter pub get && flutter run
 - Hỗ trợ phân trang khi cuộn lên (page-based pagination).
 
 [image: tv2_ket_qua_gui_tin_nhan.png]
-*Hình 3.3: Kết quả — Gửi tin nhắn*
+_Hình 3.3: Kết quả — Gửi tin nhắn_
 
 `[Ảnh chụp màn hình kết quả Gửi tin nhắn — placeholder]`
 
@@ -1315,7 +1101,7 @@ flutter pub get && flutter run
 - Auto-reset sau 3 giây nếu không nhận typing update.
 
 [image: tv2_ket_qua_typing_indicator.png]
-*Hình 3.4: Kết quả — Typing indicator*
+_Hình 3.4: Kết quả — Typing indicator_
 
 `[Ảnh chụp màn hình Typing — placeholder]`
 
@@ -1327,7 +1113,7 @@ flutter pub get && flutter run
 - Unique constraint (room_id, reader_id) đảm bảo mỗi user chỉ có 1 read state per room.
 
 [image: tv2_ket_qua_a_xem.png]
-*Hình 3.5: Kết quả — Đã xem*
+_Hình 3.5: Kết quả — Đã xem_
 
 `[Ảnh chụp màn hình Đã xem — placeholder]`
 
@@ -1338,7 +1124,7 @@ flutter pub get && flutter run
 - Chỉ sender mới có quyền sửa/xóa (MessageCheckService validate ownership).
 
 [image: tv2_ket_qua_xoa_tin_nhan.png]
-*Hình 3.6: Kết quả — Xóa tin nhắn*
+_Hình 3.6: Kết quả — Xóa tin nhắn_
 
 `[Ảnh chụp màn hình Thu hồi — placeholder]`
 
@@ -1359,69 +1145,42 @@ flutter pub get && flutter run
 - Hỗ trợ khử nhiễu cơ bản và nhận diện dấu câu.
 
 [image: tv2_ket_qua_voice_to_text.png]
-*Hình 3.8: Kết quả — Voice-to-Text*
+_Hình 3.8: Kết quả — Voice-to-Text_
 
 `[Ảnh chụp màn hình Voice-to-Text — placeholder]`
 
 ## 3.4 Kết quả thử nghiệm
 
-| STT | Chức năng | Kịch bản test | Kết quả | Ghi chú |
-|:---:|-----------|---------------|:-------:|---------|
-| 1 | Gửi tin nhắn | Text message 1-1 | ✅ Đạt | < 500ms delivery |
-| 2 | Gửi tin nhắn | Tin nhắn rỗng | ✅ Đạt | Validate reject |
-| 3 | Nhận tin nhắn | STOMP realtime | ✅ Đạt | Instant delivery |
-| 4 | Phân trang | Cuộn lên load more | ✅ Đạt | Page-based pagination |
-| 5 | Typing | Gửi typing status | ✅ Đạt | < 200ms broadcast |
-| 6 | Typing | Stop typing auto | ✅ Đạt | Reset sau 3s |
-| 7 | Đánh dấu đã xem | Mở chatroom | ✅ Đạt | ReadState cập nhật |
-| 8 | Đánh dấu đã xem | Broadcast to sender | ✅ Đạt | Tick xanh hiển thị |
-| 9 | Chỉnh sửa | Edit own message | ✅ Đạt | Status EDITED |
-| 10 | Chỉnh sửa | Edit others' message | ✅ Đạt | 403 Forbidden |
-| 11 | Thu hồi | Recall own message | ✅ Đạt | Status RECALLED |
-| 12 | Thu hồi | Broadcast recall | ✅ Đạt | "[Đã thu hồi]" |
-| 13 | Trả lời | Reply to message | ✅ Đạt | replyTo set đúng |
-| 14 | Dịch AI | Dịch Anh → Việt | ✅ Đạt | < 3s response |
-| 15 | Dịch AI | Dịch Việt → Anh | ✅ Đạt | Chính xác |
-| 16 | Dịch AI | Ngôn ngữ không hỗ trợ | ✅ Đạt | Fallback graceful |
-| 17 | WebSocket | Reconnect after drop | ✅ Đạt | Auto-reconnect |
-| 18 | Concurrent | 2 users chat cùng lúc | ✅ Đạt | Realtime đồng bộ |
+| STT | Chức năng       | Kịch bản test         | Kết quả | Ghi chú               |
+| :-: | --------------- | --------------------- | :-----: | --------------------- |
+|  1  | Gửi tin nhắn    | Text message 1-1      | ✅ Đạt  | < 500ms delivery      |
+|  2  | Gửi tin nhắn    | Tin nhắn rỗng         | ✅ Đạt  | Validate reject       |
+|  3  | Nhận tin nhắn   | STOMP realtime        | ✅ Đạt  | Instant delivery      |
+|  4  | Phân trang      | Cuộn lên load more    | ✅ Đạt  | Page-based pagination |
+|  5  | Typing          | Gửi typing status     | ✅ Đạt  | < 200ms broadcast     |
+|  6  | Typing          | Stop typing auto      | ✅ Đạt  | Reset sau 3s          |
+|  7  | Đánh dấu đã xem | Mở chatroom           | ✅ Đạt  | ReadState cập nhật    |
+|  8  | Đánh dấu đã xem | Broadcast to sender   | ✅ Đạt  | Tick xanh hiển thị    |
+|  9  | Chỉnh sửa       | Edit own message      | ✅ Đạt  | Status EDITED         |
+| 10  | Chỉnh sửa       | Edit others' message  | ✅ Đạt  | 403 Forbidden         |
+| 11  | Thu hồi         | Recall own message    | ✅ Đạt  | Status RECALLED       |
+| 12  | Thu hồi         | Broadcast recall      | ✅ Đạt  | "[Đã thu hồi]"        |
+| 13  | Trả lời         | Reply to message      | ✅ Đạt  | replyTo set đúng      |
+| 14  | Dịch AI         | Dịch Anh → Việt       | ✅ Đạt  | < 3s response         |
+| 15  | Dịch AI         | Dịch Việt → Anh       | ✅ Đạt  | Chính xác             |
+| 16  | Dịch AI         | Ngôn ngữ không hỗ trợ | ✅ Đạt  | Fallback graceful     |
+| 17  | WebSocket       | Reconnect after drop  | ✅ Đạt  | Auto-reconnect        |
+| 18  | Concurrent      | 2 users chat cùng lúc | ✅ Đạt  | Realtime đồng bộ      |
 
-*Bảng 3.3: Kết quả thử nghiệm chức năng Chat cá nhân & Tin nhắn*
+_Bảng 3.3: Kết quả thử nghiệm chức năng Chat cá nhân & Tin nhắn_
 
 **Số liệu demo:**
+
 - Số tin nhắn gửi thử nghiệm: 500+
 - Số cuộc trò chuyện DUO test: 15
 - Thời gian gửi/nhận trung bình: < 300ms
 - Số lần dịch AI thử nghiệm: 30
 - Thời gian phản hồi dịch AI: < 3s
-
-
-### Đánh giá kiến trúc
-
-| Tiêu chí | Đánh giá | Chi tiết |
-|----------|:--------:|---------|
-| Hiệu năng tin nhắn | ✅ Đạt | < 500ms qua WebSocket STOMP |
-| Typing indicator | ✅ Đạt | Realtime qua STOMP, debounce 300ms |
-| Trạng thái đã xem | ✅ Đạt | ReadStatusEvent broadcast chính xác |
-| Thu hồi tin nhắn | ✅ Đạt | RECALLED status, STOMP notify |
-| Dịch tin nhắn AI | ✅ Đạt | 20+ ngôn ngữ, context-aware |
-| Reply tin nhắn | ✅ Đạt | replyTo foreign key, UI hiển thị |
-| Scalability | ⚠️ Trung bình | Cần horizontal scaling cho > 1000 concurrent users |
-
-*Bảng 3.4: Đánh giá kiến trúc module Chat & Tin nhắn*
-
-### Phân tích hiệu năng
-
-| Thao tác | Thời gian trung bình | Mục tiêu | Kết quả |
-|----------|:-------------------:|:--------:|:-------:|
-| Gửi tin nhắn text | ~150ms | < 500ms | ✅ Đạt |
-| Typing indicator delay | ~50ms | < 200ms | ✅ Đạt |
-| Read receipt delivery | ~100ms | < 500ms | ✅ Đạt |
-| Dịch tin nhắn AI | ~2.5s | < 5s | ✅ Đạt |
-| Load 50 tin nhắn | ~300ms | < 1s | ✅ Đạt |
-| WebSocket reconnect | ~4s | < 10s | ✅ Đạt |
-
-*Bảng 3.5: Phân tích hiệu năng module Chat*
 
 ## 3.5 Kết luận và hạn chế
 
@@ -1441,6 +1200,7 @@ flutter pub get && flutter run
 4. **Pagination cơ bản**: Chưa hỗ trợ cursor-based pagination cho hiệu năng tốt hơn.
 
 ### Hướng phát triển
+
 - Thêm end-to-end encryption (E2EE)
 - Chuyển typing indicator sang STOMP trực tiếp
 - Thêm full-text search cho tin nhắn (PostgreSQL tsvector)

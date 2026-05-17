@@ -1,103 +1,89 @@
 # BẢNG PHÂN CÔNG NHIỆM VỤ
 
-| STT | Họ và tên | MSSV | Nhiệm vụ cụ thể | Đóng góp (%) |
-|:---:|-----------|------|------------------|:------------:|
-| 1 | Nguyễn Văn Duy | B22DCCN154 | Gửi hình ảnh/media, Thông báo đẩy (FCM), Chatbot AI streaming, Video Call (Agora) | 25% |
-| 2 | Nguyễn Hoàng Hiệp | B22DCCN298 | Chat cá nhân 1-1, Gửi/nhận tin nhắn, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI, Voice-to-Text | 25% |
-| 3 | Nguyễn Quang Minh | B22DCCN538 | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI | 25% |
-| 4 | Đặng Hữu Hoàng Quân | B22DCCN658 | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin | 25% |
+| STT | Họ và tên           | MSSV       | Nhiệm vụ cụ thể                                                                                                          | Đóng góp (%) |
+| :-: | ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ | :----------: |
+|  1  | Nguyễn Văn Duy      | B22DCCN154 | Gửi hình ảnh/media, Thông báo đẩy (FCM), Chatbot AI streaming, Video Call (Agora)                                        |     25%      |
+|  2  | Nguyễn Hoàng Hiệp   | B22DCCN298 | Chat cá nhân 1-1, Gửi/nhận tin nhắn, Typing indicator, Trạng thái đã xem, Xóa tin nhắn, Dịch tin nhắn AI, Voice-to-Text  |     25%      |
+|  3  | Nguyễn Quang Minh   | B22DCCN538 | Tài khoản (Đăng ký, Đăng nhập, Quên MK, Profile), Quản lý bạn bè (Lời mời, Chặn, Xóa bạn), Trạng thái online, Tóm tắt AI |     25%      |
+|  4  | Đặng Hữu Hoàng Quân | B22DCCN658 | Danh sách cuộc trò chuyện, Tìm kiếm, Ghim chat, Tạo nhóm, Quản lý thành viên nhóm, Phân quyền admin                      |     25%      |
 
-*Bảng 0.1: Bảng phân công nhiệm vụ các thành viên*
+_Bảng 0.1: Bảng phân công nhiệm vụ các thành viên_
 
 ---
 
 # MỤC LỤC
+
 ---
 
 <div style="page-break-before: always;"></div>
 
 # DANH SÁCH VIẾT TẮT
 
-| Viết tắt | Ý nghĩa |
-|----------|---------|
-| API | Application Programming Interface |
-| CRUD | Create, Read, Update, Delete |
-| DTO | Data Transfer Object |
-| FCM | Firebase Cloud Messaging |
-| GVHD | Giảng viên hướng dẫn |
-| HTTP | HyperText Transfer Protocol |
-| JPA | Java Persistence API |
-| JWT | JSON Web Token |
-| LLM | Large Language Model |
-| MK | Mật khẩu |
-| MSSV | Mã số sinh viên |
-| ORM | Object-Relational Mapping |
-| REST | Representational State Transfer |
-| S3 | Simple Storage Service |
-| SDK | Software Development Kit |
-| SQL | Structured Query Language |
-| SSE | Server-Sent Events |
-| STOMP | Simple Text Oriented Messaging Protocol |
-| UI | User Interface |
-| UML | Unified Modeling Language |
+| Viết tắt  | Ý nghĩa                                         |
+| --------- | ----------------------------------------------- |
+| API       | Application Programming Interface               |
+| CRUD      | Create, Read, Update, Delete                    |
+| DTO       | Data Transfer Object                            |
+| FCM       | Firebase Cloud Messaging                        |
+| GVHD      | Giảng viên hướng dẫn                            |
+| HTTP      | HyperText Transfer Protocol                     |
+| JPA       | Java Persistence API                            |
+| JWT       | JSON Web Token                                  |
+| LLM       | Large Language Model                            |
+| MK        | Mật khẩu                                        |
+| MSSV      | Mã số sinh viên                                 |
+| ORM       | Object-Relational Mapping                       |
+| REST      | Representational State Transfer                 |
+| S3        | Simple Storage Service                          |
+| SDK       | Software Development Kit                        |
+| SQL       | Structured Query Language                       |
+| SSE       | Server-Sent Events                              |
+| STOMP     | Simple Text Oriented Messaging Protocol         |
+| UI        | User Interface                                  |
+| UML       | Unified Modeling Language                       |
 | WebSocket | Giao thức truyền thông hai chiều thời gian thực |
 
-*Bảng 0.2: Danh sách viết tắt*
+_Bảng 0.2: Danh sách viết tắt_
 
 ---
 
 # DANH SÁCH HÌNH
 
-| Ký hiệu | Mô tả |
-|----------|-------|
-| Hình 2.1 | Sơ đồ kiến trúc tổng quan hệ thống ChatApp |
-| Hình 2.2 | Biểu đồ Use Case tổng quan |
-| Hình 2.3 | Biểu đồ Use Case chi tiết — Media, Thông báo & AI |
-| Hình 2.4 | Biểu đồ lớp — Module Media, Thông báo & AI |
-| Hình 2.5 | Biểu đồ tuần tự — Gửi hình ảnh |
-| Hình 2.6 | Biểu đồ tuần tự — Push notification |
-| Hình 2.7 | Biểu đồ tuần tự — Chatbot AI streaming |
-| Hình 2.8 | Biểu đồ tuần tự — Chatbot AI Streaming |
-| Hình 2.9 | Biểu đồ tuần tự — Push Notification (FCM) |
-| Hình 2.10 | Biểu đồ tuần tự — Video Call (Agora RTC) |
-| Hình 2.11 | Biểu đồ tuần tự — Video Call (Agora RTC) |
-| Hình 2.12 | Sơ đồ thực thể quan hệ (ER Diagram) |
-| Hình 2.13 | Giao diện ChatScreen — Gửi hình ảnh |
-| Hình 2.14 | Giao diện AI Chatbot |
-| Hình 2.15 | Giao diện Cài đặt thông báo |
-| Hình 2.16 | Luồng dữ liệu Provider trong Flutter |
-| Hình 2.17 | Biểu đồ hoạt động — Upload media & push notification |
-| Hình 3.1 | Sơ đồ triển khai Docker Compose |
-| Hình 3.2 | Kết quả — Gửi hình ảnh |
-| Hình 3.3 | Kết quả — Push notification |
-| Hình 3.4 | Kết quả — AI Chatbot |
+| Ký hiệu   | Mô tả                                             |
+| --------- | ------------------------------------------------- |
+| Hình 2.1  | Sơ đồ kiến trúc tổng quan hệ thống ChatApp        |
+| Hình 2.2  | Biểu đồ Use Case tổng quan                        |
+| Hình 2.3  | Biểu đồ Use Case chi tiết — Media, Thông báo & AI |
+| Hình 2.4  | Biểu đồ lớp — Module Media, Thông báo & AI        |
+| Hình 2.5  | Biểu đồ tuần tự — Gửi hình ảnh                    |
+| Hình 2.6  | Biểu đồ tuần tự — Push notification               |
+| Hình 2.7  | Biểu đồ tuần tự — Chatbot AI streaming            |
+| Hình 2.8  | Biểu đồ tuần tự — Chatbot AI Streaming            |
+| Hình 2.9  | Biểu đồ tuần tự — Push Notification (FCM)         |
+| Hình 2.10 | Biểu đồ tuần tự — Video Call (Agora RTC)          |
+| Hình 2.11 | Biểu đồ tuần tự — Video Call (Agora RTC)          |
+| Hình 2.12 | Sơ đồ thực thể quan hệ (ER Diagram)               |
+| Hình 2.13 | Giao diện ChatScreen — Gửi hình ảnh               |
+| Hình 2.14 | Giao diện AI Chatbot                              |
+| Hình 2.15 | Giao diện Cài đặt thông báo                       |
+| Hình 3.1  | Sơ đồ triển khai Docker Compose                   |
+| Hình 3.2  | Kết quả — Gửi hình ảnh                            |
+| Hình 3.3  | Kết quả — Push notification                       |
+| Hình 3.4  | Kết quả — AI Chatbot                              |
 
-*Bảng 0.3: Danh sách hình*
+_Bảng 0.3: Danh sách hình_
 
 ---
 
 # DANH SÁCH BẢNG
 
-| Ký hiệu | Mô tả |
-|----------|-------|
 | Bảng 1.1 | Yêu cầu chức năng |
 | Bảng 1.2 | Yêu cầu phi chức năng |
 | Bảng 1.3 | So sánh lựa chọn công nghệ |
-| Bảng 1.4 | So sánh ChatApp với các ứng dụng nhắn tin hiện có |
-| Bảng 1.5 | Tổng hợp các mẫu thiết kế |
-| Bảng 1.6 | Đặc tả UC-10 — Gửi hình ảnh |
-| Bảng 1.7 | Đặc tả UC-18 — Chat với AI Bot |
-| Bảng 1.8 | Đặc tả UC-15 — Push notification |
-| Bảng 2.1 | Chi tiết các trường entity trong hệ thống |
-| Bảng 2.2 | Cấu trúc phân lớp Flutter Frontend |
-| Bảng 2.3 | Danh sách services trong Flutter Frontend |
-| Bảng 2.4 | API Endpoints — Module Media, Thông báo & AI |
 | Bảng 3.1 | Danh sách services |
 | Bảng 3.2 | Kết quả thử nghiệm chức năng Media, Thông báo & AI |
-| Bảng 3.3 | Đánh giá kiến trúc module Media, Thông báo & AI |
-| Bảng 3.4 | Phân tích hiệu năng module AI & Media |
 
-*Bảng 0.4: Danh sách bảng*
+_Bảng 0.4: Danh sách bảng_
 
 ---
 
@@ -143,146 +129,68 @@ ChatApp được thiết kế theo mô hình **Client-Server** với kiến trú
 
 ### 1.3.1 Yêu cầu chức năng
 
-| STT | Mã | Yêu cầu | Mô tả |
-|:---:|-----|---------|-------|
-| 1 | FR-01 | Đăng ký tài khoản | Tạo tài khoản với username/password |
-| 2 | FR-02 | Đăng nhập | JWT token pair authentication |
-| 3 | FR-03 | Quên mật khẩu | Email reset link |
-| 4 | FR-05 | Cập nhật profile | Đổi displayName, avatar |
-| 5 | FR-06 | Quản lý bạn bè | Lời mời kết bạn |
-| 6 | FR-07 | Chặn người dùng | Block/unblock |
-| 7 | FR-08 | Nhắn tin 1-1 | Realtime DUO chat |
-| 8 | FR-09 | Nhắn tin nhóm | GROUP chat ≥3 người |
-| 9 | FR-10 | Gửi media | Upload hình ảnh, video, tài liệu, âm thanh |
-| 10 | FR-11 | Trạng thái tin nhắn | Typing, đã gửi, đã xem |
-| 11 | FR-12 | Xóa tin nhắn | Thu hồi (recall) |
-| 12 | FR-13 | Ghim chat | Pin/unpin chatroom |
-| 13 | FR-14 | Tìm kiếm | Search user |
-| 14 | FR-15 | Thông báo đẩy | FCM push notification |
-| 15 | FR-16 | Tóm tắt AI | LLM summarization |
-| 16 | FR-17 | Dịch tin nhắn AI | LLM translation |
-| 17 | FR-18 | Chatbot AI | Streaming SSE chatbot |
-| 18 | FR-19 | Gọi video | Agora RTC 1-1 |
-| 19 | FR-20 | Trạng thái online | Redis presence |
+| STT | Mã    | Yêu cầu             | Mô tả                                      |
+| :-: | ----- | ------------------- | ------------------------------------------ |
+|  1  | FR-01 | Đăng ký tài khoản   | Tạo tài khoản với username/password        |
+|  2  | FR-02 | Đăng nhập           | JWT token pair authentication              |
+|  3  | FR-03 | Quên mật khẩu       | Email reset link                           |
+|  4  | FR-05 | Cập nhật profile    | Đổi displayName, avatar                    |
+|  5  | FR-06 | Quản lý bạn bè      | Lời mời kết bạn                            |
+|  6  | FR-07 | Chặn người dùng     | Block/unblock                              |
+|  7  | FR-08 | Nhắn tin 1-1        | Realtime DUO chat                          |
+|  8  | FR-09 | Nhắn tin nhóm       | GROUP chat ≥3 người                        |
+|  9  | FR-10 | Gửi media           | Upload hình ảnh, video, tài liệu, âm thanh |
+| 10  | FR-11 | Trạng thái tin nhắn | Typing, đã gửi, đã xem                     |
+| 11  | FR-12 | Xóa tin nhắn        | Thu hồi (recall)                           |
+| 12  | FR-13 | Ghim chat           | Pin/unpin chatroom                         |
+| 13  | FR-14 | Tìm kiếm            | Search user                                |
+| 14  | FR-15 | Thông báo đẩy       | FCM push notification                      |
+| 15  | FR-16 | Tóm tắt AI          | LLM summarization                          |
+| 16  | FR-17 | Dịch tin nhắn AI    | LLM translation                            |
+| 17  | FR-18 | Chatbot AI          | Streaming SSE chatbot                      |
+| 18  | FR-19 | Gọi video           | Agora RTC 1-1                              |
+| 19  | FR-20 | Trạng thái online   | Redis presence                             |
 
-*Bảng 1.1: Yêu cầu chức năng*
+_Bảng 1.1: Yêu cầu chức năng_
 
 ### 1.3.2 Yêu cầu phi chức năng
 
-| STT | Mã | Yêu cầu | Mô tả |
-|:---:|-----|---------|-------|
-| 1 | NFR-01 | Hiệu năng | < 500ms WebSocket delivery |
-| 2 | NFR-02 | Bảo mật | JWT + Argon2 |
-| 3 | NFR-03 | Khả dụng | Docker 24/7 |
-| 4 | NFR-04 | Mở rộng | Scalable services |
-| 5 | NFR-05 | Tương thích | Android, iOS, Web |
-| 6 | NFR-06 | Cache | Redis |
-| 7 | NFR-07 | Lưu trữ | S3-compatible |
-| 8 | NFR-08 | Triển khai | Docker Compose |
+| STT | Mã     | Yêu cầu     | Mô tả                      |
+| :-: | ------ | ----------- | -------------------------- |
+|  1  | NFR-01 | Hiệu năng   | < 500ms WebSocket delivery |
+|  2  | NFR-02 | Bảo mật     | JWT + Argon2               |
+|  3  | NFR-03 | Khả dụng    | Docker 24/7                |
+|  4  | NFR-04 | Mở rộng     | Scalable services          |
+|  5  | NFR-05 | Tương thích | Android, iOS, Web          |
+|  6  | NFR-06 | Cache       | Redis                      |
+|  7  | NFR-07 | Lưu trữ     | S3-compatible              |
+|  8  | NFR-08 | Triển khai  | Docker Compose             |
 
-*Bảng 1.2: Yêu cầu phi chức năng*
+_Bảng 1.2: Yêu cầu phi chức năng_
 
 ## 1.4 Lựa chọn công nghệ
 
-| Thành phần | Công nghệ | Phiên bản | Lý do lựa chọn |
-|------------|-----------|-----------|-----------------|
-| **Backend** | Spring Boot | 4.0.5 | Hệ sinh thái lớn, WebSocket, Security, JPA |
-| **Ngôn ngữ** | Java + Kotlin | 21 / 2.2 | Virtual threads + cú pháp ngắn gọn |
-| **Frontend** | Flutter | Dart ^3.5 | Đa nền tảng, hot reload |
-| **Database** | PostgreSQL | 18 | RDBMS mạnh mẽ, ACID |
-| **Cache** | Redis | 8 | In-memory, pub/sub |
-| **Broker** | Apache Artemis| Message broker hỗ trợ STOMP/JMS | 2.53.0 | STOMP protocol |
-| **Storage** | VersityGW | Latest | S3-compatible |
-| **Gateway** | Caddy | 2 Alpine | Reverse proxy |
-| **Push** | Firebase Admin SDK | 9.8.0 | FCM push |
-| **Video** | Agora RTC | 6.2.0 | Video call SDK |
-| **AI** | OpenAI Java SDK | 4.30.0 | LLM integration |
-| **State** | Provider | 6.1.2 | Flutter state management |
-| **Deploy** | Docker Compose | — | Multi-service deployment |
+| Thành phần   | Công nghệ          | Phiên bản                       | Lý do lựa chọn                             |
+| ------------ | ------------------ | ------------------------------- | ------------------------------------------ | -------------- |
+| **Backend**  | Spring Boot        | 4.0.5                           | Hệ sinh thái lớn, WebSocket, Security, JPA |
+| **Ngôn ngữ** | Java + Kotlin      | 21 / 2.2                        | Virtual threads + cú pháp ngắn gọn         |
+| **Frontend** | Flutter            | Dart ^3.5                       | Đa nền tảng, hot reload                    |
+| **Database** | PostgreSQL         | 18                              | RDBMS mạnh mẽ, ACID                        |
+| **Cache**    | Redis              | 8                               | In-memory, pub/sub                         |
+| **Broker**   | Apache Artemis     | Message broker hỗ trợ STOMP/JMS | 2.53.0                                     | STOMP protocol |
+| **Storage**  | VersityGW          | Latest                          | S3-compatible                              |
+| **Gateway**  | Caddy              | 2 Alpine                        | Reverse proxy                              |
+| **Push**     | Firebase Admin SDK | 9.8.0                           | FCM push                                   |
+| **Video**    | Agora RTC          | 6.2.0                           | Video call SDK                             |
+| **AI**       | OpenAI Java SDK    | 4.30.0                          | LLM integration                            |
+| **State**    | Provider           | 6.1.2                           | Flutter state management                   |
+| **Deploy**   | Docker Compose     | —                               | Multi-service deployment                   |
 
-*Bảng 1.3: So sánh lựa chọn công nghệ*
+_Bảng 1.3: So sánh lựa chọn công nghệ_
 
 ---
 
 <div style="page-break-before: always;"></div>
-
-
-## 1.5 So sánh với các ứng dụng nhắn tin hiện có
-
-| Tiêu chí | ChatApp | Zalo | Telegram | Messenger |
-|----------|---------|------|----------|-----------|
-| **Nền tảng** | Android, iOS, Web (Flutter) | Android, iOS, Web, Desktop | Đa nền tảng | Android, iOS, Web |
-| **AI tích hợp** | Tóm tắt, dịch, chatbot streaming (LLM) | Không | Bot API | Meta AI |
-| **Push notification** | FCM (Firebase) | Proprietary | Proprietary | Proprietary |
-| **Media upload** | S3-compatible (VersityGW) | Proprietary | Cloud-based | Proprietary |
-| **Chatbot** | SSE streaming, MCP support | Không | Bot API (không streaming) | Meta AI (limited) |
-| **Self-hosted** | Docker Compose | Không | TDLib | Không |
-
-*Bảng 1.4: So sánh ChatApp với các ứng dụng nhắn tin hiện có*
-
-## 1.6 Các mẫu thiết kế áp dụng (Design Patterns)
-
-| Mẫu thiết kế | Loại (GoF) | Vị trí áp dụng | Lợi ích chính |
-|---------------|------------|-----------------|---------------|
-| Repository | Structural | JPA Repositories | Tách data access |
-| Service Layer | Architectural | Service classes | Single Responsibility |
-| DTO | Structural | API request/response | Bảo vệ domain model |
-| Observer | Behavioral | STOMP, FCM | Loose coupling, realtime |
-| Strategy | Behavioral | FileTypeService | Open/Closed Principle |
-| Proxy | Structural | Caddy, Security | Access control |
-| Builder | Creational | PromptService | Readable construction |
-
-*Bảng 1.5: Tổng hợp các mẫu thiết kế*
-
-**Chi tiết áp dụng trong module Media, Thông báo & AI:**
-- **Strategy Pattern:** `FileTypeService` phân loại file thành 5 loại: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW dựa trên extension.
-- **Observer Pattern:** FCM push notification — `NotificationService` → `FcmTokenService` → Firebase Admin SDK → Device.
-- **Builder Pattern:** `PromptService.buildTranslationPrompt()` và `buildSummaryPrompt()` xây dựng prompt LLM từng bước.
-- **Service Layer:** `ChatbotService` (~21KB) quản lý toàn bộ lifecycle chatbot conversation + SSE streaming.
-
-## 1.7 Đặc tả Use Case chi tiết — Media, Thông báo & AI
-
-### UC-10: Gửi hình ảnh trong chat
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Gửi hình ảnh trong cuộc trò chuyện |
-| **Actor** | Người dùng (thành viên chatroom) |
-| **Tiền điều kiện** | ChatRoom tồn tại, user là thành viên |
-| **Hậu điều kiện** | Attachment(IMAGE) được tạo, file upload lên S3, tin nhắn broadcast |
-| **Luồng chính** | 1. Nhấn nút đính kèm (📎). 2. ImagePicker chọn ảnh. 3. `POST /api/v1/messages/?room={id}` (multipart). 4. AttachmentService → FileTypeService → IMAGE. 5. S3Service upload lên VersityGW. 6. Tạo Attachment + ChatMessage. 7. STOMP broadcast. |
-| **Luồng ngoại lệ** | 5a. S3 upload fail → 500. 4a. File quá lớn → 413. |
-| **API** | `POST /api/v1/messages/?room={roomId}` (multipart/form-data) |
-
-*Bảng 1.6: Đặc tả UC-10 — Gửi hình ảnh*
-
-### UC-18: Chat với AI Bot (Streaming)
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Trò chuyện với AI chatbot (streaming SSE) |
-| **Actor** | Người dùng (đã đăng nhập) |
-| **Tiền điều kiện** | ChatbotConversation tồn tại, dịch vụ AI cấu hình |
-| **Hậu điều kiện** | ChatbotMessage(USER) + ChatbotMessage(ASSISTANT) được lưu |
-| **Luồng chính** | 1. Nhập tin nhắn. 2. `POST /chatbot/conversations/{id}/stream`. 3. ChatbotService lưu USER message. 4. Load conversation history. 5. OpenAIClientService streaming → SseEmitter. 6. Client nhận từng chunk qua SSE. 7. Render markdown realtime. 8. Khi [DONE] → lưu ASSISTANT message. |
-| **Luồng ngoại lệ** | 5a. Timeout 5 phút → SseEmitter timeout. 5b. AI error → error event. |
-| **API** | `POST /api/v1/chatbot/conversations/{id}/stream` |
-
-*Bảng 1.7: Đặc tả UC-18 — Chat với AI Bot*
-
-*Bảng 1.8: Đặc tả UC-15 — Push notification*
-
-### UC-19: Gọi video 1-1 (Agora RTC)
-
-| Thành phần | Mô tả |
-|------------|-------|
-| **Tên UC** | Gọi video trực tuyến 1-1 |
-| **Actor** | Người dùng (đã kết bạn) |
-| **Tiền điều kiện** | Cả 2 đang online, đã cấp quyền Camera/Mic |
-| **Hậu điều kiện** | Cuộc gọi được thiết lập, data stream qua Agora |
-| **Luồng chính** | 1. Chọn user → nhấn icon Video Call. 2. `POST /api/v1/calls/token` lấy Agora token. 3. Gửi STOMP signal notify receiver. 4. Receiver nhận cuộc gọi → join Agora channel. 5. Hiển thị view video 2 phía. 6. Nhấn 'End' để kết thúc. |
-| **Luồng ngoại lệ** | 3a. Receiver bận → hiển thị thông báo. |
-| **API** | `POST /api/v1/calls/token` |
 
 ---
 
@@ -332,7 +240,7 @@ graph TB
 ```
 
 [image: tv4_so_o_kien_truc_tong_quan_he_thong_chatapp.png]
-*Hình 2.1: Sơ đồ kiến trúc tổng quan hệ thống ChatApp*
+_Hình 2.1: Sơ đồ kiến trúc tổng quan hệ thống ChatApp_
 
 ## 2.2 Biểu đồ Use Case tổng quan
 
@@ -382,7 +290,7 @@ graph LR
 ```
 
 [image: tv4_bieu_o_use_case_tong_quan.png]
-*Hình 2.2: Biểu đồ Use Case tổng quan*
+_Hình 2.2: Biểu đồ Use Case tổng quan_
 
 ---
 
@@ -440,7 +348,7 @@ graph LR
 ```
 
 [image: tv4_bieu_o_use_case_chi_tiet_media_thong_bao_ai.png]
-*Hình 2.3: Biểu đồ Use Case chi tiết — Media, Thông báo & AI*
+_Hình 2.3: Biểu đồ Use Case chi tiết — Media, Thông báo & AI_
 
 **Mô tả chi tiết:**
 
@@ -558,7 +466,7 @@ classDiagram
 ```
 
 [image: tv4_bieu_o_lop_module_media_thong_bao_ai.png]
-*Hình 2.4: Biểu đồ lớp — Module Media, Thông báo & AI*
+_Hình 2.4: Biểu đồ lớp — Module Media, Thông báo & AI_
 
 **Giải thích:**
 
@@ -616,7 +524,7 @@ sequenceDiagram
 ```
 
 [image: tv4_bieu_o_tuan_tu_gui_hinh_anh.png]
-*Hình 2.5: Biểu đồ tuần tự — Gửi hình ảnh*
+_Hình 2.5: Biểu đồ tuần tự — Gửi hình ảnh_
 
 ### 2.5.2 Biểu đồ tuần tự — Push notification
 
@@ -650,7 +558,7 @@ sequenceDiagram
 ```
 
 [image: tv4_bieu_o_tuan_tu_push_notification.png]
-*Hình 2.6: Biểu đồ tuần tự — Push notification*
+_Hình 2.6: Biểu đồ tuần tự — Push notification_
 
 ### 2.5.3 Biểu đồ tuần tự — Chatbot AI streaming (SSE)
 
@@ -696,7 +604,7 @@ sequenceDiagram
 ```
 
 [image: tv4_bieu_o_tuan_tu_chatbot_ai_streaming.png]
-*Hình 2.7: Biểu đồ tuần tự — Chatbot AI streaming (SSE)*
+_Hình 2.7: Biểu đồ tuần tự — Chatbot AI streaming (SSE)_
 
 ### 2.5.4 Biểu đồ tuần tự — Video Call (Agora RTC)
 
@@ -733,8 +641,7 @@ sequenceDiagram
 ```
 
 [image: tv4_bieu_o_tuan_tu_video_call_agora_rtc.png]
-*Hình 2.8: Biểu đồ tuần tự — Video Call (Agora RTC)*
-
+_Hình 2.8: Biểu đồ tuần tự — Video Call (Agora RTC)_
 
 ## 2.6 Sơ đồ thực thể quan hệ — ER Diagram
 
@@ -845,36 +752,8 @@ erDiagram
 ```
 
 [image: tv4_so_o_thuc_the_quan_he_er_diagram.png]
-*Hình 2.12: Sơ đồ thực thể quan hệ (ER Diagram)*
-**Chi tiết các trường quan trọng:**
-
-| Entity | Trường | Kiểu | Constraint | Mô tả |
-|--------|--------|------|-----------|-------|
-| USER | username | String | UNIQUE, NOT NULL | Tên đăng nhập duy nhất |
-| USER | password | String | NOT NULL | Mã hóa Argon2 |
-| USER | display_name | String | Nullable | Tên hiển thị |
-| CHAT_ROOM | type | Enum | NOT NULL | DUO hoặc GROUP |
-| CHAT_ROOM | name | String | Nullable | Tên nhóm (NULL cho DUO) |
-| CHAT_MESSAGE | status | Enum | NOT NULL | SENT / RECALLED |
-| CHAT_MESSAGE | reply_to_id | Long | FK, Nullable | Tin nhắn được trả lời |
-| CHAT_ROOM_MEMBER | is_admin | Boolean | NOT NULL | Quyền admin trong nhóm |
-| CHAT_ROOM_PIN | (user, room) | — | UNIQUE | Ngăn ghim trùng |
-| ATTACHMENT | type | Enum | NOT NULL | IMAGE/VIDEO/DOCUMENT/AUDIO/RAW |
-| FCM_TOKEN | (user, token) | — | UNIQUE | Ngăn đăng ký trùng |
-| CHATBOT_MESSAGE | role | Enum | NOT NULL | USER/ASSISTANT/SYSTEM/TOOL |
-| INVITATION | status | Enum | NOT NULL | PENDING/ACCEPTED/REJECTED |
-
-*Bảng 2.1: Chi tiết các trường entity trong hệ thống*
-
-**Các ràng buộc quan trọng:**
-- **Cascade Delete:** Khi xóa ChatRoom → cascade xóa ChatMessage, ChatRoomMember, ChatRoomPin, ChatRoomReadState.
-- **Unique Constraints:** (user_id, chat_room_id) trong ChatRoomPin, (user_id, token) trong FcmToken, (blocker_id, blocked_id) trong UserBlock.
-- **Foreign Key References:** ChatMessage.sender_id → User, ChatMessage.room_id → ChatRoom, Invitation.sender_id → User.
-- **Index Strategy:** Index trên username (User), 
-oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
-
-
-**★ Entity thuộc phạm vi Thành viên 4:** ATTACHMENT, FCM_TOKEN, CHATBOT_CONVERSATION, CHATBOT_MESSAGE.
+_Hình 2.12: Sơ đồ thực thể quan hệ (ER Diagram)_
+**★ Entity thuộc phạm vi Thành viên 1:** ATTACHMENT, FCM_TOKEN, CHATBOT_CONVERSATION, CHATBOT_MESSAGE.
 
 ## 2.7 Giao diện đáp ứng chức năng
 
@@ -885,7 +764,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 **Mô tả:** Trong ChatScreen, nút đính kèm (📎) mở ImagePicker để chọn ảnh từ gallery hoặc camera. Ảnh được preview trước khi gửi. Sau khi gửi, ảnh hiển thị trong MessageBubble qua CachedNetworkImage, load từ `/storage/*` qua Caddy Gateway.
 
 [image: tv4_giao_dien_chatscreen_gui_hinh_anh.png]
-*Hình 2.13: Giao diện ChatScreen — Gửi hình ảnh*
+_Hình 2.13: Giao diện ChatScreen — Gửi hình ảnh_
 
 `[Ảnh chụp màn hình gửi ảnh — placeholder]`
 
@@ -896,6 +775,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 **Mô tả:** Giao diện chat với AI chatbot. Hiển thị danh sách cuộc trò chuyện AI ở sidebar, nội dung chat ở main area. Tin nhắn AI được render dưới dạng Markdown (flutter_markdown_plus). Hỗ trợ streaming — text xuất hiện từng ký tự.
 
 **Các thành phần chính:**
+
 - ListView conversations (sidebar)
 - FAB tạo conversation mới
 - Chat area: MessageBubble cho USER + ASSISTANT
@@ -904,7 +784,7 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 - Input bar gửi tin nhắn
 
 [image: tv4_giao_dien_ai_chatbot.png]
-*Hình 2.14: Giao diện AI Chatbot*
+_Hình 2.14: Giao diện AI Chatbot_
 
 `[Ảnh chụp màn hình Chatbot — placeholder]`
 
@@ -915,15 +795,13 @@ oom_id + sent_on (ChatMessage), user_id (FcmToken) để tối ưu query.
 **Mô tả:** Trong SettingsScreen, có toggle switch bật/tắt thông báo đẩy. Gọi `PUT /api/v1/users/me/notification-settings/` để cập nhật server-side preference.
 
 [image: tv4_giao_dien_cai_at_thong_bao.png]
-*Hình 2.15: Giao diện Cài đặt thông báo*
+_Hình 2.15: Giao diện Cài đặt thông báo_
 
 `[Ảnh chụp màn hình Notification settings — placeholder]`
 
 ---
 
 <div style="page-break-before: always;"></div>
-
-
 
 **Chi tiết cấu hình WebSocket (WebSocketConfig.kt):**
 
@@ -943,12 +821,6 @@ class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     }
 }
 ```
-
-**Giải thích:**
-- STOMP Broker Relay kết nối đến Apache Artemis (external broker) thay vì sử dụng simple broker.
-- Hai endpoints: `/socket` (SockJS fallback cho trình duyệt cũ) và `/ws` (native WebSocket cho Flutter).
-- `WebSocketAuthenticationInterceptor` xác thực JWT token trong STOMP CONNECT frame.
-- Application destination prefix `/app` cho messages từ client → server (typing indicator, read receipt).
 
 **Chi tiết cấu hình Security (SecurityConfig.kt):**
 
@@ -971,91 +843,22 @@ fun filterChain(http: HttpSecurity): SecurityFilterChain {
 }
 ```
 
-**Giải thích:**
-- Sử dụng **Argon2PasswordEncoder** (PHC winner 2015) — bảo mật hơn BCrypt nhờ memory-hard function.
-- JWT xác thực qua **HMAC-SHA256** (symmetric key ≥ 32 bytes) với NimbusJwtDecoder.
-- Các endpoint `/api/v1/messages/**`, `/api/v1/chatbot/**`, `/api/v1/invitations/**`, `/api/v1/users/me/**` yêu cầu authenticated.
-- Các endpoint public: đăng ký, đăng nhập, tìm kiếm user, quên mật khẩu.
-
-
-**Chi tiết kiến trúc Flutter Frontend:**
-
-Hệ thống Flutter sử dụng **Provider** (official state management) với cấu trúc phân lớp rõ ràng:
-
-| Layer | Thư mục | Chức năng | Ví dụ |
-|-------|---------|-----------|-------|
-| **Models** | `lib/models/` | Data classes (JSON serialization) | `ChatRoomModel`, `MessageReceiveModel` |
-| **Services** | `lib/services/` | API calls, business logic | `RealtimeService` (30KB), `ChatbotService` |
-| **Providers** | `lib/providers/` | State management (ChangeNotifier) | `ChatRoomsProvider`, `AuthProvider` |
-| **Screens** | `lib/screens/` | UI pages | `ChatScreen`, `ChatbotScreen` |
-| **Widgets** | `lib/widgets/` | Reusable UI components | `MessageBubble`, `AppAvatar` |
-| **Utils** | `lib/utils/` | Helpers, formatters | Date formatting, error handling |
-| **Core** | `lib/core/` | Constants, theme | `AppConstants`, base URL |
-
-*Bảng 2.2: Cấu trúc phân lớp Flutter Frontend*
-
-**Các service chính (Frontend):**
-
-| Service | File | Kích thước | Chức năng |
-|---------|------|-----------|-----------|
-| RealtimeService | `realtime_service.dart` | 30KB (1021 dòng) | WebSocket STOMP, 15+ event types |
-| MessageService | `message_service.dart` | 8.6KB | CRUD tin nhắn, multipart upload |
-| GroupChatService | `group_chat_service.dart` | 8KB | Quản lý nhóm chat |
-| ChatbotService | `chatbot_service.dart` | 5.4KB | AI chatbot SSE streaming |
-| ApiClient | `api_client.dart` | 8.1KB | HTTP client, JWT refresh, error handling |
-| LocalNotificationService | `local_notification_service.dart` | 5.3KB | Hiển thị notification trên device |
-| FcmTokenManagerService | `fcm_token_manager_service.dart` | 3.8KB | Quản lý FCM token lifecycle |
-| AgoraService | `agora_service.dart` | 6.9KB | Video call via Agora RTC |
-
-*Bảng 2.3: Danh sách services trong Flutter Frontend*
-
-**Luồng dữ liệu Provider:**
-
-`mermaid
-flowchart LR
-    UI[Screen/Widget] -->|listen| Provider
-    Provider -->|call| Service
-    Service -->|HTTP| ApiClient
-    ApiClient -->|REST| CaddyGW[Caddy Gateway]
-    Service -->|STOMP| RealtimeService
-    RealtimeService -->|WebSocket| CaddyGW
-    Provider -->|notifyListeners| UI
-`
-
-[image: tv4_luong_du_lieu_provider_trong_flutter.png]
-*Hình 2.16: Luồng dữ liệu Provider trong Flutter*
-
-**Chi tiết ApiClient (`api_client.dart`, 8.1KB):**
-- Tự động attach JWT access token vào mọi request header.
-- Khi nhận 401 Unauthorized, tự động refresh access token và retry request.
-- Sử dụng `TokenStorageService` (SharedPreferences) để lưu/đọc token.
-- Support multipart/form-data upload cho ảnh và media files.
-- Centralized error handling: parse error response từ server.
-
-**Chi tiết RealtimeService (`realtime_service.dart`, 30KB):**
-- Quản lý lifecycle WebSocket: connect, disconnect, reconnect.
-- 15+ `StreamController.broadcast()` cho các loại event.
-- `_requestedRooms` Set: theo dõi rooms cần subscribe.
-- `_activeRoomSubscriptions`: ngăn duplicate STOMP subscriptions.
-- Reconnect strategy: deactivate old client → refresh token → create new client.
-- SockJS fallback endpoint `/socket` + native WebSocket endpoint `/ws`.
-
 ## 2.8 Bảng API Endpoints — Module Media, Thông báo & AI
 
-| STT | Method | Endpoint | Auth | Mô tả | Status Codes |
-|:---:|--------|----------|:----:|-------|:------------:|
-| 1 | POST | `/api/v1/messages/?room={id}` | ✓ | Gửi tin nhắn + media (multipart) | 201, 403 |
-| 2 | POST | `/api/v1/users/me/fcm-token/` | ✓ | Đăng ký FCM token | 201 |
-| 3 | GET | `/api/v1/users/me/notification-settings/` | ✓ | Lấy cài đặt thông báo | 200 |
-| 4 | PUT | `/api/v1/users/me/notification-settings/` | ✓ | Cập nhật cài đặt thông báo | 200 |
-| 5 | GET | `/api/v1/chatbot/conversations` | ✓ | Danh sách cuộc trò chuyện AI | 200 |
-| 6 | POST | `/api/v1/chatbot/conversations` | ✓ | Tạo cuộc trò chuyện AI mới | 201 |
-| 7 | GET | `/api/v1/chatbot/conversations/{id}/messages` | ✓ | Lịch sử chat AI | 200 |
-| 8 | POST | `/api/v1/chatbot/conversations/{id}/stream` | ✓ | Streaming SSE chat AI | 200 (SSE) |
-| 9 | DELETE | `/api/v1/chatbot/conversations/{id}` | ✓ | Xóa cuộc trò chuyện AI | 204 |
-| 10 | POST | `/api/v1/speech-to-text` | ✓ | Chuyển giọng nói → text | 200 |
+| STT | Method | Endpoint                                      | Auth | Mô tả                            | Status Codes |
+| :-: | ------ | --------------------------------------------- | :--: | -------------------------------- | :----------: |
+|  1  | POST   | `/api/v1/messages/?room={id}`                 |  ✓   | Gửi tin nhắn + media (multipart) |   201, 403   |
+|  2  | POST   | `/api/v1/users/me/fcm-token/`                 |  ✓   | Đăng ký FCM token                |     201      |
+|  3  | GET    | `/api/v1/users/me/notification-settings/`     |  ✓   | Lấy cài đặt thông báo            |     200      |
+|  4  | PUT    | `/api/v1/users/me/notification-settings/`     |  ✓   | Cập nhật cài đặt thông báo       |     200      |
+|  5  | GET    | `/api/v1/chatbot/conversations`               |  ✓   | Danh sách cuộc trò chuyện AI     |     200      |
+|  6  | POST   | `/api/v1/chatbot/conversations`               |  ✓   | Tạo cuộc trò chuyện AI mới       |     201      |
+|  7  | GET    | `/api/v1/chatbot/conversations/{id}/messages` |  ✓   | Lịch sử chat AI                  |     200      |
+|  8  | POST   | `/api/v1/chatbot/conversations/{id}/stream`   |  ✓   | Streaming SSE chat AI            |  200 (SSE)   |
+|  9  | DELETE | `/api/v1/chatbot/conversations/{id}`          |  ✓   | Xóa cuộc trò chuyện AI           |     204      |
+| 10  | POST   | `/api/v1/speech-to-text`                      |  ✓   | Chuyển giọng nói → text          |     200      |
 
-*Bảng 2.4: API Endpoints — Module Media, Thông báo & AI*
+_Bảng 2.4: API Endpoints — Module Media, Thông báo & AI_
 
 ## 2.9 Biểu đồ hoạt động — Luồng upload media & push notification
 
@@ -1092,7 +895,7 @@ flowchart TD
 ```
 
 [image: tv4_bieu_o_hoat_ong_upload_media_push_notification.png]
-*Hình 2.17: Biểu đồ hoạt động — Upload media & push notification*
+_Hình 2.17: Biểu đồ hoạt động — Upload media & push notification_
 
 ---
 
@@ -1124,26 +927,7 @@ graph TB
 ```
 
 [image: tv4_so_o_trien_khai_docker_compose.png]
-*Hình 3.1: Sơ đồ triển khai Docker Compose*
-
-| Service | Image | Chức năng |
-|---------|-------|-----------|
-| gateway | caddy:2-alpine | Reverse proxy |
-| app | Custom Dockerfile | Spring Boot application |
-| postgres | postgres:18-alpine | Relational database |
-| redis | redis:8-alpine | Cache & presence |
-| artemis | apache/artemis:2.53.0 | STOMP message broker |
-| versitygw | versity/versitygw | S3-compatible storage |
-
-*Bảng 3.1: Danh sách services*
-
-
-**Luồng khởi động:****
-1. Docker Compose khởi tạo PostgreSQL, Redis, Artemis, VersityGW song song.
-2. Mỗi service phải pass health check trước khi service phụ thuộc khởi động.
-3. Spring Boot app khởi động sau khi tất cả dependencies healthy.
-4. Caddy gateway khởi động sau khi app và versitygw sẵn sàng.
-5. Toàn bộ hệ thống sẵn sàng phục vụ qua port 8080.
+_Hình 3.1: Sơ đồ triển khai Docker Compose_
 
 ## 3.2 Các bước cài đặt và triển khai
 
@@ -1164,8 +948,6 @@ cp .env.example.json .env.json
 flutter pub get && flutter run
 ```
 
-
-
 ## 3.3 Kết quả thực hiện — Media, Thông báo & AI Chatbot
 
 ### 3.3.1 Gửi hình ảnh / Media
@@ -1178,7 +960,7 @@ flutter pub get && flutter run
 - Hỗ trợ preview ảnh toàn màn hình khi tap.
 
 [image: tv4_ket_qua_gui_hinh_anh.png]
-*Hình 3.2: Kết quả — Gửi hình ảnh*
+_Hình 3.2: Kết quả — Gửi hình ảnh_
 
 `[Ảnh chụp màn hình gửi ảnh — placeholder]`
 
@@ -1193,7 +975,7 @@ flutter pub get && flutter run
 - LocalNotificationService hiển thị system notification với title/body/payload.
 
 [image: tv4_ket_qua_push_notification.png]
-*Hình 3.3: Kết quả — Push notification*
+_Hình 3.3: Kết quả — Push notification_
 
 `[Ảnh chụp màn hình Push notification — placeholder]`
 
@@ -1231,40 +1013,41 @@ flutter pub get && flutter run
 - Hỗ trợ background call qua push notification nếu app đang đóng.
 
 [image: tv4_ket_qua_video_call.png]
-*Hình 3.5: Kết quả — Gọi video 1-1*
+_Hình 3.5: Kết quả — Gọi video 1-1_
 
 `[Ảnh chụp màn hình Video Call — placeholder]`
 
 ## 3.4 Kết quả thử nghiệm
 
-| STT | Chức năng | Kịch bản test | Kết quả | Ghi chú |
-|:---:|-----------|---------------|:-------:|---------|
-| 1 | Gửi ảnh | Upload JPG 2MB | ✅ Đạt | S3 upload < 2s |
-| 2 | Gửi ảnh | Upload PNG 5MB | ✅ Đạt | FileType = IMAGE |
-| 3 | Gửi video | Upload MP4 10MB | ✅ Đạt | FileType = VIDEO |
-| 4 | Gửi tài liệu | Upload PDF | ✅ Đạt | FileType = DOCUMENT |
-| 5 | Gửi audio | Upload MP3 | ✅ Đạt | FileType = AUDIO |
-| 6 | Gửi file khác | Upload ZIP | ✅ Đạt | FileType = RAW |
-| 7 | Xem ảnh | Tap fullscreen | ✅ Đạt | PhotoView hoạt động |
-| 8 | FCM register | Đăng ký token | ✅ Đạt | Token lưu DB |
-| 9 | Push msg | Tin nhắn mới (bg) | ✅ Đạt | Notification < 3s |
-| 10 | Push msg | Tin nhắn mới (fg) | ✅ Đạt | In-app notification |
-| 11 | Push invite | Lời mời kết bạn | ✅ Đạt | Notification đúng |
-| 12 | Push group | Thêm vào nhóm | ✅ Đạt | Group notification |
-| 13 | Toggle notif | Tắt thông báo | ✅ Đạt | Không nhận push |
-| 14 | Toggle notif | Bật lại thông báo | ✅ Đạt | Nhận push bình thường |
-| 15 | AI create | Tạo conversation | ✅ Đạt | Conversation saved |
-| 16 | AI stream | Chat streaming | ✅ Đạt | SSE chunks render |
-| 17 | AI stream | Long response (2000 tokens) | ✅ Đạt | Stream < 10s |
-| 18 | AI history | Xem lịch sử | ✅ Đạt | Messages load đúng |
-| 19 | AI delete | Xóa conversation | ✅ Đạt | Cascade delete |
-| 20 | AI markdown | Code block render | ✅ Đạt | Syntax highlight |
-| 21 | Multi-device | Push to 2 devices | ✅ Đạt | Both receive |
-| 22 | Token cleanup | Expired token | ✅ Đạt | Auto cleanup job |
+| STT | Chức năng     | Kịch bản test               | Kết quả | Ghi chú               |
+| :-: | ------------- | --------------------------- | :-----: | --------------------- |
+|  1  | Gửi ảnh       | Upload JPG 2MB              | ✅ Đạt  | S3 upload < 2s        |
+|  2  | Gửi ảnh       | Upload PNG 5MB              | ✅ Đạt  | FileType = IMAGE      |
+|  3  | Gửi video     | Upload MP4 10MB             | ✅ Đạt  | FileType = VIDEO      |
+|  4  | Gửi tài liệu  | Upload PDF                  | ✅ Đạt  | FileType = DOCUMENT   |
+|  5  | Gửi audio     | Upload MP3                  | ✅ Đạt  | FileType = AUDIO      |
+|  6  | Gửi file khác | Upload ZIP                  | ✅ Đạt  | FileType = RAW        |
+|  7  | Xem ảnh       | Tap fullscreen              | ✅ Đạt  | PhotoView hoạt động   |
+|  8  | FCM register  | Đăng ký token               | ✅ Đạt  | Token lưu DB          |
+|  9  | Push msg      | Tin nhắn mới (bg)           | ✅ Đạt  | Notification < 3s     |
+| 10  | Push msg      | Tin nhắn mới (fg)           | ✅ Đạt  | In-app notification   |
+| 11  | Push invite   | Lời mời kết bạn             | ✅ Đạt  | Notification đúng     |
+| 12  | Push group    | Thêm vào nhóm               | ✅ Đạt  | Group notification    |
+| 13  | Toggle notif  | Tắt thông báo               | ✅ Đạt  | Không nhận push       |
+| 14  | Toggle notif  | Bật lại thông báo           | ✅ Đạt  | Nhận push bình thường |
+| 15  | AI create     | Tạo conversation            | ✅ Đạt  | Conversation saved    |
+| 16  | AI stream     | Chat streaming              | ✅ Đạt  | SSE chunks render     |
+| 17  | AI stream     | Long response (2000 tokens) | ✅ Đạt  | Stream < 10s          |
+| 18  | AI history    | Xem lịch sử                 | ✅ Đạt  | Messages load đúng    |
+| 19  | AI delete     | Xóa conversation            | ✅ Đạt  | Cascade delete        |
+| 20  | AI markdown   | Code block render           | ✅ Đạt  | Syntax highlight      |
+| 21  | Multi-device  | Push to 2 devices           | ✅ Đạt  | Both receive          |
+| 22  | Token cleanup | Expired token               | ✅ Đạt  | Auto cleanup job      |
 
-*Bảng 3.2: Kết quả thử nghiệm chức năng Media, Thông báo & AI*
+_Bảng 3.2: Kết quả thử nghiệm chức năng Media, Thông báo & AI_
 
 **Số liệu demo:**
+
 - Số file media upload thử nghiệm: 50+
 - Tổng dung lượng upload: ~200MB
 - Số push notification gửi: 100+
@@ -1273,31 +1056,30 @@ flutter pub get && flutter run
 - Số tin nhắn AI: 80+
 - Thời gian phản hồi AI trung bình: < 5s
 
-
 ### Đánh giá kiến trúc
 
-| Tiêu chí | Đánh giá | Chi tiết |
-|----------|:--------:|---------|
-| Upload ảnh | ✅ Đạt | S3 upload + STOMP broadcast < 2s |
-| FileType classification | ✅ Đạt | 5 loại: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW |
-| Push notification | ✅ Đạt | FCM delivery < 2s |
-| Notification preference | ✅ Đạt | Toggle ON/OFF chính xác |
-| AI chatbot streaming | ✅ Đạt | SSE chunks render realtime |
-| Chatbot conversation | ✅ Đạt | CRUD + history đầy đủ |
-| Fallback model | ✅ Đạt | Auto-fallback khi rate limited |
+| Tiêu chí                | Đánh giá | Chi tiết                                   |
+| ----------------------- | :------: | ------------------------------------------ |
+| Upload ảnh              |  ✅ Đạt  | S3 upload + STOMP broadcast < 2s           |
+| FileType classification |  ✅ Đạt  | 5 loại: IMAGE, VIDEO, DOCUMENT, AUDIO, RAW |
+| Push notification       |  ✅ Đạt  | FCM delivery < 2s                          |
+| Notification preference |  ✅ Đạt  | Toggle ON/OFF chính xác                    |
+| AI chatbot streaming    |  ✅ Đạt  | SSE chunks render realtime                 |
+| Chatbot conversation    |  ✅ Đạt  | CRUD + history đầy đủ                      |
+| Fallback model          |  ✅ Đạt  | Auto-fallback khi rate limited             |
 
-*Bảng 3.3: Đánh giá kiến trúc module Media, Thông báo & AI*
+_Bảng 3.3: Đánh giá kiến trúc module Media, Thông báo & AI_
 
 ### Phân tích hiệu năng
 
-| Thao tác | Thời gian TB | Mục tiêu | Đạt? |
-|----------|:-----------:|:--------:|:----:|
-| Upload ảnh 2MB | ~1.2s | < 2s | ✅ |
-| FCM push delivery | ~1.5s | < 3s | ✅ |
-| AI chatbot first token | ~1s | < 3s | ✅ |
-| AI chatbot full response | ~5s | < 10s | ✅ |
+| Thao tác                 | Thời gian TB | Mục tiêu | Đạt? |
+| ------------------------ | :----------: | :------: | :--: |
+| Upload ảnh 2MB           |    ~1.2s     |   < 2s   |  ✅  |
+| FCM push delivery        |    ~1.5s     |   < 3s   |  ✅  |
+| AI chatbot first token   |     ~1s      |   < 3s   |  ✅  |
+| AI chatbot full response |     ~5s      |  < 10s   |  ✅  |
 
-*Bảng 3.4: Phân tích hiệu năng module AI & Media*
+_Bảng 3.4: Phân tích hiệu năng module AI & Media_
 
 ## 3.5 Kết luận và hạn chế
 
@@ -1318,6 +1100,7 @@ flutter pub get && flutter run
 5. **MCP chưa hoàn thiện**: Model Context Protocol flag có nhưng implementation còn hạn chế.
 
 ### Hướng phát triển
+
 - Thêm file size limit và media compression
 - Thêm notification channel (mute per-conversation)
 - Thêm UI chọn AI model (GPT-4o, Claude, Gemini)
